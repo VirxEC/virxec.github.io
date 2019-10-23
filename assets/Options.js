@@ -1,8 +1,8 @@
 function loadOptions(){
     if ($ == undefined) throw new SyntaxError("$ is undefined");
     const isDark = $("@isDark"), isOffline = $("*isOffline"), alerted = $("*alerted"), isConsole = $("@isConsole"), savei = $("@isSaveI"), storage = ["isDark","isOffline","alerted","isConsole","savei"];
-    for (var i=0;i<storage.length;i++) eval(`if(!(${storage[i]}.me() == "Off" || ${storage[i]}.me() == "On")) ${storage[i]}.set("Off")`);
-    if (isDark.me() == "On") {
+    for (var i=0;i<storage.length;i++) eval(`if(!(${storage[i]}.i() == "Off" || ${storage[i]}.i() == "On")) ${storage[i]}.set("Off")`);
+    if (isDark.i() == "On") {
         $(0).css.replaceWithAll(
             'body { color: white; background-color: black; margin: 0 !important; }',
             'button { color: white; background-color: rgb(50, 50, 50); border-color: rgb(60, 60, 60); }',
@@ -34,9 +34,9 @@ function loadOptions(){
 
     try { 
 		navigator.serviceWorker.getRegistration().then(registration => {if(!registration) isOffline.set("Off");});
-		if (isOffline.me() == "Off") if ('serviceWorker' in navigator) navigator.serviceWorker.register($("*index").me() == "On" ? "sw.min.js":"../sw.min.js").then(() => isOffline.set("On"));
+		if (isOffline.i() == "Off") if ('serviceWorker' in navigator) navigator.serviceWorker.register($("*index").i() == "On" ? "sw.min.js":"../sw.min.js").then(() => isOffline.set("On"));
     } catch(e) {console.error(e);}
-	if (isConsole.me() == "On") {
+	if (isConsole.i() == "On") {
         var c = document.querySelector(".console");
         console.log = (...args) => args.forEach(m => {
             try { c.appendChild(document.createTextNode(`\n ${m}`)); } catch(err) {}

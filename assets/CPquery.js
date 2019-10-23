@@ -1,15 +1,7 @@
 // Copyright 2019 Eric Michael Veilleux - Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. - You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
 function cpQuery(query) {
-	function select() {
-		return document.querySelector(query);
-	}
-	
-	function create() {
-		return document.createElement(query);
-	}
-	
 	function css() {
-		this.sheet = document.styleSheets[query];
+		if (typeof query == "number") this.sheet = document.styleSheets[query];
 	}
 	
 	css.prototype.append = function(item) {
@@ -19,20 +11,21 @@ function cpQuery(query) {
 	css.prototype.remove = function(item)  {
 		this.sheet.deleteRule(item);
 	};
+    
+    css.prototype.removeAll = function() {
+    	for (var i=0; i<this.sheet.cssRules.length; i++) this.sheet.deleteRule(i);
+    }
 	
 	css.prototype.replaceWithAll = function() {
 		for (var i=0; i<this.sheet.cssRules.length; i++) this.sheet.deleteRule(i);
 		for (var i=0; i<arguments.length; i++) this.sheet.insertRule(arguments[i], this.sheet.cssRules.length);
 	};
-	
-	css.prototype.replace = function(item) {
-		for (var i=0; i<this.sheet.cssRules.length; i++) this.sheet.deleteRule(i);
-		this.sheet.insertRule(item, this.sheet.cssRules.length);
-	};
 
 	var element, local = false, session = false;
 	if (typeof query == "string") {
-		if (["","body","document"].indexOf(query)>-1) element = document;
+		if (["","document"].indexOf(query)>-1) element = document;
+        else if (query == "head") element = document.head;
+        else if (query == "body") element = document.body;
 		else {
 			query = query.split("#");
 			if (query.length == 2) {
@@ -58,25 +51,36 @@ function cpQuery(query) {
 				}
 			}
 		}
-	}
-
-	function checked(value) {
-		if (value == undefined) return element.checked;
-		element.checked = value;
-	}
-
-	function click(code) {
-		console.log(element);
-		element.addEventListener("click", code);
+	} else if (query == undefined) element = document;
+	
+	function select(type, num) {
+    	if (num != undefined) element = element[num];
+		return element.querySelector(type);
 	}
 	
-	function val() {
-		return element.value;
+	function create(type, num) {
+    	if (num != undefined) element = element[num];
+        var newelem = document.createElement(type);
+		element.appendChild(newelem);
 	}
+    
+    css.prototype.createSheet = function() {
+    	element.appendChild(document.createElement("style"));
+    };
+    
+	function checked() {
+		if (arguments == undefined) return element.checked;
+		element.checked = arguments[0];
+	}
+    
+    function listen(name, code) {
+    	element.addEventListener(name, code);
+    }
 
-	function me() {
+	function i(num) {
 		if (local) return localStorage.getItem(query);
 		else if (session) return sessionStorage.getItem(query);
+        else if (typeof num == "number") return element[num];
 		return element;
 	}
 
@@ -85,37 +89,41 @@ function cpQuery(query) {
 		else if (session) sessionStorage.setItem(query, item);
 	}
 
-	function html() {}
-	
-	html.prototype.append = function(item) {
-		element.innerHTML += item;
-	}
-
-	html.prototype.replace = function(item) {
-		element.innerHTML = item;
-	}
-
-	function text() {}
-	
-	text.prototype.append = function(item) {
-		element.textContent += item;
-	}
-
-	text.prototype.replace = function(item) {
-		element.textContent = item;
-	}
+	function txt(item, extra1, extra2) {
+    	var add = typeof extra1 == "boolean" ? extra1:extra2, num = typeof extra1 == "number" ? extra1:extra2;
+    	if (num != undefined) element = element[num];
+        if (add) element.textContent += item;
+        else element.textContent = item;
+    }
+    
+	function htm(item, extra1, extra2) {
+    	var add = typeof extra1 == "boolean" ? extra1:extra2, num = typeof extra1 == "number" ? extra1:extra2;
+    	if (num != undefined) element = element[num];
+        if (add) element.innerHTML += item;
+        else element.innerHTML = item;
+    }
+    
+    function tag(newtag, extra1, extra2) {
+    	var type = typeof extra1 == "string" ? extra1:extra2, num = typeof extra1 == "number" ? extra1:extra2;
+    	if (num != undefined) element = element[num];
+        newtag = newtag.split("");
+        if (newtag[0] == "#") element.id = newtag[1];
+        else if (newtag[0] == ".") element.class = newtag[1];
+        else eval(`element.${newtag.join("")} = "${type}"`);
+    }
 
 	return {
+		checked: checked,
 		select: select,
 		create: create,
+		listen: listen,
 		css: new css(),
-		checked: checked,
-		click: click,
-		val: val,
-		me: me,
+        text: txt,
+        html: htm,
+        tag: tag,
+        txt: txt,
 		set: set,
-		html: new html(),
-		text: new text()
+		i: i
 	}
 }
 
