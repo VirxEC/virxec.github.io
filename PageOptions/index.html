@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Works with really large numbers">
+    <meta name="author" content="Virx">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../assets/logo.png">
+    <script src="../assets/CPquery.js"></script>
+    <script src="../assets/Options.js"></script>
+    <title>CalcPlus Page Options</title>
+    <style>
+      body { color: white; background-color: white; }
+      a { color: white; }
+      button { color: white; }
+      nav a { background-color: white; color: white; }
+      nav a:link, nav a:visited { background-color: white; color: white; }
+      nav a:hover, nav a:active { background-color: white; color: white; }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="../">Home</a>
+      <a href="../PreviewLibrary/">Preview the library</a>
+      <a href="../LibrarySource/">Library Source</a>
+      <a href="../CPQuerySource/">CPQuery Source</a>
+      <a href="../AboutLibrary/">About Library</a>
+      <a href="../SiteDiscord/">Offical Discord</a>
+    </nav>
+    <p class="console"></p>
+    <br>
+    <noscript>Please allow JavaScript to run on this page, or else most things won't work. Thank you!<br></noscript>
+    <h1>Page Options</h1>
+    <h3>Dark Mode <button id="dark"></button></h3>
+    <h3>On-Screen Console <button id="console"></button></h3>
+    <h3>Save Inputs <button id="saveI"></button></h3>
+    <!-- Mobile setting - auto-activate - will always load minified sources -->
+    
+    <script>
+      function defineButton(id) {
+        var isDark = id=="dark", store = $("@is"+id.charAt(0).toUpperCase()+id.substr(1)), id = $("#"+id);
+        id.text.replace(store.me());
+        id.click(()=>{
+          store.set(store.me());
+          id.text.replace(store.me());
+          loadOptions();
+        });
+      }
+      defineButton("dark");
+      defineButton("console");
+      defineButton("saveI");
+    </script>
+  </body>
+</html>

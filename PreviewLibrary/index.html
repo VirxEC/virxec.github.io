@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Virx">
+    <meta name="description" content="Preview the CalcPlus open-source library">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../assets/logo.png">
+    <title>Preview the CalcPlus Library</title>
+    <style>
+      body { color: white; background-color: white; }
+      a { color: white; }
+      button { color: white; }
+      .removeInput { color: white; background: white; border: none; }
+      nav a { background-color: white; color: white; }
+      nav a:link, nav a:visited { background-color: white; color: white; }
+      nav a:hover, nav a:active { background-color: white; color: white; }
+    </style>
+    <script src="../assets/Library.js"></script>
+    <script src="../assets/CPquery.js"></script>
+    <script src="../assets/Options.js"></script>
+  </head>
+  <body>
+    <nav>
+      <a href="../">Home</a>
+      <a href="../LibrarySource/">Library Source</a>
+      <a href="../CPQuerySource/">CPQuery Source</a>
+      <a href="../AboutLibrary/">About Library</a>
+      <a href="../PageOptions/">Page Options</a>
+      <a href="../SiteDiscord/">Offical Discord</a>
+    </nav>
+    <br>
+    <span class="console"></span>
+    <form>
+      <input type="radio" id="add" name="math-type" checked="checked"> Addition
+      <br>
+      <input type="radio" id="sub" name="math-type"> Subtraction
+      <br>
+      <input type="radio" id="multi" name="math-type"> Multiplication
+      <br>
+      <input type="radio" id="expo" name="math-type"> Exponents (No decimals after the first number for now)
+      <br>
+      <input type="radio" id="div" name="math-type"> Division (In development)
+      <br>
+      <input type="radio" id="isLessThan" name="math-type"> Is Less Than
+      <br>
+      <input type="radio" id="isGreaterThan" name="math-type"> Is Greater Than
+      <br>
+      <input type="radio" id="isLessThanEqual" name="math-type"> Is Less Than or Equal to
+      <br>
+      <input type="radio" id="isGreaterThanEqual" name="math-type"> Is Greater Than or Equal to
+      <br>
+      <input type="radio" id="round" name="math-type"> Round
+      <br>
+      <input type="radio" id="roundUp" name="math-type"> Round Up
+      <br>
+      <input type="radio" id="roundDown" name="math-type"> Round Down
+    </form>
+    <br>
+    <button id="addInput">Add another input field</button>
+    <br>
+    Number: <input type="text" id="input1" label="Number input field #1">
+    <br>
+    Number: <input type="text" id="input2" label="Number input field #2">
+    <br>
+    <span id="extraInputs"></span>
+    <button id="calc">Calculate...</button>
+    <br>
+    <br>
+    <p id="output">Press "Calculate..."</p>
+    <br>
+    <br>
+    <ul>
+      <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.1-beta-js">CalcPlus Stable Beta Library (v0.1)</a></li>
+      <li><a href="assets/Library.js" download="CalcPlus_BETA_Library.js">CalcPlus BETA Library (Latest)</a></li>
+    </ul>
+    <script>
+      var inputBoxes = 2, divChecked = false, getChecked=name=>$("#"+name).checked();
+      document.getElementById("div").addEventListener("change", ()=>{
+        function removeMaxDiv() {
+          if (!getChecked("div")) {
+              $("#spanDivMax").remove();
+              divChecked=false;
+              $("#div").checked(false);
+              $("#add").checked(true);
+            } else alert("You can't perform that function because it's required to use the division algorithm.");
+        }
+        if (getChecked("div")) {
+          divChecked = true;
+          $("#extraInputs").html.append('<span id="spanDivMax">Max decimal place: <input type="text" id="maxDecimal" label="Max number of decimals for division algorithm"/> <button class="removeInput" id="divMax" label="Delete max decimal field for division algorithm">X</button><br></span>');
+          $("#divMax").click(removeMaxDiv());
+        } else removeMaxDiv();
+      });
+      $("#addInput").click(()=>{
+        inputBoxes++;
+        $("#extraInputs").html.append(`<span id="id${inputBoxes}">Number: <input type="text" id="input${inputBoxes}" label="Number input field #'+inputBoxes+'"/> <button class="removeInput" id="'+inputBoxes+'" onclick="this.parentNode.remove();inputBoxes-=1;" label="Delete input field #'+inputBoxes+'">X</button><br></span>`);
+      });
+      $("#calc").click(()=>{
+        var final, inputs=[];
+        for (var i=1;i<=inputBoxes;i++) inputs[i-1] = $(`#input${i.toString()}`).val();
+        if (getChecked("add")) final = add(inputs);
+        else if (getChecked("sub")) final = sub(inputs);
+        else if (getChecked("multi")) final = multi(inputs);
+        else if (getChecked("expo")) final = expo(inputs);
+        else if (getChecked("div")) final = div(inputs, $("#maxDecimal").val());
+        else if (getChecked("isLessThan")) final = isLessThan(inputs);
+        else if (getChecked("isGreaterThan")) final = isGreaterThan(inputs);
+        else if (getChecked("isLessThanEqual")) final = isLessThanEqual(inputs);
+        else if (getChecked("isGreaterThanEqual")) final = isGreaterThanEqual(inputs);
+        else if (getChecked("round")) final = round($("#input1").val());
+        else if (getChecked("roundUp")) final = roundUp($("#input1").val());
+        else if (getChecked("roundDown")) final = roundDown($("#input1").val());
+        $("#output").text.replace(`Answer: ${final}`);
+      });
+    </script>
+  </body>
+</html>
