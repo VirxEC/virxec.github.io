@@ -1,6 +1,5 @@
 // Copyright 2019 Eric Michael Veilleux - Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
 var clone = o => JSON.parse(JSON.stringify(o));
-
 function parseNums(num1pre, num2pre, mode) {
  if (["string", "object"].indexOf(typeof num1pre) == -1) throw new TypeError("The first number wasn't a string (or object). It has to be a string (or object). Note that an object input is ment to submit a pre-parsed number.");
  if (["string", "object"].indexOf(typeof num2pre) == -1) throw new TypeError("The second number wasn't a string (or object). It has to be a string (or object). Note that an object input is ment to submit a pre-parsed number.");
