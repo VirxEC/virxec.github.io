@@ -27,6 +27,6 @@
     <br>
     <h1>CPQuery Source Code</h1>
     <p id="source"></p>
-    <script>$("#source").htm(JSON.parse(JSON.stringify(rawFile.responseText).replace(/\\n/g, "<br>").replace(/\\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;")));</script>
+    <script>$("#source").htm(JSON.parse(JSON.stringify(rawFile.responseText).replace(/\\n/g, "<br>").replace(/\\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")));</script>
   </body>
 </html>
