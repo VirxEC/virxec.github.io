@@ -11,10 +11,10 @@ function cpQuery(query) {
 	css.prototype.remove = function(item)  {
 		this.sheet.deleteRule(item);
 	};
-    
-    css.prototype.removeAll = function() {
-    	for (var i=0; i<this.sheet.cssRules.length; i++) this.sheet.deleteRule(i);
-    }
+   	
+	css.prototype.removeAll = function() {
+		for (var i=0; i<this.sheet.cssRules.length; i++) this.sheet.deleteRule(i);
+    	}
 	
 	css.prototype.replaceWithAll = function() {
 		for (var i=0; i<this.sheet.cssRules.length; i++) this.sheet.deleteRule(i);
@@ -24,8 +24,8 @@ function cpQuery(query) {
 	var element, local = false, session = false;
 	if (typeof query == "string") {
 		if (["","document"].indexOf(query)>-1) element = document;
-        else if (query == "head") element = document.head;
-        else if (query == "body") element = document.body;
+		else if (query == "head") element = document.head;
+		else if (query == "body") element = document.body;
 		else {
 			query = query.split("#");
 			if (query.length == 2) {
@@ -54,33 +54,33 @@ function cpQuery(query) {
 	} else if (query == undefined) element = document;
 	
 	function select(type, num) {
-    	if (num != undefined) element = element[num];
+		if (num != undefined) element = element[num];
 		return element.querySelector(type);
 	}
-	
+
 	function create(type, num) {
-    	if (num != undefined) element = element[num];
-        var newelem = document.createElement(type);
+		if (num != undefined) element = element[num];
+		var newelem = document.createElement(type);
 		element.appendChild(newelem);
 	}
     
-    css.prototype.createSheet = function() {
-    	element.appendChild(document.createElement("style"));
-    };
+    	css.prototype.createSheet = function() {
+    		element.appendChild(document.createElement("style"));
+    	};
     
 	function checked() {
 		if (arguments == undefined) return element.checked;
 		element.checked = arguments[0];
 	}
     
-    function listen(name, code) {
-    	element.addEventListener(name, code);
-    }
+	function listen(name, code) {
+		element.addEventListener(name, code);
+	}
 
 	function i(num) {
 		if (local) return localStorage.getItem(query);
 		else if (session) return sessionStorage.getItem(query);
-        else if (typeof num == "number") return element[num];
+        	else if (typeof num == "number") return element[num];
 		return element;
 	}
 
@@ -90,27 +90,27 @@ function cpQuery(query) {
 	}
 
 	function txt(item, extra1, extra2) {
-    	var add = typeof extra1 == "boolean" ? extra1:extra2, num = typeof extra1 == "number" ? extra1:extra2;
-    	if (num != undefined) element = element[num];
-        if (add) element.textContent += item;
-        else element.textContent = item;
-    }
+		var add = typeof extra1 == "boolean" ? extra1:extra2, num = typeof extra1 == "number" ? extra1:extra2;
+		if (num != undefined) element = element[num];
+		if (add) element.textContent += item;
+		else element.textContent = item;
+	    }
     
 	function htm(item, extra1, extra2) {
-    	var add = typeof extra1 == "boolean" ? extra1:extra2, num = typeof extra1 == "number" ? extra1:extra2;
-    	if (num != undefined) element = element[num];
-        if (add) element.innerHTML += item;
-        else element.innerHTML = item;
-    }
+		var add = typeof extra1 == "boolean" ? extra1:extra2, num = typeof extra1 == "number" ? extra1:extra2;
+		if (num != undefined) element = element[num];
+		if (add) element.innerHTML += item;
+		else element.innerHTML = item;
+	}
     
-    function tag(newtag, extra1, extra2) {
-    	var type = typeof extra1 == "string" ? extra1:extra2, num = typeof extra1 == "number" ? extra1:extra2;
-    	if (num != undefined) element = element[num];
-        newtag = newtag.split("");
-        if (newtag[0] == "#") element.id = newtag[1];
-        else if (newtag[0] == ".") element.class = newtag[1];
-        else eval(`element.${newtag.join("")} = "${type}"`);
-    }
+	function tag(newtag, extra1, extra2) {
+		var type = typeof extra1 == "string" ? extra1:extra2, num = typeof extra1 == "number" ? extra1:extra2;
+		if (num != undefined) element = element[num];
+		newtag = newtag.split("");
+		if (newtag[0] == "#") element.id = newtag[1];
+		else if (newtag[0] == ".") element.class = newtag[1];
+		else eval(`element.${newtag.join("")} = "${type}"`);
+	}
 
 	return {
 		checked: checked,
@@ -118,10 +118,11 @@ function cpQuery(query) {
 		create: create,
 		listen: listen,
 		css: new css(),
-        text: txt,
-        html: htm,
-        tag: tag,
-        txt: txt,
+		text: txt,
+		html: htm,
+		htm: htm,
+		tag: tag,
+		txt: txt,
 		set: set,
 		i: i
 	}
