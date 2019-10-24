@@ -9,7 +9,6 @@
     <script>
         var rawFile = new XMLHttpRequest();
         rawFile.open("GET", "../assets/CPquery.js");
-        rawFile.onreadystatechange = ()=> { if(rawFile.readyState == 4 && rawFile.status == 200 || rawFile.status == 0) rawFile = JSON.parse(JSON.stringify(rawFile.responseText).replace(/\\n/g, "<br>").replace(/\\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;")); }
         rawFile.send(null);
     </script>
     <script src="../assets/CPquery.js"></script>
@@ -28,6 +27,6 @@
     <br>
     <h1>CPQuery Source Code</h1>
     <p id="source"></p>
-    <script>$("#source").htm(rawFile);</script>
+    <script>$("#source").htm(JSON.parse(JSON.stringify(rawFile.responseText).replace(/\\n/g, "<br>").replace(/\\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;")));</script>
   </body>
 </html>
