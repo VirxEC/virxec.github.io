@@ -34,7 +34,7 @@
       function readTextFile(file) {
           var rawFile = new XMLHttpRequest();
           rawFile.open("GET", file, false);
-          rawFile.onreadystatechange = ()=> { if(rawFile.readyState == 4 && rawFile.status == 200 || rawFile.status == 0) $("#source").txt(rawFile.responseText); }
+          rawFile.onreadystatechange = ()=> { if(rawFile.readyState == 4 && rawFile.status == 200 || rawFile.status == 0) $("#source").tag("innerHTML", JSON.parse(JSON.stringify(rawFile.responseText).replace(/\\n/g, "<br>").replace(/\\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;"))); }
           rawFile.send(null);
       }
       readTextFile("../assets/CPquery.js");
