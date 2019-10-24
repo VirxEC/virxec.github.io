@@ -2,7 +2,8 @@ function loadOptions(){
     if ($ == undefined) throw new SyntaxError("$ is undefined");
     const isDark = $("@isDark"), isOffline = $("*isOffline"), alerted = $("*alerted"), isConsole = $("@isConsole"), savei = $("@isSaveI"), storage = ["isDark","isOffline","alerted","isConsole","savei"];
     for (var i=0;i<storage.length;i++) eval(`if(!(${storage[i]}.i() == "Off" || ${storage[i]}.i() == "On")) ${storage[i]}.set("Off")`);
-    if (isDark.i() == "On") {
+    $().css.createSheet();
+	if (isDark.i() == "On") {
         $(0).css.replaceWithAll(
             'body { color: white; background-color: black; margin: 0 !important; }',
             'button { color: white; background-color: rgb(50, 50, 50); border-color: rgb(60, 60, 60); }',
