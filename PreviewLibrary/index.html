@@ -7,15 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../assets/logo.png">
     <title>Preview the CalcPlus Library</title>
-    <style>
-      body { color: white; background-color: white; }
-      a { color: white; }
-      button { color: white; }
-      .removeInput { color: white; background: white; border: none; }
-      nav a { background-color: white; color: white; }
-      nav a:link, nav a:visited { background-color: white; color: white; }
-      nav a:hover, nav a:active { background-color: white; color: white; }
-    </style>
     <script src="../assets/Library.js"></script>
     <script src="../assets/CPquery.js"></script>
     <script src="../assets/Options.js"></script>
@@ -76,7 +67,8 @@
     </ul>
     <script>
       var inputBoxes = 2, divChecked = false, getChecked=name=>$("#"+name).checked();
-      document.getElementById("div").addEventListener("change", ()=>{
+	  
+	  $("#div").listen("change", ()=>{
         function removeMaxDiv() {
           if (!getChecked("div")) {
               $("#spanDivMax").remove();
@@ -87,17 +79,17 @@
         }
         if (getChecked("div")) {
           divChecked = true;
-          $("#extraInputs").html.append('<span id="spanDivMax">Max decimal place: <input type="text" id="maxDecimal" label="Max number of decimals for division algorithm"/> <button class="removeInput" id="divMax" label="Delete max decimal field for division algorithm">X</button><br></span>');
-          $("#divMax").click(removeMaxDiv());
+          $("#extraInputs").htm('<span id="spanDivMax">Max decimal place: <input type="text" id="maxDecimal" label="Max number of decimals for division algorithm"/> <button class="removeInput" id="divMax" label="Delete max decimal field for division algorithm">X</button><br></span>', true);
+          $("#divMax").listen("click", removeMaxDiv());
         } else removeMaxDiv();
       });
-      $("#addInput").click(()=>{
+      $("#addInput").listen("click", ()=>{
         inputBoxes++;
-        $("#extraInputs").html.append(`<span id="id${inputBoxes}">Number: <input type="text" id="input${inputBoxes}" label="Number input field #'+inputBoxes+'"/> <button class="removeInput" id="'+inputBoxes+'" onclick="this.parentNode.remove();inputBoxes-=1;" label="Delete input field #'+inputBoxes+'">X</button><br></span>`);
+        $("#extraInputs").htm(`<span id="id${inputBoxes}">Number: <input type="text" id="input${inputBoxes}" label="Number input field #'+inputBoxes+'"> <button class="removeInput" id="'+inputBoxes+'" onclick="this.parentNode.remove();inputBoxes-=1;" label="Delete input field #'+inputBoxes+'">X</button><br></span>`, true);
       });
-      $("#calc").click(()=>{
+      $("#calc").listen("click", ()=>{
         var final, inputs=[];
-        for (var i=1;i<=inputBoxes;i++) inputs[i-1] = $(`#input${i.toString()}`).val();
+        for (var i=1;i<=inputBoxes;i++) inputs[i-1] = $(`#input${i.toString()}`).i().value;
         if (getChecked("add")) final = add(inputs);
         else if (getChecked("sub")) final = sub(inputs);
         else if (getChecked("multi")) final = multi(inputs);
@@ -110,7 +102,8 @@
         else if (getChecked("round")) final = round($("#input1").val());
         else if (getChecked("roundUp")) final = roundUp($("#input1").val());
         else if (getChecked("roundDown")) final = roundDown($("#input1").val());
-        $("#output").text.replace(`Answer: ${final}`);
+		
+		$("#output").text(`Answer: ${final}`);
       });
     </script>
   </body>
