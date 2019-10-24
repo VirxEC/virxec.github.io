@@ -9,7 +9,7 @@
     <script>
         var rawFile = new XMLHttpRequest();
         rawFile.open("GET", "../assets/CPquery.js");
-        rawFile.onreadystatechange = ()=> { if(rawFile.readyState == 4 && rawFile.status == 200 || rawFile.status == 0) rawFile = JSON.parse(JSON.stringify(rawFile.responseText).replace(/\\n/g, "<br>").replace(/\\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;"); }
+        rawFile.onreadystatechange = ()=> { if(rawFile.readyState == 4 && rawFile.status == 200 || rawFile.status == 0) rawFile = JSON.parse(JSON.stringify(rawFile.responseText).replace(/\\n/g, "<br>").replace(/\\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;")); }
         rawFile.send(null);
     </script>
     <script src="../assets/CPquery.js"></script>
