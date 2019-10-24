@@ -6,16 +6,15 @@
     <meta name="author" content="Virx">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../assets/logo.png">
+    <script>
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", "../assets/CPquery.js");
+        rawFile.onreadystatechange = ()=> { if(rawFile.readyState == 4 && rawFile.status == 200 || rawFile.status == 0) rawFile = JSON.parse(JSON.stringify(rawFile.responseText).replace(/\\n/g, "<br>").replace(/\\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;"); }
+        rawFile.send(null);
+    </script>
     <script src="../assets/CPquery.js"></script>
-    <title>CalcPlus Library Source Code</title>
-    <style>
-      body { color: white; background-color: white; margin: 0;}
-      a { color: white; }
-      nav a { background-color: white; color: white; text-decoration: none; outline: none; padding: 10px 20px; display: block; float: left; border-right: solid 1px white; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; width: 16.666%; text-align: center; box-sizing: border-box; }
-      nav a:link, nav a:visited { background-color: white; color: white; }
-      nav a:hover, nav a:active { background-color: white; color: black; }
-    </style>
     <script src="../assets/Options.js"></script>
+    <title>CalcPlus Library Source Code</title>
   </head>
   <body>
     <nav>
@@ -28,16 +27,7 @@
     </nav>
     <br>
     <h1>CPQuery Source Code</h1>
-    <br>
     <p id="source"></p>
-    <script>
-      function readTextFile(file) {
-          var rawFile = new XMLHttpRequest();
-          rawFile.open("GET", file, false);
-          rawFile.onreadystatechange = ()=> { if(rawFile.readyState == 4 && rawFile.status == 200 || rawFile.status == 0) $("#source").htm(JSON.parse(JSON.stringify(rawFile.responseText).replace(/\\n/g, "<br>").replace(/\\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;"))); }
-          rawFile.send(null);
-      }
-      readTextFile("../assets/CPquery.js");
-    </script>
+    <script>$("#source").htm(rawFile);</script>
   </body>
 </html>
