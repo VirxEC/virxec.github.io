@@ -68,11 +68,6 @@ function cpQuery(query) {
     		element.appendChild(document.createElement("style"));
     	};
     
-	function checked() {
-		if (arguments == undefined) return element.checked;
-		element.checked = arguments[0];
-	}
-    
 	function listen(name, code) {
 		element.addEventListener(name, code);
 	}
@@ -113,7 +108,6 @@ function cpQuery(query) {
 	}
 
 	return {
-		checked: checked,
 		select: select,
 		create: create,
 		listen: listen,
