@@ -7,24 +7,13 @@
     <meta name="author" content="Virx">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/logo.png">
-    <script src="assets/CPquery_1-0-0.min.js"></script>
+    <script src="assets/CPquery.js"></script>
     <script>
       $("*index").set("On");
-      window.addEventListener("beforeunload", () => {$("*index").set("Off");});
+      $(window).listen("beforeunload", ()=>{$("*index").set("Off");});
     </script>
-    <script src="assets/Options.min.js"></script>
+    <script src="assets/Options.js"></script>
     <title>CalcPlus</title>
-    <style>
-      body { color: white; background-color: white; }
-      a { color: white; }
-      span.broken { color: white; }
-      span.fix { color: white; }
-      span.verify { color: white; }
-      span.working { color: white; }
-      nav a { background-color: white; color: white; }
-      nav a:link, nav a:visited { background-color: white; color: white; }
-      nav a:hover, nav a:active { background-color: white; color: white; }
-    </style>
   </head>
   <body>
     <nav>
@@ -34,9 +23,7 @@
       <a href="CalcPlus/">About Library</a>
       <a href="PageOptions/">Page Options</a>
       <a href="SiteDiscord/">Offical Discord</a>
-    </nav>
-    <br>
-    <noscript>Please allow JavaScript to run on this page, or else some things won't work. Thank you!<br></noscript>
+    </nav><br>
     <h1>Welcome the CalcPlus Library</h1>
     <h2>Status of JavaScript Library: <span class="working">Stable</span></h2>
     <img src="https://travis-ci.com/VirxEC/virxec.github.io.svg?branch=master" alt="Build Status"></img>
@@ -52,7 +39,7 @@
     <h3>Download Links</h3>
     <ul>
       <li><a href="LICENSE" download="CalcPlus_License.txt">CalcPlus License</a></li>
-      <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.1-beta-js">CalcPlus Stable Beta Library (v0.1)</a></li>
+      <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.1.1-beta-js">CalcPlus Stable Beta Library (v0.1.1)</a></li>
       <li><a href="assets/Library.js" download="CalcPlus_BETA_Library.js">CalcPlus BETA Library (Latest)</a></li>
       <li><a href="assets/CPquery_1-0-0.min.js" download="CalcPlus-Query_1-0-0.min.js">CPQuery 1.0.0 Library (minified version)</a></li>
       <li><a href="assets/CPquery.js" download="CalcPlus-Query_1-0-0.js">CPQuery 1.0.0 Library (development version)</a></li>
