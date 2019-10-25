@@ -101,10 +101,16 @@ function cpQuery(query) {
 	function tag(newtag, extra1, extra2) {
 		var type = typeof extra1 == "string" ? extra1:extra2, num = typeof extra1 == "number" ? extra1:extra2;
 		if (num != undefined) element = element[num];
-		newtag = newtag.split("");
-		if (newtag[0] == "#") element.id = newtag[1];
-		else if (newtag[0] == ".") element.class = newtag[1];
-		else eval(`element.${newtag.join("")} = "${type}"`);
+		if (type != undefined) {
+			type = type.split("");
+			if (newtag[0] == "#") element.id = type[1];
+			else if (newtag[0] == ".") element.class = type[1];
+			else eval(`element.${newtag.join("")} = "${type}"`);
+		} else {
+			if (newtag[0] == "#") return element.id;
+			else if (newtag[0] == ".") return element.class = type[1];
+			else return eval(`element.${newtag.join("")}"`);
+		}
 	}
 
 	return {
