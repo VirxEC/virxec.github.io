@@ -16,7 +16,7 @@
       <a href="../">Home</a>
       <a href="../LibrarySource/">Library Source</a>
       <a href="../CPQuerySource/">CPQuery Source</a>
-      <a href="../AboutLibrary/">About Library</a>
+      <a href="../CalcPlus/">About Library</a>
       <a href="../PageOptions/">Page Options</a>
       <a href="../SiteDiscord/">Offical Discord</a>
     </nav>
@@ -59,22 +59,20 @@
     <br>
     <br>
     <p id="output">Press "Calculate..."</p>
-    <br>
-    <br>
     <ul>
       <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.1-beta-js">CalcPlus Stable Beta Library (v0.1)</a></li>
       <li><a href="assets/Library.js" download="CalcPlus_BETA_Library.js">CalcPlus BETA Library (Latest)</a></li>
     </ul>
     <script>
-      var inputBoxes = 2, divChecked = false, getChecked=name=>$("#"+name).checked();
+      var inputBoxes = 2, divChecked = false, getChecked=name=>$("#"+name).tag("checked");
 	  
-	  $("#div").listen("change", ()=>{
+	    $("#div").listen("change", ()=>{
         function removeMaxDiv() {
           if (!getChecked("div")) {
               $("#spanDivMax").remove();
               divChecked=false;
-              $("#div").checked(false);
-              $("#add").checked(true);
+              $("#div").tag("checked");
+              $("#add").tag("checked");
             } else alert("You can't perform that function because it's required to use the division algorithm.");
         }
         if (getChecked("div")) {
@@ -102,8 +100,8 @@
         else if (getChecked("round")) final = round($("#input1").val());
         else if (getChecked("roundUp")) final = roundUp($("#input1").val());
         else if (getChecked("roundDown")) final = roundDown($("#input1").val());
-		
-		$("#output").text(`Answer: ${final}`);
+        else console.error("No option was checked");
+		    $("#output").text(`Answer: ${final}`);
       });
     </script>
   </body>

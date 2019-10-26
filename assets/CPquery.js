@@ -52,6 +52,7 @@ function cpQuery(query) {
 			}
 		}
 	} else if (query == undefined) element = document;
+	else element = query;
 	
 	function select(type, num) {
 		if (num != undefined) element = element[num];
@@ -67,11 +68,6 @@ function cpQuery(query) {
     	css.prototype.createSheet = function() {
     		element.appendChild(document.createElement("style"));
     	};
-    
-	function checked() {
-		if (arguments == undefined) return element.checked;
-		element.checked = arguments[0];
-	}
     
 	function listen(name, code) {
 		element.addEventListener(name, code);
@@ -107,13 +103,18 @@ function cpQuery(query) {
 		var type = typeof extra1 == "string" ? extra1:extra2, num = typeof extra1 == "number" ? extra1:extra2;
 		if (num != undefined) element = element[num];
 		newtag = newtag.split("");
-		if (newtag[0] == "#") element.id = newtag[1];
-		else if (newtag[0] == ".") element.class = newtag[1];
-		else eval(`element.${newtag.join("")} = "${type}"`);
+		if (type != undefined) {
+			if (newtag[0] == "#") element.id = type[1];
+			else if (newtag[0] == ".") element.class = type;
+			else eval(`element.${newtag.join("")} = "${type}"`);
+		} else {
+			if (newtag[0] == "#") return element.id;
+			else if (newtag[0] == ".") return element.class = type[1];
+			else return eval(`element.${newtag.join("")}`);
+		}
 	}
 
 	return {
-		checked: checked,
 		select: select,
 		create: create,
 		listen: listen,

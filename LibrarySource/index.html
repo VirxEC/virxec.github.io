@@ -6,11 +6,7 @@
     <meta name="author" content="Virx">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../assets/logo.png">
-    <script>
-        var rawFile = new XMLHttpRequest();
-        rawFile.open("GET", "../assets/Library.js");
-        rawFile.send(null);
-    </script>
+    <script>var rawFile = new XMLHttpRequest();rawFile.open("GET", "../assets/Library.js");</script>
     <script src="../assets/CPquery.js"></script>
     <script src="../assets/Options.js"></script>
     <title>CalcPlus Library Source Code</title>
@@ -27,6 +23,6 @@
     <br>
     <h1>CalcPlus Library Source Code</h1>
     <p id="source"></p>
-    <script>rawFile.onreadystatechange = function(){$("#source").htm(JSON.parse(JSON.stringify(rawFile.responseText).replace(/&/g, "&amp;").replace(/ /g, "&nbsp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\\n/g, "<br>").replace(/\\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;")));};</script>
+    <script>var line=0;rawFile.onreadystatechange = function(){$("#source").htm(JSON.parse(JSON.stringify(rawFile.responseText).replace(/&/g, "&amp;").replace(/ /g, "&nbsp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\\n/g, "<br>").replace(/\\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;")));};rawFile.send(null);</script>
   </body>
 </html>
