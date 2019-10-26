@@ -20,8 +20,10 @@ function parseNums(num1pre, num2pre, mode) {
 	if (stringMode1 && num1.split("-").length == 2) num1 = num1.split("-")[1], neg[1] = true;
 	if (stringMode2 && num2.split("-").length == 2) num2 = num2.split("-")[1], neg[2] = true;
 	if (neg[1] != neg[2] && mode != 1 && mode != 2) neg[0] = true;
-	if (stringMode1) num1 = num1.split('').filter(w => w != ",");
-	if (stringMode2) num2 = num2.split('').filter(w => w != ",");
+	if (stringMode1) num1 = num1.replace(/(^0+)|(\.?0+$)/g, '').split('').filter(w => w != ",");
+	if (stringMode2) num2 = num2.replace(/(^0+)|(\.?0+$)/g, '').split('').filter(w => w != ",");
+    if (stringMode1 && num1=='') num1="0";
+    if (stringMode2 && num2=='') num2="0";
 	num1pos = num1.indexOf("."), decimal1 = num1pos != -1 ? num1.filter(w => w != ".").length - num1pos : 0, num2pos = num2.indexOf("."), decimal2 = num2pos != -1 ? num2.filter(w => w != ".").length - num2pos : 0, decimal = mode == 1 || mode == 2 ? Math.max(decimal1, decimal2) : mode == 3 ? decimal1 + decimal2 : decimal1 - decimal2, maxChar = Math.max(num1.length, num2.length);
 	if (decimal < 0) decimal = 0;
 	for (var i = 0; !skip && ((neg[1] || neg[2]) && mode == 1) && num2.length == maxChar && i < num1.length; i++)
@@ -77,9 +79,10 @@ function formatNums(final, decimals, neg) {
 			final = final.join("");
 		} else final = final.reverse().join("");
 	}
-	final = neg[0] ? "-" + final : final;
-	final = ["", ".", "-"].indexOf(final) > -1 ? "0" : final;
-	return final;
+	final = neg[0] ? "-" + final : final, final = final.replace(/(^0+)|(\.?0+$)/g, ''), final = ["", ".", "-"].indexOf(final) > -1 ? "0" : final;
+    var temp = final.split("");
+    if (temp[temp.length-1]==".") final = final.slice(0, -1);
+    return final;
 }
 
 function add() {
@@ -152,7 +155,7 @@ function sub() {
 				var j = i - 1;
 				final[finali] = String(fans + 10), num1[j] = String(num1[j] - 1);
 				while (num1[j] < 0 && j != 0) num1[j] = String((+num1[j]) + 10), j = j - 1, num1[j] = String(num1[j] - 1);
-			} else if (fans < 0 && i == 0) final[finali] = String(fans).split("-")[1];
+			} else if (fans <= 0 && i == 0) final[finali] = String(fans).split("-")[1];
 			else final[finali] = fans;
 		}
 		return formatNums(final, decimal[0], neg);
@@ -246,7 +249,6 @@ function multi() {
 			neg = [parsedNums.isNeg, parsedNums.num1.isNeg, parsedNums.num2.isNeg],
 			final = "",
 			decimals = parsedNums.decimals,
-			numArray = [],
 			num2 = parsedNums.num2,
 			num1 = parsedNums.num1;
 		if (num2.num.length == 1 && num2.num[0] == "1") return formatNums(num2.num, decimals, neg);
@@ -280,7 +282,6 @@ function expo() {
 			decimals = parsedNums.decimals,
 			decimal2 = parsedNums.num2.decimals,
 			neg = [parsedNums.isNeg, parsedNums.num1.isNeg, parsedNums.num2.isNeg],
-			numArray = [],
 			final = "";
 		if (neg[1]) num1.num.unshift("-");
 		if (neg[2]) num2.num.unshift("-");
@@ -322,13 +323,13 @@ function div() {
 			num2 = parsedNums.num2,
 			num = sub(num1, num2),
 			final = "1";
+		console.log(num2.num, num1.num)
 		while (isLessThanEqual(num2, num)) {
 			num = sub(num, num2), final = add(final, {
 				num: ["1"],
 				isNeg: false,
 				decimals: 0
 			});
-			log(num)
 		}
 		return final;
 	}
@@ -351,3 +352,6 @@ var a = add,
 	r = round,
 	ru = roundUp,
 	rd = roundDown;
+
+console.log(sub("10","2"));
+//console.log(div("12","2"));
