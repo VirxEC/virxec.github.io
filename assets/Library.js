@@ -20,19 +20,21 @@ function parseNums(num1pre, num2pre, mode) {
 	if (stringMode1 && num1.split("-").length == 2) num1 = num1.split("-")[1], neg[1] = true;
 	if (stringMode2 && num2.split("-").length == 2) num2 = num2.split("-")[1], neg[2] = true;
 	if (neg[1] != neg[2] && mode != 1 && mode != 2) neg[0] = true;
-	if (stringMode1) num1 = num1.replace(/(^0+)|(\.?0+$)/g, '').split('').filter(w => w != ",");
-	if (stringMode2) num2 = num2.replace(/(^0+)|(\.?0+$)/g, '').split('').filter(w => w != ",");
-    if (stringMode1 && num1=='') num1="0";
-    if (stringMode2 && num2=='') num2="0";
+	if (stringMode1 && num1.split(".").length == 2) num1 = num1.replace(/(\.?0+$)/g, '');
+	if (stringMode2 && num2.split(".").length == 2) num2 = num2.replace(/(\.?0+$)/g, '');
+	if (stringMode1 && num1 != "0") num1 = num1.replace(/(^0+)/g, '').split('').filter(w => w != ",");
+	if (stringMode2 && num2 != "0") num2 = num2.replace(/(^0+)/g, '').split('').filter(w => w != ",");
+    if (stringMode1 && num1 == "" && num1 == "." && num1 == "-") num1=["0"];
+	if (stringMode2 && num2 == "" && num2 == "." && num2 == "-") num2=["0"];
 	num1pos = num1.indexOf("."), decimal1 = num1pos != -1 ? num1.filter(w => w != ".").length - num1pos : 0, num2pos = num2.indexOf("."), decimal2 = num2pos != -1 ? num2.filter(w => w != ".").length - num2pos : 0, decimal = mode == 1 || mode == 2 ? Math.max(decimal1, decimal2) : mode == 3 ? decimal1 + decimal2 : decimal1 - decimal2, maxChar = Math.max(num1.length, num2.length);
 	if (decimal < 0) decimal = 0;
 	for (var i = 0; !skip && ((neg[1] || neg[2]) && mode == 1) && num2.length == maxChar && i < num1.length; i++)
 		if (+num2[i] > +num1[i]) neg[0] = true, skip = true;
-	for (var i = 0; !skip && mode == 2 && num2.length == maxChar && i < num1.length; i++) {
+	if (mode == 2 && num2.length == maxChar && num1.length != maxChar) neg[0] = true;
+	for (var i = 0; !skip && !neg[0] && mode == 2 && num2.length == maxChar && i < num1.length; i++) {
 		if (num1[i] < num2[i]) neg[0] = true, skip = true;
 		else skip = !(num2[i] == num1[i]);
 	}
-	if (num2.length == maxChar && num2.length != maxChar) neg[0] = true;
 	if (maxChar == num2.length && mode == 3) num1 = [num2, num2 = num1][0]
 	if (decimal1 != decimal2 && [1, 2].indexOf(mode) > -1) {
 		if (decimal1 == decimal)
@@ -44,7 +46,7 @@ function parseNums(num1pre, num2pre, mode) {
 		numl = [num1.length, num2.length];
 		if (maxChar == numl[0])
 			for (var i = 0; i < numl[0] - numl[1]; i++) num2.unshift("0");
-		else if (maxChar != num1[0])
+		else if (maxChar == numl[1])
 			for (var i = 0; i < numl[1] - numl[0]; i++) num1.unshift("0");
 	}
 	if (mode == 3 && neg.every(e => (e == true))) neg[0] = false;
@@ -322,7 +324,7 @@ function div() {
 			num1 = parsedNums.num1,
 			num2 = parsedNums.num2,
 			num = sub(num1, num2),
-			final = "1";
+			final = "0";
 		console.log(num2.num, num1.num)
 		while (isLessThanEqual(num2, num)) {
 			num = sub(num, num2), final = add(final, {
@@ -353,5 +355,4 @@ var a = add,
 	ru = roundUp,
 	rd = roundDown;
 
-console.log(sub("10","2"));
-//console.log(div("12","2"));
+//console.log(div("2","12"));
