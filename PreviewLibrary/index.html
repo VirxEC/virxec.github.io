@@ -65,45 +65,45 @@
       <li><a href="assets/Library.js" download="CalcPlus_BETA_Library.js">CalcPlus BETA Library (Latest)</a></li>
     </ul>
     <script>
-      var inputBoxes = 2, divChecked = false, getChecked=name=>$("#"+name).tag("checked");
+        var inputBoxes = 2, divChecked = false, getChecked=name=>$("#"+name).tag("checked");
 
 	    $("#div").listen("change", ()=>{
-        function removeMaxDiv() {
-          if (!getChecked("div")) {
-              $("#spanDivMax").remove();
-              divChecked=false;
-              $("#div").tag("checked");
-              $("#add").tag("checked");
-            } else alert("You can't perform that function because it's required to use the division algorithm.");
-        }
-        if (getChecked("div")) {
-          divChecked = true;
-          $("#extraInputs").htm('<span id="spanDivMax">Max decimal place: <input type="text" id="maxDecimal" label="Max number of decimals for division algorithm"/> <button class="removeInput" id="divMax" label="Delete max decimal field for division algorithm">X</button><br></span>', true);
-          $("#divMax").listen("click", removeMaxDiv());
-        } else removeMaxDiv();
-      });
-      $("#addInput").listen("click", ()=>{
-        inputBoxes++;
-        $("#extraInputs").htm(`<span id="id${inputBoxes}">Number: <input type="text" id="input${inputBoxes}" label="Number input field #'+inputBoxes+'"> <button class="removeInput" id="'+inputBoxes+'" onclick="this.parentNode.remove();inputBoxes-=1;" label="Delete input field #'+inputBoxes+'">X</button><br></span>`, true);
-      });
-      $("#calc").listen("click", ()=>{
-        var final, inputs=[];
-        for (var i=1;i<=inputBoxes;i++) inputs[i-1] = $(`#input${i.toString()}`).i().value;
-        if (getChecked("add")) final = add(inputs);
-        else if (getChecked("sub")) final = sub(inputs);
-        else if (getChecked("multi")) final = multi(inputs);
-        else if (getChecked("expo")) final = expo(inputs);
-        else if (getChecked("div")) final = div(inputs, $("#maxDecimal").val());
-        else if (getChecked("isLessThan")) final = isLessThan(inputs);
-        else if (getChecked("isGreaterThan")) final = isGreaterThan(inputs);
-        else if (getChecked("isLessThanEqual")) final = isLessThanEqual(inputs);
-        else if (getChecked("isGreaterThanEqual")) final = isGreaterThanEqual(inputs);
-        else if (getChecked("round")) final = round($("#input1").val());
-        else if (getChecked("roundUp")) final = roundUp($("#input1").val());
-        else if (getChecked("roundDown")) final = roundDown($("#input1").val());
-        else console.error("No option was checked");
+            function removeMaxDiv() {
+                if (!getChecked("div")) {
+                    $("#spanDivMax").remove();
+                    divChecked=false;
+                    $("#div").tag("checked");
+                    $("#add").tag("checked");
+                } else alert("You can't perform that function because it's required to use the division algorithm.");
+            }
+            if (getChecked("div")) {
+                divChecked = true;
+                $("#extraInputs").htm('<span id="spanDivMax">Max decimal place: <input type="text" id="maxDecimal"/><button class="removeInput" id="divMax">X</button><br></span>', true);
+                $("#divMax").listen("click", removeMaxDiv());
+            }// else removeMaxDiv();
+        });
+        $("#addInput").listen("click", ()=>{
+            inputBoxes++;
+            $("#extraInputs").htm(`<span id="id${inputBoxes}">Number: <input type="text" id="input${inputBoxes}"><button class="removeInput" id="${inputBoxes}" onclick="this.parentNode.remove();inputBoxes-=1;" label="Delete input field #${inputBoxes}">X</button><br></span>`, true);
+        });
+        $("#calc").listen("click", ()=>{
+            var final, inputs=[];
+            for (var i=1;i<=inputBoxes;i++) inputs[i-1] = $(`#input${i.toString()}`).i().value;
+                if (getChecked("add")) final = add(inputs);
+                else if (getChecked("sub")) final = sub(inputs);
+                else if (getChecked("multi")) final = multi(inputs);
+                else if (getChecked("expo")) final = expo(inputs);
+                else if (getChecked("div")) final = div(inputs, $("#maxDecimal").val());
+                else if (getChecked("isLessThan")) final = isLessThan(inputs);
+                else if (getChecked("isGreaterThan")) final = isGreaterThan(inputs);
+                else if (getChecked("isLessThanEqual")) final = isLessThanEqual(inputs);
+                else if (getChecked("isGreaterThanEqual")) final = isGreaterThanEqual(inputs);
+                else if (getChecked("round")) final = round($("#input1").val());
+                else if (getChecked("roundUp")) final = roundUp($("#input1").val());
+                else if (getChecked("roundDown")) final = roundDown($("#input1").val());
+                else console.error("No option was checked");
 		    $("#output").text(`Answer: ${final}`);
-      });
+        });
     </script>
   </body>
 </html>
