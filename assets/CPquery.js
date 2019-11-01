@@ -1,27 +1,11 @@
-// Copyright 2019 Eric Michael Veilleux - Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. - You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+/* Copyright 2019 Eric Michael Veilleux
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and limitations under the License
+ */
 function cpQuery(query) {
-	function css() {
-		if (typeof query == "number") this.sheet = document.styleSheets[query];
-	}
-	
-	css.prototype.append = function(item) {
-		this.sheet.insertRule(item, this.sheet.cssRules.length);
-	};
-	
-	css.prototype.remove = function(item)  {
-		this.sheet.deleteRule(item);
-	};
-   	
-	css.prototype.removeAll = function() {
-		for (var i=0; i<this.sheet.cssRules.length; i++) this.sheet.deleteRule(i);
-    	}
-	
-	css.prototype.replaceWithAll = function() {
-		for (var i=0; i<this.sheet.cssRules.length; i++) this.sheet.deleteRule(i);
-		for (var i=0; i<arguments.length; i++) this.sheet.insertRule(arguments[i], this.sheet.cssRules.length);
-	};
-
-	var element, local = false, session = false;
+	var element, local = false, session = false, ogquery = query;
 	if (typeof query == "string") {
 		if (["","document"].indexOf(query)>-1) element = document;
 		else if (query == "head") element = document.head;
@@ -53,7 +37,7 @@ function cpQuery(query) {
 		}
 	} else if (query == undefined) element = document;
 	else element = query;
-	
+
 	function select(type, num) {
 		if (num != undefined) element = element[num];
 		return element.querySelector(type);
@@ -64,11 +48,34 @@ function cpQuery(query) {
 		var newelem = document.createElement(type);
 		element.appendChild(newelem);
 	}
-    
-    	css.prototype.createSheet = function() {
-    		element.appendChild(document.createElement("style"));
-    	};
-    
+
+	const css = class {
+		constructor() {
+            if (typeof ogquery == "number") this.sheet = document.styleSheets[ogquery];
+        }
+
+        append() {
+            this.sheet.insertRule(item, this.sheet.cssRules.length);
+        }
+
+        remove(item)  {
+		    this.sheet.deleteRule(item);
+	    }
+
+        removeAll() {
+            for (var i=0; i<this.sheet.cssRules.length; i++) this.sheet.deleteRule(i);
+        }
+
+        replaceWithAll() {
+            for (var i=0; i<this.sheet.cssRules.length; i++) this.sheet.deleteRule(i);
+		    for (var i=0; i<arguments.length; i++) this.sheet.insertRule(arguments[i], this.sheet.cssRules.length);
+        }
+
+        createSheet() {
+    	    element.appendChild(document.createElement("style"));
+        }
+	}
+
 	function listen(name, code) {
 		element.addEventListener(name, code);
 	}
@@ -76,7 +83,7 @@ function cpQuery(query) {
 	function i(num) {
 		if (local) return localStorage.getItem(query);
 		else if (session) return sessionStorage.getItem(query);
-        	else if (typeof num == "number") return element[num];
+        else if (typeof num == "number") return element[num];
 		return element;
 	}
 
@@ -90,15 +97,15 @@ function cpQuery(query) {
 		if (num != undefined) element = element[num];
 		if (add) element.textContent += item;
 		else element.textContent = item;
-	    }
-    
+	}
+
 	function htm(item, extra1, extra2) {
 		var add = typeof extra1 == "boolean" ? extra1:extra2, num = typeof extra1 == "number" ? extra1:extra2;
 		if (num != undefined) element = element[num];
 		if (add) element.innerHTML += item;
 		else element.innerHTML = item;
 	}
-    
+
 	function tag(newtag, extra1, extra2) {
 		var type = typeof extra1 == "string" ? extra1:extra2, num = typeof extra1 == "number" ? extra1:extra2;
 		if (num != undefined) element = element[num];
