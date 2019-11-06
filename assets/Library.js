@@ -4,7 +4,7 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License
  */
-var predefone = {num:["1"],isNeg:false,decimals:0}, powermode = false, checks = true, clone = o => JSON.parse(JSON.stringify(o)), checkNumberString = obj => {
+var powermode = false, checks = true, predefone = {num:["1"],isNeg:false,decimals:0}, clone = o => JSON.parse(JSON.stringify(o)), checkNumberString = obj => {
     obj.forEach((a, i) => {
         if (a == undefined) throw new ReferenceError("Input number "+i+" was undefined.");
         else if (typeof a == "object") {
@@ -125,7 +125,7 @@ var predefone = {num:["1"],isNeg:false,decimals:0}, powermode = false, checks = 
 
 function toggleAntiCheck() {
     if (check) {
-        console.log("Enabled Anti-Check. This disables all input checks to save computer resources.","To disable checks forever, change the first variable on the first line to 'false' in the program file. It will bypass these messages.");
+        console.log("Enabled Anti-Check. This disables all input checks to save computer resources.","To disable checks forever, change the second variable on the line 7 to 'false' in the program file. It will bypass these messages.");
         console.warn("Anti-Check may have unintended concequences.");
         checks = false;
     } else {
@@ -141,7 +141,7 @@ function togglePowerMode() {
         console.warn("Disabling power mode will result");
         powermode = false;
     } else {
-        console.log("Enabled power mode. This will make it so the library will only activate if the sum/difference is over Math.MAX_SAFE_INTEGER.");
+        console.log("Enabled power mode. This will make it so the library will only activate if the sum/difference is over Math.MAX_SAFE_INTEGER.","To enable power mode forever, change the first variable on line 7 to true.");
         powermode = true;
     }
 }
