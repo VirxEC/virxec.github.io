@@ -1,111 +1,97 @@
 <!DOCTYPE html>
 <html lang="en-US">
-
-<head>
-	<meta charset="UTF-8">
-	<meta name="author" content="Virx">
-	<meta name="description" content="Preview the CalcPlus open-source library">
-	<meta name="keywords" content="HTML,CSS,JavaScript,InfiniCalc,BigCalc,Big,Infitite,Calculator,Large,Number,Not,Small,Numbers,CalcPlus,Calc,Plus,Big Number Calculator,Big # Calc,GitHub,#">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="../assets/logo.png">
-	<title>Preview the CalcPlus Library</title>
-	<script src="../assets/Library.js"></script>
-	<script src="../assets/CPquery_1-1-0.min.js"></script>
-	<script src="../assets/Options.min.js"></script>
-</head>
-
-<body>
-	<nav>
-		<a href="../">Home</a>
-		<a href="../LibrarySource/">Library Source</a>
-		<a href="../CPQuerySource/">CPQuery Source</a>
-		<a href="../CalcPlus/">About Library</a>
-		<a href="../PageOptions/">Page Options</a>
-		<a href="../SiteDiscord/">Offical Discord</a>
-	</nav>
-	<br>
-    <span class="console"></span>
-    <form>
-      <input type="radio" id="add" name="math-type" checked="checked"> Addition
-      <br>
-      <input type="radio" id="sub" name="math-type"> Subtraction
-      <br>
-      <input type="radio" id="multi" name="math-type"> Multiplication
-      <br>
-      <input type="radio" id="expo" name="math-type"> Exponents (No decimals after the first number for now)
-      <br>
-      <input type="radio" id="div" name="math-type"> Division (In development)
-      <br>
-      <input type="radio" id="isLessThan" name="math-type"> Is Less Than
-      <br>
-      <input type="radio" id="isGreaterThan" name="math-type"> Is Greater Than
-      <br>
-      <input type="radio" id="isLessThanEqual" name="math-type"> Is Less Than or Equal to
-      <br>
-      <input type="radio" id="isGreaterThanEqual" name="math-type"> Is Greater Than or Equal to
-      <br>
-      <input type="radio" id="round" name="math-type"> Round
-      <br>
-      <input type="radio" id="roundUp" name="math-type"> Round Up
-      <br>
-      <input type="radio" id="roundDown" name="math-type"> Round Down
-    </form>
-    <br>
-    <button id="addInput">Add another input field</button>
-    <br>
-    Number: <input type="text" id="input1" label="Number input field #1">
-    <br>
-    Number: <input type="text" id="input2" label="Number input field #2">
-    <br>
-    <span id="extraInputs"></span>
-    <button id="calc">Calculate...</button>
-    <br>
-    <br>
-    <p id="output">Press "Calculate..."</p>
-    <ul>
-      <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.1.1-beta-js">CalcPlus Stable Beta Library (v0.1.1)</a></li>
-      <li><a href="assets/Library.js" download="CalcPlus_BETA_Library.js">CalcPlus BETA Library (Latest)</a></li>
-    </ul>
-    <script>
-        var inputBoxes = 2, divChecked = false, getChecked=name=>$("#"+name).tag("checked");
-
-	    $("#div").listen("change", ()=>{
-            function removeMaxDiv() {
-                if (!getChecked("div")) {
-                    $("#spanDivMax").remove();
-                    divChecked=false;
-                    $("#div").tag("checked");
-                    $("#add").tag("checked");
-                }
-            }
-            if (getChecked("div")) {
-                divChecked = true;
-                $("#extraInputs").htm('<span id="spanDivMax">Max decimal place: <input type="text" id="maxDecimal"/><button class="removeInput" id="divMax">X</button><br></span>', true);
-                $("#divMax").listen("click", removeMaxDiv());
-            }// else removeMaxDiv();
-        });
-        $("#addInput").listen("click", ()=>{
-            inputBoxes++;
-            $("#extraInputs").htm(`<span id="id${inputBoxes}">Number: <input type="text" id="input${inputBoxes}"><button class="removeInput" id="${inputBoxes}" onclick="this.parentNode.remove();inputBoxes-=1;" label="Delete input field #${inputBoxes}">X</button><br></span>`, true);
-        });
-        $("#calc").listen("click", ()=>{
-            var final, inputs=[];
-            for (var i=1;i<=inputBoxes;i++) inputs[i-1] = $(`#input${i.toString()}`).i().value;
-                if (getChecked("add")) final = add(inputs);
-                else if (getChecked("sub")) final = sub(inputs);
-                else if (getChecked("multi")) final = multi(inputs);
-                else if (getChecked("expo")) final = expo(inputs);
-                else if (getChecked("div")) final = div(inputs, $("#maxDecimal").val());
-                else if (getChecked("isLessThan")) final = isLessThan(inputs);
-                else if (getChecked("isGreaterThan")) final = isGreaterThan(inputs);
-                else if (getChecked("isLessThanEqual")) final = isLessThanEqual(inputs);
-                else if (getChecked("isGreaterThanEqual")) final = isGreaterThanEqual(inputs);
-                else if (getChecked("round")) final = round($("#input1").val());
-                else if (getChecked("roundUp")) final = roundUp($("#input1").val());
-                else if (getChecked("roundDown")) final = roundDown($("#input1").val());
-                else console.error("No option was checked");
-		    $("#output").text(`Answer: ${final}`);
-        });
-    </script>
+	<head>
+		<meta name="description" content="Preview the CalcPlus open-source library">
+		<title>Preview the CalcPlus Library</title>
+		<script src="../assets/Library.js"></script>
+		<script src="../assets/CPquery_1-2-0.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer></script>
+		<script src="../assets/Options.min.js"></script>
+	</head>
+	<body>
+		<nav>
+			<a href="../">Home</a>
+			<a href="../LibrarySource/">Library Source</a>
+			<a href="../CPQuerySource/">CPQuery Source</a>
+			<a href="../CalcPlus/">About Library</a>
+			<a href="../PageOptions/">Page Options</a>
+			<a href="https://invite.gg/virxec">Offical Discord</a>
+		</nav><br>
+		<span class="console"></span>
+		<form>
+			<input type="radio" id="a" name="math-type" checked="checked">
+			<label for="a">Addition</label>
+			<br>
+			<input type="radio" id="s" name="math-type">
+			<label for="s">Subtraction</label>
+			<br>
+			<input type="radio" id="m" name="math-type">
+			<label for="m">Multiplication</label>
+			<br>
+			<input type="radio" id="e" name="math-type">
+			<label for="e">Exponents (No decimals after the first number for now)</label>
+			<br>
+			<input type="radio" id="d" name="math-type">
+			<label for="d">Division (In development)</label>
+			<br>
+			<input type="radio" id="l" name="math-type">
+			<label for="l">Is Less Than</label>
+			<br>
+			<input type="radio" id="g" name="math-type">
+			<label for="g">Is Greater Than</label>
+			<br>
+			<input type="radio" id="le" name="math-type">
+			<label for="le">Is Less Than or Equal to</label>
+			<br>
+			<input type="radio" id="ge" name="math-type">
+			<label for="ge">Is Greater Than or Equal to</label>
+			<br>
+			<input type="radio" id="r" name="math-type">
+			<label for="r">Round</label>
+			<br>
+			<input type="radio" id="ru" name="math-type">
+			<label for="ru">Round Up</label>
+			<br>
+			<input type="radio" id="rd" name="math-type">
+			<label for="rd">Round down</label>
+		</form>
+		<br>
+		<button id="addInput">Add another input field</button>
+		<br>
+		<input type="text" id="input1" placeholder="Number">
+		<br>
+		<input type="text" id="input2" placeholder="Number">
+		<br>
+		<span id="extraInputs"></span>
+		<button id="calc">Calculate...</button>
+		<br>
+		<br>
+		<p id="output">Press "Calculate..."</p>
+		<ul>
+			<li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.1.1-beta-js">CalcPlus Stable Beta Library (v0.1.1)</a></li>
+			<li><a href="../assets/Library.js" download="CalcPlus_BETA_Library.js">CalcPlus Alpha Library (Latest)</a></li>
+		</ul>
+		<script>
+			var inputBoxes=2, divChecked=false, gc=n=>$("#"+n).tag("checked");
+			$("#d").listen("change", ()=>{
+				if (gc("d")) {
+					divChecked = true;
+					$("#extraInputs").htm('<span id="spanDivMax"><input type="text" id="maxDecimal" placeholder="Max decimal place"><br></span>', true);
+				} else if (divChecked) {
+					divChecked = false;
+					$("#spanDivMax").tag("remove()");
+				}
+			});
+			$("#addInput").listen("click", ()=>{
+				inputBoxes++;
+				$("#extraInputs").htm(`<span id="id${inputBoxes}"><input type="text" id="input${inputBoxes}" placeholder="Number"><button class="removeInput" id="${inputBoxes}" onclick="this.parentNode.remove();inputBoxes-=1;">X</button><br></span>`, true);
+			});
+			$("#calc").listen("click", ()=>{
+				var final, inputs=[];
+				for(var i=1;i<=inputBoxes;i++)inputs[i-1]=$("#input"+i).tag("value");
+				final=gc("a")?a(inputs):gc("s")?s(inputs):gc("m")?m(inputs):gc("e")?e(inputs):gc("d")?d(inputs, $("#maxDecimal").tag("value")):gc("l")?l(inputs):gc("g")?g(inputs):gc("le")?le(inputs):gc("ge")?ge(inputs):gc("r")?r(inputs[0]):gc("ru")?ru(inputs[0]):gc("rd")?rd(inputs[0]):console.error("No option was checked");
+				$("#output").txt("Answer: "+final);
+			});
+		</script>
   </body>
 </html>

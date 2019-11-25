@@ -1,17 +1,8 @@
 <!DOCTYPE html>
 <html lang="en-us"> 
 <head>
-	<meta charset="UTF-8">
 	<meta name="description" content="A library that lets numbers be calculated way over the normal limit without losing precision">
-	<meta name="keywords" content="HTML,CSS,JavaScript,InfiniCalc,BigCalc,Big,Infitite,Calculator,Large,Number,Not,Small,Numbers,CalcPlus,Calc,Plus,Big Number Calculator,Big # Calc,GitHub,#">
-	<meta name="author" content="Virx">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="assets/logo.png">
-	<script src="assets/CPquery_1-1-0.min.js"></script>
-	<script>
-		$("*index").set("On");
-    $(window).listen("beforeunload", ()=>{$("*index").set("Off");});
-	</script>
+	<script src="assets/CPquery_1-2-0.min.js"></script>
 	<script src="assets/Options.min.js"></script>
 	<title>CalcPlus</title>
 </head>
@@ -21,28 +12,43 @@
 		<a href="LibrarySource/">Library Source</a>
 		<a href="CPQuerySource/">CPQuery Source</a>
 		<a href="CalcPlus/">About Library</a>
-		<a href="PageOptions/">Page Options</a>
-		<a href="SiteDiscord/">Offical Discord</a>
+		<a href="PageOptions/">Site Options</a>
+		<a href="https://invite.gg/virxec">Official Discord</a>
 	</nav><br>
-    <h1>Welcome the CalcPlus Library</h1>
-    <h2>Status of JavaScript Library: <span class="working">Stable</span></h2>
-    <img src="https://travis-ci.com/VirxEC/virxec.github.io.svg?branch=master" alt="Build Status"></img>
+	<span class="console"></span>
+	<widgetbot
+  	server="507708985206505482"
+  	channel="629774177733181440"
+  	width="60%"
+  	height="90%"
+  	shard="https://disweb.dashflo.net"
+	></widgetbot>
+	<script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed" async></script>
+	<h1>Welcome the CalcPlus Library</h1>
+	<h2>Status of JavaScript Library: <span class="working">Stable</span></h2>
+	<img src="https://travis-ci.com/VirxEC/virxec.github.io.svg?branch=master" alt="Build Status">
 
-    <h3>Project Links</h3>
-    <ul>
-      <li><a href="http://bit.ly/CPToDo">To do page</a></li>
-      <li><a href="http://bit.ly/CPIssues">Sumbit a bug report</a></li>
-      <li><a href="http://bit.ly/CPFeature">Suggest a feature</a></li>
-      <li><a href="https://github.com/VirxEC/CalcPlus/compare">Submit a pull request</a></li>
-    </ul>
+	<h3>Project Links</h3>
+	<ul>
+	  <li><a href="https://github.com/VirxEC/CalcPlus/projects/1">To do page</a></li>
+	  <li><a href="https://github.com/VirxEC/CalcPlus/issues/new?assignees=VirxEC&labels=bug&template=bug_report.md&title=%5BBUG%5D">Sumbit a bug report</a></li>
+	  <li><a href="https://github.com/VirxEC/CalcPlus/issues/new?assignees=VirxEC&labels=enhancement&template=feature_request.md&title=%5BFEATURE+REQUEST%5D">Suggest a feature</a></li>
+	  <li><a href="https://github.com/VirxEC/CalcPlus/compare">Submit a pull request</a></li>
+	</ul>
 
-    <h3>Download Links</h3>
-    <ul>
-      <li><a href="LICENSE" download="CalcPlus_License.txt">CalcPlus License</a></li>
-      <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.1.1-beta-js">CalcPlus Stable Beta Library (v0.1.1)</a></li>
-      <li><a href="assets/Library.js" download="CalcPlus_BETA_Library.js">CalcPlus Alpha Library (Latest)</a></li>
-      <li><a href="assets/CPquery_1-1-0.min.js" download="CalcPlus-Query_1-1-0.min.js">CPQuery 1.1.0 Library</a></li>
-      <li><a href="assets/CPquery.js" download="CalcPlus-Query.js">CPQuery Beta Library</a></li>
-    </ul>
+	<h3>Download Links</h3>
+	<ul>
+	  <li><a href="LICENSE" download="CalcPlus_License.txt">CalcPlus License</a></li>
+	  <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.1.2-beta-js">CalcPlus Beta Library (v0.1.2)</a></li>
+	  <li><a href="assets/Library.js" download="CalcPlus_Library_ALPHA.js">CalcPlus Alpha Library (Latest)</a></li>
+	  <li><a href="https://github.com/VirxEC/CPQuery/releases/tag/v1.1.1" download="CalcPlus-Query_1-1-1.min.js">CPQuery v1.1.1 Library</a></li>
+	  <li><a href="assets/CPquery.js" download="CalcPlus_Query.js">CPQuery Beta Library (v<span id="major"></span>.<span id="minor"></span>.<span id="bugFix"></span>)</a></li>
+	</ul>
+	<script>
+		const v = $().version
+		$("#major").txt(v.major);
+		$("#minor").txt(v.minor);
+		$("#bugFix").txt(v.bugFix);
+	</script>
 </body>
 </html>

@@ -1,0 +1,12 @@
+body { color: black; background-color: white; margin: 0 !important; }
+button { color: black; background-color: rgb(200, 200, 200); border-color: rgb(210, 210, 210); }
+a { color: rgb(0, 0, 192); }
+widgetbot { position: absolute; top: 40px; right: 10px; }
+span.broken { color: red; }
+span.fix { color: rgb(235, 235, 0); }
+span.verify { color: orange; }
+span.working { color: green; }
+.removeInput { color: black; background-color: red; border: none; }
+nav a { background-color: grey; color: white; text-decoration: none; outline: none; padding: 10px 20px; display: block; float: left; border-right: solid 1px silver; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; width: 16.666%; text-align: center; box-sizing: border-box; }
+nav a:link, nav a:visited { background-color: grey; color: white; }
+nav a:hover, nav a:active { background-color: silver; color: black; }

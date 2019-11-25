@@ -1,22 +1,11 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <meta charset="UTF-8">
     <meta name="description" content="A library that lets numbers be calculated way over the normal limit without losing precision.">
-    <meta name="author" content="Virx">
-    <meta name="keywords" content="HTML,CSS,JavaScript,InfiniCalc,BigCalc,Big,Infitite,Calculator,Large,Number,Not,Small,Numbers,CalcPlus,Calc,Plus,Big Number Calculator,Big # Calc,GitHub,#">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../assets/logo.png">
     <title>CalcPlus Library Source Code</title>
-    <script>var rawFile = new XMLHttpRequest();rawFile.open("GET", "../assets/Library.js");</script>
-    <script src="../assets/CPquery_1-1-0.min.js"></script>
-		<script>
-			var link = document.createElement("link");
-			link.rel = "stylesheet";
-			if ($("@isDark").i()) link.href = "../assets/dark.min.css";
-			else link.href = "../assets/light.min.css";
-			document.head.appendChild(link);
-		</script>
+    <script src="../assets/CPquery_1-2-0.min.js"></script>
+		<script>var raw = new $("../assets/Library.js").file;</script>
+		<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer></script>
 		<script src="../assets/Options.min.js"></script>
 		<script src="../assets/highlight.min.js"></script>
   </head>
@@ -27,11 +16,16 @@
       <a href="../CPQuerySource/">CPQuery Source</a>
       <a href="../CalcPlus/">About Library</a>
       <a href="../PageOptions/">Page Options</a>
-      <a href="../SiteDiscord/">Offical Discord</a>
-    </nav>
-    <br>
+      <a href="https://invite.gg/virxec">Offical Discord</a>
+    </nav><br>
+		<span class="console"></span>
     <h1>CalcPlus Library Source Code</h1>
     <pre><code id="source" class="javascript"></code></pre>
-    <script>rawFile.onreadystatechange = function(){if (this.readyState == 4) {$("#source").txt(rawFile.responseText);hljs.initHighlighting();}};rawFile.send(null);</script>
+    <script>
+			raw.request(function(){
+				$("#source").txt(raw.i("responseText"));
+				hljs.initHighlighting();
+			});
+		</script>
   </body>
 </html>

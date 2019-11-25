@@ -1,40 +1,32 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <meta charset="UTF-8">
     <meta name="description" content="Works with really large numbers">
-    <meta name="author" content="Virx">
-    <meta name="keywords" content="HTML,CSS,JavaScript,InfiniCalc,BigCalc,Big,Infitite,Calculator,Large,Number,Not,Small,Numbers,CalcPlus,Calc,Plus,Big Number Calculator,Big # Calc,GitHub,#">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../assets/logo.png">
     <title>CalcPlus Page Options</title>
-    <script src="../assets/CPquery_1-1-0.min.js"></script>
+    <script src="../assets/CPquery_1-2-0.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer></script>
     <script src="../assets/Options.min.js"></script>
   </head>
   <body>
     <nav>
       <a href="../">Home</a>
-      <a href="../PreviewLibrary/">Preview the library</a>
+      <a href="../PreviewLibrary/">Preview library</a>
       <a href="../LibrarySource/">Library Source</a>
       <a href="../CPQuerySource/">CPQuery Source</a>
       <a href="../CalcPlus/">About Library</a>
-      <a href="../SiteDiscord/">Offical Discord</a>
-    </nav>
+      <a href="https://invite.gg/virxec">Offical Discord</a>
+    </nav><br>
     <p class="console"></p>
-    <br>
-    <noscript>Please allow JavaScript to run on this page, or else most things won't work. Thank you!<br></noscript>
     <h1>Page Options</h1>
     <h3>Dark Mode <button id="dark"></button></h3>
     <h3>On-Screen Console <button id="console"></button></h3>
-    <!-- Mobile setting - auto-activate - will always load minified sources -->
 
     <script>
       function defineButton(id) {
         var store = $("@is"+id.charAt(0).toUpperCase()+id.substr(1)), id = $("#"+id);
         id.txt(store.i());
         id.listen("click", ()=>{
-          var value = "On";
-          if (store.i() =="On") value = "Off";
+          var value = store.i() =="On"?"Off":"On";
           store.set(value);
           id.txt(value);
           loadOptions();
