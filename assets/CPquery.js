@@ -84,6 +84,10 @@ function cpQuery(query) {
 		append() {
 			element.appendChild(this.newelem);
 		}
+
+		async asyncAppend() {
+			element.appendChild(this.newelem);
+		}
 	};
 
 	const css = class {
@@ -126,6 +130,7 @@ function cpQuery(query) {
 			return element;
 		} catch(e) {
 			console.warn("Skipping "+e.stack);
+			return null;
 		}
 	}
 
@@ -135,6 +140,7 @@ function cpQuery(query) {
 			else if (session) sessionStorage.setItem(query, item);
 		} catch(e) {
 			console.warn("Skipping "+e.stack);
+			return null;
 		}
 	}
 

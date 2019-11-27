@@ -1,7 +1,6 @@
 body { color: white; background-color: black; margin: 0 !important; }
 button { color: white; background-color: rgb(50, 50, 50); border-color: rgb(60, 60, 60); }
 a { color: rgb(0, 0, 255); }
-widgetbot { position: absolute; top: 40px; right: 10px; }
 span.broken { color: red; }
 span.fix { color: yellow; }
 span.verify { color: orange; }

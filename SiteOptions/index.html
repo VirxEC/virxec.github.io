@@ -2,10 +2,11 @@
 <html lang="en-us">
   <head>
     <meta name="description" content="Works with really large numbers">
-    <title>CalcPlus Page Options</title>
+    <title>Site Options</title>
+	<script src="../assets/preload.js"></script>
     <script src="../assets/CPquery_1-2-0.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer></script>
     <script src="../assets/Options.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async></script>
   </head>
   <body>
     <nav>
@@ -13,27 +14,28 @@
       <a href="../PreviewLibrary/">Preview library</a>
       <a href="../LibrarySource/">Library Source</a>
       <a href="../CPQuerySource/">CPQuery Source</a>
-      <a href="../CalcPlus/">About Library</a>
+      <a href="../CalcPlus/">About CalcPlus</a>
       <a href="https://invite.gg/virxec">Offical Discord</a>
     </nav><br>
     <p class="console"></p>
     <h1>Page Options</h1>
     <h3>Dark Mode <button id="dark"></button></h3>
     <h3>On-Screen Console <button id="console"></button></h3>
+		<h3>Discord Widget <button id="widget"></button></h3>
+		<h3>Gamer Mode<button id="gamer"></button></h3>
 
     <script>
-      function defineButton(id) {
-        var store = $("@is"+id.charAt(0).toUpperCase()+id.substr(1)), id = $("#"+id);
-        id.txt(store.i());
-        id.listen("click", ()=>{
-          var value = store.i() =="On"?"Off":"On";
-          store.set(value);
-          id.txt(value);
-          loadOptions();
-        });
-      }
-      defineButton("dark");
-      defineButton("console");
+			var id=[$("#dark"),$("#console"),$("#widget"),$("#gamer")], dex=[$("@isDark"),$("@isConsole"),$("@isWidget"),$("@isGamer")];
+			id.forEach((e,i)=>{
+				e.txt(dex[i].i()?dex[i].i():"Off");
+				e.listen("click", ()=>{
+					var value = dex[i].i()=="On"?"Off":"On";
+					if (i == 3) dex[0].set(value);
+					dex[i].set(value);
+					e.txt(value);
+					location.reload();
+				});
+			});
     </script>
   </body>
 </html>

@@ -2,27 +2,28 @@
 <html lang="en-us">
   <head>
     <meta name="description" content="A library that lets numbers be calculated way over the normal limit without losing precision.">
-    <title>CalcPlus Library Source Code</title>
+		<title>CalcPlus Library Source Code</title>
+		<script src="../assets/preload.js"></script>
     <script src="../assets/CPquery_1-2-0.min.js"></script>
 		<script>var raw = new $("../assets/Library.js").file;</script>
-		<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer></script>
 		<script src="../assets/Options.min.js"></script>
-		<script src="../assets/highlight.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer></script>
   </head>
   <body>
     <nav>
       <a href="../">Home</a>
       <a href="../PreviewLibrary/">Preview library</a>
       <a href="../CPQuerySource/">CPQuery Source</a>
-      <a href="../CalcPlus/">About Library</a>
-      <a href="../PageOptions/">Page Options</a>
+      <a href="../CalcPlus/">About CalcPlus</a>
+      <a href="../SiteOptions/">Site Options</a>
       <a href="https://invite.gg/virxec">Offical Discord</a>
     </nav><br>
 		<span class="console"></span>
     <h1>CalcPlus Library Source Code</h1>
     <pre><code id="source" class="javascript"></code></pre>
+    <script src="../assets/highlight.min.js"></script>
     <script>
-			raw.request(function(){
+			raw.request(async function(){
 				$("#source").txt(raw.i("responseText"));
 				hljs.initHighlighting();
 			});
