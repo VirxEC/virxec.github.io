@@ -6,9 +6,9 @@ async function preload(url,type) {
 	document.head.appendChild(load);
 }
 if ("CalcPlus Library Source Code"==document.title||"CPQuery Source Code"==document.title) {
-	console.log("J")
-	preload(`../assets/${localStorage.getItem("isDark") == "On"?"dark":"light"}.min.css`, "style");
-	preload("../assets/highlight.min.js", "script");
+	preload(`../assets/3rdParty/${localStorage.getItem("isDark") == "On"?"dark":"light"}.min.css`, "style");
+	preload("../assets/3rdParty/highlight.min.js", "script");
 }
-preload((document.title == "CalcPlus"?"":"../")+`assets/${localStorage.getItem("isDark") == "On"?"dark":"light"}page.css`, "style");
-preload("https://cdn.jsdelivr.net/npm/@widgetbot/crate@3", "script")
+const rt = (document.title == "CalcPlus"?"":"../");
+preload(rt+`assets/${localStorage.getItem("isDark") == "On"?"dark":"light"}.css`, "style");
+preload(rt+"assets/3rdParty/crate3.min.js", "script");

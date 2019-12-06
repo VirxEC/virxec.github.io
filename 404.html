@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
+	<script>
+		if (location.pathname != "/404.html") location.replace("/404.html");
+	</script>
 	<title>Whoops!</title>
-	<script src="../assets/preload.js"></script>
-	<meta name="description" content="A library that lets numbers be calculated way over the normal limit without losing precision">
+	<script src="assets/preload.js"></script>
+	<meta name="description" content="Sorry, your page was found">
 	<script src="assets/CPquery_1-2-0.min.js"></script>
 	<script src="assets/Options.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer></script>
+	<script src="../assets/3rdParty/crate3.min.js" async></script>
 </head>
 <body>
 	<nav>
@@ -17,6 +20,7 @@
 		<a href="../SiteOptions/">Site Options</a>
 		<a href="https://invite.gg/virxec">Offical Discord</a>
 	</nav><br>
+	<p id="sconsole"></p>
 	<h2>Your page wasn't found. To go back, <a id="back"><u>click here</u></a></h2>
 	<h3>Or <a href="../">click here</a> to return to the home page<h3>
 	<script>$("#back").listen("click", ()=>history.back());</script>

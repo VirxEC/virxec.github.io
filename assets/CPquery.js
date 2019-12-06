@@ -48,7 +48,7 @@ function cpQuery(query) {
 	}
 
 	function func(f) {
-		return eval("element."+f);
+		return element[f];
 	}
 
 	const create = class {
@@ -134,7 +134,7 @@ function cpQuery(query) {
 		}
 	}
 
-	function set(item) {
+	function val(item) {
 		try {
 			if (local) localStorage.setItem(query, item);
 			else if (session) sessionStorage.setItem(query, item);
@@ -158,18 +158,18 @@ function cpQuery(query) {
 		else element.innerHTML = item;
 	}
 
-	function tag(newtag, extra1, extra2) {
-		var type = typeof extra1 == "string" ? extra1:extra2, num = typeof extra1 == "number" ? extra1:extra2;
-		if (num) element = element[num];
+	function tag(newtag, extra) {
+		if (typeof extra == "string") extra = [extra];
+		if (extra && extra[1]) element = element[extra[1]];
 		newtag = newtag.split("");
-		if (type) {
-			if (newtag[0] == "#") element.id = type;
-			else if (newtag[0] == ".") element.class = type;
-			else eval(`element.${newtag.join("")} = "${type}"`);
+		if (extra && extra[0]) {
+			if (newtag[0] == "#") element.id = extra[0];
+			else if (newtag[0] == ".") element.class = extra[0];
+			else element[newtag.join("")] = extra[0];
 		} else {
 			if (newtag[0] == "#") return element.id;
 			else if (newtag[0] == ".") return element.class;
-			else return eval(`element.${newtag.join("")}`);
+			else return element[newtag.join("")];
 		}
 	}
 
@@ -228,7 +228,7 @@ function cpQuery(query) {
 		htm: htm,
 		tag: tag,
 		txt: txt,
-		set: set,
+		val: val,
 		i: i
 	};
 }
