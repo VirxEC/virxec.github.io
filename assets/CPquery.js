@@ -11,37 +11,17 @@ function cpQuery(query) {
 		else if (query == "head") element = document.head;
 		else if (query == "body") element = document.body;
 		else {
-			query = query.split("#");
-			if (query.length == 2) {
-				query = query[1];
-				element = document.getElementById(query);
-			} else {
-				query = query.toString().split(".");
-				if (query.length == 2) {
-					query = query[1];
-					element = document.getElementsByClassName(query);
-				} else {
-					query = query.toString().split("@");
-					if (query.length == 2) {
-						query = query[1];
-						local = !0;
-					} else {
-						query = query.toString().split("*");
-						if (query.length == 2) {
-							query = query[1];
-							session = !0;
-						} else element = document.getElementsByTagName(query);
-					}
-				}
-			}
+      if (query[0] == "@") query = query.substr(1), local = !0;
+      else if (query[0] == "*") query = query.substr(1), session = !0;
+      else if (query[0] == "#") element = document.querySelector(query);
+      else element = document.querySelectorAll(query);
 		}
 	} else if (!query) element = document;
 	else element = query;
 
-	function select(type, num) {
-		if (num) element = element[num];
-		return element.querySelector(type);
-	}
+  function select(num) {
+    element = element[num];
+  }
 
 	function textNode(node) {
 		return element.createTextNode(node);
@@ -119,28 +99,22 @@ function cpQuery(query) {
 	};
 
 	function listen(name, code) {
-		element.addEventListener(name, code);
+		if (typeof code == "object") Object.keys(code).forEach(i=>element.addEventListener(i, code[i]));
+		else element.addEventListener(name, code);
 	}
 
 	function i(num) {
 		try {
-			if (local) return localStorage.getItem(query);
-			else if (session) return sessionStorage.getItem(query);
-			else if (typeof num == "number") return element[num];
-			return element;
+			if (num) {
+        if (typeof num == "number") return element[num];
+				else if (local) localStorage.setItem(query, num);
+				else if (session) sessionStorage.setItem(query, num);
+      } else if (local) return localStorage.getItem(query);
+      else if (session) return sessionStorage.getItem(query);
+			else return element;
 		} catch(e) {
 			console.warn("Skipping "+e.stack);
-			return null;
-		}
-	}
-
-	function val(item) {
-		try {
-			if (local) localStorage.setItem(query, item);
-			else if (session) sessionStorage.setItem(query, item);
-		} catch(e) {
-			console.warn("Skipping "+e.stack);
-			return null;
+			return e.stack;
 		}
 	}
 
@@ -218,18 +192,31 @@ function cpQuery(query) {
 		},
 		create: (tag, num)=>new create(tag, num),
 		file: new file(),
-		select: select,
 		listen: listen,
 		node: textNode,
 		css: new css(),
 		func: func,
-		text: txt,
 		html: htm,
+		text: txt,
 		htm: htm,
 		tag: tag,
 		txt: txt,
-		val: val,
-		i: i
+		i: i,
+		j: {
+			on: listen,
+			val: f=>tag("value",f),
+			click: f=>listen("click",f),
+			ready: f=>listen("load",f),
+			hide: ()=>tag("style.display", "none"),
+			show: ()=>tag("style.display", "block"),
+			dblclick: f=>listen("dblclick",f),
+			mouseenter: f=>listen("mouseenter",f),
+			mouseleave: f=>listen("mouseleave",f),
+			mousedown: f=>listen("mousedown",f),
+			mouseup: f=>listen("mouseup",f),
+			hover: f=>listen("hover",f),
+			focus: f=>listen("focus",f)
+		}
 	};
 }
 

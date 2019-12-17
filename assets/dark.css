@@ -1,11 +1,1 @@
-body { color: white; background-color: black; margin: 0 !important; }
-button { color: white; background-color: rgb(50, 50, 50); border-color: rgb(60, 60, 60); }
-a { color: rgb(0, 0, 255); }
-span.broken { color: red; }
-span.fix { color: yellow; }
-span.verify { color: orange; }
-span.working { color: green; }
-.removeInput { color: black; background-color: red; border: none; }
-nav a { background-color: rgb(30, 30, 30); color: white; text-decoration: none; outline: none; padding: 10px 20px; display: block; float: left; border-right: solid 1px rgb(75, 75, 75); border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; width: 16.666%; text-align: center; box-sizing: border-box; }
-nav a:link, nav a:visited { background-color: rgb(30, 30, 30); color: white; }
-nav a:hover, nav a:active { background-color: rgb(60, 60, 60); color: rgb(215, 215, 215); }
+body{color:#fff;background-color:#000;margin:0!important}button{color:#fff;background-color:#323232;border-color:#3c3c3c}a{color:#00f}.removeInput{color:#000;background-color:red;border:none}span.fix{color:#ff0}div.log{color:#66f}div.info{color:#5e5eff}nav a{text-decoration:none;outline:0;padding:10px 20px;float:left;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:16.666%;text-align:center;box-sizing:border-box;background-color:#1e1e1e;color:#fff;border-right:solid 1px #4b4b4b}nav a:link,nav a:visited{background-color:#1e1e1e;color:#fff}nav a:active,nav a:hover{background-color:#3c3c3c;color:#d7d7d7}span.broken{color:red}span.verify{color:orange}span.working{color:green}div.warn{color:orange}div.error{color:red}

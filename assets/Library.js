@@ -363,7 +363,7 @@ function expo() {
 					}, predefone)) final = multi(final, num[1]);
 				return final;
 			}
-			if (neg[2]) return div("1", final, );
+			if (neg[2]) return div("1", final);
 		}
 	};
 	var permfinal, a = clone(arguments);
