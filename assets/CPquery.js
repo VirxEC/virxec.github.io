@@ -203,21 +203,19 @@ function cpQuery(query) {
     tag: tag,
     txt: txt,
     i: i,
-    j: {
-      on: listen,
-      val: f=>tag("value",f),
-      click: f=>listen("click",f),
-      ready: f=>listen("load",f),
-      hide: ()=>tag("style.display", "none"),
-      show: ()=>tag("style.display", "block"),
-      dblclick: f=>listen("dblclick",f),
-      mouseenter: f=>listen("mouseenter",f),
-      mouseleave: f=>listen("mouseleave",f),
-      mousedown: f=>listen("mousedown",f),
-      mouseup: f=>listen("mouseup",f),
-      hover: f=>listen("hover",f),
-      focus: f=>listen("focus",f)
-    }
+    on: listen,
+    val: f=>tag("value",f),
+    click: f=>listen("click",f),
+    ready: f=>listen("load",f),
+    hide: ()=>tag("style.display", "none"),
+    show: ()=>tag("style.display", "block"),
+    dblclick: f=>listen("dblclick",f),
+    mouseenter: f=>listen("mouseenter",f),
+    mouseleave: f=>listen("mouseleave",f),
+    mousedown: f=>listen("mousedown",f),
+    mouseup: f=>listen("mouseup",f),
+    hover: f=>listen("hover",f),
+    focus: f=>listen("focus",f)
   };
 }
 
