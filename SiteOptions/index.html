@@ -5,7 +5,7 @@
     <title>Site Options</title>
 		<script src="../assets/preload.js"></script>
     <script src="../assets/CPquery_1-2-0.min.js"></script>
-    <script src="../assets/Options.min.js"></script>
+    <script src="../assets/Options.js"></script>
 		<script src="../assets/3rdParty/crate3.min.js" async></script>
   </head>
   <body>
@@ -20,8 +20,8 @@
 		<p id="sconsole"></p>
     <h1>Site Options</h1>
     <h3>Dark Mode <button id="dark"></button></h3>
-    <h3>On-Screen Console <button id="console"></button></h3>
-		<h3>Discord Widget <button id="widget"></button></h3>
+    <h3>Syntax Highlighting <button id="syntax"></button> (Credit: <a href="https://highlightjs.org">Highlight JS</a>)</h3>
+		<h3>Discord Widget <button id="widget"></button> (Credit: <a href="https://widgetbot.io">WidgetBot</a>)</h3>
 		<h3>Default Channel
 			<select id="channel">
 				<option value="629774177733181440">CalcPlus</option>
@@ -31,9 +31,10 @@
 		</h3>
 		<h3>Gamer Mode <button id="gamer"></button></h3>
 		<h3>Transition time <input type="range" min="1" max="5000" id="transition"> <button id="applytrans">Apply <span id="transval"></span>ms</button></h3>
-		<h3>Reset all <button id="reset">Reset</button></h3>
+    <h3>On-Screen Console <button id="console"></button></h3>
+    <h3>Reset all <button id="reset">Reset</button></h3>
     <script>
-			const id=[$("#dark"),$("#console"),$("#widget"),$("#gamer")], dex=[$("@isDark"),$("@isConsole"),$("@isWidget"),$("@isGamer")];
+			const id=[$("#dark"),$("#console"),$("#widget"),$("#gamer"),$("#syntax")], dex=[$("@isDark"),$("@isConsole"),$("@isWidget"),$("@isGamer"),$("@isSyntax")];
 			$("#channel").tag("value",$("@channel").i());
 			$("#transition").tag("value", $("@interval").i());
 			$("#transval").txt($("@interval").i());
