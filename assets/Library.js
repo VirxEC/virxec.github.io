@@ -4,23 +4,23 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License
  */
-var powermode = false,
-  checks = true,
+var powermode = !1,
+  checks = !0,
   predefone = {
     num: ["1"],
-    isNeg: false,
+    isNeg: !1,
     decimals: 0
   },
   clone = o => JSON.parse(JSON.stringify(o)),
   checkNumberString = obj => {
     obj.forEach((a, i) => {
-      if (a == undefined) throw new ReferenceError("Input number " + i + " was undefined.");
+      if (!a) throw new ReferenceError("Input number " + i + " was null.");
       else if (typeof a == "object") {
-        if (a.num == undefined) throw new ReferenceError("Input number " + i + " invalid, property num was undefined.");
+        if (!a.num) throw new ReferenceError("Input number " + i + " invalid, property num was null.");
         else if (!Array.isArray(obj[i].num)) throw new TypeError("Input number " + i + " invalid, property num wasn't an array");
-        if (a.isNeg == undefined) throw new ReferenceError("Input number " + i + " invalid, property isNeg was undefined.");
+        if (!a.isNeg) throw new ReferenceError("Input number " + i + " invalid, property isNeg was null.");
         else if (typeof a.isNeg != "boolean") throw new TypeError("Input number " + i + " invalid, property isNeg wasn't a boolean.");
-        if (a.decimals == undefined) throw new ReferenceError("Input number " + i + " invalid, property decimals was undefined.");
+        if (!a.decimals) throw new ReferenceError("Input number " + i + " invalid, property decimals was null.");
         else if (typeof a.decimals != "number") throw new TypeError("Input number " + i + " invalid, property decimals wasn't a number.");
       } else if (typeof a == "string") {
         if (typeof + a != "number") throw new TypeError("Input number " + i + " invalid, it wasn't a number string.");
@@ -32,7 +32,7 @@ var powermode = false,
     else if (type == "array" && items.length > 1 && Array.isArray(items[0]))
       items.forEach((item) => {
         var itype = typeof item;
-        if (item == undefined) throw new ReferenceError("Item was undefined.");
+        if (!item) throw new ReferenceError("Item was null.");
         else if (type == "numberstring") {
           if (itype == "object" && !Array.isArray(item)) throw new TypeError("The object variation of number strings isn't accepted here.");
           if (itype != "string") throw new TypeError("Item wasn't a number string. It was a(n) " + itype);
@@ -47,18 +47,18 @@ var powermode = false,
       if (1 > mode || mode > 5) throw new RangeError("The mode of the function must be from 1-5\n1: Addition\n2: Subtraction\n3: Multiplication\n4: Division\n5: Exponents");
       checkNumberString([num1pre, num2pre]);
     }
-    var num = [undefined, num1pre, num2pre],
-      skip = false,
-      stringMode = [undefined, true, true],
-      neg = [false, false, false],
+    var num = [null, num1pre, num2pre],
+      skip = !1,
+      stringMode = [null, !0, !0],
+      neg = [!1, !1, !1],
       decimal = [0, 0, 0],
-      numpos = [undefined],
+      numpos = [null],
       maxChar, numl, numisplit;
     for (var i = 1; i < 3; i++) {
-      if (num[i].num != undefined) neg[i] = num[i].isNeg, decimal[i] = num[i].decimals, num[i] = num[i].num, stringMode[i] = false;
+      if (num[i].num) neg[i] = num[i].isNeg, decimal[i] = num[i].decimals, num[i] = num[i].num, stringMode[i] = !1;
       if (stringMode[i]) {
         numisplit = num[i].split("-");
-        if (numisplit.length == 2) num[i] = numisplit[1], neg[i] = true;
+        if (numisplit.length == 2) num[i] = numisplit[1], neg[i] = !0;
         if (num[i].split(".").length == 2) num[i] = num[i].replace(/\.?0+$/g, '');
         num[i] = num[i].replace(/(,)|(^0+)/g, "");
         if (num[i].length > 1 && num[i].charAt(0) == ".") num[i] = "0" + num[i];
@@ -68,17 +68,17 @@ var powermode = false,
       if (!Array.isArray(num[i])) num[i] = num[i].split("");
       numpos[i] = num[i].indexOf("."), num[i] = num[i].filter(w => w != "."), decimal[i] = numpos[i] != -1 ? num[i].length - numpos[i] : 0;
     }
-    if (neg[1] != neg[2] && mode != 1 && mode != 2) neg[0] = true;
+    if (neg[1] != neg[2] && mode != 1 && mode != 2) neg[0] = !0;
     maxChar = Math.max(num[1].length, num[2].length);
     if (decimal[1] > 0 || decimal[2] > 0) {
       decimal[0] = mode == 1 || mode == 2 ? Math.max(decimal[1], decimal[2]) : mode == 3 ? decimal[1] + decimal[2] : decimal[1] - decimal[2];
       if (decimal[0] < 0) decimal[0] = 0;
     }
     for (i = 0; !skip && (neg[1] || neg[2]) && mode == 1 && num[2].length == maxChar && i < num[1].length; i++)
-      if (num[2][i] > num[1][i]) neg[0] = true, skip = true;
-    if (mode == 2 && num[2].length == maxChar && num[1].length != maxChar) neg[0] = true;
+      if (num[2][i] > num[1][i]) neg[0] = !0, skip = !0;
+    if (mode == 2 && num[2].length == maxChar && num[1].length != maxChar) neg[0] = !0;
     for (i = 0; !skip && !neg[0] && mode == 2 && num[2].length == maxChar && i < num[1].length; i++) {
-      if (num[1][i] < num[2][i]) neg[0] = true, skip = true;
+      if (num[1][i] < num[2][i]) neg[0] = !0, skip = !0;
       else skip = num[2][i] != num[1][i];
     }
     if (maxChar == num[2].length && mode == 3) num[1] = [num[2], num[2] = num[1]][0];
@@ -91,7 +91,7 @@ var powermode = false,
       if (maxChar == numl[0]) num[2].padStart(numl[0] - numl[1], "0");
       else if (maxChar == numl[1]) num[1].padStart(numl[1] - numl[0], "0");
     }
-    if ([3, 4].indexOf(mode) > -1 && neg[1] && neg[2]) neg[0] = false;
+    if ([3, 4].indexOf(mode) > -1 && neg[1] && neg[2]) neg[0] = !1;
     return {
       num1: {
         num: num[1],
@@ -108,7 +108,7 @@ var powermode = false,
       decimals: decimal[0]
     };
   },
-  formatNums = function(final, decimals, neg, array = true) {
+  formatNums = function(final, decimals, neg, array = !0) {
     if (checks) {
       checkCustom(final, "array");
       checkCustom(decimals, "number");
@@ -140,13 +140,13 @@ function toggleAntiCheck() {
 
 function togglePowerMode() {
   if (powermode) console.warn("Disabled power mode. Recommended for debugging only.");
-  else console.warn("Enabled power mode. This will make it so the library will only activate if the sum/difference is over Math.MAX_SAFE_INTEGER.", "To enable power mode forever, change the first variable on line 7 to true.");
+  else console.warn("Enabled power mode. This will make it so the library will only activate if the sum/difference is over Number.MAX_SAFE_INTEGER.", "To enable power mode forever, change the first variable on line 7 to true.");
   powermode = !powermode;
 }
 
 function add() {
   var tempadd = function(num1, num2) {
-    if (!powermode || (powermode && num1 + num2 > Number.MAX_SAFE_INTEGER)) {
+    if (!powermode || (powermode && num1 + num2 >= Number.MAX_SAFE_INTEGER)) {
       if (checks) checkNumberString([num1, num2]);
       var parsedNums = parseNums(num1, num2, 1),
         neg = [parsedNums.isNeg, parsedNums.num1.isNeg, parsedNums.num2.isNeg],
@@ -157,12 +157,12 @@ function add() {
         finali, time;
       if (neg[2]) return sub(parsedNums.num1, {
         num: num[2],
-        isNeg: false,
+        isNeg: !1,
         decimals: decimal[1]
       });
       else if (neg[1]) return sub(parsedNums.num[2], {
         num: num[1],
-        isNeg: false,
+        isNeg: !1,
         decimals: decimal[2]
       });
       for (var i = parsedNums.maxChar - 1; i >= 0; i--) {
@@ -195,7 +195,7 @@ function add() {
 
 function sub() {
   var tempsub = function(num1, num2) {
-    if (!powermode || (powermode && num1 + num2 > Number.MAX_SAFE_INTEGER)) {
+    if (!powermode || (powermode && num1 + num2 >= Number.MAX_SAFE_INTEGER)) {
       if (checks) checkNumberString([num1, num2]);
       var parsedNums = parseNums(num1, num2, 2),
         neg = [parsedNums.isNeg, parsedNums.num1.isNeg, parsedNums.num2.isNeg],
@@ -203,16 +203,16 @@ function sub() {
         num = [null, parsedNums.num1.num, parsedNums.num2.num],
         final = [],
         finali, fans;
-      if (neg.indexOf(true) > -1) {
+      if (neg.indexOf(!0) > -1) {
         if ((neg[0] && !neg[1] && !neg[2]) || (neg[1] && neg[2])) num[1] = [num[2], num[2] = num[1]][0];
         else if (neg[2] && !neg[1]) return add(parsedNums.num1, {
           num: num[2],
-          isNeg: false,
+          isNeg: !1,
           decimals: decimal[2]
         });
         else if (neg[1] && !neg[2]) return "-" + add({
           num: num[1],
-          isNeg: false,
+          isNeg: !1,
           decimals: decimal[1]
         }, parsedNums.num2);
       }
@@ -246,8 +246,8 @@ function sub() {
 function isLessThan() {
   var templessthan = function(num1, num2) {
     var num = sub(num2, num1);
-    if (num.split("-").length == 1 && num != 0) return true;
-    return false;
+    if (num.split("-").length == 1 && num != 0) return !0;
+    return !1;
   };
   var permfinal, a = clone(arguments);
   if (Array.isArray(a[0])) a = a[0];
@@ -259,8 +259,8 @@ function isLessThan() {
 function isGreaterThan() {
   var tempgreaterthan = function(num1, num2) {
     var num = sub(num1, num2);
-    if (num.split("-").length == 1 && num != 0) return true;
-    return false;
+    if (num.split("-").length == 1 && num != 0) return !0;
+    return !1;
   };
   var permfinal, a = clone(arguments);
   if (Array.isArray(a[0])) a = a[0];
@@ -271,8 +271,8 @@ function isGreaterThan() {
 
 function isLessThanEqual() {
   var templessthanequal = function(num1, num2) {
-    if (sub(num2, num1).split("-").length == 1) return true;
-    return false;
+    if (sub(num2, num1).split("-").length == 1) return !0;
+    return !1;
   };
   var permfinal, a = clone(arguments);
   if (Array.isArray(a[0])) a = a[0];
@@ -283,8 +283,8 @@ function isLessThanEqual() {
 
 function isGreaterThanEqual() {
   var tempisgreaterthanequal = function(num1, num2) {
-    if (sub(num1, num2).split("-").length == 1) return true;
-    return false;
+    if (sub(num1, num2).split("-").length == 1) return !0;
+    return !1;
   };
   var permfinal, a = clone(arguments);
   if (Array.isArray(a[0])) a = a[0];
@@ -321,11 +321,11 @@ function multi() {
       final = add(num[1], num[1]);
       for (var i = "2"; isLessThan(i, num[2]); i = add({
           num: i.split(""),
-          isNeg: false,
+          isNeg: !1,
           decimals: 0
         }, predefone)) final = add(final, num[1]);
     }
-    return formatNums(final, decimals, neg, false);
+    return formatNums(final, decimals, neg, !1);
   };
   var permfinal, a = clone(arguments);
   if (Array.isArray(a[0])) a = a[0];
@@ -348,13 +348,13 @@ function expo() {
       // root_of_decimal2*10(num1)**(num2*(10*decimal2))
       throw new TypeError("Decimal exponents aren't supported yet");
     } else {
-      if (num[2].num.length == 1 && num[2].num[0] == "1") return formatNums(num[2].num, decimals[0], false);
+      if (num[2].num.length == 1 && num[2].num[0] == "1") return formatNums(num[2].num, decimals[0], !1);
       else if (num[2].num.length == 1 && num[2].num[0] == "0") return "1";
       else {
         final = multi(num[1], num[1]);
         for (var i = "2"; isLessThan(i, num[2]); i = add({
             num: i.split(""),
-            isNeg: false,
+            isNeg: !1,
             decimals: 0
           }, predefone)) final = multi(final, num[1]);
         return final;
@@ -380,7 +380,7 @@ function div() {
     while (isLessThanEqual(num[2], num[0])) {
       num[0] = sub(num[0], num[2]), final = add(final, predefone);
     }
-    return formatNums(final.split(""), decimals, neg, false);
+    return formatNums(final.split(""), decimals, neg, !1);
   };
   var permfinal, maxDecimal, a = clone(arguments);
   if (Array.isArray(a[0])) maxDecimal = a[1], a = a[0];

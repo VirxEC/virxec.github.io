@@ -6,7 +6,7 @@ async function preload(url,type) {
 	load.as=type;
 	document.head.appendChild(load);
 }
-if (["/LibrarySource/index.html","/LibrarySource/","/CPQuerySource/","/CPQuerySource/index.html"].inculdes(location.pathname)) {
+if (["/LibrarySource/index.html","/LibrarySource/","/CPQuerySource/","/CPQuerySource/index.html"].includes(location.pathname)) {
 	preload(`assets/3rdParty/${localStorage.getItem("isDark") == "On"?"dark":"light"}.min.css`, "style");
 	preload("assets/3rdParty/highlight.min.js", "script");
 }
