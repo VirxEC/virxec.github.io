@@ -1,6 +1,6 @@
 var errors = "", discord;
 if (localStorage.getItem("isConsole") == "On") window.onerror=(a,b,c,d,e)=>errors += `<div class="error">${e}</div>`;
-const keywords = JSON.parse('["HTML","CSS","JavaScript","InfiniCalc","BigCalc","Big","Infitite","Calculator","Large","Number","Not","Small","Numbers","CalcPlus","Calc","Plus","Big Number Calculator","Big # Calc","GitHub","#","Calculator Plus","Library","JS","Hyper Text Markup Language","Cascading Style Sheet","JS Library"]'), author = ["Virx","VirxEC"], intervalx = $("@interval"), theme=$("head").create("meta"), char = $("head").create("meta"), word = $("head").create("meta"), auth = $("head").create("meta"), port = $("head").create("meta"), icon = $("head").create("link"),isDark = $("@isDark"), mcss = $("head").create("link"), isOffline = $("*isOffline"), syntax = $("@isSyntax"), alerted = $("*alerted"), isConsole = $("@isConsole"), gamer = $("@isGamer"), widget = $("@isWidget"), channel=$("@channel"), shard=$("@shard"), storage = [isOffline,alerted,isConsole,gamer];
+const rt = ["/", "/index.html", "/404.html"].includes(location.pathname)?"":"../", keywords = JSON.parse('["HTML","CSS","JavaScript","InfiniCalc","BigCalc","Big","Infitite","Calculator","Large","Number","Not","Small","Numbers","CalcPlus","Calc","Plus","Big Number Calculator","Big # Calc","GitHub","#","Calculator Plus","Library","JS","Hyper Text Markup Language","Cascading Style Sheet","JS Library"]'), author = ["Virx","VirxEC"], intervalx = $("@interval"), theme=$("head").create("meta"), char = $("head").create("meta"), word = $("head").create("meta"), auth = $("head").create("meta"), port = $("head").create("meta"), icon = $("head").create("link"),isDark = $("@isDark"), mcss = $("head").create("link"), isOffline = $("*isOffline"), syntax = $("@isSyntax"), alerted = $("*alerted"), isConsole = $("@isConsole"), gamer = $("@isGamer"), widget = $("@isWidget"), channel=$("@channel"), storage = [isOffline,alerted,isConsole,gamer];
 if (!isDark.i()) isDark.i("On");
 theme.tag("name","theme-color");
 theme.tag("content",$("@isDark").i()=="Off"?"rbg(255,255,255)":"rbg(0,0,0)");
@@ -66,16 +66,18 @@ onload = ()=>{
 			$(0).css.append(`nav a { background-color: ${color}; transition: background-color ${intervalx.i()/1000}s ease-in; }`);
 			$(0).css.append(`nav a:link, nav a:visited { background-color: ${color}; transition: background-color ${intervalx.i()/1000}s ease-in; }`);
 			$(0).css.append(`nav a:hover, nav a:active { background-color: ${color}; transition: background-color ${intervalx.i()/1000}s ease-in; }`);
+      $(0).css.append(`body { color: ${color}; transition: color ${intervalx.i()/1000} ease-in; }`);
+      $(0).css.append(`button { color: ${color}; transition: color ${intervalx.i()/1000} ease-in; }`);
 		}
 	}, intervalx.i());
   if (["/LibrarySource/index.html","/LibrarySource/","/CPQuerySource/","/CPQuerySource/index.html"].includes(location.pathname) && syntax.i() == "On") hljs.initHighlighting();
   if (["/", "/index.html"].includes(location.pathname)) {
     const v = $().version, cv = calcplus_info();
-		$("#major").txt(v.major);
-		$("#minor").txt(v.minor);
-		$("#bugFix").txt(v.bugFix);
+    $("#major").txt(v.major);
+    $("#minor").txt(v.minor);
+    $("#bugFix").txt(v.bugFix);
     $("#major").txt(cv.major);
     $("#minor").txt(cv.minor);
     $("#bugFix").txt(cv.bugFix);
   }
-}
+};

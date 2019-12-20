@@ -11,17 +11,13 @@ var powermode = !1,
     isNeg: !1,
     decimals: 0
   },
-  clone = o => JSON.parse(JSON.stringify(o)),
   checkNumberString = obj => {
     obj.forEach((a, i) => {
       if (!a) throw new ReferenceError("Input number " + i + " was null.");
       else if (typeof a == "object") {
-        if (!a.num) throw new ReferenceError("Input number " + i + " invalid, property num was null.");
-        else if (!Array.isArray(obj[i].num)) throw new TypeError("Input number " + i + " invalid, property num wasn't an array");
-        if (!a.isNeg) throw new ReferenceError("Input number " + i + " invalid, property isNeg was null.");
-        else if (typeof a.isNeg != "boolean") throw new TypeError("Input number " + i + " invalid, property isNeg wasn't a boolean.");
-        if (!a.decimals) throw new ReferenceError("Input number " + i + " invalid, property decimals was null.");
-        else if (typeof a.decimals != "number") throw new TypeError("Input number " + i + " invalid, property decimals wasn't a number.");
+        if (!Array.isArray(obj[i].num)) throw new TypeError("Input number " + i + " invalid, property num wasn't an array");
+        if (typeof a.isNeg != "boolean") throw new TypeError("Input number " + i + " invalid, property isNeg wasn't a boolean.");
+        if (typeof a.decimals != "number") throw new TypeError("Input number " + i + " invalid, property decimals wasn't a number.");
       } else if (typeof a == "string") {
         if (typeof + a != "number") throw new TypeError("Input number " + i + " invalid, it wasn't a number string.");
       } else throw new TypeError("Input number " + i + " was defined but wasn't a number string or object. The type was " + typeof a);
@@ -83,13 +79,17 @@ var powermode = !1,
     }
     if (maxChar == num[2].length && mode == 3) num[1] = [num[2], num[2] = num[1]][0];
     if (decimal[1] != decimal[2] && [1, 2].includes(mode)) {
-      if (decimal[1] == decimal[0]) num[2].padEnd(decimal[1] - decimal[2], "0");
-      else if (decimal[2] == decimal[0]) num[1].padEnd(decimal[2] - decimal[1], "0");
+      if (decimal[1] == decimal[0])
+        for (i = 0; i < decimal[1] - decimal[2]; i++) num[1].push("0");
+      else if (decimal[2] == decimal[0])
+        for (i = 0; i < decimal[2] - decimal[1]; i++) num[0].push("0");
     }
     if (num[1].length != num[2].length && [1, 2].includes(mode)) {
       numl = [num[1].length, num[2].length];
-      if (maxChar == numl[0]) num[2].padStart(numl[0] - numl[1], "0");
-      else if (maxChar == numl[1]) num[1].padStart(numl[1] - numl[0], "0");
+      if (maxChar == numl[0])
+        for (i = 0; i < numl[0] - numl[1]; i++) num[1].unshift("0");
+      else if (maxChar == numl[1])
+        for (i = 0; i < numl[1] - numl[0]; i++) num[0].unshift("0");
     }
     if ([3, 4].indexOf(mode) > -1 && neg[1] && neg[2]) neg[0] = !1;
     return {
@@ -114,9 +114,10 @@ var powermode = !1,
       checkCustom(decimals, "number");
       checkCustom(neg, "array");
     }
+    if (!array) final = final.length > 1 ? final.split("") : [final];
     if (array && final.length > 1) final = final.reverse();
     if (decimals > 0) final.splice(decimals, 0, ".");
-    if (array) final = final.length > 1 ? final.join("") : final[0];
+    final = final.join("");
     if (neg[0]) final = "-" + final;
     if (final.split(".").length == 2) final = final.replace(/\.?0+$/g, '');
     final = final.replace(/^0+/g, '');
@@ -186,7 +187,7 @@ function add() {
       return num1 + num2;
     }
   };
-  var permfinal, a = clone(arguments);
+  var permfinal, a = {...arguments};
   if (Array.isArray(a[0])) a = a[0];
   permfinal = tempadd(a[0], a[1]);
   for (var i = 2; i < a.length; i++) permfinal = tempadd(permfinal, a[i]);
@@ -236,7 +237,7 @@ function sub() {
       return num1 + num2;
     }
   };
-  var permfinal, a = clone(arguments);
+  var permfinal, a = {...arguments};
   if (Array.isArray(a[0])) a = a[0];
   permfinal = tempsub(a[0], a[1]);
   for (var i = 2; i < a.length; i++) permfinal = tempsub(permfinal, a[i]);
@@ -249,7 +250,7 @@ function isLessThan() {
     if (num.split("-").length == 1 && num != 0) return !0;
     return !1;
   };
-  var permfinal, a = clone(arguments);
+  var permfinal, a = {...arguments};
   if (Array.isArray(a[0])) a = a[0];
   permfinal = templessthan(a[0], a[1]);
   for (var i = 2; i < a.length; i++) permfinal = templessthan(permfinal, a[i]);
@@ -262,7 +263,7 @@ function isGreaterThan() {
     if (num.split("-").length == 1 && num != 0) return !0;
     return !1;
   };
-  var permfinal, a = clone(arguments);
+  var permfinal, a = {...arguments};
   if (Array.isArray(a[0])) a = a[0];
   permfinal = tempgreaterthan(a[0], a[1]);
   for (var i = 2; i < a.length; i++) permfinal = tempgreaterthan(permfinal, a[i]);
@@ -274,7 +275,7 @@ function isLessThanEqual() {
     if (sub(num2, num1).split("-").length == 1) return !0;
     return !1;
   };
-  var permfinal, a = clone(arguments);
+  var permfinal, a = {...arguments};
   if (Array.isArray(a[0])) a = a[0];
   permfinal = templessthanequal(a[0], a[1]);
   for (var i = 2; i < a.length; i++) permfinal = templessthanequal(permfinal, a[i]);
@@ -286,7 +287,7 @@ function isGreaterThanEqual() {
     if (sub(num1, num2).split("-").length == 1) return !0;
     return !1;
   };
-  var permfinal, a = clone(arguments);
+  var permfinal, a = {...arguments};
   if (Array.isArray(a[0])) a = a[0];
   permfinal = tempisgreaterthanequal(a[0], a[1]);
   for (var i = 2; i < a.length; i++) permfinal = tempisgreaterthanequal(permfinal, a[i]);
@@ -327,7 +328,7 @@ function multi() {
     }
     return formatNums(final, decimals, neg, !1);
   };
-  var permfinal, a = clone(arguments);
+  var permfinal, a = {...arguments};
   if (Array.isArray(a[0])) a = a[0];
   permfinal = tempmulti(a[0], a[1]);
   for (var i = 2; i < a.length; i++) permfinal = tempmulti(permfinal, a[i]);
@@ -362,7 +363,7 @@ function expo() {
       if (neg[2]) return div("1", final);
     }
   };
-  var permfinal, a = clone(arguments);
+  var permfinal, a = {...arguments};
   if (Array.isArray(a[0])) a = a[0];
   permfinal = tempexpo(a[0], a[1]);
   for (var i = 2; i < a.length; i++) permfinal = tempexpo(permfinal, a[i]);
@@ -382,7 +383,7 @@ function div() {
     }
     return formatNums(final.split(""), decimals, neg, !1);
   };
-  var permfinal, maxDecimal, a = clone(arguments);
+  var permfinal, maxDecimal, a = {...arguments};
   if (Array.isArray(a[0])) maxDecimal = a[1], a = a[0];
   else maxDecimal = a[2];
   permfinal = tempdiv(a[0], a[1], maxDecimal);
