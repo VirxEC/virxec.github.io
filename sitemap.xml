@@ -1,32 +1,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 	<url>
-		<loc>https://virxec.github.io/</loc>
-		<lastmod>2019-12-02T16:12:54+00:00</lastmod>
+		<loc>https://www.virxcase.ga/</loc>
 		<priority>1.00</priority>
 	</url>
 	<url>
-		<loc>https://virxec.github.io/PreviewLibrary/</loc>
-		<lastmod>2019-12-02T16:12:54+00:00</lastmod>
+		<loc>https://www.virxcase.ga/PreviewLibrary/</loc>
 		<priority>0.80</priority>
 	</url>
 	<url>
-		<loc>https://virxec.github.io/LibrarySource/</loc>
-		<lastmod>2019-12-02T16:12:54+00:00</lastmod>
+		<loc>https://www.virxcase.ga/LibrarySource/</loc>
 		<priority>0.80</priority>
 	</url>
 	<url>
-		<loc>https://virxec.github.io/CPQuerySource/</loc>
-		<lastmod>2019-12-02T16:12:54+00:00</lastmod>
+		<loc>https://www.virxcase.ga/CPQuerySource/</loc>
 		<priority>0.80</priority>
 	</url>
 	<url>
-		<loc>https://virxec.github.io/CalcPlus/</loc>
-		<lastmod>2019-12-02T14:30:07+00:00</lastmod>
+		<loc>https://www.virxcase.ga/CalcPlus/</loc>
 		<priority>0.80</priority>
 	</url>
 	<url>
-		<loc>https://virxec.github.io/PageOptions/</loc>
-		<lastmod>2019-12-02T16:12:54+00:00</lastmod>
+		<loc>https://www.virxcase.ga/PageOptions/</loc>
 		<priority>0.80</priority>
 	</url>
 </urlset>	
