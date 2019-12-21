@@ -76,8 +76,8 @@ onload = ()=>{
     $("#major").txt(v.major);
     $("#minor").txt(v.minor);
     $("#bugFix").txt(v.bugFix);
-    $("#major").txt(cv.major);
-    $("#minor").txt(cv.minor);
-    $("#bugFix").txt(cv.bugFix);
+    $("#cmajor").txt(cv.major);
+    $("#cminor").txt(cv.minor);
+    $("#cbugFix").txt(cv.bugFix);
   }
 };
