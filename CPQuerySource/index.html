@@ -4,10 +4,7 @@
     <meta name="description" content="A light-weight version of jQuery that this website uses.">
     <title>CPQuery Source Code</title>
 	  <script src="../assets/CPquery.js"></script>
-    <script>var raw = new $("^../assets/CPquery.js").file;</script>
 	  <script src="../assets/Options.js"></script>
-  	<script src="../assets/3rdParty/crate3.min.js" async></script>
-    <script src="../assets/3rdParty/highlight.min.js" async></script>
   </head>
   <body>
     <nav>
@@ -22,9 +19,12 @@
     <h1>CPQuery Source Code</h1>
     <pre><code id="source" class="javascript"></code></pre>
 		<script>
+      var raw = new $("^../assets/CPquery.js").file;
 			raw.request(async function(){
 				$("#source").txt(raw.i("responseText"));
 			});
 		</script>
+  	<script src="../assets/3rdParty/crate3.min.js"></script>
+    <script src="../assets/3rdParty/highlight.min.js"></script>
   </body>
 </html>
