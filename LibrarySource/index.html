@@ -3,27 +3,28 @@
   <head>
     <meta name="description" content="A library that lets numbers be calculated way over the normal limit without losing precision.">
 		<title>CalcPlus Library Source Code</title>
-	  <script src="../assets/CPquery.js"></script>
-	  <script src="../assets/Options.js"></script>
+	  <script src="/assets/CPquery.js"></script>
+	  <script src="/assets/Options.js"></script>
   </head>
   <body>
     <nav>
-      <a class="nava" href="../">Home</a>
-      <a class="nava" href="../PreviewLibrary/">Preview library</a>
-      <a class="nava" href="../CPQuerySource/">CPQuery Source</a>
-      <a class="nava" href="../CalcPlus/">About CalcPlus</a>
-      <a class="nava" href="../SiteOptions/">Site Options</a>
-      <a class="nava" href="https://invite.gg/virxec">Offical Discord</a>
+      <a class="nava" href="/">Home</a>
+      <a class="nava" href="/PreviewLibrary/">Preview library</a>
+      <a class="nava" href="/CPQuerySource/">CPQuery Source</a>
+      <a class="nava" href="/CalcPlus/">About CalcPlus</a>
+      <a class="nava" href="/SiteOptions/">Site Options</a>
+      <a class="nava" href="/Discord/">Offical Discord</a>
     </nav><br>
 		<p id="sconsole"></p>
     <h1>CalcPlus Library Source Code</h1>
     <pre><code id="source" class="javascript"></code></pre>
     <script>
-      let raw = new $("^../assets/Library.js").file;
+      let raw = new $("^/assets/Library.js").file;
 			raw.request(async function(){
 				$("#source").txt(raw.i("responseText"));
 			});
 		</script>
-  	<script src="../assets/3rdParty/crate3.min.js"></script>
+    <script src="/assets/3rdParty/highlight.min.js"></script>
+  	<script src="/assets/3rdParty/crate3.min.js"></script>
   </body>
 </html>
