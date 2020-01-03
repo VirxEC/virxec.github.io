@@ -1,5 +1,5 @@
 # virxec.github.io
-Testing/showcase website for all things Virx
+Testing/showcase website for all things Virx (virx@virxcase.ga)
 
 Currently showcasing:
  - [CalcPlus](https://github.com/virxec/calcplus)
