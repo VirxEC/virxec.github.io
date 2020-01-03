@@ -18,7 +18,7 @@ mcss.tag("href", rt+`assets/${$("@isDark").i() == "Off"?"light":"dark"}.css`);
 if (["/LibrarySource/index.html","/LibrarySource/","/CPQuerySource/","/CPQuerySource/index.html"].includes(location.pathname)) {
 	const link = $("head").create("link");
 	link.tag("rel", "stylesheet");
-	link.tag("href", `../assets/3rdParty/${$("@isDark").i() == "Off"?"light":"dark"}.min.css`);
+	link.tag("href", `/assets/3rdParty/${$("@isDark").i() == "Off"?"light":"dark"}.min.css`);
 	link.append();
 }
 theme.append();
@@ -33,7 +33,7 @@ if (!syntax.i()) syntax.i("On");
 storage.forEach(e=>{if(!e.i()) e.i("Off");});
 try {
 	navigator.serviceWorker.getRegistration().then(r => {if(!r) isOffline.i("Off");});
-	if (isOffline.i() == "Off" && 'serviceWorker' in navigator) navigator.serviceWorker.register($("*index").i() == "On" ? "sw.min.js":"../sw.min.js").then(() => isOffline.i("On"));
+	if (isOffline.i() == "Off" && 'serviceWorker' in navigator) navigator.serviceWorker.register($("*index").i() == "On" ? "sw.min.js":"/sw.min.js").then(() => isOffline.i("On"));
 } catch(e) { console.warn("Skipping "+e.stack);}
 if (!channel.i()) channel.i("629774177733181440");
 if (!intervalx.i()) intervalx.i("400");
