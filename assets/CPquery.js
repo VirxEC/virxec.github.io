@@ -8,6 +8,7 @@ function cpQuery(query) {
   var element, local = !1, session = !1, ogquery = query;
   if (typeof query == "string") {
     if (["","document"].includes(query)) element = document;
+    else if (query == "window") element = window;
     else if (query == "head") element = document.head;
     else if (query == "body") element = document.body;
     else {
@@ -99,9 +100,9 @@ function cpQuery(query) {
     }
   };
 
-  function listen(name, code) {
-    if (typeof code == "object") Object.keys(code).forEach(i=>element.addEventListener(i, code[i]));
-    else element.addEventListener(name, code);
+  function listen(name, code, options=false) {
+    if (typeof code == "object") Object.keys(code).forEach(i=>element.addEventListener(i, code[i], options));
+    else element.addEventListener(name, code, options);
   }
 
   function i(num) {
@@ -112,7 +113,7 @@ function cpQuery(query) {
         else if (session) sessionStorage.setItem(query, num);
       } else if (local) return localStorage.getItem(query);
       else if (session) return sessionStorage.getItem(query);
-      else return element;
+      return element;
     } catch(e) {
       console.warn("Skipping "+e.stack);
       return e.stack;

@@ -1,6 +1,6 @@
 var errors = "", discord;
 if (localStorage.getItem("isConsole") == "On") window.onerror=(a,b,c,d,e)=>errors += `<div class="error">${e}</div>`;
-const rt = ["/", "/index.html", "/404.html"].includes(location.pathname)?"":"../", keywords = JSON.parse('["HTML","CSS","JavaScript","InfiniCalc","BigCalc","Big","Infitite","Calculator","Large","Number","Not","Small","Numbers","CalcPlus","Calc","Plus","Big Number Calculator","Big # Calc","GitHub","#","Calculator Plus","Library","JS","Hyper Text Markup Language","Cascading Style Sheet","JS Library"]'), author = ["Virx","VirxEC"], intervalx = $("@interval"), theme=$("head").create("meta"), char = $("head").create("meta"), word = $("head").create("meta"), auth = $("head").create("meta"), port = $("head").create("meta"), icon = $("head").create("link"),isDark = $("@isDark"), mcss = $("head").create("link"), isOffline = $("*isOffline"), syntax = $("@isSyntax"), alerted = $("*alerted"), isConsole = $("@isConsole"), gamer = $("@isGamer"), widget = $("@isWidget"), channel=$("@channel"), storage = [isOffline,alerted,isConsole,gamer];
+const rt = ["/", "/index.html", "/404.html"].includes(location.pathname)?"":"../", keywords = JSON.parse('["HTML","CSS","JavaScript","InfiniCalc","BigCalc","Big","Infitite","Calculator","Large","Number","Not","Small","Numbers","CalcPlus","Calc","Plus","Big Number Calculator","Big # Calc","GitHub","#","Calculator Plus","Library","JS","Hyper Text Markup Language","Cascading Style Sheet","JS Library"]'), intervalx = $("@interval"), theme=$("head").create("meta"), char = $("head").create("meta"), word = $("head").create("meta"), auth = $("head").create("meta"), port = $("head").create("meta"), icon = $("head").create("link"),isDark = $("@isDark"), mcss = $("head").create("link"), isOffline = $("*isOffline"), syntax = $("@isSyntax"), alerted = $("*alerted"), isConsole = $("@isConsole"), gamer = $("@isGamer"), widget = $("@isWidget"), channel=$("@channel"), storage = [isOffline,alerted,isConsole,gamer];
 if (!isDark.i()) isDark.i("On");
 theme.tag("name","theme-color");
 theme.tag("content",$("@isDark").i()=="Off"?"rbg(255,255,255)":"rbg(0,0,0)");
@@ -8,7 +8,7 @@ char.tag("charset","UTF-8");
 word.tag("name","keywords");
 word.tag("content",keywords.join());
 auth.tag("name","author");
-auth.tag("content",author.join());
+auth.tag("content","Eric (Virx/VirxEC) Michael Veilleux, virx@virxcase.ga");
 port.tag("name","viewport");
 port.tag("content","width=device-width,initial-scale=1.0");
 icon.tag("rel","icon");
@@ -18,16 +18,16 @@ mcss.tag("href", rt+`assets/${$("@isDark").i() == "Off"?"light":"dark"}.css`);
 if (["/LibrarySource/index.html","/LibrarySource/","/CPQuerySource/","/CPQuerySource/index.html"].includes(location.pathname)) {
 	const link = $("head").create("link");
 	link.tag("rel", "stylesheet");
-	link.tag("href", `../assets/3rdParty/${$("@isDark").i() == "Pff"?"light":"dark"}.min.css`);
-	link.asyncAppend();
+	link.tag("href", `../assets/3rdParty/${$("@isDark").i() == "Off"?"light":"dark"}.min.css`);
+	link.append();
 }
-theme.asyncAppend();
-word.asyncAppend();
-auth.asyncAppend();
-port.asyncAppend();
-char.asyncAppend();
-icon.asyncAppend();
-mcss.asyncAppend();
+theme.append();
+word.append();
+auth.append();
+port.append();
+char.append();
+icon.append();
+mcss.append();
 if (!widget.i()) widget.i("On");
 if (!syntax.i()) syntax.i("On");
 storage.forEach(e=>{if(!e.i()) e.i("Off");});
@@ -37,12 +37,16 @@ try {
 } catch(e) { console.warn("Skipping "+e.stack);}
 if (!channel.i()) channel.i("629774177733181440");
 if (!intervalx.i()) intervalx.i("400");
-onload = ()=>{
-  var max = 0, elements = document.querySelectorAll('.nava');
-  [].reduce.call(elements, (prev, item)=>{
-    max = Math.max(item.clientHeight, max);
-    return height=>prev(item.style.height = height);
-  }, ()=>{})(max + 'px');
+$("window").listen("load", ()=>{
+  function resizeNav() {
+    let m=0,e=document.querySelectorAll('.nava');
+    [].reduce.call(e,(p,i)=>{
+      m=Math.max(i.clientHeight,m);
+      return h=>p(i.style.height=h);
+    }, ()=>{})(m+'px');
+  }
+  $("window").listen("resize", resizeNav);
+  resizeNav();
 	if (isConsole.i() == "On") {
 		$("#sconsole").htm("<span id='oconsole'></span><br><textarea id='iconsole'></textarea><br><button id='fconsole'>Run</button>");
 		const c = $("#oconsole");
@@ -51,7 +55,7 @@ onload = ()=>{
 		console.info = (...args) => args.forEach(e=>c.htm(`<div class="info">${e}</div>`, true));
 		console.warn = (...args) => args.forEach(e=>c.htm(`<div class="warn">${e}</div>`, true));
 		console.error = (...args) => args.forEach(e=>c.htm(`<div class="error">${e}</div>`, true));
-		onerror=(e,s,l,c,o)=>console.error(o.stack);
+		$("window").listen("error", (e,s,l,c,o)=>console.error(o.stack));
 		$("#fconsole").listen("click", e=>{
 			console.log(eval($("#iconsole").tag("value")));
 			$("#iconsole").tag("value","");
@@ -80,4 +84,4 @@ onload = ()=>{
     $("#cminor").txt(cv.minor);
     $("#cbugFix").txt(cv.bugFix);
   }
-};
+});
