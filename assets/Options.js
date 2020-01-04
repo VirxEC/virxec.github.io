@@ -1,6 +1,9 @@
 if (localStorage.getItem("isConsole") == "On") window.addEventListener("error", (a,b,c,d,e)=>errors += `<div class="error">${e}</div>`);
 var errors = "", discord, rt = ["/", "/index.html", "/404.html"].includes(location.pathname)?"":"/", keywords = JSON.parse('["HTML","CSS","JavaScript","InfiniCalc","BigCalc","Big","Infitite","Calculator","Large","Number","Not","Small","Numbers","CalcPlus","Calc","Plus","Big Number Calculator","Big # Calc","GitHub","#","Calculator Plus","Library","JS","Hyper Text Markup Language","Cascading Style Sheet","JS Library"]'), intervalx = $("@interval"), theme=$("head").create("meta"), word = $("head").create("meta"), auth = $("head").create("meta"), port = $("head").create("meta"), icon = $("head").create("link"),isDark = $("@isDark"), mcss = $("head").create("link"), isOffline = $("*isOffline"), syntax = $("@isSyntax"), alerted = $("*alerted"), isConsole = $("@isConsole"), gamer = $("@isGamer"), widget = $("@isWidget"), channel=$("@channel"), storage = [isOffline,alerted,isConsole,gamer];
 if (!isDark.i()) isDark.i("On");
+mcss.tag("rel", "stylesheet");
+mcss.tag("href", `/assets/${$("@isDark").i() == "Off"?"light":"dark"}.css`);
+mcss.append();
 theme.tag("name","theme-color");
 theme.tag("content",$("@isDark").i()=="Off"?"rbg(255,255,255)":"rbg(0,0,0)");
 word.tag("name","keywords");
@@ -11,8 +14,6 @@ port.tag("name","viewport");
 port.tag("content","width=device-width,initial-scale=1.0");
 icon.tag("rel","icon");
 icon.tag("href", "/assets/logo.png");
-mcss.tag("rel", "stylesheet");
-mcss.tag("href", `/assets/${$("@isDark").i() == "Off"?"light":"dark"}.css`);
 function path(items) {
   return items.includes(location.pathname);
 }
@@ -32,7 +33,6 @@ word.append();
 auth.append();
 port.append();
 icon.append();
-mcss.append();
 var crate = $("head").create("link");
 crate.tag("rel", "preload");
 crate.tag("href", "/assets/3rdParty/crate3.min.js");
