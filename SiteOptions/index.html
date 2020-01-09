@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
     <meta name="description" content="Works with really large numbers">
     <title>Site Options</title>
@@ -18,9 +18,9 @@
 		<p id="sconsole"></p>
     <h1>Site Options</h1>
     <h3>Dark Mode <button id="dark"></button></h3>
-    <h3>Syntax Highlighting <button id="syntax"></button> (Credit: <a href="https://highlightjs.org">Highlight JS</a>)</h3>
-		<h3>Discord Widget <button id="widget"></button> (Credit: <a href="https://widgetbot.io">WidgetBot</a>)</h3>
-		<h3>Default Channel
+    <h3><abbr title="Credit: Highlight JS (hightlightjs.org)">Syntax Highlighting</abbr> <button id="syntax"></button></h3>
+		<h3><abbr title="Credit: WidgetBot (widgetbot.io)">Discord Widget</abbr> <button id="widget"></button></h3>
+		<h3><abbr title="Requires Discord Widget to work">Default Channel</abbr>
 			<select id="channel">
 				<option value="629774177733181440">CalcPlus</option>
 				<option value="507717342680186891">General</option>
@@ -28,7 +28,7 @@
 			</select>
 		</h3>
 		<h3>Gamer Mode <button id="gamer"></button></h3>
-		<h3>Transition time <input type="range" min="1" max="5000" id="transition"> <button id="applytrans">Apply <span id="transval"></span>ms</button></h3>
+		<h3><abbr title="Requires Gamer Mode to work">Transition time</abbr> <input type="range" min="1" max="5000" id="transition"> <button id="applytrans">Apply <span id="transval"></span>ms</button></h3>
     <h3>On-Screen Console <button id="console"></button></h3>
     <h3>Reset all <button id="reset">Reset</button></h3>
     <script>

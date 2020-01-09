@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html>
 	<head>
 		<meta name="description" content="Preview the CalcPlus open-source library">
 		<title>Preview the CalcPlus Library</title>
@@ -16,42 +16,48 @@
 			<a class="nava" href="/Discord/">Offical Discord</a>
 		</nav><br>
 		<p id="sconsole"></p>
-		<input type="radio" id="a" name="math-type" checked="checked">
+		<input type="radio" id="a" name="math" checked="checked">
 		<label for="a">Addition</label>
 		<br>
-		<input type="radio" id="s" name="math-type">
+		<input type="radio" id="s" name="math">
 		<label for="s">Subtraction</label>
 		<br>
-		<input type="radio" id="m" name="math-type">
+		<input type="radio" id="m" name="math">
 		<label for="m">Multiplication</label>
 		<br>
-		<input type="radio" id="e" name="math-type">
-		<label for="e">Exponents (No decimals after the first number for now)</label>
+		<input type="radio" id="e" name="math">
+		<label for="e"><abbr title="In development, no decimals after the first number">Exponents</abbr></label>
 		<br>
-		<input type="radio" id="d" name="math-type">
-		<label for="d">Division (In development)</label>
+		<input type="radio" id="d" name="math">
+		<label for="d"><abbr title="In development, whole numbers only">Division</abbr></label>
+    <br>
+    <input type="radio" id="f" name="math">
+    <label for="f"><abbr title="Concept, not implemented">Factorial</abbr></label>
 		<br>
-		<input type="radio" id="l" name="math-type">
+		<input type="radio" id="l" name="math">
 		<label for="l">Is Less Than</label>
 		<br>
-		<input type="radio" id="g" name="math-type">
+		<input type="radio" id="g" name="math">
 		<label for="g">Is Greater Than</label>
 		<br>
-		<input type="radio" id="le" name="math-type">
-		<label for="le">Is Less Than or Equal to</label>
+		<input type="radio" id="le" name="math">
+		<label for="le">Is Less Than or Equal</label>
 		<br>
-		<input type="radio" id="ge" name="math-type">
-		<label for="ge">Is Greater Than or Equal to</label>
+		<input type="radio" id="ge" name="math">
+		<label for="ge">Is Greater Than or Equal</label>
 		<br>
-		<input type="radio" id="r" name="math-type">
+		<input type="radio" id="r" name="math">
 		<label for="r">Round</label>
 		<br>
-		<input type="radio" id="ru" name="math-type">
+		<input type="radio" id="ru" name="math">
 		<label for="ru">Round Up</label>
 		<br>
-		<input type="radio" id="rd" name="math-type">
+		<input type="radio" id="rd" name="math">
 		<label for="rd">Round down</label>
 		<br>
+    <button id="powermode"><span id="powerstatus">Enable</span> Power mode</button>
+    <button id="anticheck"><span id="checkstatus">Enable</span> Anti-Check</button>
+    <br>
 		<button id="addInput">Add another input field</button>
 		<br>
 		<input type="text" id="input1" placeholder="Number">
@@ -69,15 +75,20 @@
 		</ul>
 		<script src="/assets/Library.js"></script>
 		<script>
-			var inputBoxes=2, divChecked=false, gc=n=>$("#"+n).tag("checked");
+			var inputBoxes=2, divChecked=false, gc=n=>$("#"+n).tag("checked"), powermode = false, anticheck = false;
+      $("#powermode").listen("click", ()=>{
+        togglePowerMode();
+        if (powermode) $("#powerstatus").txt("Disable");
+        else $("#powerstatus").txt("Enable");
+      });
+      $("#anticheck").listen("click", ()=>{
+        toggleAntiCheck();
+        if (anticheck) $("#checkstatus").txt("Disable");
+        else $("#checkstatus").txt("Enable");
+      });
 			$("#d").listen("change", ()=>{
-				if (gc("d")) {
-					divChecked = true;
-					$("#extraInputs").htm('<span id="spanDivMax"><input type="text" id="maxDecimal" placeholder="Max decimal place"><br></span>', true);
-				} else if (divChecked) {
-					divChecked = false;
-					$("#spanDivMax").tag("remove()");
-				}
+				if (gc("d")) $("#extraInputs").htm('<span id="spanDivMax"><input type="text" id="maxDecimal" placeholder="Max decimal place"><br></span>', true);
+				else $("#spanDivMax").tag("remove()");
 			});
 			$("#addInput").listen("click", ()=>{
 				inputBoxes++;
@@ -86,7 +97,7 @@
 			$("#calc").listen("click", ()=>{
 				var final, inputs=[];
 				for(var i=1;i<=inputBoxes;i++)inputs[i-1]=$("#input"+i).tag("value");
-				final=gc("a")?a(inputs):gc("s")?s(inputs):gc("m")?m(inputs):gc("e")?e(inputs):gc("d")?d(inputs, $("#maxDecimal").tag("value")):gc("l")?l(inputs):gc("g")?g(inputs):gc("le")?le(inputs):gc("ge")?ge(inputs):gc("r")?r(inputs[0]):gc("ru")?ru(inputs[0]):gc("rd")?rd(inputs[0]):console.error("No option was checked");
+				final=gc("a")?a(inputs):gc("s")?s(inputs):gc("m")?m(inputs):gc("e")?e(inputs):gc("d")?d(inputs, $("#maxDecimal").tag("value")):gc("f")?f(inputs):gc("l")?l(inputs):gc("g")?g(inputs):gc("le")?le(inputs):gc("ge")?ge(inputs):gc("r")?r(inputs[0]):gc("ru")?ru(inputs[0]):gc("rd")?rd(inputs[0]):console.error("No option was checked");
 				$("#output").txt("Answer: "+final);
 			});
 		</script>
