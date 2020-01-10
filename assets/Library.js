@@ -131,14 +131,10 @@ function parseNums(num1pre, num2pre, mode) {
     decimal[0] = mode == 1 || mode == 2 ? Math.max(decimal[1], decimal[2]) : mode == 3 ? decimal[1] + decimal[2] : decimal[1] - decimal[2];
     if (decimal[0] < 0) decimal[0] = 0;
   }
-  let skip = false;
   for (let i = 0; !neg[0] && (neg[1] || neg[2]) && mode == 1 && num[2].length == maxChar && i < num[1].length; i++)
     if (num[2][i] > num[1][i]) neg[0] = true;
   if (mode == 2 && num[2].length - decimal[2] == maxChar && num[1].length - decimal[1] != maxChar) neg[0] = true;
-  for (let i = num[1].length; !skip && !neg[0] && mode == 2 && num[2].length == maxChar && i > 0; i--) {
-    if (num[1][i] < num[2][i]) neg[0] = true;
-    else skip = num[2][i] != num[1][i];
-  }
+  let negCalc = num[2].length == maxChar
   if (maxChar == num[2].length && mode == 3) num[1] = [num[2], num[2] = num[1]][0];
   if (decimal[1] != decimal[2] && [1, 2].includes(mode)) {
     if (decimal[1] == decimal[0])
@@ -150,6 +146,8 @@ function parseNums(num1pre, num2pre, mode) {
     while (num[1].length - num[2].length > 0) num[2].unshift("0");
     while (num[2].length - num[1].length > 0) num[1].unshift("0");
   }
+  for (let i = num[1].length; !neg[0] && mode == 2 && negCalc && i > 0; i--)
+    if (num[1][i] < num[2][i]) neg[0] = true;
   if ([3, 4].includes(mode) && neg[1] && neg[2]) neg[0] = false;
   if (mode == 3) neg[1] = false, neg[2] = false;
   console.log(JSON.stringify([new Define(num[1], neg[1], decimal[1]), new Define(num[2], neg[2], decimal[2])]));
@@ -173,10 +171,10 @@ function formatNums(final, decimals, neg, array = true) {
   final = final.join("");
   if (final.split(".").length == 2) final = final.replace(/\.?0+$/g, '');
   final = final.replace(/^0+/g, '');
-  if (neg[0]) final = "-" + final;
   if (final.length > 1 && final.charAt(0) == ".") final = "0" + final;
+  if (neg[0]) final = "-" + final;
   if (final.charAt(final.length - 1) == "." || final.charAt(0) == ".") final = final.replace(".", "");
-  final = ["", ".", "-"].indexOf(final) > -1 ? "0" : final;
+  final = ["", ".", "-"].includes(final) ? "0" : final;
   return final;
 }
 
@@ -210,7 +208,7 @@ let shouldRun = function(num1, num2) {
 }
 
 function add() {
-  let tempadd = function (num1, num2) {
+  let tempadd = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       if (checks) checkNumberString([num1, num2]);
       let parsedNums = parseNums(num1, num2, 1),
@@ -251,7 +249,7 @@ function add() {
 }
 
 function sub() {
-  let tempsub = function (num1, num2) {
+  let tempsub = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       if (checks) checkNumberString([num1, num2]);
       let parsedNums = parseNums(num1, num2, 2),
@@ -273,8 +271,9 @@ function sub() {
         if (fans < 0 && i != 0) {
           let j = i - 1;
           final[finali] = String(fans + 10), num[1][j] = String(num[1][j] - 1);
-          while (num1[j] < 0 && j != 0) num[1][j] = String((+num[1][j]) + 10), j = j - 1, num[1][j] = String(num[1][j] - 1);
-        } else if (fans <= 0 && i == 0) final[finali] = String(fans).split("-").length > 1 ? String(fans).split("-")[1] : String(fans);
+          while (num1[j] < 0 && j != decimal[1]) num[1][j] = String((+num[1][j]) + 10), j = j - 1, num[1][j] = String(num[1][j] - 1);
+          if (decimal[1] > 0 && j == decimal[1]) while (num1[j] < 0 && j != 0) num[1][j] = String((+num[1][j]) + 10), j = j - 1, num[1][j] = String(num[1][j] + 1);
+        } else if (fans <= 0 && i == 0) final[finali] = String(fans).split("-").length > 1 ? String(fans).split("-")[1]-1 : String(fans);
         else final[finali] = fans;
         console.varinfo({final});
       }
@@ -295,7 +294,7 @@ function sub() {
 }
 
 function isLessThan() {
-  let templessthan = function (num1, num2) {
+  let templessthan = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       let num = sub(num2, num1);
       if (num.split("-").length == 1 && num != 0) return true;
@@ -316,7 +315,7 @@ function isLessThan() {
 }
 
 function isGreaterThan() {
-  let tempgreaterthan = function (num1, num2) {
+  let tempgreaterthan = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       let num = sub(num1, num2);
       if (num.split("-").length == 1 && num != 0) return true;
@@ -337,7 +336,7 @@ function isGreaterThan() {
 }
 
 function isLessThanEqual() {
-  let templessthanequal = function (num1, num2) {
+  let templessthanequal = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       if (sub(num2, num1).split("-").length == 1) return true;
       return false;
@@ -357,7 +356,7 @@ function isLessThanEqual() {
 }
 
 function isGreaterThanEqual() {
-  let tempisgreaterthanequal = function (num1, num2) {
+  let tempisgreaterthanequal = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       if (sub(num1, num2).split("-").length == 1) return true;
       return false;
@@ -411,7 +410,7 @@ function roundUp() {
 }
 
 function multi() {
-  let tempmulti = function (num1, num2) {
+  let tempmulti = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       if (checks) checkNumberString([num1, num2]);
       let parsedNums = parseNums(num1, num2, 3),
@@ -442,7 +441,7 @@ function multi() {
 }
 
 function expo() {
-  let tempexpo = function (num1, num2) {
+  let tempexpo = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       if (checks) checkNumberString([num1, num2]);
       let parsedNums = parseNums(num1, num2, 5),
@@ -481,7 +480,7 @@ function expo() {
 }
 
 function div() {
-  let tempdiv = function (num1, num2) {
+  let tempdiv = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       if (checks) checkNumberString([num1, num2]);
       let parsedNums = parseNums(num1, num2, 4),
