@@ -38,7 +38,7 @@ async function preload() {
   port.tag("name", "viewport");
   port.tag("content", "width=device-width,initial-scale=1.0");
   icon.tag("rel", "icon");
-  icon.tag("href", "/assets/icons/icon-512x512.png");
+  icon.tag("href", "/assets/icons/512x512.png");
   function path(items) {
     return items.includes(location.pathname);
   }
