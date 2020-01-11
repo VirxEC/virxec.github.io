@@ -77,7 +77,7 @@ async function preload() {
   apple.title.tag("name", "apple-mobile-web-app-title");
   apple.title.tag("content", "VirxEC Showcase");
   apple.icon.tag("rel", "apple-touch-icon");
-  apple.icon.tag("href", "/assets/icons/icon-152x152.png");
+  apple.icon.tag("href", "/assets/icons/152x152.png");
   apple.capable.append();
   apple.status.append();
   apple.title.append();
