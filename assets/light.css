@@ -1,1 +1,93 @@
-body{color:#000;background-color:#fff;margin:0!important}button{color:#000;background-color:#c8c8c8;border-color:#d2d2d2}a{color:#0000c0}.removeInput{color:#000;background-color:red;border:none}span.fix{color:#ebeb00}div.log{color:#00f}div.info{color:#009}nav a{background-color:grey;color:#fff;border-right:solid 1px silver;text-decoration:none;outline:0;padding:10px 20px;display:block;float:left;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:16.666%;text-align:center;box-sizing:border-box}nav a:link,nav a:visited{background-color:grey;color:#fff}nav a:active,nav a:hover{background-color:silver;color:#000}span.broken{color:red}span.verify{color:orange}span.working{color:green}div.warn{color:orange}div.error{color:red}@media(max-width:800px){nav a{font-size:0.8em;padding:10px 10px;}}@media(max-width:400px){nav a{font-size:0.6em;padding:5px 5px;}}
+body {
+  color: #000;
+  background-color: #fff;
+  margin: 0!important;
+}
+
+button {
+  color: #000;
+  background-color: #c8c8c8;
+  border-color: #d2d2d2;
+}
+
+a {
+  color: #0000c0;
+}
+
+.removeInput {
+  color: #000;
+  background-color: red;
+  border: none;
+}
+
+span.fix {
+  color: #ebeb00;
+}
+
+div.log {
+  color: #00f;
+}
+
+div.info {
+  color: #009;
+}
+
+nav a {
+  background-color: grey;
+  color: #fff;
+  border-right: solid 1px silver;
+  text-decoration: none;
+  outline: 0;
+  padding: 10px 20px;
+  display: block;
+  float: left;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: 16.666%;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+nav a:link, nav a:visited {
+  background-color: grey;
+  color: #fff;
+}
+
+nav a:active, nav a:hover {
+  background-color: silver;
+  color: #000;
+}
+
+span.broken {
+  color: red;
+}
+
+span.verify {
+  color: orange;
+}
+
+span.working {
+  color: green;
+}
+
+div.warn {
+  color: orange;
+}
+
+div.error {
+  color: red;
+}
+
+@media(max-width:800px) {
+  nav a {
+    font-size: 0.8em;
+    padding: 10px 10px;
+  }
+}
+
+@media(max-width:400px) {
+  nav a {
+    font-size: 0.6em;
+    padding: 5px 5px;
+  }
+}

@@ -1,1 +1,100 @@
-body{color:#fff;background-color:#000;margin:0%!important}button{color:#fff;background-color:#323232;border-color:#3c3c3c}a{color:#00f}.removeInput{color:#000;background-color:red;border:none}span.fix{color:#ff0}div.log{color:#66f}div.info{color:#5e5eff}nav a{text-decoration:none;outline:0;padding:10px 20px;float:left;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:16.666%;text-align:center;box-sizing:border-box;background-color:#1e1e1e;color:#fff;border-right:solid 1px #4b4b4b}nav a:link,nav a:visited{background-color:#1e1e1e;color:#fff}nav a:active,nav a:hover{background-color:#3c3c3c;color:#d7d7d7}span.broken{color:red}span.verify{color:orange}span.working{color:green}div.warn{color:orange}div.error{color:red}h1.title{margin-bottom:0em;}p.author{margin-top:0em;}@media(max-width:800px){nav a{font-size:0.8em;padding:10px 10px;}}@media(max-width:400px){nav a{font-size:0.6em;padding:5px 5px;}}
+body {
+  color: #fff;
+  background-color: #000;
+  margin: 0%!important;
+}
+
+button {
+  color: #fff;
+  background-color: #323232;
+  border-color: #3c3c3c
+}
+
+a {
+  color: #00f
+}
+
+.removeInput {
+  color: #000;
+  background-color: red;
+  border: none;
+}
+
+span.fix {
+  color: #ff0;
+}
+
+div.log {
+  color: #66f;
+}
+
+div.info {
+  color: #5e5eff;
+}
+
+nav a {
+  text-decoration: none;
+  outline: 0;
+  padding: 10px 20px;
+  float: left;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: 16.666%;
+  text-align: center;
+  box-sizing: border-box;
+  background-color: #1e1e1e;
+  color: #fff;
+  border-right: solid 1px #4b4b4b;
+}
+
+nav a:link, nav a:visited {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+nav a:active, nav a:hover {
+  background-color: #3c3c3c;
+  color: #d7d7d7;
+}
+
+span.broken {
+  color: red;
+}
+
+span.verify {
+  color: orange;
+}
+
+span.working {
+  color: green;
+}
+
+div.warn {
+  color: orange;
+}
+
+div.error {
+  color: red;
+}
+
+h1.title {
+  margin-bottom: 0em;
+}
+
+p.author {
+  margin-top: 0em;
+}
+
+@media(max-width:800px) {
+  nav a {
+    font-size: 0.8em;
+    padding: 10px 10px;
+  }
+}
+
+@media(max-width:400px) {
+  nav a {
+    font-size: 0.6em;
+    padding: 5px 5px;
+  }
+}

@@ -163,8 +163,8 @@ function cpQuery(query) {
     version: {
       name: "CalcPlus Query",
       major: 1,
-      minor: 2,
-      bugFix: 1
+      minor: 3,
+      bugFix: 0
     },
     create: (tag, num) => new create(tag, num),
     file: new file(),

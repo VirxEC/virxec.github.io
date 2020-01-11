@@ -5,6 +5,21 @@
 	<meta name="description" content="VirxEC Showcase. Showcasing: CalcPlus & CPQuery. CalcPlus is a library that lets numbers be calculated way over the normal limit without losing precision. CPQuery is a lightweight version of jQuery that has all the features that are most commonly used.">
 	<script src="assets/CPquery.js"></script>
 	<script src="assets/Options.js"></script>
+  <style>
+    div#pwamsg {
+      display: none;
+    }
+    .top {
+      margin-bottom: 0%;
+    }
+    .bottom {
+      margin-top: 0%;
+    }
+    .middle {
+      margin-top: 8px;
+      margin-bottom: 0%;
+    }
+  </style>
 </head>
 <body>
 	<nav>
@@ -20,8 +35,35 @@
   <p class="author">Contact me: <a href="mailto:virx@virxcase.ga" target="_blank">virx@virxcase.ga</a></p>
 	<h2>Status of JavaScript Library: <span class="fix">Fixing</span></h2>
 	<img src="https://api.travis-ci.com/VirxEC/virxec.github.io.svg?branch=master" alt="Build Status">
-
-	<h3>CalcPlus Project Links</h3>
+  
+  <div id="pwamsg">
+    <h3 class="top">Install the VirxEC PWA!</h3>
+    <p class="middle">Get a 1-click icon to launch this site and have an automatic fullscreen experience!</p>
+    <button class="bottom" id="pwainstall">Install now with no download</button>
+  </div>
+  <script>
+    let prompt;
+    addEventListener('beforeinstallprompt', e=>{
+      console.log("Showing prompt...");
+      //e.preventDefault();
+      prompt = e;
+      document.querySelector("#pwamsg").style.display = "block";
+    });
+    addEventListener('appinstalled', e=> {
+      console.log('PWA installed');
+    });
+    $("#pwainstall").listen('click', (e) => {
+      $("#pwamsg").hide();
+      prompt.prompt();
+      prompt.userChoice
+        .then(result => {
+          result.outcome == 'accepted' ? console.log('User accepted the install prompt') : console.log('User dismissed the install prompt');
+          prompt = null;
+        });
+    });
+  </script>
+  
+  <h3>CalcPlus Project Links</h3>
 	<ul>
     <li><a href="https://github.com/VirxEC/CalcPlus/wiki">Wiki</a></li>
 	  <li><a href="https://github.com/VirxEC/CalcPlus/projects/1">To do page</a></li>
