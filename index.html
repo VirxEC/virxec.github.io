@@ -44,23 +44,15 @@
   <script>
     let prompt;
     addEventListener('beforeinstallprompt', e=>{
-      console.log("Showing prompt...");
-      //e.preventDefault();
       prompt = e;
       document.querySelector("#pwamsg").style.display = "block";
     });
-    addEventListener('appinstalled', e=> {
-      console.log('PWA installed');
-    });
-    $("#pwainstall").listen('click', (e) => {
+    $("#pwainstall").listen('click', e=> {
       $("#pwamsg").hide();
       prompt.prompt();
-      prompt.userChoice
-        .then(result => {
-          result.outcome == 'accepted' ? console.log('User accepted the install prompt') : console.log('User dismissed the install prompt');
-          prompt = null;
-        });
     });
+
+    if (/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()) && !('standalone' in navigator)) this.setState({ showInstallMessage: true });
   </script>
   
   <h3>CalcPlus Project Links</h3>
