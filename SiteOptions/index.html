@@ -38,7 +38,7 @@
     <script src="/assets/3rdParty/js.cookie.min.js"></script>
     <script>
 			let id=[$("#dark"),$("#console"),$("#widget"),$("#gamer"),$("#syntax")], dex=[$("@isDark"),$("@isConsole"),$("@isWidget"),$("@isGamer"),$("@isSyntax")];
-			$("#loadsettings").listen("click", ()=>{
+			/*$("#loadsettings").listen("click", ()=>{
         let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
         req.load(function() {
           if (this.readyState == XMLHttpRequest.DONE) {
@@ -121,7 +121,7 @@
         req.open("GET");
         req.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
         req.send();
-      });
+      });*/
       $("#channel").tag("value",$("@channel").i());
 			$("#transition").tag("value", $("@interval").i());
 			$("#transval").txt($("@interval").i());
