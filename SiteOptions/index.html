@@ -3,8 +3,8 @@
   <head>
     <meta name="description" content="Works with really large numbers">
     <title>Site Options</title>
-	<script src="/assets/CPquery.js"></script>
-	<script src="/assets/Options.js"></script>
+	  <script src="/assets/CPquery.js"></script>
+	  <script src="/assets/Options.js"></script>
   </head>
   <body>
     <nav>
@@ -17,6 +17,9 @@
     </nav><br>
 		<p id="sconsole"></p>
     <h1>Site Options</h1>
+    <!--
+    <h3><button id="loadsettings"><abbr title="This is a beta feature. MD5 algorithm credit: http://www.myersdaily.org/joseph/">Load settings</abbr></button> <button id="savesettings"><abbr title="This is a beta feature. MD5 algorithm credit: http://www.myersdaily.org/joseph/">Save settings</abbr></button> <button id="signup"><abbr title="This is a beta feature. MD5 algorithm credit: http://www.myersdaily.org/joseph/">Sign up</abbr></button></h3>
+    -->
     <h3>Dark Mode <button id="dark"></button></h3>
     <h3><abbr title="Credit: Highlight JS (hightlightjs.org)">Syntax Highlighting</abbr> <button id="syntax"></button></h3>
 		<h3><abbr title="Credit: WidgetBot (widgetbot.io)">Discord Widget</abbr> <button id="widget"></button></h3>
@@ -31,9 +34,95 @@
 		<h3><abbr title="Requires Gamer Mode to work">Transition time</abbr> <input type="range" min="1" max="5000" id="transition"> <button id="applytrans">Apply <span id="transval"></span>ms</button></h3>
     <h3>On-Screen Console <button id="console"></button></h3>
     <h3>Reset all <button id="reset">Reset</button></h3>
+    <script src="/assets/3rdParty/md5.min.js"></script>
+    <script src="/assets/3rdParty/js.cookie.min.js"></script>
     <script>
-			const id=[$("#dark"),$("#console"),$("#widget"),$("#gamer"),$("#syntax")], dex=[$("@isDark"),$("@isConsole"),$("@isWidget"),$("@isGamer"),$("@isSyntax")];
-			$("#channel").tag("value",$("@channel").i());
+			let id=[$("#dark"),$("#console"),$("#widget"),$("#gamer"),$("#syntax")], dex=[$("@isDark"),$("@isConsole"),$("@isWidget"),$("@isGamer"),$("@isSyntax")];
+			$("#loadsettings").listen("click", ()=>{
+        let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
+        req.load(function() {
+          if (this.readyState == XMLHttpRequest.DONE) {
+            try {
+              let data = JSON.parse(this.responseText)[prompt("Username:")][md5(prompt("Password:"))];
+              $("@isDark").i(data.dark);
+              $("@isConsole").i(data.console);
+              $("@isWidget").i(data.widget);
+              $("@isGamer").i(data.gamer);
+              $("@isSyntax").i(data.syntax);
+              $("@channel").i(data.channel);
+              $("@interval").i(data.interval);
+              location.reload();
+            } catch(e) {
+              alert("Invalid username/password");
+            }
+          }
+        });
+        req.open("GET");
+        req.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
+        req.send();
+      });
+      $("#savesettings").listen("click", ()=>{
+        let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
+        req.load(function() {
+          if (this.readyState == XMLHttpRequest.DONE) {
+            try {
+              let data = JSON.parse(this.responseText), user = prompt("Username:"), pass = md5(prompt("Password:"));
+              if (data[user][pass] != null) {
+                data[user][pass] = {dark: $("@isDark").i(), console: $("@isConsole").i(), widget: $("@isWidget").i(), gamer: $("@isGamer").i(), syntax: $("@isSyntax").i(), channel: $("@channel").i(), interval: $("@interval").i() };
+                let save = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
+                save.load(function() {
+                  if (this.readyState == XMLHttpRequest.DONE) {
+                    let response = JSON.parse(this.responseText);
+                    if (response.success) alert("Settings saved");
+                    else alert("There was an error. Please contact virx@virxcase.ga and report this:\n"+response.message);
+                  }
+                });
+                save.open("PUT");
+                save.i("setRequestHeader", "Content-type", "application/json");
+                save.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
+                save.i("setRequestHeader", "versioning", "false");
+                save.send(JSON.stringify(data));
+              } else alert("Invalid username/password");
+            } catch(e) {
+              alert("Something went wrong! Please message this to virx@virxcase.ga:\n"+e);
+            }
+          }
+        });
+        req.open("GET");
+        req.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
+        req.send();
+      });
+      $("#signup").listen("click", ()=>{
+        let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
+        req.load(function() {
+          if (this.readyState == XMLHttpRequest.DONE) {
+            try {
+              let data = JSON.parse(this.responseText), user = prompt("Username:"), pass = md5(prompt("Password:"));
+              data[user] = {};
+              data[user][pass] = {dark: $("@isDark").i(), console: $("@isConsole").i(), widget: $("@isWidget").i(), gamer: $("@isGamer").i(), syntax: $("@isSyntax").i(), channel: $("@channel").i(), interval: $("@interval").i() };
+              let save = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
+              save.load(function() {
+                if (this.readyState == XMLHttpRequest.DONE) {
+                  let response = JSON.parse(this.responseText);
+                  if (response.success) alert("Account created");
+                  else alert("There was an error. Please contact virx@virxcase.ga and report this:\n"+response.message);
+                }
+              });
+              save.open("PUT");
+              save.i("setRequestHeader", "Content-type", "application/json");
+              save.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
+              save.i("setRequestHeader", "versioning", "false");
+              save.send(JSON.stringify(data));
+            } catch(e) {
+              alert("Invalid username/password");
+            }
+          }
+        });
+        req.open("GET");
+        req.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
+        req.send();
+      });
+      $("#channel").tag("value",$("@channel").i());
 			$("#transition").tag("value", $("@interval").i());
 			$("#transval").txt($("@interval").i());
 			id.forEach((e,i)=>{
@@ -59,6 +148,6 @@
 				location.reload();
 			});
     </script>
-	  <script src="/assets/3rdParty/crate3.min.js"></script>
+	  <script src="/assets/3rdParty/crate3.min.js" async></script>
   </body>
 </html>

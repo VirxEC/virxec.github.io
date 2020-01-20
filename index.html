@@ -48,8 +48,11 @@
       document.querySelector("#pwamsg").style.display = "block";
     });
     $("#pwainstall").listen('click', e=> {
-      $("#pwamsg").hide();
       prompt.prompt();
+      deferredPrompt.userChoice.then(c => {
+        if (choiceResult.outcome === 'accepted') document.querySelector("#pwamsg").style.display = "none";
+        prompt = null;
+      });
     });
 
     if (/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()) && !('standalone' in navigator)) this.setState({ showInstallMessage: true });

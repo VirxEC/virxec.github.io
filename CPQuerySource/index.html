@@ -21,7 +21,7 @@
 		<script>
       var raw = new $("^/assets/CPquery.js").file;
 			raw.request(async function(){
-				$("#source").txt(raw.i("responseText"));
+				$("#source").txt(this.responseText);
 			});
 		</script>
     <script src="/assets/3rdParty/highlight.min.js"></script>

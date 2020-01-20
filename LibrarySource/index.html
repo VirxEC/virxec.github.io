@@ -21,7 +21,7 @@
     <script>
       let raw = new $("^/assets/Library.js").file;
 			raw.request(async function(){
-				$("#source").txt(raw.i("responseText"));
+				$("#source").txt(this.responseText);
 			});
 		</script>
     <script src="/assets/3rdParty/highlight.min.js"></script>
