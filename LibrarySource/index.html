@@ -20,7 +20,7 @@
     <pre><code id="source" class="javascript"></code></pre>
     <script>
       let raw = new $("^/assets/Library.js").file;
-			raw.request(async function(){
+			raw.request(function(){
 				$("#source").txt(this.responseText);
 			});
 		</script>

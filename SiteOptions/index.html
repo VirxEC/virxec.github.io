@@ -40,21 +40,19 @@
 			let id=[$("#dark"),$("#console"),$("#widget"),$("#gamer"),$("#syntax")], dex=[$("@isDark"),$("@isConsole"),$("@isWidget"),$("@isGamer"),$("@isSyntax")];
 			/*$("#loadsettings").listen("click", ()=>{
         let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
-        req.load(function() {
-          if (this.readyState == XMLHttpRequest.DONE) {
-            try {
-              let data = JSON.parse(this.responseText)[prompt("Username:")][md5(prompt("Password:"))];
-              $("@isDark").i(data.dark);
-              $("@isConsole").i(data.console);
-              $("@isWidget").i(data.widget);
-              $("@isGamer").i(data.gamer);
-              $("@isSyntax").i(data.syntax);
-              $("@channel").i(data.channel);
-              $("@interval").i(data.interval);
-              location.reload();
-            } catch(e) {
-              alert("Invalid username/password");
-            }
+        req.ready(function() {
+          try {
+            let data = JSON.parse(this.responseText)[prompt("Username:")][md5(prompt("Password:"))];
+            $("@isDark").i(data.dark);
+            $("@isConsole").i(data.console);
+            $("@isWidget").i(data.widget);
+            $("@isGamer").i(data.gamer);
+            $("@isSyntax").i(data.syntax);
+            $("@channel").i(data.channel);
+            $("@interval").i(data.interval);
+            location.reload();
+          } catch(e) {
+            alert("Invalid username/password");
           }
         });
         req.open("GET");
@@ -63,48 +61,16 @@
       });
       $("#savesettings").listen("click", ()=>{
         let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
-        req.load(function() {
-          if (this.readyState == XMLHttpRequest.DONE) {
-            try {
-              let data = JSON.parse(this.responseText), user = prompt("Username:"), pass = md5(prompt("Password:"));
-              if (data[user][pass] != null) {
-                data[user][pass] = {dark: $("@isDark").i(), console: $("@isConsole").i(), widget: $("@isWidget").i(), gamer: $("@isGamer").i(), syntax: $("@isSyntax").i(), channel: $("@channel").i(), interval: $("@interval").i() };
-                let save = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
-                save.load(function() {
-                  if (this.readyState == XMLHttpRequest.DONE) {
-                    let response = JSON.parse(this.responseText);
-                    if (response.success) alert("Settings saved");
-                    else alert("There was an error. Please contact virx@virxcase.ga and report this:\n"+response.message);
-                  }
-                });
-                save.open("PUT");
-                save.i("setRequestHeader", "Content-type", "application/json");
-                save.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
-                save.i("setRequestHeader", "versioning", "false");
-                save.send(JSON.stringify(data));
-              } else alert("Invalid username/password");
-            } catch(e) {
-              alert("Something went wrong! Please message this to virx@virxcase.ga:\n"+e);
-            }
-          }
-        });
-        req.open("GET");
-        req.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
-        req.send();
-      });
-      $("#signup").listen("click", ()=>{
-        let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
-        req.load(function() {
-          if (this.readyState == XMLHttpRequest.DONE) {
-            try {
-              let data = JSON.parse(this.responseText), user = prompt("Username:"), pass = md5(prompt("Password:"));
-              data[user] = {};
+        req.ready(function() {
+          try {
+            let data = JSON.parse(this.responseText), user = prompt("Username:"), pass = md5(prompt("Password:"));
+            if (data[user][pass] != null) {
               data[user][pass] = {dark: $("@isDark").i(), console: $("@isConsole").i(), widget: $("@isWidget").i(), gamer: $("@isGamer").i(), syntax: $("@isSyntax").i(), channel: $("@channel").i(), interval: $("@interval").i() };
               let save = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
               save.load(function() {
                 if (this.readyState == XMLHttpRequest.DONE) {
                   let response = JSON.parse(this.responseText);
-                  if (response.success) alert("Account created");
+                  if (response.success) alert("Settings saved");
                   else alert("There was an error. Please contact virx@virxcase.ga and report this:\n"+response.message);
                 }
               });
@@ -113,9 +79,35 @@
               save.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
               save.i("setRequestHeader", "versioning", "false");
               save.send(JSON.stringify(data));
-            } catch(e) {
-              alert("Invalid username/password");
-            }
+            } else alert("Invalid username/password");
+          } catch(e) {
+            alert("Something went wrong! Please message this to virx@virxcase.ga:\n"+e);
+          }
+        });
+        req.open("GET");
+        req.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
+        req.send();
+      });
+      $("#signup").listen("click", ()=>{
+        let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
+        req.ready(function() {
+          try {
+            let data = JSON.parse(this.responseText), user = prompt("Username:"), pass = md5(prompt("Password:"));
+            data[user] = {};
+            data[user][pass] = {dark: $("@isDark").i(), console: $("@isConsole").i(), widget: $("@isWidget").i(), gamer: $("@isGamer").i(), syntax: $("@isSyntax").i(), channel: $("@channel").i(), interval: $("@interval").i() };
+            let save = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
+            save.ready(function() {
+              let response = JSON.parse(this.responseText);
+              if (response.success) alert("Account created");
+              else alert("There was an error. Please contact virx@virxcase.ga and report this:\n"+response.message);
+            });
+            save.open("PUT");
+            save.i("setRequestHeader", "Content-type", "application/json");
+            save.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
+            save.i("setRequestHeader", "versioning", "false");
+            save.send(JSON.stringify(data));
+          } catch(e) {
+            alert("Invalid username/password");
           }
         });
         req.open("GET");

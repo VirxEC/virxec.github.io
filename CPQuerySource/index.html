@@ -20,7 +20,7 @@
     <pre><code id="source" class="javascript"></code></pre>
 		<script>
       var raw = new $("^/assets/CPquery.js").file;
-			raw.request(async function(){
+			raw.request(function(){
 				$("#source").txt(this.responseText);
 			});
 		</script>

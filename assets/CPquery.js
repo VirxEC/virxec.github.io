@@ -5,16 +5,16 @@
  * See the License for the specific language governing permissions and limitations under the License
  */
 function cpQuery(query) {
-  var element, local = !1,
-    session = !1;
+  let element, local = false,
+    session = false;
   if (typeof query == "string") {
     if (["", "document"].includes(query)) element = document;
     else if (query == "window") element = window;
     else if (query == "head") element = document.head;
     else if (query == "body") element = document.body;
     else {
-      if (query[0] == "@") query = query.substr(1), local = !0;
-      else if (query[0] == "*") query = query.substr(1), session = !0;
+      if (query[0] == "@") query = query.substr(1), local = true;
+      else if (query[0] == "*") query = query.substr(1), session = true;
       else if (query[0] == '^') query = query.substr(1);
       else element = document.querySelector(query);
     }
@@ -73,12 +73,12 @@ function cpQuery(query) {
       this.sheet.deleteRule(item);
     }
     removeAll() {
-      for (var i = 0; i < this.sheet.cssRules.length; i++) this.sheet.deleteRule(i);
+      for (let i = 0; i < this.sheet.cssRules.length; i++) this.sheet.deleteRule(i);
     }
     replaceWithAll() {
-      var i = Array.isArray(arguments[0]) ? arguments[0] : arguments;
+      let i = Array.isArray(arguments[0]) ? arguments[0] : arguments;
       this.removeAll();
-      for (var g in i) this.append(i[g]);
+      for (let g in i) this.append(i[g]);
     }
     createSheet() {
       element.appendChild(document.createElement("style"));
@@ -102,28 +102,21 @@ function cpQuery(query) {
       return e.stack;
     }
   }
-  function txt(item, extra1, extra2) {
-    var add = typeof extra1 == "boolean" ? extra1 : extra2,
-      num = typeof extra1 == "number" ? extra1 : extra2;
-    if (num) element = element[num];
-    if (add) element.textContent += item;
-    else element.textContent = item;
+  function txt(item, add) {
+    add ? element.textContent += item : element.textContent = item;
   }
-  function htm(item, extra1, extra2) {
-    var add = typeof extra1 == "boolean" ? extra1 : extra2,
-      num = typeof extra1 == "number" ? extra1 : extra2;
-    if (num) element = element[num];
-    if (add) element.innerHTML += item;
-    else element.innerHTML = item;
+  function htm(item, add) {
+    add ? element.innerHTML += item : element.innerHTML = item;
   }
   function tag(newtag, extra) {
     if (typeof extra == "string") extra = [extra];
-    if (extra && extra[1]) element = element[extra[1]];
     newtag = newtag.split("");
-    if (extra && extra[0]) {
-      if (newtag[0] == "#") element.id = extra[0];
-      else if (newtag[0] == ".") element.class = extra[0];
-      else element[newtag.join("")] = extra[0];
+    if (extra) {
+      for (let item of extra) {
+        if (newtag[0] == "#") element.id = item;
+        else if (newtag[0] == ".") element.class = extra[0];
+        else element[newtag.join("")] = extra[0];
+      }
     } else {
       if (newtag[0] == "#") return element.id;
       else if (newtag[0] == ".") return element.class;
@@ -137,17 +130,20 @@ function cpQuery(query) {
     load(f) {
       this.raw.onreadystatechange = f;
     }
-    open(type, async = !0, user = null, pass = null) {
+    ready(f) {
+      this.raw.onreadystatechange = function() {
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) f.call(this);
+      };
+    }
+    open(type, async = true, user = null, pass = null) {
       this.raw.open(type, query, async, user, pass);
     }
     send(item) {
       this.raw.send(item);
     }
     request(f) {
-      this.raw.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-          f();
-        }
+      this.raw.onreadystatechange = function() {
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) f.call(this);
       };
       this.raw.open("GET", query);
       this.raw.send();

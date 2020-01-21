@@ -12,7 +12,7 @@ var errors = "",
   widget = $("@isWidget"),
   intervalx = $("@interval"),
   channel = $("@channel");
-async function preload() {
+(async function() {
   let manifest = $("head").create("link"),
     theme = $("head").create("meta"),
     word = $("head").create("meta"),
@@ -34,11 +34,11 @@ async function preload() {
   word.tag("name", "keywords");
   word.tag("content", keywords.join());
   auth.tag("name", "author");
-  auth.tag("content", "Eric (Virx/VirxEC) Michael Veilleux, virx@virxcase.ga");
+  auth.tag("content", "Eric (Virx/VirxEC) Michael Veilleux (virx@virxcase.ga)");
   port.tag("name", "viewport");
   port.tag("content", "width=device-width,initial-scale=1.0");
   icon.tag("rel", "icon");
-  icon.tag("href", "/assets/icons/512x512.png");
+  icon.tag("href", "/assets/icons/512.png");
   function path(items) {
     return items.includes(location.pathname);
   }
@@ -82,8 +82,7 @@ async function preload() {
   apple.status.append();
   apple.title.append();
   apple.icon.append();
-}
-preload();
+})();
 if (!widget.i()) widget.i("On");
 if (!syntax.i()) syntax.i("On");
 storage.forEach(e => {
@@ -119,7 +118,7 @@ $("window").listen("load", async function() {
   let dwidget = widget.i(),
     game = gamer.i(),
     interval;
-  async function t() {
+  (async function() {
     if (widget.i() == "On") discord = new Crate({
       server: '507708985206505482',
       channel: channel.i(),
@@ -136,8 +135,7 @@ $("window").listen("load", async function() {
         $(0).css.append(`button { color: ${color}; transition: color ${intervalx.i()/1000} ease-in; }`);
       }
     }, intervalx.i());
-  };
-  t();
+  })();
   if (["/LibrarySource/index.html", "/LibrarySource/", "/CPQuerySource/", "/CPQuerySource/index.html"].includes(location.pathname) && syntax.i() == "On") hljs.initHighlighting();
   if (["/", "/index.html"].includes(location.pathname)) {
     let v = $().version,
