@@ -4,7 +4,7 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License
  */
-function cpQuery(query) {
+function cpQuery(query, num = false) {
   let element, local = false,
     session = false;
   if (typeof query == "string") {
@@ -16,19 +16,18 @@ function cpQuery(query) {
       if (query[0] == "@") query = query.substr(1), local = true;
       else if (query[0] == "*") query = query.substr(1), session = true;
       else if (query[0] == '^') query = query.substr(1);
-      else element = document.querySelector(query);
+      else if (num == false) element = document.querySelector(query);
+      else if (num == true) element = document.querySelectorAll(query);
+      else element = element = document.querySelectorAll(query)[num];
     }
   } else if (!query) element = document;
   else element = query;
-
   function select(num) {
     element = document.querySelectorAll(query)[num];
   }
-
   function textNode(node) {
     return element.createTextNode(node);
   }
-
   function func(f) {
     return element[f];
   }
@@ -108,20 +107,10 @@ function cpQuery(query) {
   function htm(item, add) {
     add ? element.innerHTML += item : element.innerHTML = item;
   }
-  function tag(newtag, extra) {
+  function tag(tag, extra) {
     if (typeof extra == "string") extra = [extra];
-    newtag = newtag.split("");
-    if (extra) {
-      for (let item of extra) {
-        if (newtag[0] == "#") element.id = item;
-        else if (newtag[0] == ".") element.class = extra[0];
-        else element[newtag.join("")] = extra[0];
-      }
-    } else {
-      if (newtag[0] == "#") return element.id;
-      else if (newtag[0] == ".") return element.class;
-      else return element[newtag.join("")];
-    }
+    if (extra) extra.forEach(item=>tag == "#" ? element.id = item : tag == "." ? element.class = item : element[tag] = extra);
+    else return tag == "#" ? element.id : tag == "." ? element.class : element[tag];
   }
   const file = class {
     constructor() {
@@ -131,7 +120,7 @@ function cpQuery(query) {
       this.raw.onreadystatechange = f;
     }
     ready(f) {
-      this.raw.onreadystatechange = function() {
+      this.raw.onreadystatechange = function () {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) f.call(this);
       };
     }
@@ -142,7 +131,7 @@ function cpQuery(query) {
       this.raw.send(item);
     }
     request(f) {
-      this.raw.onreadystatechange = function() {
+      this.raw.onreadystatechange = function () {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) f.call(this);
       };
       this.raw.open("GET", query);
@@ -165,6 +154,7 @@ function cpQuery(query) {
     create: (tag, num) => new create(tag, num),
     file: new file(),
     listen: listen,
+    select: select,
     node: textNode,
     css: new css(),
     func: func,
@@ -178,8 +168,8 @@ function cpQuery(query) {
     val: f => tag("value", f),
     click: f => listen("click", f),
     ready: f => listen("load", f),
-    hide: () => tag("style.display", "none"),
-    show: () => tag("style.display", "block"),
+    hide: () => tag(["style","display"], "none"),
+    show: () => tag(["style","display"], "block"),
     dblclick: f => listen("dblclick", f),
     mouseenter: f => listen("mouseenter", f),
     mouseleave: f => listen("mouseleave", f),

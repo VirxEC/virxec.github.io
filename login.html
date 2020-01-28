@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>Log into Virxcase</title>
+	<meta name="description" content="Log into Virxcase">
+	<script src="/assets/CPquery.js"></script>
+	<script src="/assets/Options.js"></script>
+  <style>
+    #error {
+      display: none;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+	<nav>
+		<a class="nava" href="/PreviewLibrary/">Preview library</a>
+		<a class="nava" href="/LibrarySource/">Library Source</a>
+		<a class="nava" href="/CPQuerySource/">CPQuery Source</a>
+		<a class="nava" href="/CalcPlus/">About CalcPlus</a>
+		<a class="nava" href="/SiteOptions/">Site Options</a>
+		<a class="nava" href="/Discord/">Offical Discord</a>
+	</nav><br>
+	<p id="sconsole"></p>
+  <h2>You must login before you can do that</h2>
+  <h3 id="error">Invalid username/password</h3>
+  <script>
+    function get(n) {
+      let result, tmp = [];
+      location.search.substr(1).split("&").forEach(i=>{
+        tmp = i.split("=");
+        if (tmp[0] == n) result = decodeURIComponent(tmp[1]);
+      });
+      return result;
+    }
+    (async ()=>{
+      if (get("invalid") == "true") document.querySelector("#error").style.display = "block";
+    })();
+  </script>
+  <form id="login" action="/logon.html">
+    <input name="s" type="checkbox">
+    <label for="s">I'm signing up</label><br>
+    <input name="e" type="email" placeholder="Email" autocomplete="email" autofocus required><br>
+    <input name="p" type="password" placeholder="Password" autocomplete="current-password" required><br>
+    <input name="r" type="checkbox">
+    <label for="r">Remember me</label><br>
+    <input type="submit" value="Login/Signup"><br>
+  </form>
+  <script>
+    var check = false;
+    (async ()=>{
+      $($("#login").tag("elements")["s"]).on("change", ()=>{
+          check = !check;
+          if (check) $("#login").tag("elements")["p"].autocomplete = "new-password";
+          else $("#login").tag("elements")["p"].autocomplete = "current-password";
+      });
+    })();
+  </script>
+</body>
+</html>
