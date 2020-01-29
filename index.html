@@ -76,7 +76,17 @@
 	  <li><a href="https://github.com/VirxEC/CPQuery/releases/download/v1.2/CPQuery_1-2-0.min.js" download>CPQuery v1.2.0 Library</a></li>
 	  <li><a href="assets/CPquery.js" download="CalcPlus_Query.js">CPQuery Beta Library (v<span id="major"></span>.<span id="minor"></span>.<span id="bugFix"></span>)</a></li>
 	</ul>
-  <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register("sw.min.js");</script>
-	<script src="assets/Library.js"></script>
+  <script src="/assets/Library.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register("sw.min.js");
+    let v = $().version,
+      cv = calcplus_info();
+    $("#major").txt(v.major);
+    $("#minor").txt(v.minor);
+    $("#bugFix").txt(v.bugFix);
+    $("#cmajor").txt(cv.major);
+    $("#cminor").txt(cv.minor);
+    $("#cbugFix").txt(cv.bugFix);
+  </script>
 </body>
 </html>

@@ -63,7 +63,6 @@ widget = $("@isWidget"),
     preload("/assets/3rdParty/highlight.min.js", "script");
   }
   if (widget.i() != "Off") preload("/assets/3rdParty/crate3.min.js", "script");
-  if (["/", "/index.html", "/PreviewLibrary/", "/PreviewLibrary/index.html"].includes(location.pathname)) preload("/assets/Library.js", "script");
   apple.capable.tag("name", "apple-mobile-web-app-capable");
   apple.capable.tag("content", "yes");
   apple.status.tag("name", "apple-mobile-web-app-status-bar-style");
@@ -141,15 +140,5 @@ $("window").listen("load", async () => {
   }
   (async () => {
     if (["/LibrarySource/index.html", "/LibrarySource/", "/CPQuerySource/", "/CPQuerySource/index.html"].includes(location.pathname) && syntax.i() == "On") hljs.initHighlighting();
-    if (["/", "/index.html"].includes(location.pathname)) {
-      let v = $().version,
-        cv = calcplus_info();
-      $("#major").txt(v.major);
-      $("#minor").txt(v.minor);
-      $("#bugFix").txt(v.bugFix);
-      $("#cmajor").txt(cv.major);
-      $("#cminor").txt(cv.minor);
-      $("#cbugFix").txt(cv.bugFix);
-    }
   })();
 });
