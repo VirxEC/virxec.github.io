@@ -1,17 +1,21 @@
-/* Copyright 2019 Eric (VirxEC/Virx) Michael Veilleux
+/**
+ * Copyright 2020 Eric (VirxEC/Virx) Michael Veilleux
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License
+ * 
+ * This is the JavaScript release of https://github.com/VirxEC/CalcPlus
  */
 
-var powermode = false,
-  checks = true,
-  maxNumber = Number.MAX_SAFE_INTEGER,
-  minNumber = Number.MIN_SAFE_INTEGER;
+var powermode = false, // Feel free to change this, or use togglePowerMode();
+  checks = true, // Feel free to change this, or use toggleAntiCheck();
+  maxNumber = Number.MAX_SAFE_INTEGER, // Feel free to change this, or use setMaxSafeInteger(maxSafeInteger);
+  minNumber = Number.MIN_SAFE_INTEGER; // Feel free to change this, but it doesn't do anything right now
+
 const Define = class {
   constructor(num, isNeg, decimals) {
-    this.prototype += (new Object).prototype;
+    this.prototype = (new Object).prototype;
     if (checks) {
       if (Array.isArray(num)) {
         if (typeof isNeg == "boolean") {
@@ -97,21 +101,19 @@ function checkCustom(items, type) {
     });
 }
 
-console.varinfo = v => console.log(JSON.stringify(v));
+console.varinfo = v => console.log(Object.keys(v)[0]+": "+JSON.stringify(v[Object.keys(v)[0]]));
 
-function parseNums(num1pre, num2pre, mode) {
+function parseNums(num1, num2, mode) {
   if (checks) {
     if (1 > mode || mode > 5) throw new RangeError("The mode of the function must be from 1-5\n1: Addition\n2: Subtraction\n3: Multiplication\n4: Division\n5: Exponents");
-    checkNumberString([num1pre, num2pre]);
+    checkNumberString([num1, num2]);
   }
-  console.info(mode);
-  let num = [null, num1pre, num2pre],
-    neg = [false, false, false],
+  let neg = [false, false, false],
     decimal = [0, 0, 0];
+  num = [[], num1, num2];
   for (let i = 1; i < 3; i++) {
     if (num[i] instanceof Define) {
       neg[i] = num[i].isNeg, decimal[i] = num[i].decimals, num[i] = num[i].num;
-      //while (num[i].slice(-1)[0] == "0" && (num[i].length - (decimal[i] > 0 ? decimal[i] : 0) > 0)) num[i].pop();
     } else {
       let numisplit = num[i].split("-");
       if (numisplit.length == 2) num[i] = numisplit[1], neg[i] = true;
@@ -123,8 +125,8 @@ function parseNums(num1pre, num2pre, mode) {
       let numpos = num[i].indexOf(".");
       num[i] = num[i].filter(w => w != "."), decimal[i] = numpos != -1 ? num[i].length - numpos : 0;
     }
+    num[0][i-1] = [...num[i]];
   }
-  console.log(JSON.stringify([{ num: num[1], decimals: decimal[1], isNeg: neg[1] }, { num: num[2], decimals: decimal[2], neg: neg[2] }]));
   if (neg[1] != neg[2] && [3, 4].includes(mode)) neg[0] = true;
   let maxChar = Math.max(num[1].length, num[2].length);
   if (decimal[1] > 0 || decimal[2] > 0) {
@@ -134,7 +136,6 @@ function parseNums(num1pre, num2pre, mode) {
   for (let i = 0; !neg[0] && (neg[1] || neg[2]) && mode == 1 && num[2].length == maxChar && i < num[1].length; i++)
     if (num[2][i] > num[1][i]) neg[0] = true;
   if (mode == 2 && num[2].length - decimal[2] == maxChar && num[1].length - decimal[1] != maxChar) neg[0] = true;
-  let negCalc = num[2].length == maxChar
   if (maxChar == num[2].length && mode == 3) num[1] = [num[2], num[2] = num[1]][0];
   if (decimal[1] != decimal[2] && [1, 2].includes(mode)) {
     if (decimal[1] == decimal[0])
@@ -146,12 +147,16 @@ function parseNums(num1pre, num2pre, mode) {
     while (num[1].length - num[2].length > 0) num[2].unshift("0");
     while (num[2].length - num[1].length > 0) num[1].unshift("0");
   }
-  for (let i = num[1].length; !neg[0] && mode == 2 && negCalc && i > 0; i--)
+  let negCalc = num[2].length == maxChar;
+  for (let i = 0; !neg[0] && mode == 2 && negCalc && !(num[1][i] > num[2][i]) && i < num[1].length; i++)
     if (num[1][i] < num[2][i]) neg[0] = true;
   if ([3, 4].includes(mode) && neg[1] && neg[2]) neg[0] = false;
   if (mode == 3) neg[1] = false, neg[2] = false;
-  console.log(JSON.stringify([new Define(num[1], neg[1], decimal[1]), new Define(num[2], neg[2], decimal[2])]));
   return {
+    pre: [
+      new Define(num[0][0], neg[1], decimal[1]),
+      new Define(num[0][1], neg[2], decimal[2])
+    ],
     num1: new Define(num[1], neg[1], decimal[1]),
     num2: new Define(num[2], neg[2], decimal[2]),
     isNeg: neg[0],
@@ -159,6 +164,7 @@ function parseNums(num1pre, num2pre, mode) {
     decimals: decimal[0]
   };
 }
+
 function formatNums(final, decimals, neg, array = true) {
   if (checks) {
     checkCustom(final, "array");
@@ -198,12 +204,10 @@ function setMaxSafeInteger(number) {
   } else console.warn("You must turn on Power Mode before you can set the max safe number.");
 }
 
-let shouldRun = function (num1, num2) {
+function shouldRun(num1, num2) {
   if (num1.length >= String(maxNumber).length || num2.length >= String(maxNumber).length) return true;
   let maxstr = String(maxNumber), maxChar = Math.max(num1.length, num2.length), num = maxChar == num1.length ? num1 : num2;
-  for (let i = Math.max(num1.length, num2.length); i > 0; i++) {
-    if (+num[i] > +maxstr[i]) return true;
-  }
+  for (let i = Math.max(num1.length, num2.length); i > 0; i++) if (+num[i] > +maxstr[i]) return true;
   return false;
 }
 
@@ -219,8 +223,8 @@ function add() {
         carry = "0",
         finali, time;
 
-      if (neg[2]) return sub(parsedNums.num1, parsedNums.num2.set("isNeg", false));
-      else if (neg[1]) return sub(parsedNums.num2, parsedNums.num1.set("isNeg", false));
+      if (neg[2]) return sub(parsedNums.pre[0], parsedNums.pre[1].set("isNeg", false));
+      else if (neg[1]) return sub(parsedNums.pre[1], parsedNums.pre[0].set("isNeg", false));
       for (let i = parsedNums.maxChar - 1; i >= 0; i--) {
         finali = parsedNums.maxChar - i - 1;
         if (time != i + 1) carry = "0";
@@ -230,7 +234,6 @@ function add() {
           final[finali] = temp[1], carry = temp[0], time = i;
           if (i - 1 < 0) final.push(carry);
         }
-        console.log(final);
       }
       return formatNums(final, decimal[0], neg);
     } else {
@@ -258,16 +261,14 @@ function sub() {
         num = [null, parsedNums.num1.num, parsedNums.num2.num],
         final = [],
         finali, fans;
-      console.varinfo({ num });
+        
       if (neg.includes(true)) {
         if ((neg[0] && !neg[1] && !neg[2]) || (neg[1] && neg[2])) num[1] = [num[2], num[2] = num[1]][0];
-        else if (neg[2] && !neg[1]) return add(parsedNums.num1, parsedNums.num2.set("isNeg", false));
-        else if (neg[1] && !neg[2]) return "-" + add(parsedNums.num1.set("isNeg", false), parsedNums.num2);
+        else if (neg[2] && !neg[1]) return add(parsedNums.pre[0], parsedNums.pre[1].set("isNeg", false));
+        else if (neg[1] && !neg[2]) return "-" + add(parsedNums.pre[0].set("isNeg", false), parsedNums.pre[1]);
       }
-      console.varinfo({ num });
       for (let i = parsedNums.maxChar - 1; i >= 0; i--) {
         finali = parsedNums.maxChar - i - 1, fans = num[1][i] - num[2][i];
-        console.varinfo({ finali });
         if (fans < 0 && i != 0) {
           let j = i - 1;
           final[finali] = String(fans + 10), num[1][j] = String(num[1][j] - 1);
@@ -275,7 +276,6 @@ function sub() {
           if (decimal[1] > 0 && j == decimal[1]) while (num1[j] < 0 && j != 0) num[1][j] = String((+num[1][j]) + 10), j = j - 1, num[1][j] = String(num[1][j] + 1);
         } else if (fans <= 0 && i == 0) final[finali] = String(fans).split("-").length > 1 ? String(fans).split("-")[1] - 1 : String(fans);
         else final[finali] = fans;
-        console.varinfo({ final });
       }
       return formatNums(final, decimal[0], neg);
     } else {
@@ -518,9 +518,10 @@ function calcplus_info() {
     name: "CalcPlus Beta Library",
     major: 0,
     minor: 2,
-    bugFix: 0
+    bugFix: 1
   };
 }
+
 var a = add,
   s = sub,
   m = multi,
