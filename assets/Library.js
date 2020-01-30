@@ -456,7 +456,7 @@ function expo() {
         throw new TypeError("Decimal exponents aren't supported yet");
       } else {
         if (neg[1]) num[1].num.unshift("-");
-        if (neg[2]) return div("1", tempexpo(num[1], num[2].set("isNeg", false));
+        if (neg[2]) return div("1", tempexpo(num[1], num[2].set("isNeg", false)));
         else if (num[2].num.length == 1 && num[2].num[0] == "1") return formatNums(num[1].num, decimals[0], false, true, false);
         else if ((num[2].num.length == 1 && num[2].num[0] == "0") || (num[1].num.length == 1 && num[1].num[0] == "1")) return "1";
         else {
