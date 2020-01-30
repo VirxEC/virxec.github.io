@@ -5,7 +5,7 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License
  * 
- * This is the JavaScript release of https://github.com/VirxEC/CalcPlus
+ * This is the Javascript release of https://github.com/VirxEC/CalcPlus
  */
 
 var powermode = false, // Feel free to change this, or use togglePowerMode();
@@ -109,12 +109,11 @@ function parseNums(num1, num2, mode) {
     checkNumberString([num1, num2]);
   }
   let neg = [false, false, false],
-    decimal = [0, 0, 0];
-  num = [[], num1, num2];
+    decimal = [0, 0, 0],
+    num = [[], num1, num2];
   for (let i = 1; i < 3; i++) {
-    if (num[i] instanceof Define) {
-      neg[i] = num[i].isNeg, decimal[i] = num[i].decimals, num[i] = num[i].num;
-    } else {
+    if (num[i] instanceof Define) neg[i] = num[i].isNeg, decimal[i] = num[i].decimals, num[i] = [...num[i].num];
+    else {
       let numisplit = num[i].split("-");
       if (numisplit.length == 2) num[i] = numisplit[1], neg[i] = true;
       num[i] = num[i].replace(/,/g, "");
@@ -127,31 +126,33 @@ function parseNums(num1, num2, mode) {
     }
     num[0][i-1] = [...num[i]];
   }
-  if (neg[1] != neg[2] && [3, 4].includes(mode)) neg[0] = true;
-  let maxChar = Math.max(num[1].length, num[2].length);
-  if (decimal[1] > 0 || decimal[2] > 0) {
-    decimal[0] = mode == 1 || mode == 2 ? Math.max(decimal[1], decimal[2]) : mode == 3 ? decimal[1] + decimal[2] : decimal[1] - decimal[2];
-    if (decimal[0] < 0) decimal[0] = 0;
+  if (mode != 5) {
+    if (neg[1] != neg[2] && [3, 4].includes(mode)) neg[0] = true;
+    let maxChar = Math.max(num[1].length, num[2].length);
+    if (decimal[1] > 0 || decimal[2] > 0) {
+      decimal[0] = mode == 1 || mode == 2 ? Math.max(decimal[1], decimal[2]) : mode == 3 ? decimal[1] + decimal[2] : decimal[1] - decimal[2];
+      if (decimal[0] < 0) decimal[0] = 0;
+    }
+    for (let i = 0; !neg[0] && (neg[1] || neg[2]) && mode == 1 && num[2].length == maxChar && i < num[1].length; i++)
+      if (num[2][i] > num[1][i]) neg[0] = true;
+    if (mode == 2 && num[2].length - decimal[2] == maxChar && num[1].length - decimal[1] != maxChar) neg[0] = true;
+    if (maxChar == num[2].length && mode == 3) num[1] = [num[2], num[2] = num[1]][0];
+    if (decimal[1] != decimal[2] && [1, 2].includes(mode)) {
+      if (decimal[1] == decimal[0])
+        for (let i = 0; i < decimal[1] - decimal[2]; i++) num[2].push("0");
+      else if (decimal[2] == decimal[0])
+        for (let i = 0; i < decimal[2] - decimal[1]; i++) num[1].push("0");
+    }
+    if (num[1].length != num[2].length && [1, 2].includes(mode)) {
+      while (num[1].length - num[2].length > 0) num[2].unshift("0");
+      while (num[2].length - num[1].length > 0) num[1].unshift("0");
+    }
+    let negCalc = num[2].length == maxChar;
+    for (let i = 0; !neg[0] && mode == 2 && negCalc && !(num[1][i] > num[2][i]) && i < num[1].length; i++)
+      if (num[1][i] < num[2][i]) neg[0] = true;
+    if ([3, 4].includes(mode) && neg[1] && neg[2]) neg[0] = false;
+    if (mode == 3) neg[1] = false, neg[2] = false;
   }
-  for (let i = 0; !neg[0] && (neg[1] || neg[2]) && mode == 1 && num[2].length == maxChar && i < num[1].length; i++)
-    if (num[2][i] > num[1][i]) neg[0] = true;
-  if (mode == 2 && num[2].length - decimal[2] == maxChar && num[1].length - decimal[1] != maxChar) neg[0] = true;
-  if (maxChar == num[2].length && mode == 3) num[1] = [num[2], num[2] = num[1]][0];
-  if (decimal[1] != decimal[2] && [1, 2].includes(mode)) {
-    if (decimal[1] == decimal[0])
-      for (let i = 0; i < decimal[1] - decimal[2]; i++) num[2].push("0");
-    else if (decimal[2] == decimal[0])
-      for (let i = 0; i < decimal[2] - decimal[1]; i++) num[1].push("0");
-  }
-  if (num[1].length != num[2].length && [1, 2].includes(mode)) {
-    while (num[1].length - num[2].length > 0) num[2].unshift("0");
-    while (num[2].length - num[1].length > 0) num[1].unshift("0");
-  }
-  let negCalc = num[2].length == maxChar;
-  for (let i = 0; !neg[0] && mode == 2 && negCalc && !(num[1][i] > num[2][i]) && i < num[1].length; i++)
-    if (num[1][i] < num[2][i]) neg[0] = true;
-  if ([3, 4].includes(mode) && neg[1] && neg[2]) neg[0] = false;
-  if (mode == 3) neg[1] = false, neg[2] = false;
   return {
     pre: [
       new Define(num[0][0], neg[1], decimal[1]),
@@ -165,14 +166,14 @@ function parseNums(num1, num2, mode) {
   };
 }
 
-function formatNums(final, decimals, neg, array = true) {
+function formatNums(final, decimals, neg, array = true, reverse=true) {
   if (checks) {
     checkCustom(final, "array");
     checkCustom(decimals, "number");
     checkCustom(neg, "array");
   }
   if (!array) final = final.length > 1 ? final.split("") : [final];
-  if (array && final.length > 1) final = final.reverse();
+  if (reverse && final.length > 1) final = final.reverse();
   if (decimals > 0) final.splice(final.length - decimals, 0, ".");
   final = final.join("");
   if (final.split(".").length == 2) final = final.replace(/\.?0+$/g, '');
@@ -424,7 +425,7 @@ function multi() {
         final = add(num[1], num[1]);
         for (let i = "2"; isLessThan(i, num[2]); i = add(new Define(i.split(""), false, 0), predefone)) final = add(final, num[1]);
       }
-      return formatNums(final, decimals, neg, false);
+      return formatNums(final, decimals, neg, false, false);
     } else {
       if (checks) {
         checkNumberString(num1);
@@ -449,16 +450,17 @@ function expo() {
         decimals = [parsedNums.decimals, parsedNums.num2.decimals],
         neg = [parsedNums.isNeg, parsedNums.num1.isNeg, parsedNums.num2.isNeg],
         final = "";
-      if (neg[1]) num[1].num.unshift("-");
-      if (neg[2]) num[2].num.unshift("-");
+
       if (decimals[1] > 0) {
         // root_of_decimal2*10(num1)**(num2*(10*decimal2))
         throw new TypeError("Decimal exponents aren't supported yet");
       } else {
-        if (neg[2]) return div("1", final);
-        else if (num[2].num.length == 1 && num[2].num[0] == "1") return formatNums(num[1].num.filter(w => w != "-"), decimals[0], false);
+        if (neg[1]) num[1].num.unshift("-");
+        if (neg[2]) return div("1", tempexpo(num[1], num[2].set("isNeg", false));
+        else if (num[2].num.length == 1 && num[2].num[0] == "1") return formatNums(num[1].num, decimals[0], false, true, false);
         else if ((num[2].num.length == 1 && num[2].num[0] == "0") || (num[1].num.length == 1 && num[1].num[0] == "1")) return "1";
         else {
+          if (num[1].num[0] == "-") num[1].num.shift();
           final = multi(num[1], num[1]);
           for (let i = "2"; isLessThan(i, num[2]); i = add(new Define(i.split(""), false, 0), predefone)) final = multi(final, num[1]);
           return final;
