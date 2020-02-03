@@ -4,7 +4,7 @@
     <meta name="description" content="Works with really large numbers">
     <title>Site Options</title>
     <script>
-      if (!document.cookie) location.replace("/login.html");
+      if (!document.cookie && confirm("Login?")) location.replace("/login.html");
     </script>
     <link rel="preload" href="/assets/3rdParty/cookie.min.js" as="script">
 	  <script src="/assets/CPquery.js"></script>
