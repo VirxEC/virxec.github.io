@@ -3,9 +3,6 @@
   <head>
     <meta name="description" content="Works with really large numbers">
     <title>Site Options</title>
-    <script>
-      if (!document.cookie && confirm("Login?")) location.replace("/login.html");
-    </script>
     <link rel="preload" href="/assets/3rdParty/cookie.min.js" as="script">
 	  <script src="/assets/CPquery.js"></script>
 	  <script src="/assets/Options.js"></script>
@@ -38,6 +35,9 @@
     <h3>Reset all <button id="reset">Reset</button></h3>
     <script src="/assets/3rdParty/cookie.min.js"></script>
     <script>
+      $(window).on("load", async ()=>{
+        if (!document.cookie && confirm("Login?")) location.replace("/login.html");
+      });
       (async ()=>{
         $("#loadsettings").listen("click", ()=>{
           let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c/latest").file;
