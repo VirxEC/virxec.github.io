@@ -109,8 +109,13 @@ function cpQuery(query, num = false) {
   }
   function tag(tag, extra) {
     if (typeof extra == "string") extra = [extra];
-    if (extra) extra.forEach(item=>tag == "#" ? element.id = item : tag == "." ? element.class = item : element[tag] = extra);
+    if (extra) extra.forEach(item=>tag == "#" ? element.id = item : tag == "." ? element.class = item : element[tag] = item);
     else return tag == "#" ? element.id : tag == "." ? element.class : element[tag];
+  }
+  function tagcss(tag, extra) {
+    if (typeof extra == "string") extra = [extra];
+    if (extra) extra.forEach(item=> element.style[tag] = item);
+    else return element.style[tag];
   }
   const file = class {
     constructor() {
@@ -151,32 +156,33 @@ function cpQuery(query, num = false) {
       minor: 3,
       bugFix: 0
     },
+    show: () => tagcss("visibility", "visible"),
+    hide: () => tagcss("visibility", "hidden"),
     create: (tag, num) => new create(tag, num),
-    file: new file(),
-    listen: listen,
-    select: select,
-    node: textNode,
-    css: new css(),
-    func: func,
-    html: htm,
-    text: txt,
-    htm: htm,
-    tag: tag,
-    txt: txt,
-    i: i,
-    on: listen,
-    val: f => tag("value", f),
-    click: f => listen("click", f),
-    ready: f => listen("load", f),
-    hide: () => tag(["style","display"], "none"),
-    show: () => tag(["style","display"], "block"),
-    dblclick: f => listen("dblclick", f),
     mouseenter: f => listen("mouseenter", f),
     mouseleave: f => listen("mouseleave", f),
     mousedown: f => listen("mousedown", f),
+    dblclick: f => listen("dblclick", f),
     mouseup: f => listen("mouseup", f),
+    click: f => listen("click", f),
     hover: f => listen("hover", f),
-    focus: f => listen("focus", f)
+    focus: f => listen("focus", f),
+    ready: f => listen("load", f),
+    val: f => tag("value", f),
+    file: new file(),
+    node: textNode,
+    css: new css(),
+    on: listen,
+    html: htm,
+    text: txt,
+    listen,
+    select,
+    tagcss,
+    func,
+    htm,
+    tag,
+    txt,
+    i
   };
 }
 

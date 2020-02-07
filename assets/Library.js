@@ -7,11 +7,11 @@
  * 
  * This is the Javascript release of https://github.com/VirxEC/CalcPlus
  */
-
 var powermode = false, // Feel free to change this, or use togglePowerMode();
   checks = true, // Feel free to change this, or use toggleAntiCheck();
   maxNumber = Number.MAX_SAFE_INTEGER, // Feel free to change this, or use setMaxSafeInteger(maxSafeInteger);
   minNumber = Number.MIN_SAFE_INTEGER; // Feel free to change this, but it doesn't do anything right now
+console.varinfo = (v, x = Object.keys(v)[0]) => console.log(x,JSON.stringify(v[x])); // For debugging, this isn't exported
 
 const Define = class {
   constructor(num, isNeg, decimals) {
@@ -63,25 +63,26 @@ const Define = class {
   }
 
   getNumber() {
-    let final = this.num.join("");
-    if (this.isNeg) final = "-" + final;
-    if (this.decimals > 0) final.splice(this.decimals, 0, ".");
-    return +final;
+    return +formatNums(this.num, this.deicmals, this.isNeg);
   }
 };
 
-Number.prototype.getNumber = function () { return Number(this); };
-String.prototype.getNumber = function () { return Number(this); };
+Number.prototype.getNumber = function() {
+  return Number(this);
+};
+String.prototype.getNumber = function() {
+  return Number(this);
+};
 let predefone = new Define(["1"], false, 0);
 
 function checkNumberString(obj) {
   obj.forEach((a, i) => {
-    if (!a) throw new ReferenceError(`Invalid argument #${i}, was null`);
+    if (!a) throw new ReferenceError(`Invalid argument #${i} (${JSON.stringify(a)}), was null`);
     else if (typeof a == "object") {
-      if (!(a instanceof Define)) throw new TypeError(`Invalid argument #${i}, property wasn't an instance of the class Define`);
+      if (!(a instanceof Define)) throw new TypeError(`Invalid argument #${i} (${JSON.stringify(a)}), property wasn't an instance of the class Define`);
     } else if (typeof a == "string") {
-      if (typeof + a != "number") throw new TypeError(`Invalid argument #${i}, it wasn't a number string.`);
-    } else throw new TypeError(`Invalid argument #${i} was Defined but wasn't a number string or object. The type was ` + typeof a);
+      if (typeof + a != "number") throw new TypeError(`Invalid argument #${i} (${JSON.stringify(a)}), it wasn't a number string.`);
+    } else throw new TypeError(`Invalid argument #${i} (${JSON.stringify(a)}) was defined but wasn't a number string or object. The type was ` + typeof a);
   });
 }
 
@@ -92,16 +93,13 @@ function checkCustom(items, type) {
       let itype = typeof item;
       if (!item) throw new ReferenceError("Item was null.");
       else if (type == "numberstring") {
-        if (itype == "object" && !Array.isArray(item)) throw new TypeError("The object variation of number strings isn't accepted here.");
-        if (itype != "string") throw new TypeError("Item wasn't a number string. It was a(n) " + itype);
-        else if (typeof + item != "number") throw new TypeError("Item wasn't a number string. It was a(n)" + itype);
-      } else if (type == "array") {
-        if (!Array.isArray(item)) throw new TypeError("Item wasn't an array. It was a(n) " + itype);
-      } else if (itype != type) throw new TypeError("Item wasn't a(n) " + type + " is was a(n) " + itype);
+        if (itype == "object" && !Array.isArray(item)) throw new TypeError(`The object variation of number strings isn't accepted here. (${JSON.stringify(item)})`);
+        if (itype != "string") throw new TypeError(`Item wasn't a number string. It was a(n) ${itype} (${JSON.stringify(item)})`);
+        else if (typeof + item != "number") throw new TypeError(`Item wasn't a number string. It was a(n) ${itype} (${JSON.stringify(a)})`);
+      } else if (type == "array") if (!Array.isArray(item)) throw new TypeError(`Item wasn't an array. It was a(n) ${itype} (${JSON.stringify(item)})`);
+      else if (itype != type) throw new TypeError(`Item wasn't a(n) ${type} is was a(n) ${itype} (${JSON.stringify(item)})`);
     });
 }
-
-console.varinfo = v => console.log(Object.keys(v)[0]+": "+JSON.stringify(v[Object.keys(v)[0]]));
 
 function parseNums(num1, num2, mode) {
   if (checks) {
@@ -110,7 +108,9 @@ function parseNums(num1, num2, mode) {
   }
   let neg = [false, false, false],
     decimal = [0, 0, 0],
-    num = [[], num1, num2];
+    num = [
+      [], num1, num2
+    ];
   for (let i = 1; i < 3; i++) {
     if (num[i] instanceof Define) neg[i] = num[i].isNeg, decimal[i] = num[i].decimals, num[i] = [...num[i].num];
     else {
@@ -124,7 +124,6 @@ function parseNums(num1, num2, mode) {
       let numpos = num[i].indexOf(".");
       num[i] = num[i].filter(w => w != "."), decimal[i] = numpos != -1 ? num[i].length - numpos : 0;
     }
-    num[0][i-1] = [...num[i]];
   }
   if (mode != 5) {
     if (neg[1] != neg[2] && [3, 4].includes(mode)) neg[0] = true;
@@ -154,10 +153,6 @@ function parseNums(num1, num2, mode) {
     if (mode == 3) neg[1] = false, neg[2] = false;
   }
   return {
-    pre: [
-      new Define(num[0][0], neg[1], decimal[1]),
-      new Define(num[0][1], neg[2], decimal[2])
-    ],
     num1: new Define(num[1], neg[1], decimal[1]),
     num2: new Define(num[2], neg[2], decimal[2]),
     isNeg: neg[0],
@@ -166,7 +161,7 @@ function parseNums(num1, num2, mode) {
   };
 }
 
-function formatNums(final, decimals, neg, array = true, reverse=true) {
+function formatNums(final, decimals, neg, array = true, reverse = true) {
   if (checks) {
     checkCustom(final, "array");
     checkCustom(decimals, "number");
@@ -207,13 +202,16 @@ function setMaxSafeInteger(number) {
 
 function shouldRun(num1, num2) {
   if (num1.length >= String(maxNumber).length || num2.length >= String(maxNumber).length) return true;
-  let maxstr = String(maxNumber), maxChar = Math.max(num1.length, num2.length), num = maxChar == num1.length ? num1 : num2;
-  for (let i = Math.max(num1.length, num2.length); i > 0; i++) if (+num[i] > +maxstr[i]) return true;
+  let maxstr = String(maxNumber),
+    maxChar = Math.max(num1.length, num2.length),
+    num = maxChar == num1.length ? num1 : num2;
+  for (let i = Math.max(num1.length, num2.length); i > 0; i++)
+    if (+num[i] > +maxstr[i]) return true;
   return false;
 }
 
 function add() {
-  let tempadd = function (num1, num2) {
+  let tempadd = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       if (checks) checkNumberString([num1, num2]);
       let parsedNums = parseNums(num1, num2, 1),
@@ -223,7 +221,6 @@ function add() {
         final = [],
         carry = "0",
         finali, time;
-
       if (neg[2]) return sub(parsedNums.pre[0], parsedNums.pre[1].set("isNeg", false));
       else if (neg[1]) return sub(parsedNums.pre[1], parsedNums.pre[0].set("isNeg", false));
       for (let i = parsedNums.maxChar - 1; i >= 0; i--) {
@@ -253,7 +250,7 @@ function add() {
 }
 
 function sub() {
-  let tempsub = function (num1, num2) {
+  let tempsub = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       if (checks) checkNumberString([num1, num2]);
       let parsedNums = parseNums(num1, num2, 2),
@@ -262,7 +259,7 @@ function sub() {
         num = [null, parsedNums.num1.num, parsedNums.num2.num],
         final = [],
         finali, fans;
-        
+
       if (neg.includes(true)) {
         if ((neg[0] && !neg[1] && !neg[2]) || (neg[1] && neg[2])) num[1] = [num[2], num[2] = num[1]][0];
         else if (neg[2] && !neg[1]) return add(parsedNums.pre[0], parsedNums.pre[1].set("isNeg", false));
@@ -274,7 +271,8 @@ function sub() {
           let j = i - 1;
           final[finali] = String(fans + 10), num[1][j] = String(num[1][j] - 1);
           while (num1[j] < 0 && j != decimal[1]) num[1][j] = String((+num[1][j]) + 10), j = j - 1, num[1][j] = String(num[1][j] - 1);
-          if (decimal[1] > 0 && j == decimal[1]) while (num1[j] < 0 && j != 0) num[1][j] = String((+num[1][j]) + 10), j = j - 1, num[1][j] = String(num[1][j] + 1);
+          if (decimal[1] > 0 && j == decimal[1])
+            while (num1[j] < 0 && j != 0) num[1][j] = String((+num[1][j]) + 10), j = j - 1, num[1][j] = String(num[1][j] + 1);
         } else if (fans <= 0 && i == 0) final[finali] = String(fans).split("-").length > 1 ? String(fans).split("-")[1] - 1 : String(fans);
         else final[finali] = fans;
       }
@@ -295,7 +293,7 @@ function sub() {
 }
 
 function isLessThan() {
-  let templessthan = function (num1, num2) {
+  let templessthan = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       let num = sub(num2, num1);
       if (num.split("-").length == 1 && num != 0) return true;
@@ -316,7 +314,7 @@ function isLessThan() {
 }
 
 function isGreaterThan() {
-  let tempgreaterthan = function (num1, num2) {
+  let tempgreaterthan = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       let num = sub(num1, num2);
       if (num.split("-").length == 1 && num != 0) return true;
@@ -337,7 +335,7 @@ function isGreaterThan() {
 }
 
 function isLessThanEqual() {
-  let templessthanequal = function (num1, num2) {
+  let templessthanequal = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       if (sub(num2, num1).split("-").length == 1) return true;
       return false;
@@ -357,7 +355,7 @@ function isLessThanEqual() {
 }
 
 function isGreaterThanEqual() {
-  let tempisgreaterthanequal = function (num1, num2) {
+  let tempisgreaterthanequal = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       if (sub(num1, num2).split("-").length == 1) return true;
       return false;
@@ -411,21 +409,41 @@ function roundUp() {
 }
 
 function multi() {
-  let tempmulti = function (num1, num2) {
+  let tempmulti = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       if (checks) checkNumberString([num1, num2]);
       let parsedNums = parseNums(num1, num2, 3),
         neg = [parsedNums.isNeg, parsedNums.num1.isNeg, parsedNums.num2.isNeg],
-        final = "",
         decimals = parsedNums.decimals,
-        num = [null, parsedNums.num1, parsedNums.num2];
-      if ((num[2].num[0] == "0" && num[2].num.length == 1) || (num[2].num[0] == "0" && num[2].num.length == 1)) return "0";
-      else if (num[2].num.length == 1 && num[2].num[0] == "1") return formatNums(num[1].num, decimals, neg);
-      else {
-        final = add(num[1], num[1]);
-        for (let i = "2"; isLessThan(i, num[2]); i = add(new Define(i.split(""), false, 0), predefone)) final = add(final, num[1]);
+        num = [null, parsedNums.num1.num, parsedNums.num2.num],
+        final = [],
+        carry = 0,
+        product = "",
+        f=[],
+        time;
+
+      for (let f2 = num[2].length - 1; f2 >= 0; f2--) {
+        let f2i = num[2].length - f2 - 1;
+        final[f2i] = [];
+        if (f2 != num[2].length - 1) f.push("0");
+        for (let f1 = num[1].length - 1; f1 >= 0; f1--) {
+          let f1i = num[1].length - f1 - 1;
+          if (time != f1 + 1) carry = 0;
+          if (num[2][f2] != 0 && num[1][f2] != 0) {
+            final[f2i][f1i] = String((+num[2][f2]) * (+num[1][f1]) + carry);
+            if (final[f2i][f1i] > 9) {
+              let temp = final[f2i][f1i].split('');
+              final[f2i][f1i] = temp[1], carry = +temp[0], time = f1;
+              if (f1 == 0) final[f2i].push(String(carry));
+            }
+          } else final[f2i][f1i] = "0";
+        }
+        final[f2i] = formatNums(f.concat(final[f2i]), decimals, false);
       }
-      return formatNums(final, decimals, neg, false, false);
+      product = final[0];
+      for (let i = 1; i < final.length; i++) product = add(product, final[i]);
+      if (neg[0] == true) return "-"+product;
+      return (neg[0] ? "-":"")+product;
     } else {
       if (checks) {
         checkNumberString(num1);
@@ -434,7 +452,7 @@ function multi() {
       return String(num1.getNumber() * num2.getNumber());
     }
   };
-  let permfinal, a = [...arguments].sort((a, b) => b.length - a.length);
+  let permfinal, a = [...arguments];
   if (Array.isArray(a[0])) a = a[0];
   permfinal = tempmulti(a[0], a[1]);
   for (let i = 2; i < a.length; i++) permfinal = tempmulti(permfinal, a[i]);
@@ -442,7 +460,7 @@ function multi() {
 }
 
 function expo() {
-  let tempexpo = function (num1, num2) {
+  let tempexpo = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       if (checks) checkNumberString([num1, num2]);
       let parsedNums = parseNums(num1, num2, 5),
@@ -462,7 +480,7 @@ function expo() {
         else {
           if (num[1].num[0] == "-") num[1].num.shift();
           final = multi(num[1], num[1]);
-          for (let i = "2"; isLessThan(i, num[2]); i = add(new Define(i.split(""), false, 0), predefone)) final = multi(final, num[1]);
+          for (let i = "2"; isLessThan(new Define(i.split(""), false, 0), num[2]); i = add(new Define(i.split(""), false, 0), predefone)) final = multi(final, num[1]);
           return final;
         }
       }
@@ -482,7 +500,7 @@ function expo() {
 }
 
 function div() {
-  let tempdiv = function (num1, num2) {
+  let tempdiv = function(num1, num2) {
     if (!powermode || (powermode && shouldRun(num1, num2))) {
       if (checks) checkNumberString([num1, num2]);
       let parsedNums = parseNums(num1, num2, 4),
@@ -511,16 +529,15 @@ function div() {
 }
 
 function fact(n) {
-  console.warn(`This function uses raw JavaScript and can only calculate function up to ${maxNumber}. An algorithm is on hold as there are currently many bugs with the program.`);
-  return n.getNumber() ? String(n.getNumber() * fact(n.getNumber() - 1)) : "1";
+  return n == "0" ? "1" : multi(n, fact(sub(n, new Define(["1"], false, 0))));
 }
 
 function calcplus_info() {
   return {
     name: "CalcPlus Beta Library",
     major: 0,
-    minor: 2,
-    bugFix: 1
+    minor: 3,
+    bugFix: 0
   };
 }
 
