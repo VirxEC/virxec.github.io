@@ -70,7 +70,8 @@
 		<br>
 		<p id="output">Press "Calculate..."</p>
 		<ul>
-			<li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.1.1-beta-js">CalcPlus Stable Beta Library (v0.1.1)</a></li>
+    <li><a href="https://github.com/VirxEC/CalcPlus/packages">CalcPlus Beta NodeJS LIbrary</a></li>
+			<li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.4.0-beta-js">CalcPlus Stable Beta Library (v0.4.0)</a></li>
 			<li><a href="/assets/Library.js" download="CalcPlus_BETA_Library.js">CalcPlus Alpha Library (Latest)</a></li>
 		</ul>
     <script src="/assets/Library.js"></script>
@@ -88,7 +89,7 @@
       });
 			$("#d").listen("change", ()=>{
 				if (gc("d")) $("#extraInputs").htm('<span id="spanDivMax"><input type="text" id="maxDecimal" placeholder="Max decimal place"><br></span>', true);
-				else $("#spanDivMax").tag("remove()");
+				else $("#spanDivMax").tagfunc("remove");
 			});
 			$("#addInput").listen("click", ()=>{
 				inputBoxes++;

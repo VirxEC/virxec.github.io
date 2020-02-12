@@ -7,7 +7,7 @@
 	<script src="/assets/Options.js"></script>
   <style>
     #error {
-      display: none;
+      visibility: hidden;
       color: red;
     }
   </style>
@@ -34,7 +34,7 @@
       return result;
     }
     (async ()=>{
-      if (get("invalid") == "true") document.querySelector("#error").style.display = "block";
+      if (get("invalid") == "true") $("#error").show();
     })();
   </script>
   <form id="login" action="/logon.html">
@@ -47,12 +47,13 @@
     <input type="submit" value="Login/Signup"><br>
   </form>
   <script>
-    var check = false;
     (async ()=>{
-      $($("#login").tag("elements")["s"]).on("change", ()=>{
+      let check = false,
+        loginElements = $("#login").tag("elements");
+      $(loginElements["s"]).on("change", ()=>{
           check = !check;
-          if (check) $("#login").tag("elements")["p"].autocomplete = "new-password";
-          else $("#login").tag("elements")["p"].autocomplete = "current-password";
+          if (check) loginElements["p"].autocomplete = "new-password";
+          else loginElements["p"].autocomplete = "current-password";
       });
     })();
   </script>

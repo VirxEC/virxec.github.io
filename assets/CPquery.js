@@ -31,6 +31,9 @@ function cpQuery(query, num = false) {
   function func(f) {
     return element[f];
   }
+  function tagfunc(f) {
+    return element[f]();
+  }
   const create = class {
     constructor(type, num) {
       if (num) element = element[num];
