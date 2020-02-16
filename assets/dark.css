@@ -16,10 +16,13 @@ a {
 }
 
 table {
+    table-layout: fixed;
+    width: 100%;
     border-collapse: collapse;
 }
 
 td {
+    width: 50%;
     vertical-align: baseline;
 }
 
@@ -34,12 +37,12 @@ td.left {
 }
 
 th#right {
-    width: 30%;
+    width: 50%;
     border-left: 0px;
 }
 
 th#left {
-    width: 70%;
+    width: 50%;
     border-right: 0px;
 }
 
@@ -53,6 +56,9 @@ th#left {
 
 .right {
     text-align: right;
+}
+
+td.right ul {
     direction: rtl;
 }
 
