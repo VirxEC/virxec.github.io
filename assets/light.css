@@ -1,7 +1,8 @@
 body {
   color: #000;
   background-color: #fff;
-  margin: 0!important;
+  margin: 0;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 button {
@@ -12,6 +13,53 @@ button {
 
 a {
   color: #0000c0;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    width: 50%;
+    vertical-align: baseline;
+}
+
+td.right {
+    padding-right: 5px;
+    border-right: 2px solid black;
+}
+
+td.left {
+    padding-left: 5px;
+    border-left: 2px solid black;
+}
+
+th#right {
+    width: 50%;
+    border-left: 0px;
+}
+
+th#left {
+    width: 50%;
+    border-right: 0px;
+}
+
+.center {
+  text-align: center;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+td.right ul {
+    direction: rtl;
 }
 
 .removeInput {
@@ -76,6 +124,14 @@ div.warn {
 
 div.error {
   color: red;
+}
+
+h1.title {
+  margin-bottom: 0em;
+}
+
+p.author {
+  margin-top: 0em;
 }
 
 @media(max-width:800px) {
