@@ -28,20 +28,18 @@ td {
 
 td.right {
     padding-right: 5px;
-    border-right: 2px solid black;
 }
 
 td.left {
     padding-left: 5px;
-    border-left: 2px solid black;
 }
 
-th#right {
+#right {
     width: 50%;
     border-left: 0px;
 }
 
-th#left {
+#left {
     width: 50%;
     border-right: 0px;
 }
@@ -68,15 +66,15 @@ td.right ul {
   border: none;
 }
 
-span.fix {
+.fix {
   color: #ebeb00;
 }
 
-div.log {
+.log {
   color: #00f;
 }
 
-div.info {
+.info {
   color: #009;
 }
 
@@ -106,31 +104,31 @@ nav a:active, nav a:hover {
   color: #000;
 }
 
-span.broken {
+.broken {
   color: red;
 }
 
-span.verify {
+.verify {
   color: orange;
 }
 
-span.working {
+.working {
   color: green;
 }
 
-div.warn {
+.warn {
   color: orange;
 }
 
-div.error {
+.error {
   color: red;
 }
 
-h1.title {
+.title {
   margin-bottom: 0em;
 }
 
-p.author {
+.author {
   margin-top: 0em;
 }
 
