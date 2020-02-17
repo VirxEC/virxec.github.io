@@ -1,7 +1,6 @@
 var errors = "", errhandler = a => errors += `<div class="error">${a.error.stack}</div>`;
 if (localStorage.getItem("isConsole") == "On") addEventListener("error", errhandler); // whole point of this is so if anything in the Library breaks, this doesn't break.
-var discord, rt = ["/", "/index.html", "/404.html"].includes(location.pathname) ? "" : "/",
-    isOffline = $("*isOffline"),
+var isOffline = $("*isOffline"),
     syntax = $("@isSyntax"),
     alerted = $("*alerted"),
     isConsole = $("@isConsole"),
@@ -9,38 +8,26 @@ var discord, rt = ["/", "/index.html", "/404.html"].includes(location.pathname) 
     storage = [isOffline, alerted, isConsole, gamer],
     widget = $("@isWidget"),
     interval = $("@interval"),
-    channel = $("@channel");
-(async () => {
-    function preload(href, type) {
-        let item = $("head").create("link");
-        item.tag("rel", "preload");
-        item.tag("href", href);
-        item.tag("as", type);
-        item.append();
-    }
-    let theme = $("head").create("meta"),
-        isDark = $("@isDark"),
-        mcss = $("head").create("link");
-    if (!isDark.i()) isDark.i("On");
-    mcss.tag("rel", "stylesheet");
-    mcss.tag("href", `/assets/${$("@isDark").i() == "Off" ? "light" : "dark"}.css`);
-    mcss.append();
-    theme.tag("name", "theme-color");
-    theme.tag("content", $("@isDark").i() == "Off" ? "#FFF" : "#000");
-    theme.append();
-    if (["/LibrarySource/", "/LibrarySource/index.html", "/CPQuerySource/", "/CPQuerySource/index.html"].includes(location.pathname)) {
-        let link = $("head").create("link");
-        link.tag("rel", "stylesheet");
-        link.tag("href", `/assets/3rdParty/${$("@isDark").i() == "Off" ? "light" : "dark"}.min.css`);
-        link.append();
-        preload("/assets/3rdParty/highlight.min.js", "script");
-    }
-})();
+    dark = $("@isDark"),
+    channel = $("@channel"), discord;
+
 (async ()=>{
     let desc = $("^/assets/description.html").file;
     desc.request(function(){
         $(document.head).htm(this.responseText, true);
 	});
+})();
+
+(async () => {
+    let addElement = e => $(document.head).htm(e, true);
+    if (widget.i() == "On") addElement(`<link rel="preload" href="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" as="script">`);
+    if (!dark.i()) dark.i("On");
+    addElement(`<link rel="stylesheet" href="/assets/${$("@isDark").i() == "Off" ? "light" : "dark"}.css">`);
+    addElement(`<meta name="theme-color" content="${$("@isDark").i() == "Off" ? "#FFF" : "#000"}">`);
+    if (["/LibrarySource/", "/LibrarySource/index.html", "/CPQuerySource/", "/CPQuerySource/index.html"].includes(location.pathname)) {
+        addElement(`<link rel="stylesheet" href="/assets/3rdParty/${$("@isDark").i() == "Off" ? "light" : "dark"}.min.css">`);
+        addElement("<link rel='preload' href='/assets/3rdParty/highlight.min.js' as='script'>");
+    }
 })();
 
 if (!widget.i()) widget.i("On");
@@ -50,18 +37,16 @@ if (!interval.i()) interval.i("400");
 storage.forEach(e => !e.i() ? e.i("Off") : 0);
 $("window").listen("load", async () => {
     if (widget.i() == "On") {
-        (async () => {
-            let dscript = $("head").create("script");
-            dscript.tag("src", "/assets/3rdParty/crate3.min.js");
-            dscript.tag("onload", async () => {
-                discord = new Crate({
-                    server: '507708985206505482',
-                    channel: channel.i(),
-                    shard: "https://disweb.dashflo.net"
-                });
+        let dscript = $("head").create("script");
+        dscript.tag("src", "https://cdn.jsdelivr.net/npm/@widgetbot/crate@3");
+        dscript.tag("onload", async () => {
+            discord = new Crate({
+                server: '507708985206505482',
+                channel: channel.i(),
+                shard: "https://disweb.dashflo.net"
             });
-            dscript.append();
-        })();
+        });
+        dscript.append();
     }
     async function resizeNav() {
         let m = 0,

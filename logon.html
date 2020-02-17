@@ -1,80 +1,83 @@
 <DOCTYPE html>
 <html>
-<head>
-  <title>Logging you in</title>
-    <script src="/assets/CPquery.js"></script>
-  <script src="/assets/3rdParty/md5.min.js"></script>
-  <script src="/assets/3rdParty/cookie.min.js"></script>
-  <script>
-    addEventListener("error", e=>alert(e.error.stack));
-    (async ()=>{
-      function get(n) {
-        let result, tmp = [];
-        location.search.substr(1).split("&").forEach(i=>{
-          tmp = i.split("=");
-          if (tmp[0] == n) result = decodeURIComponent(tmp[1]);
-        });
-        return result;
-      }
-      if (get("e") && get("p")) {
-        let email = get("e"),
-          password = md5(get("p")),
-          signup = get("s"),
-          remember = get("r"),
-          settings = {
-            secure: true
-          },
-          invalid = false;
-        let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c/latest").file;
-        req.ready(function() {
-          let data = JSON.parse(this.responseText);
-          if (signup) {
-            data[email] = {};
-            data[email][password] = {
-              dark: $("@isDark").i(),
-              console: $("@isConsole").i(),
-              widget: $("@isWidget").i(),
-              gamer: $("@isGamer").i(),
-              syntax: $("@isSyntax").i(),
-              channel: $("@channel").i(),
-              interval: $("@interval").i()
-            };
-            let save = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
-            save.open("PUT");
-            save.i("setRequestHeader", "Content-type", "application/json");
-            save.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
-            save.i("setRequestHeader", "versioning", "false");
-            save.send(JSON.stringify(data));
-          } else {
-            data = data[email],
-              invalid = false;
-            if (data) {
-              data = data[password]
-              if (data) {
-                $("@isDark").i(data.dark);
-                $("@isConsole").i(data.console);
-                $("@isWidget").i(data.widget);
-                $("@isSyntax").i(data.syntax);
-                $("@channel").i(["629774177733181440", "507717342680186891", "583376212114669578"].includes(data.channel) ? data.channel : "629774177733181440");
-                $("@isGamer").i(data.gamer);
-                $("@interval").i(data.interval);
-              } else invalid = true;
-            } else invalid = true;
-          }
-          if (invalid) location.replace("/login.html?invalid=true")
-          if (remember) settings.expires = 2;
-          Cookies.set("u", email, settings);
-          Cookies.set("p", password, settings); 
-          location.replace("/SiteOptions/");
-        });
-        req.open("GET");
-        req.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
-        req.send();
-      } else location.replace("/login.html?invalid=true");
-    })();
-  </script>
-</head>
-<body>
-  <p>Please wait...</p>
-</body>
+    <head>
+        <title>Logging you in</title>
+        <link rel="preload" href="/assets/3rdParty/md5.min.js" as="script">
+        <link rel="preload" href="/assets/3rdParty/cookie.min.js" as="script">
+        <script src="/assets/CPquery.js"></script>
+        <script src="/assets/3rdParty/md5.min.js"></script>
+        <script src="/assets/3rdParty/cookie.min.js"></script>
+        <script>
+            addEventListener("error", e => alert(e.error.stack));
+            (async() => {
+                function get(n) {
+                    let result, tmp = [];
+                    location.search.substr(1).split("&").forEach(i => {
+                        tmp = i.split("=");
+                        if (tmp[0] == n) result = decodeURIComponent(tmp[1]);
+                    });
+                    return result;
+                }
+                if (get("e") && get("p")) {
+                    let email = get("e"),
+                        password = md5(get("p")),
+                        signup = get("s"),
+                        remember = get("r"),
+                        settings = {
+                            secure: true
+                        },
+                        invalid = false;
+                    let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c/latest").file;
+                    req.ready(function () {
+                        let data = JSON.parse(this.responseText);
+                        if (signup) {
+                            data[email] = {};
+                            data[email][password] = {
+                                dark: $("@isDark").i(),
+                                console: $("@isConsole").i(),
+                                widget: $("@isWidget").i(),
+                                gamer: $("@isGamer").i(),
+                                syntax: $("@isSyntax").i(),
+                                channel: $("@channel").i(),
+                                interval: $("@interval").i()
+                            };
+                            let save = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
+                            save.open("PUT");
+                            save.i("setRequestHeader", "Content-type", "application/json");
+                            save.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
+                            save.i("setRequestHeader", "versioning", "false");
+                            save.send(JSON.stringify(data));
+                        } else {
+                            data = data[email],
+                                invalid = false;
+                            if (data) {
+                                data = data[password]
+                                if (data) {
+                                    $("@isDark").i(data.dark);
+                                    $("@isConsole").i(data.console);
+                                    $("@isWidget").i(data.widget);
+                                    $("@isSyntax").i(data.syntax);
+                                    $("@channel").i(["629774177733181440", "507717342680186891", "583376212114669578"].includes(data.channel) ? data.channel : "629774177733181440");
+                                    $("@isGamer").i(data.gamer);
+                                    $("@interval").i(data.interval);
+                                } else invalid = true;
+                            } else invalid = true;
+                        }
+                        if (invalid) location.replace("/login.html?invalid=true")
+                        if (remember) settings.expires = 2;
+                        Cookies.set("u", email, settings);
+                        Cookies.set("p", password, settings);
+                        location.replace("/SiteOptions/");
+                    });
+                    req.open("GET");
+                    req.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
+                    req.send();
+                } else location.replace("/login.html?invalid=true");
+            })();
+        </script>
+    </head>
+    <body>
+        <h4>Please wait...</h4>
+        <h5><a href="/login.html">Return to the login page</a></h5>
+    </body>
 </html>

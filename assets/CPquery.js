@@ -1,4 +1,4 @@
-/* Copyright 2019 Eric (VirxEC/Virx) Michael Veilleux
+/* Copyright 2020 Eric (VirxEC/Virx) Michael Veilleux
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,7 +32,9 @@ function cpQuery(query, num = false) {
     return element[f];
   }
   function tagfunc(f) {
-    return element[f]();
+    let a = [...arguments];
+    a.shift();
+    return element[f](...a);
   }
   const create = class {
     constructor(type, num) {
@@ -167,6 +169,7 @@ function cpQuery(query, num = false) {
     mousedown: f => listen("mousedown", f),
     dblclick: f => listen("dblclick", f),
     mouseup: f => listen("mouseup", f),
+    remove: () => tagfunc("remove"),
     click: f => listen("click", f),
     hover: f => listen("hover", f),
     focus: f => listen("focus", f),
@@ -178,6 +181,7 @@ function cpQuery(query, num = false) {
     on: listen,
     html: htm,
     text: txt,
+    tagfunc,
     listen,
     select,
     tagcss,

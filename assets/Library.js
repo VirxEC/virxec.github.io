@@ -537,6 +537,7 @@ function div() {
 }
 
 function fact() {
+  let num = [...arguments][0];
   return num < 0 ? predefone.set("isNeg", true) : num == 0 ? predefone : multi(num, fact(sub(num, predefone)));
 }
 
