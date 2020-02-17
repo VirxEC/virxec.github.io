@@ -11,7 +11,7 @@ button {
   border-color: #d2d2d2;
 }
 
-a {
+a, a:visited {
   color: #0000c0;
 }
 
@@ -78,25 +78,19 @@ td.right ul {
   color: #009;
 }
 
-nav a {
-  background-color: grey;
-  color: #fff;
+nav a, nav a:link, nav a:visited {
   border-right: solid 1px silver;
-  text-decoration: none;
-  outline: 0;
-  padding: 10px 20px;
-  display: block;
-  float: left;
-  border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  width: 16.666%;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-nav a:link, nav a:visited {
+  border-bottom-left-radius: 5px;
   background-color: grey;
+  box-sizing: border-box;
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 20px;
+  width: 16.666%;
   color: #fff;
+  float: left;
+  outline: 0;
 }
 
 nav a:active, nav a:hover {
@@ -132,16 +126,22 @@ nav a:active, nav a:hover {
   margin-top: 0em;
 }
 
-@media(max-width:800px) {
+@media screen and (min-width:800px) {
+    nav a {
+        padding: 10px 20px;
+    }
+}
+
+@media screen and (max-width:800px) and (min-width:400px) {
   nav a {
     font-size: 0.8em;
-    padding: 10px 10px;
+    padding: 10px 5px;
   }
 }
 
-@media(max-width:400px) {
+@media screen and (max-width:400px) {
   nav a {
     font-size: 0.6em;
-    padding: 5px 5px;
+    padding: 15px 2px;
   }
 }
