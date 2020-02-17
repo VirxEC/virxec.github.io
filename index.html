@@ -10,7 +10,19 @@
 	<script src="assets/Options.js"></script>
 	<style>
         #calcplus-icon {
-            width: 6%;
+            width: 8%;
+        }
+
+        @media screen and (max-width:800px) {
+            #calcplus-icon {
+                width: 15%
+            }
+        }
+
+        @media screen and (max-width:400px) {
+            #calcplus-icon {
+                width: 20%
+            }
         }
 
 		#pwamsg {
@@ -39,7 +51,7 @@
 		<a class="nava" href="CPQuerySource/">CPQuery Source</a>
 		<a class="nava" href="CalcPlus/">About CalcPlus</a>
 		<a class="nava" href="SiteOptions/">Site Options</a>
-		<a class="nava" href="Discord/">Official Discord</a>
+		<a id="discord" class="nava" href="Discord/">Official Discord</a>
 	</nav><br>
     <div class="center">
         <p id="sconsole"></p>
@@ -85,7 +97,7 @@
                             });
                         });
 
-                        if (/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase()) && !('standalone' in navigator)) this.setState({ showInstallMessage: true });
+                        if (/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase() && !(('standalone' in window.navigator) && (window.navigator.standalone))) && !('standalone' in navigator)) this.setState({ showInstallMessage: true });
                     </script>
                 </td>
                 <td class="left">

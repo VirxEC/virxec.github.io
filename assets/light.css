@@ -1,18 +1,19 @@
 body {
-  color: #000;
-  background-color: #fff;
-  margin: 0;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #000;
+    background-color: #fff;
+    margin: 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 button {
-  color: #000;
-  background-color: #c8c8c8;
-  border-color: #d2d2d2;
+    color: #000;
+    background-color: #c8c8c8;
+    border-color: #d2d2d2;
 }
 
-a, a:visited {
-  color: #0000c0;
+a,
+a:visited {
+    color: #0000c0;
 }
 
 table {
@@ -45,7 +46,7 @@ td.left {
 }
 
 .center {
-  text-align: center;
+    text-align: center;
 }
 
 .left {
@@ -61,69 +62,71 @@ td.right ul {
 }
 
 .removeInput {
-  color: #000;
-  background-color: red;
-  border: none;
+    color: #000;
+    background-color: red;
+    border: none;
 }
 
 .fix {
-  color: #ebeb00;
+    color: #ebeb00;
 }
 
 .log {
-  color: #00f;
+    color: #00f;
 }
 
 .info {
-  color: #009;
+    color: #009;
 }
 
-nav a, nav a:link, nav a:visited {
-  border-right: solid 1px silver;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  background-color: grey;
-  box-sizing: border-box;
-  text-decoration: none;
-  text-align: center;
-  padding: 10px 20px;
-  width: 16.666%;
-  color: #fff;
-  float: left;
-  outline: 0;
+nav a,
+nav a:link,
+nav a:visited {
+    border-right: solid 1px silver;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: grey;
+    box-sizing: border-box;
+    text-decoration: none;
+    text-align: center;
+    width: 16.666%;
+    color: #fff;
+    float: left;
+    outline: 0;
 }
 
-nav a:active, nav a:hover {
-  background-color: silver;
-  color: #000;
+nav a:active,
+nav a:hover {
+    background-color: silver;
+    color: #000;
 }
 
 .broken {
-  color: red;
+    color: red;
 }
 
 .verify {
-  color: orange;
+    color: orange;
 }
 
 .working {
-  color: green;
+    color: green;
 }
 
 .warn {
-  color: orange;
+    color: orange;
 }
 
 .error {
-  color: red;
+    color: red;
 }
 
 .title {
-  margin-bottom: 0em;
+    margin-bottom: 0em;
 }
 
 .author {
-  margin-top: 0em;
+    margin-top: 0em;
 }
 
 @media screen and (min-width:800px) {
@@ -132,16 +135,20 @@ nav a:active, nav a:hover {
     }
 }
 
+@media screen and (max-width:800px) {
+    nav a {
+        font-size: 0.9em;
+    }
+}
+
 @media screen and (max-width:800px) and (min-width:400px) {
-  nav a {
-    font-size: 0.8em;
-    padding: 10px 5px;
-  }
+    nav a {
+        padding: 10px 5px;
+    }
 }
 
 @media screen and (max-width:400px) {
-  nav a {
-    font-size: 0.6em;
-    padding: 15px 2px;
-  }
+    nav a {
+        padding: 15px 2px;
+    }
 }
