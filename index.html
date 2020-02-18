@@ -1,139 +1,146 @@
 <!DOCTYPE html>
 <html lang="en-US">
-
-<head>
-	<title>VirxEC Showcase</title>
-	<meta name="description" content="VirxEC Showcase. Showcasing: CalcPlus & CPQuery. CalcPlus is a library that lets numbers be calculated way over the normal limit without losing precision. CPQuery is a lightweight version of jQuery that has all the features that are most commonly used.">
-	<meta name="og:description" content="VirxEC Showcase. Showcasing: CalcPlus & CPQuery. CalcPlus is a library that lets numbers be calculated way over the normal limit without losing precision. CPQuery is a lightweight version of jQuery that has all the features that are most commonly used.">
-	<meta name="twitter:description" content="VirxEC Showcase. Showcasing: CalcPlus & CPQuery. CalcPlus is a library that lets numbers be calculated way over the normal limit without losing precision. CPQuery is a lightweight version of jQuery that has all the features that are most commonly used.">
-	<script src="assets/CPquery.js"></script>
-	<script src="assets/Options.js"></script>
-	<style>
-        #calcplus-icon {
-            width: 8%;
-        }
-
-        @media screen and (max-width:800px) {
+    <head>
+        <title>VirxEC Showcase</title>
+        <meta name="description" content="VirxEC Showcase. Showcasing: CalcPlus & CPQuery. CalcPlus is a library that lets numbers be calculated way over the normal limit without losing precision. CPQuery is a lightweight version of jQuery that has all the features that are most commonly used.">
+        <meta name="og:description" content="VirxEC Showcase. Showcasing: CalcPlus & CPQuery. CalcPlus is a library that lets numbers be calculated way over the normal limit without losing precision. CPQuery is a lightweight version of jQuery that has all the features that are most commonly used.">
+        <meta name="twitter:description" content="VirxEC Showcase. Showcasing: CalcPlus & CPQuery. CalcPlus is a library that lets numbers be calculated way over the normal limit without losing precision. CPQuery is a lightweight version of jQuery that has all the features that are most commonly used.">
+        <script src="assets/CPquery.js"></script>
+        <script src="assets/Options.js"></script>
+        <style>
             #calcplus-icon {
-                width: 15%
+                width: 8%;
             }
-        }
 
-        @media screen and (max-width:400px) {
-            #calcplus-icon {
-                width: 20%
+            @media screen and (max-width:800px) {
+                #calcplus-icon {
+                    width: 15%;
+                }
             }
-        }
 
-		#pwamsg {
-			visibility: hidden;
-		}
+            @media screen and (max-width:400px) {
+                #calcplus-icon {
+                    width: 20%;
+                }
+            }
 
-		.top {
-			margin-bottom: 0%;
-		}
+            #pwamsg {
+                visibility: hidden;
+            }
 
-		.bottom {
-			margin-top: 0%;
-		}
+            .top {
+                margin-bottom: 0%;
+            }
 
-		.middle {
-			margin-top: 8px;
-			margin-bottom: 0%;
-		}
-	</style>
-</head>
+            .bottom {
+                margin-top: 0%;
+            }
 
-<body>
-	<nav>
-		<a class="nava" href="PreviewLibrary/">Preview library</a>
-		<a class="nava" href="LibrarySource/">Library Source</a>
-		<a class="nava" href="CPQuerySource/">CPQuery Source</a>
-		<a class="nava" href="CalcPlus/">About CalcPlus</a>
-		<a class="nava" href="SiteOptions/">Site Options</a>
-		<a id="discord" class="nava" href="Discord/">Official Discord</a>
-	</nav><br>
-    <div class="center">
-        <p id="sconsole"></p>
-        <h1 class="title">VirxEC Showcase Website: <img src="https://api.travis-ci.com/VirxEC/virxec.github.io.svg?branch=master" alt="Build Status"></h1>
-        <img id="calcplus-icon" src="/assets/icons/512.png" alt="CalcPlus logo">
-        <p class="author">Contact me: <a href="mailto:virx@virxcase.ga" target="_blank">virx@virxcase.ga</a></p>
-    </div>
-    <hr>
-    <table>
-        <thead>
-            <tr>
-                <th id="left"></th>
-                <th id="right"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="right">
-                    <h3>Status of the JavaScript/NodeJS Library: <span class="fix">Fixing</span></h3>
-                    <h3>Let's go Bobcat Robotics 2020!</h3>
-                    <ul>
-                        <li><a href="https://www.bobcatrobotics.org/">Website</a></li>
-                        <li><a href="https://www.instagram.com/bobcatrobotics/">Instagram</a></li>
-                        <li><a href="https://twitter.com/Bobcat_Robotics">Twitter</a></li>
-                    </ul>
-                    <div id="pwamsg">
-                        <h3 class="top">Install the VirxEC <abbr title="Progressive Website Application">PWA</abbr>!</h3>
-                        <p class="middle">Get a 1-click icon to launch this site and have an automatic fullscreen experience!</p>
-                        <a href="https://blog.bitsrc.io/what-is-a-pwa-and-why-should-you-care-388afb6c0bad">What's a "PWA"?</a><br>
-                        <button class="bottom" id="pwainstall">Install now (No download)</button>
-                    </div>
-                    <script>
-                        let prompt;
-                        addEventListener('beforeinstallprompt', e=>{
-                            prompt = e;
-                            $("#pwamsg").show();
-                        });
-                        $("#pwainstall").listen('click', e=> {
-                            prompt.prompt();
-                            deferredPrompt.userChoice.then(c => {
-                                if (choiceResult.outcome == 'accepted') document.querySelector("#pwamsg").style.display = "none";
-                                prompt = null;
+            .middle {
+                margin-top: 8px;
+                margin-bottom: 0%;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <div id="menuToggle">
+                <input type="checkbox">
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul id="menu">
+                    <li><a href="PreviewLibrary/">Preview library</a></li>
+                    <li><a href="LibrarySource/">Library Source</a></li>
+                    <li><a href="CPQuerySource/">CPQuery Source</a></li>
+                    <li><a href="CalcPlus/">About CalcPlus</a></li>
+                    <li><a href="SiteOptions/">Site Options</a></li>
+                    <li><a href="Discord/">Official Discord</a></li>
+                </ul>
+            </div>
+        </nav>
+        <br>
+        <div class="center">
+            <p id="sconsole"></p>
+            <h1 class="title">VirxEC Showcase Website: <img src="https://api.travis-ci.com/VirxEC/virxec.github.io.svg?branch=master" alt="Build Status"></h1>
+            <img id="calcplus-icon" src="/assets/icons/512.png" alt="CalcPlus logo">
+            <p class="author">Contact me: <a href="mailto:virx@virxcase.ga" target="_blank">virx@virxcase.ga</a></p>
+        </div>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <th id="left"></th>
+                    <th id="right"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="right">
+                        <h3>Status of the JavaScript/NodeJS Library: <span class="fix">Fixing</span></h3>
+                        <h3>Let's go Bobcat Robotics 2020!</h3>
+                        <ul>
+                            <li><a href="https://www.bobcatrobotics.org/">Website</a></li>
+                            <li><a href="https://www.instagram.com/bobcatrobotics/">Instagram</a></li>
+                            <li><a href="https://twitter.com/Bobcat_Robotics">Twitter</a></li>
+                        </ul>
+                        <div id="pwamsg">
+                            <h3 class="top">Install the VirxEC Showcase <abbr title="Progressive Website Application">PWA</abbr>!</h3>
+                            <p class="middle">Install a shortcut to this website in fullscreen mode!</p>
+                            <a href="https://blog.bitsrc.io/what-is-a-pwa-and-why-should-you-care-388afb6c0bad">What's a "PWA"?</a><br>
+                            <button class="bottom" id="pwainstall">Install now (No download)</button>
+                        </div>
+                        <script>
+                            let prompt;
+                            addEventListener('beforeinstallprompt', e=>{
+                                prompt = e;
+                                $("#pwamsg").show();
                             });
-                        });
-
-                        if (/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase() && !(('standalone' in window.navigator) && (window.navigator.standalone))) && !('standalone' in navigator)) this.setState({ showInstallMessage: true });
-                    </script>
-                </td>
-                <td class="left">
-                    <h3>CalcPlus Project Links</h3>
-                    <ul>
-                        <li><a href="https://github.com/VirxEC/CalcPlus/wiki">Wiki</a></li>
-                        <li><a href="https://github.com/VirxEC/CalcPlus/projects/1">To do page</a></li>
-                        <li><a href="https://github.com/VirxEC/CalcPlus/issues/new?assignees=VirxEC&labels=bug&template=bug_report.md&title=%5BBUG%5D">Submit a bug report</a></li>
-                        <li><a href="https://github.com/VirxEC/CalcPlus/issues/new?assignees=VirxEC&labels=enhancement&template=feature_request.md&title=%5BFEATURE+REQUEST%5D">Suggest a feature</a></li>
-                        <li><a href="https://github.com/VirxEC/CalcPlus/compare">Submit a pull request</a></li>
-                    </ul>
-                    <h3>Download Links</h3>
-                    <ul>
-                        <li><a href="LICENSE" download="CalcPlus_License.txt">CalcPlus License</a></li>
-                        <li><a href="https://github.com/VirxEC/CalcPlus/packages">CalcPlus Beta NodeJS Library</a></li>
-                        <li><a href="https://github.com/VirxEC/CalcPlus/releases">All Javascript releases</a></li>
-                        <li><a href="https://github.com/VirxEC/CalcPlus/archive/v0.4.0-beta-js.zip" download="CalcPlus_Library_0-4-0.js">CalcPlus Beta Library (v0.4.0)</a></li>
-                        <li><a href="assets/Library.js" download="CalcPlus_Library_ALPHA.js">CalcPlus Alpha Library (v<span id="cmajor"></span>.<span id="cminor"></span>.<span id="cbugFix"></span>)</a></li>
-                        <li><a href="https://github.com/VirxEC/CPQuery/releases/download/v1.2/CPQuery_1-2-0.min.js" download>CPQuery v1.2.0 Library</a></li>
-                        <li><a href="assets/CPquery.js" download="CalcPlus_Query.js">CPQuery Beta Library (v<span id="major"></span>.<span id="minor"></span>.<span id="bugFix"></span>)</a></li>
-                    </ul>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <script src="/assets/Library.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) navigator.serviceWorker.register("sw.min.js");
-        let v = $().version,
-        cv = calcplus_info();
-        $("#major").txt(v.major);
-        $("#minor").txt(v.minor);
-        $("#bugFix").txt(v.bugFix);
-        $("#cmajor").txt(cv.major);
-        $("#cminor").txt(cv.minor);
-        $("#cbugFix").txt(cv.bugFix);
-    </script>
-</body>
+                            $("#pwainstall").listen('click', e=> {
+                                prompt.prompt();
+                                deferredPrompt.userChoice.then(c => {
+                                    if (choiceResult.outcome == 'accepted') document.querySelector("#pwamsg").style.display = "none";
+                                    prompt = null;
+                                });
+                            });
+                            
+                            if (/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase() && !(('standalone' in window.navigator) && (window.navigator.standalone))) && !('standalone' in navigator)) this.setState({ showInstallMessage: true });
+                        </script>
+                    </td>
+                    <td class="left">
+                        <h3>CalcPlus Project Links</h3>
+                        <ul>
+                            <li><a href="https://github.com/VirxEC/CalcPlus/wiki">Wiki</a></li>
+                            <li><a href="https://github.com/VirxEC/CalcPlus/projects/1">To do page</a></li>
+                            <li><a href="https://github.com/VirxEC/CalcPlus/issues/new?assignees=VirxEC&labels=bug&template=bug_report.md&title=%5BBUG%5D">Submit a bug report</a></li>
+                            <li><a href="https://github.com/VirxEC/CalcPlus/issues/new?assignees=VirxEC&labels=enhancement&template=feature_request.md&title=%5BFEATURE+REQUEST%5D">Suggest a feature</a></li>
+                            <li><a href="https://github.com/VirxEC/CalcPlus/compare">Submit a pull request</a></li>
+                        </ul>
+                        <h3>Download Links</h3>
+                        <ul>
+                            <li><a href="LICENSE" download="CalcPlus_License.txt">CalcPlus License</a></li>
+                            <li><a href="https://github.com/VirxEC/CalcPlus/packages">CalcPlus Beta NodeJS Library</a></li>
+                            <li><a href="https://github.com/VirxEC/CalcPlus/releases">All Javascript releases</a></li>
+                            <li><a href="https://github.com/VirxEC/CalcPlus/archive/v0.4.0-beta-js.zip" download="CalcPlus_Library_0-4-0.js">CalcPlus Beta Library (v0.4.0)</a></li>
+                            <li><a href="assets/Library.js" download="CalcPlus_Library_ALPHA.js">CalcPlus Alpha Library (v<span id="cmajor"></span>.<span id="cminor"></span>.<span id="cbugFix"></span>)</a></li>
+                            <li><a href="https://github.com/VirxEC/CPQuery/releases/download/v1.2/CPQuery_1-2-0.min.js" download>CPQuery v1.2.0 Library</a></li>
+                            <li><a href="assets/CPquery.js" download="CalcPlus_Query.js">CPQuery Beta Library (v<span id="major"></span>.<span id="minor"></span>.<span id="bugFix"></span>)</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script src="/assets/Library.js"></script>
+        <script>
+            if ('serviceWorker' in navigator) navigator.serviceWorker.register("sw.min.js");
+            let v = $().version,
+            cv = calcplus_info();
+            $("#major").txt(v.major);
+            $("#minor").txt(v.minor);
+            $("#bugFix").txt(v.bugFix);
+            $("#cmajor").txt(cv.major);
+            $("#cminor").txt(cv.minor);
+            $("#cbugFix").txt(cv.bugFix);
+        </script>
+    </body>
 </html>

@@ -37,12 +37,12 @@ td.left {
 
 #right {
     width: 50%;
-    border-left: 0px;
+    border-left: 0;
 }
 
 #left {
     width: 50%;
-    border-right: 0px;
+    border-right: 0;
 }
 
 .center {
@@ -122,11 +122,11 @@ nav a:hover {
 }
 
 .title {
-    margin-bottom: 0em;
+    margin-bottom: 0;
 }
 
 .author {
-    margin-top: 0em;
+    margin-top: 0;
 }
 
 @media screen and (min-width:800px) {
