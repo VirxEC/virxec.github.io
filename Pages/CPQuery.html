@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<meta name="description" content="A light-weight version of jQuery that VirxEC Showcase uses">
+    <meta name="twitter:description" content="A light-weight version of jQuery that VirxEC Showcase uses">
+    <meta name="og:description" content="A light-weight version of jQuery that VirxEC Showcase uses">
+	<title>CPQuery Source Code</title>
+	<script src="/Assets/Js/CPquery.js"></script>
+	<script src="/Assets/Js/Options.js"></script>
+	<link rel="stylesheet" href="/Assets/Css/prism.css"/>
+	<script src="/Assets/Js/Prism.js"></script>
+</head>
+
+<body>
+    <p id="sconsole"></p>
+    <h1>CPQuery Source Code</h1>
+    <pre><code id="source" class="language-js"></code></pre>
+	<script>
+        var raw = new $("^/Assets/Js/CPquery.js").file;
+		raw.request(function(){
+			$("#source").htm(Prism.highlight(this.responseText, Prism.languages.javascript, 'javascript'));
+		});
+	</script>
+  </body>
+</html>

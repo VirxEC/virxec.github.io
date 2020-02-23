@@ -1,5 +1,14 @@
 var errors = "", errhandler = a => errors += `<div class="error">${a.error.stack}</div>`;
 if (localStorage.getItem("isConsole") == "On") addEventListener("error", errhandler); // whole point of this is so if anything in the Library breaks, this doesn't break.
+
+var path = location.pathname.split("/")
+if (path[path.length-1] == "index.html") {
+    path[path.length-1] = "";
+    location.replace(path.join("/"));
+}
+delete path;
+if (location.origin == "https://www.virxcase.ga" && location.pathname.split(".")[1] == "html") location.replace(location.pathname.split(".")[0]);
+
 var isOffline = $("*isOffline"),
     syntax = $("@isSyntax"),
     alerted = $("*alerted"),
@@ -8,26 +17,18 @@ var isOffline = $("*isOffline"),
     storage = [isOffline, alerted, isConsole, gamer],
     widget = $("@isWidget"),
     interval = $("@interval"),
-    dark = $("@isDark"),
     channel = $("@channel"), discord;
 
 (async ()=>{
-    let desc = $("^/assets/description.html").file;
+    let desc = $("^/Assets/Html/description.html").file;
     desc.request(function(){
         $(document.head).htm(this.responseText, true);
-	});
+    });
 })();
 
 (async () => {
     let addElement = e => $(document.head).htm(e, true);
     if (widget.i() == "On") addElement(`<link rel="preload" href="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" as="script">`);
-    if (!dark.i()) dark.i("On");
-    addElement(`<link rel="stylesheet" href="/assets/${$("@isDark").i() == "Off" ? "light" : "dark"}.css">`);
-    addElement(`<meta name="theme-color" content="${$("@isDark").i() == "Off" ? "#FFF" : "#000"}">`);
-    if (["/LibrarySource/", "/LibrarySource/index.html", "/CPQuerySource/", "/CPQuerySource/index.html"].includes(location.pathname)) {
-        addElement(`<link rel="stylesheet" href="/assets/3rdParty/${$("@isDark").i() == "Off" ? "light" : "dark"}.min.css">`);
-        addElement("<link rel='preload' href='/assets/3rdParty/highlight.min.js' as='script'>");
-    }
 })();
 
 if (!widget.i()) widget.i("On");
@@ -35,6 +36,7 @@ if (!syntax.i()) syntax.i("On");
 if (!channel.i()) channel.i("629774177733181440");
 if (!interval.i()) interval.i("400");
 storage.forEach(e => !e.i() ? e.i("Off") : 0);
+
 $("window").listen("load", async () => {
     if (widget.i() == "On") {
         let dscript = $("head").create("script");
@@ -48,16 +50,7 @@ $("window").listen("load", async () => {
         });
         dscript.append();
     }
-    async function resizeNav() {
-        let m = 0,
-            e = document.querySelectorAll('.nava');
-        [].reduce.call(e, (p, i) => {
-            m = Math.max(i.clientHeight, m);
-            return h => p(i.style.height = h);
-        }, () => { })(m + 'px');
-    }
-    $("window").listen("resize", resizeNav);
-    resizeNav();
+
     if (isConsole.i() == "On") {
         (async () => {
             removeEventListener("error", errhandler);
@@ -77,6 +70,8 @@ $("window").listen("load", async () => {
                 }
                 $("#iconsole").tag("value", "");
             });
+            delete errors;
+            delete errhandler;
         })();
     }
     if (gamer.i() == "On") {
@@ -90,7 +85,9 @@ $("window").listen("load", async () => {
             $(0).css.append(`button { color: ${color}; transition: color ${interval.i() / 1000} ease-in; }`);
         }, interval.i());
     }
-    (async () => {
-        if (["/LibrarySource/index.html", "/LibrarySource/", "/CPQuerySource/", "/CPQuerySource/index.html"].includes(location.pathname) && syntax.i() == "On") hljs.initHighlighting();
-    })();
+
+    let nav = $("^/Assets/Html/navigation.html").file;
+    nav.request(function() {
+        $(document.body).htm(this.responseText+$(document.body).htm());
+    });
 });

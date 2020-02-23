@@ -5,9 +5,9 @@
         <meta name="twitter:description" content="Options for VirxEC Showcase">
         <meta name="og:description" content="Options for VirxEC Showcase">
         <title>Site Options</title>
-        <link rel="preload" href="/assets/3rdParty/cookie.min.js" as="script">
-        <script src="/assets/CPquery.js"></script>
-        <script src="/assets/Options.js"></script>
+        <link rel="preload" href="/Assets/Js/cookie.min.js" as="script">
+        <script src="/Assets/Js/CPquery.js"></script>
+        <script src="/Assets/Js/Options.js"></script>
         <style>
             #login-prompt {
                 visibility: hidden;
@@ -19,21 +19,11 @@
         </style>
     </head>
     <body>
-        <nav>
-            <a class="nava" href="/">Home</a>
-            <a class="nava" href="/PreviewLibrary/">Preview library</a>
-            <a class="nava" href="/LibrarySource/">Library Source</a>
-            <a class="nava" href="/CPQuerySource/">CPQuery Source</a>
-            <a class="nava" href="/CalcPlus/">About CalcPlus</a>
-            <a class="nava" href="/Discord/">Offical Discord</a>
-        </nav>
-        <br>
         <p id="sconsole"></p>
         <h1>Site Options</h1>
         <p>MD5 algorithm credit: http://www.myersdaily.org/joseph/</p>
         <h3 id="login-prompt"><button id="login">Login to save settings</button></h3>
         <h3 id="logout-prompt"><button id="logout">Logout</button> <button id="loadsettings">Load settings</button> <button id="savesettings">Save settings</button></h3>
-        <h3>Dark Mode <button id="dark"></button></h3>
         <h3><abbr title="Credit: Highlight JS (hightlightjs.org)">Syntax Highlighting</abbr> <button id="syntax"></button></h3>
         <h3><abbr title="Credit: WidgetBot (widgetbot.io)">Discord Widget</abbr> <button id="widget"></button></h3>
         <h3>
@@ -48,7 +38,7 @@
         <h3><abbr title="Requires Gamer Mode to work">Transition time</abbr> <input type="range" min="1" max="5000" id="transition"> <button id="applytrans">Apply <span id="transval"></span>ms</button></h3>
         <h3>On-Screen Console <button id="console"></button></h3>
         <h3>Reset all <button id="reset">Reset</button></h3>
-        <script src="/assets/3rdParty/cookie.min.js"></script>
+        <script src="/Assets/Js/cookie.min.js"></script>
         <script>
             if (Cookies.get("u") && Cookies.get("p")) {
                 $("#logout-prompt").show();
@@ -61,7 +51,6 @@
                         if (data != null) {
                             data = data[Cookies.get("p")];
                             if (data != null) {
-                                $("@isDark").i(data.dark);
                                 $("@isConsole").i(data.console);
                                 $("@isWidget").i(data.widget);
                                 $("@isGamer").i(data.gamer);
@@ -91,7 +80,6 @@
                         if (data[user]) {
                             if (data[user][pass]) {
                                 data[user][pass] = {
-                                    dark: $("@isDark").i(),
                                     console: $("@isConsole").i(),
                                     widget: $("@isWidget").i(),
                                     gamer: $("@isGamer").i(),
@@ -134,14 +122,12 @@
             
             (async() => {
                 let id = [
-                        $("#dark"),
                         $("#console"),
                         $("#widget"),
                         $("#gamer"),
                         $("#syntax")
                     ],
                     dex = [
-                        $("@isDark"),
                         $("@isConsole"),
                         $("@isWidget"),
                         $("@isGamer"),

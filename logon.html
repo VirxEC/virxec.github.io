@@ -2,11 +2,11 @@
 <html>
     <head>
         <title>Logging you in</title>
-        <link rel="preload" href="/assets/3rdParty/md5.min.js" as="script">
-        <link rel="preload" href="/assets/3rdParty/cookie.min.js" as="script">
+        <link rel="preload" href="/Assets/Js/md5.min.js" as="script">
+        <link rel="preload" href="/Assets/Js/cookie.min.js" as="script">
         <script src="/assets/CPquery.js"></script>
-        <script src="/assets/3rdParty/md5.min.js"></script>
-        <script src="/assets/3rdParty/cookie.min.js"></script>
+        <script src="/Assets/Js/md5.min.js"></script>
+        <script src="/Assets/Js/cookie.min.js"></script>
         <script>
             addEventListener("error", e => alert(e.error.stack));
             (async() => {
@@ -33,7 +33,6 @@
                         if (signup) {
                             data[email] = {};
                             data[email][password] = {
-                                dark: $("@isDark").i(),
                                 console: $("@isConsole").i(),
                                 widget: $("@isWidget").i(),
                                 gamer: $("@isGamer").i(),
@@ -53,7 +52,6 @@
                             if (data) {
                                 data = data[password]
                                 if (data) {
-                                    $("@isDark").i(data.dark);
                                     $("@isConsole").i(data.console);
                                     $("@isWidget").i(data.widget);
                                     $("@isSyntax").i(data.syntax);

@@ -107,10 +107,10 @@ function cpQuery(query, num = false) {
     }
   }
   function txt(item, add) {
-    add ? element.textContent += item : element.textContent = item;
+    return !item ? element.textContent : add ? element.textContent += item : element.textContent = item;
   }
   function htm(item, add) {
-    add ? element.innerHTML += item : element.innerHTML = item;
+    return !item ? element.innerHTML : add ? element.innerHTML += item : element.innerHTML = item;
   }
   function tag(tag, extra) {
     if (typeof extra == "string") extra = [extra];

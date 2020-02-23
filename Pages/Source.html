@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta name="description" content="A library that lets numbers be calculated way over the normal limit without losing precision">
+    <meta name="twitter:description" content="A library that lets numbers be calculated way over the normal limit without losing precision">
+    <meta name="og:description" content="A library that lets numbers be calculated way over the normal limit without losing precision">
+		<title>CalcPlus Library Source Code</title>
+	  <script src="/Assets/Js/CPquery.js"></script>
+	  <script src="/Assets/Js/Options.js"></script>
+	  <script src="/Assets/Js/Prism.js"></script>
+    <link rel="stylesheet" href="/Assets/Css/prism.css"/>
+  </head>
+  <body>
+		<p id="sconsole"></p>
+    <h1>CalcPlus Library Source Code</h1>
+    <pre><code id="source" class="language-js"></code></pre>
+    <script>
+      var raw = new $("^/Assets/Js/Library.js").file;
+      raw.request(function(){
+        $("#source").htm(Prism.highlight(this.responseText, Prism.languages.javascript, 'javascript'));
+      });
+		</script>
+  </body>
+</html>
