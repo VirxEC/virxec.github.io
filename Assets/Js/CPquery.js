@@ -169,6 +169,7 @@ function cpQuery(query, num = false) {
     mousedown: f => listen("mousedown", f),
     dblclick: f => listen("dblclick", f),
     mouseup: f => listen("mouseup", f),
+    onload: f => listen("load", f),
     remove: () => tagfunc("remove"),
     click: f => listen("click", f),
     hover: f => listen("hover", f),

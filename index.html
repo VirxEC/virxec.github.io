@@ -9,6 +9,7 @@
         <script src="/Assets/Js/Options.js"></script>
     </head>
     <body>
+        <span id="nav"></span>
         <div class="center">
             <p id="sconsole"></p>
             <h1 class="title">VirxEC Showcase Website: <img src="https://api.travis-ci.com/VirxEC/virxec.github.io.svg?branch=master" alt="Build Status"></h1>
@@ -74,7 +75,7 @@
             $("#pwainstall").listen('click', e=> {
                 prompt.prompt();
                 deferredPrompt.userChoice.then(c => {
-                    if (choiceResult.outcome == 'accepted') document.querySelector("#pwamsg").style.display = "none";
+                    if (choiceResult.outcome == 'accepted') $("#pwamsg").remove();
                     prompt = null;
                 });
             });

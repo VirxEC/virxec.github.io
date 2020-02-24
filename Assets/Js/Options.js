@@ -9,12 +9,10 @@ if (path[path.length-1] == "index.html") {
 delete path;
 if (location.origin == "https://www.virxcase.ga" && location.pathname.split(".")[1] == "html") location.replace(location.pathname.split(".")[0]);
 
-var isOffline = $("*isOffline"),
-    syntax = $("@isSyntax"),
-    alerted = $("*alerted"),
+var syntax = $("@isSyntax"),
     isConsole = $("@isConsole"),
     gamer = $("@isGamer"),
-    storage = [isOffline, alerted, isConsole, gamer],
+    storage = [isConsole, gamer],
     widget = $("@isWidget"),
     interval = $("@interval"),
     channel = $("@channel"), discord;
@@ -88,6 +86,6 @@ $("window").listen("load", async () => {
 
     let nav = $("^/Assets/Html/navigation.html").file;
     nav.request(function() {
-        $(document.body).htm(this.responseText+$(document.body).htm());
+        $("#nav").htm(this.responseText);
     });
 });
