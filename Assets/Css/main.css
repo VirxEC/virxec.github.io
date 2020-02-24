@@ -13,6 +13,7 @@ a{text-decoration:none !important;}
 #ic{float:left;}
 #ic a{padding:13px 2px;}
 #ic img{height:40px;}
+
 /*Nav*/
 nav {
 	position: relative;
@@ -45,7 +46,7 @@ nav ul li a:hover{
 	color:var(--color-secondary);
 }
 
-@media only screen and (max-width: 750px){
+@media only screen and (max-width: 830px){
 	@keyframes slideInFromTop{0%{transform:translateY(-8%);opacity:0}100%{opacity:1;transform:translateY(0)}}
 
 	nav ul{list-style:none;text-align:right;margin:0;padding:0 5vw;}
@@ -55,6 +56,7 @@ nav ul li a:hover{
 	nav ul .mobile{display:inline-block !important;}
 	nav ul li a{padding:15px 25px;}/*display:block;*/
 	nav ul .discord{position:absolute;margin:15px 0 5px 25px;top:0px;right:25px;display:inline-block;}/*display:inline-block;*/
+
 	#mt{padding:25px 25px;display: block;top: 10px;left: 10px;z-index: 1;-webkit-user-select: none;user-select: none;}
 	#mt input{top:17px;left:20px;display: block !important;width: 45px;height: 32px;position: absolute;cursor: pointer;opacity:0;z-index:2;-webkit-touch-callout: none;}
 	#mt span{display: block;width: 33px;height: 4px;margin-bottom: 5px;position: relative;background: #0090FF;border-radius: 3px;z-index: 1;transform-origin: 4px 0px;transition: transform 0.3s cubic-bezier(0.77,0.2,0.05,1.0),background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),opacity 0.55s ease;}
@@ -65,7 +67,9 @@ nav ul li a:hover{
 	#mt input:checked ~ span:nth-last-child(2){transform: rotate(-45deg) translate(0, -1px);}
 	#mt input:checked ~ ul .discord{display: block;animation: none;}
 	#mt input:checked ~ ul li{display: block;animation:.5s ease-out 0s 1 slideInFromTop;}
-}#mt input{display: none;}
+}
+
+#mt input{display: none;}
 
 
 /*
