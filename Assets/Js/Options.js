@@ -28,7 +28,7 @@ var gamer = $("@isGamer"),
     if (widget.i() == "On") addElement(`<link rel="preload" href="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" as="script">`);
 })();
 
-if (!widget.i()) widget.i("Off");
+if (!widget.i()) widget.i("On");
 if (!syntax.i()) syntax.i("On");
 if (!channel.i()) channel.i("629774177733181440");
 if (!interval.i()) interval.i("400");
