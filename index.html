@@ -62,12 +62,12 @@
         <script>
             if ('serviceWorker' in navigator) navigator.serviceWorker.register("/Assets/Js/service-worker.js");
 
-            let v = $().version;
+            var v = $().version;
             $("#major").txt(v.major);
             $("#minor").txt(v.minor);
             $("#bugFix").txt(v.bugFix);
 
-            let prompt;
+            var prompt;
             addEventListener('beforeinstallprompt', e=>{
                 prompt = e;
                 $("#pwamsg").show();

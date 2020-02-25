@@ -1,14 +1,15 @@
 :root{
 	--bg-main:#131318;
 	--bg-secondary:#0f0f11;
-	--color-main:#ffffff;
+	--color-main:#eee;
 	--color-secondary:#0066ff;
+    --color-tertiary: #00ddff;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 body{background:var(--bg-main);color:var(--color-main);margin:0;padding:0;font-family:'Roboto',sans-serif;}
-a{text-decoration:none !important;}
+a, a:link, a:visited, a:hover, a:active, a:visited {text-decoration:none !important;color:var(--color-secondary);}
 ::-webkit-scrollbar{display:none;}
 #ic{float:left;}
 #ic a{padding:13px 2px;}
@@ -172,7 +173,7 @@ button {
 	background:#0d0d0f;
 	margin-top:6px;
 	border: 1px solid rgba(0,0,0);
-	color:#ffffff;
+	color: var(--color-tertiary);
 	padding:8px 10px;
 	font-weight: bold;
 }

@@ -156,7 +156,7 @@ function cpQuery(query, num = false) {
   };
   return {
     version: {
-      name: "CalcPlus Query",
+      name: "CPQuery",
       major: 1,
       minor: 3,
       bugFix: 0
