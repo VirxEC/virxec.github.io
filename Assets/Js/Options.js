@@ -1,5 +1,5 @@
-var errors = "", errhandler = a => errors += `<div class="error">${a.error.stack}</div>`;
-if (localStorage.getItem("isConsole") == "On") addEventListener("error", errhandler); // whole point of this is so if anything in the Library breaks, this doesn't break.
+var errors = "", errhandler = a => errors += `<div class="error">${a.error}</div>`;
+if (localStorage.getItem("console") == "On") addEventListener("error", errhandler); // whole point of this is so if anything in the Library breaks, this doesn't break.
 
 var path = location.pathname.split("/")
 if (path[path.length-1] == "index.html") {
@@ -9,13 +9,12 @@ if (path[path.length-1] == "index.html") {
 delete path;
 if (location.origin == "https://www.virxcase.ga" && location.pathname.split(".")[1] == "html") location.replace(location.pathname.split(".")[0]);
 
-var syntax = $("@isSyntax"),
-    isConsole = $("@isConsole"),
-    gamer = $("@isGamer"),
-    storage = [isConsole, gamer],
+var gamer = $("@isGamer"),
+    syntax = $("@isSyntax"),
     widget = $("@isWidget"),
+    channel = $("@channel"),
     interval = $("@interval"),
-    channel = $("@channel"), discord;
+    console = $("@isConsole"), discord;
 
 (async ()=>{
     let desc = $("^/Assets/Html/description.html").file;
@@ -29,27 +28,15 @@ var syntax = $("@isSyntax"),
     if (widget.i() == "On") addElement(`<link rel="preload" href="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" as="script">`);
 })();
 
-if (!widget.i()) widget.i("On");
+if (!widget.i()) widget.i("Off");
 if (!syntax.i()) syntax.i("On");
 if (!channel.i()) channel.i("629774177733181440");
 if (!interval.i()) interval.i("400");
-storage.forEach(e => !e.i() ? e.i("Off") : 0);
+if (!console.i()) console.i("Off");
+if (!gamer.i()) gamer.i("Off");
 
-$("window").listen("load", async () => {
-    if (widget.i() == "On") {
-        let dscript = $("head").create("script");
-        dscript.tag("src", "https://cdn.jsdelivr.net/npm/@widgetbot/crate@3");
-        dscript.tag("onload", async () => {
-            discord = new Crate({
-                server: '507708985206505482',
-                channel: channel.i(),
-                shard: "https://disweb.dashflo.net"
-            });
-        });
-        dscript.append();
-    }
-
-    if (isConsole.i() == "On") {
+$(window).onload(async () => {
+    if (console.i() == "On") {
         (async () => {
             removeEventListener("error", errhandler);
             $("#sconsole").htm("<span id='oconsole'></span><br><textarea id='iconsole'></textarea><br><button id='fconsole'>Run</button>");
@@ -59,28 +46,26 @@ $("window").listen("load", async () => {
             console.info = (...args) => args.forEach(e => c.htm(`<div class="info">${JSON.stringify(e)}</div>`, true));
             console.warn = (...args) => args.forEach(e => c.htm(`<div class="warn">${e}</div>`, true));
             console.error = (...args) => args.forEach(e => c.htm(`<div class="error">${e}</div>`, true));
-            $("window").listen("error", e => console.error(e.error.stack));
-            $("#fconsole").listen("click", () => {
+            $(window).on("error", e => console.error(e.error));
+            $("#fconsole").click(() => {
                 try {
-                    console.info(eval($("#iconsole").tag("value")));
+                    console.info(eval($("#iconsole").val()));
                 } catch (e) {
                     console.error(e);
                 }
-                $("#iconsole").tag("value", "");
+                $("#iconsole").val("");
             });
             delete errors;
             delete errhandler;
         })();
     }
     if (gamer.i() == "On") {
+        var getRandomColor = () => "#000000".replace(/0/g, () => (~~(Math.random() * 16)).toString(16)),
+            transition = `transition: background-color ${interval.i() / 1000}s ease-in;`;
         setInterval(async () => {
-            let color = "#000000".replace(/0/g, () => (~~(Math.random() * 16)).toString(16));
-            if (discord != null) discord.options.color = color;
-            $(0).css.append(`nav a { background-color: ${color}; transition: background-color ${interval.i() / 1000}s ease-in; }`);
-            $(0).css.append(`nav a:link, nav a:visited { background-color: ${color}; transition: background-color ${interval.i() / 1000}s ease-in; }`);
-            $(0).css.append(`nav a:hover, nav a:active { background-color: ${color}; transition: background-color ${interval.i() / 1000}s ease-in; }`);
-            $(0).css.append(`body { color: ${color}; transition: color ${interval.i() / 1000} ease-in; }`);
-            $(0).css.append(`button { color: ${color}; transition: color ${interval.i() / 1000} ease-in; }`);
+            if (discord) discord.options.color = getRandomColor();
+            $(0).css.append(`nav { background-color: ${getRandomColor()}; ${transition} }`);
+            $(0).css.append(`body { background-color: ${getRandomColor()}; ${transition} }`);
         }, interval.i());
     }
 
@@ -88,4 +73,17 @@ $("window").listen("load", async () => {
     nav.request(function() {
         $("#nav").htm(this.responseText);
     });
+
+    if (widget.i() == "On") {
+        let dscript = $("head").create("script");
+        dscript.tag("src", "https://cdn.jsdelivr.net/npm/@widgetbot/crate@3");
+        dscript.onload(async () => {
+            discord = new Crate({
+                server: '507708985206505482',
+                channel: channel.i(),
+                shard: "https://disweb.dashflo.net"
+            });
+        });
+        dscript.append();
+    }
 });

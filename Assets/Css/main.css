@@ -6,14 +6,15 @@
     --color-tertiary: #00ddff;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-
 body{background:var(--bg-main);color:var(--color-main);margin:0;padding:0;font-family:'Roboto',sans-serif;}
 a, a:link, a:visited, a:hover, a:active, a:visited {text-decoration:none !important;color:var(--color-secondary);}
 ::-webkit-scrollbar{display:none;}
+
 #ic{float:left;}
 #ic a{padding:13px 2px;}
 #ic img{height:40px;}
+
+#mt input{display: none;}
 
 /*Nav*/
 nav {
@@ -47,16 +48,18 @@ nav ul li a:hover{
 	color:var(--color-secondary);
 }
 
-@media only screen and (max-width: 830px){
-	@keyframes slideInFromTop{0%{transform:translateY(-8%);opacity:0}100%{opacity:1;transform:translateY(0)}}
+@keyframes slideInFromTop {
+    from{transform:translate(-5%, -20%);opacity:0;}
+    to{opacity:1;transform:translate(0,0);}
+}
 
-	nav ul{list-style:none;text-align:right;margin:0;padding:0 5vw;}
-	nav ul li{display: none;}
+@media only screen and (max-width: 830px) {
+
+	nav ul{margin:0;padding:0 15px;}
+	nav ul li{display:none;}
 	nav ul{text-align:left;}
-	nav ul img{display:none}
-	nav ul .mobile{display:inline-block !important;}
-	nav ul li a{padding:15px 25px;}/*display:block;*/
-	nav ul .discord{position:absolute;margin:15px 0 5px 25px;top:0px;right:25px;display:inline-block;}/*display:inline-block;*/
+	nav ul img{display:none;}
+	nav ul li a{padding:15px 25px;}
 
 	#mt{padding:25px 25px;display: block;top: 10px;left: 10px;z-index: 1;-webkit-user-select: none;user-select: none;}
 	#mt input{top:17px;left:20px;display: block !important;width: 45px;height: 32px;position: absolute;cursor: pointer;opacity:0;z-index:2;-webkit-touch-callout: none;}
@@ -66,48 +69,9 @@ nav ul li a:hover{
 	#mt input:checked ~ span{opacity: 1;transform: rotate(45deg) translate(-2px, -1px);}
 	#mt input:checked ~ span:nth-last-child(3){opacity: 0;transform: rotate(0deg) scale(0.2, 0.2);}
 	#mt input:checked ~ span:nth-last-child(2){transform: rotate(-45deg) translate(0, -1px);}
-	#mt input:checked ~ ul .discord{display: block;animation: none;}
 	#mt input:checked ~ ul li{display: block;animation:.5s ease-out 0s 1 slideInFromTop;}
+    #mt input:checked ~ nav ul{margin:0;padding: 0 5vw;}
 }
-
-#mt input{display: none;}
-
-
-/*
-.center{}
-
-table {
-    table-layout: fixed;
-    width: 100%;
-    border-collapse: collapse;
-}
-td {
-    width: 50%;
-    vertical-align: baseline;
-}
-td ul{list-style: none;}
-.right {
-	display: none;
-}
-
-.left{
-
-}
-.left ul{
-	display: inline-block;
-}
-.left ul h3{
-	font-size: 20px;
-}
-.left ul li a{
-	font-size: 15px;
-	padding: 5px 10px;
-	margin-bottom:5px;
-	border: 1px solid #fff;
-	display: inline-block;
-	color:var(--color-secondary);
-	text-decoration:none;	
-}*/
 
 table {
     table-layout: fixed;
