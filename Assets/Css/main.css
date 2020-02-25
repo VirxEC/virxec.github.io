@@ -59,7 +59,7 @@ nav ul li a:hover{
 	nav ul li{display:none;}
 	nav ul{text-align:left;}
 	nav ul img{display:none;}
-	nav ul li a{padding:15px 25px;}
+	nav ul li a{padding:15px 25px;font-size:}
 
 	#mt{padding:25px 25px;display: block;top: 10px;left: 10px;z-index: 1;-webkit-user-select: none;user-select: none;}
 	#mt input{top:17px;left:20px;display: block !important;width: 45px;height: 32px;position: absolute;cursor: pointer;opacity:0;z-index:2;-webkit-touch-callout: none;}

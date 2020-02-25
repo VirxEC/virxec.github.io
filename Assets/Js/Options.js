@@ -36,6 +36,11 @@ if (!console.i()) console.i("Off");
 if (!gamer.i()) gamer.i("Off");
 
 $(window).onload(async () => {
+    let nav = $("^/Assets/Html/navigation.html").file;
+    nav.request(function() {
+        $("#nav").htm(this.responseText);
+    });
+
     if (console.i() == "On") {
         (async () => {
             removeEventListener("error", errhandler);
@@ -69,15 +74,10 @@ $(window).onload(async () => {
         }, interval.i());
     }
 
-    let nav = $("^/Assets/Html/navigation.html").file;
-    nav.request(function() {
-        $("#nav").htm(this.responseText);
-    });
-
     if (widget.i() == "On") {
         let dscript = $("head").create("script");
         dscript.tag("src", "https://cdn.jsdelivr.net/npm/@widgetbot/crate@3");
-        dscript.onload(async () => {
+        dscript.tag("load", async () => {
             discord = new Crate({
                 server: '507708985206505482',
                 channel: channel.i(),
