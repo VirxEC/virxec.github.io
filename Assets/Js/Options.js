@@ -14,7 +14,7 @@ var gamer = $("@isGamer"),
     widget = $("@isWidget"),
     channel = $("@channel"),
     interval = $("@interval"),
-    console = $("@isConsole"), discord;
+    cconsole = $("@isConsole"), discord;
 
 (async ()=>{
     let desc = $("^/Assets/Html/description.html").file;
@@ -32,7 +32,7 @@ if (!widget.i()) widget.i("Off");
 if (!syntax.i()) syntax.i("On");
 if (!channel.i()) channel.i("629774177733181440");
 if (!interval.i()) interval.i("400");
-if (!console.i()) console.i("Off");
+if (!cconsole.i()) cconsole.i("Off");
 if (!gamer.i()) gamer.i("Off");
 
 $(window).onload(async () => {
@@ -41,7 +41,7 @@ $(window).onload(async () => {
         $("#nav").htm(this.responseText);
     });
 
-    if (console.i() == "On") {
+    if (cconsole.i() == "On") {
         (async () => {
             removeEventListener("error", errhandler);
             $("#sconsole").htm("<span id='oconsole'></span><br><textarea id='iconsole'></textarea><br><button id='fconsole'>Run</button>");
@@ -64,6 +64,7 @@ $(window).onload(async () => {
             delete errhandler;
         })();
     }
+
     if (gamer.i() == "On") {
         var getRandomColor = () => "#000000".replace(/0/g, () => (~~(Math.random() * 16)).toString(16)),
             transition = `transition: background-color ${interval.i() / 1000}s ease-in;`;
