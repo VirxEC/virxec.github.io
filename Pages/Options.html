@@ -149,17 +149,20 @@
                     });
                 });
                 if ($("@isWidget").i() == "Off") $("#channelWrap").remove();
+                else {
+                    $("#channel").listen("change", () => {
+                        $("@channel").i($("#channel").val());
+                        if ($("@isWidget").i() == "On") discord.options.channel = $("@channel").i();
+                    });
+                }
                 if ($("@isGamer").i() == "Off") $("#transitionWrap").remove();
-                
-                $("#transition").listen("input", () => $("#transval").txt($("#transition").val()));
-                $("#applytrans").click(() => {
-                    $("@interval").i($("#transition").val());
-                    location.reload();
-                });
-                $("#channel").listen("change", () => {
-                    $("@channel").i($("#channel").val());
-                    if ($("@isWidget").i() == "On") discord.options.channel = $("@channel").i();
-                });
+                else {
+                    $("#transition").listen("input", () => $("#transval").txt($("#transition").val()));
+                    $("#applytrans").click(() => {
+                        $("@interval").i($("#transition").val());
+                        location.reload();
+                    });
+                }
                 $("#reset").click(() => {
                     localStorage.clear();
                     location.reload();

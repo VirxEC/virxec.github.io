@@ -78,11 +78,12 @@ $(window).onload(async () => {
     if (widget.i() == "On") {
         let dscript = $("head").create("script");
         dscript.tag("src", "https://cdn.jsdelivr.net/npm/@widgetbot/crate@3");
-        dscript.tag("load", async () => {
+        dscript.tag("onload", async () => {
             discord = new Crate({
                 server: '507708985206505482',
                 channel: channel.i(),
-                shard: "https://disweb.dashflo.net"
+                shard: "https://e.widgetbot.io",
+                defer: true
             });
         });
         dscript.append();
