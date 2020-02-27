@@ -9,6 +9,11 @@ if (path[path.length-1] == "index.html") {
 delete path;
 if (location.origin == "https://www.virxcase.ga" && location.pathname.split(".")[1] == "html") location.replace(location.pathname.split(".")[0]);
 
+let nav = $("^/Assets/Html/navigation.html").file;
+nav.request(function() {
+    $("#nav").htm(this.responseText);
+});
+
 var gamer = $("@isGamer"),
     syntax = $("@isSyntax"),
     widget = $("@isWidget"),
@@ -17,30 +22,16 @@ var gamer = $("@isGamer"),
     cconsole = $("@isConsole"), discord;
 
 (async ()=>{
-    let desc = $("^/Assets/Html/description.html").file;
-    desc.request(function(){
-        $(document.head).htm(this.responseText, true);
-    });
+    if (!widget.i()) widget.i("On");
+    if (!syntax.i()) syntax.i("On");
+    if (!channel.i()) channel.i("629774177733181440");
+    if (!interval.i()) interval.i("400");
+    if (!cconsole.i()) cconsole.i("Off");
+    if (!gamer.i()) gamer.i("Off");
+    if (widget.i() == "On") $("head").htm('<link rel="preload" href="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" as="script">', true);
 })();
 
-(async () => {
-    let addElement = e => $(document.head).htm(e, true);
-    if (widget.i() == "On") addElement(`<link rel="preload" href="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" as="script">`);
-})();
-
-if (!widget.i()) widget.i("On");
-if (!syntax.i()) syntax.i("On");
-if (!channel.i()) channel.i("629774177733181440");
-if (!interval.i()) interval.i("400");
-if (!cconsole.i()) cconsole.i("Off");
-if (!gamer.i()) gamer.i("Off");
-
-$(window).onload(async () => {
-    let nav = $("^/Assets/Html/navigation.html").file;
-    nav.request(function() {
-        $("#nav").htm(this.responseText);
-    });
-
+$(window).onload(()=>{
     if (cconsole.i() == "On") {
         (async () => {
             removeEventListener("error", errhandler);

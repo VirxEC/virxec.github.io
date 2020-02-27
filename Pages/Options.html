@@ -1,173 +1,203 @@
 <!DOCTYPE html>
 <html lang="en-US">
-    <head>
-        <meta name="description" content="Options for VirxEC Showcase">
-        <meta name="twitter:description" content="Options for VirxEC Showcase">
-        <meta name="og:description" content="Options for VirxEC Showcase">
-        <title>Site Options</title>
-        <link rel="preload" href="/Assets/Js/cookie.min.js" as="script">
-        <script src="/Assets/Js/CPquery.js"></script>
-        <script src="/Assets/Js/Options.js"></script>
-        <style>
-            #login-prompt {
-                visibility: hidden;
-            }
+<head>
+    <link rel="preload" href="/Assets/Js/cookie.min.js" as="script">
+    
+    <link rel="preload" href="/Assets/Css/main.css" as="style">
+    <link rel="preload" href="/Assets/Js/Options.js" as="script">
+    <link rel="preload" href="/Assets/Js/CPquery.js" as="script">
 
-            #logout-prompt {
-                visibility: hidden;
-            }
-        </style>
-    </head>
-    <body>
-        <span id="nav"></span>
-        <p id="sconsole"></p>
-        <h1>Site Options</h1>
-        <p>MD5 algorithm credit: www.myersdaily.org/joseph/</p>
-        <p>Syntax highlighting credit: prismjs.com</p>
-        <p>Discord Widget credit: widgetbot.io</p>
-        <h3 id="login-prompt"><button id="login">Login to save settings</button></h3>
-        <h3 id="logout-prompt"><button id="logout">Logout</button> <button id="loadsettings">Load settings</button> <button id="savesettings">Save settings</button></h3>
-        <h3>Syntax Highlighting<button id="syntax"></button></h3>
-        <h3>Discord Widget <button id="widget"></button></h3>
-        <h3 id="channelWrap">
-            Default Channel
-            <select id="channel">
-                <option value="629774177733181440">CalcPlus</option>
-                <option value="507717342680186891">General</option>
-                <option value="583376212114669578">General 2</option>
-            </select>
-        </h3>
-        <h3>Gamer Mode <button id="gamer"></button></h3>
-        <h3 id="transitionWrap">Transition time <input type="range" min="1" max="5000" id="transition"> <button id="applytrans">Apply <span id="transval"></span>ms</button></h3>
-        <h3>On-Screen Console <button id="console"></button></h3>
-        <h3>Reset all <button id="reset">Reset</button></h3>
-        <script src="/Assets/Js/cookie.min.js"></script>
-        <script>
-            if (Cookies.get("u") && Cookies.get("p")) {
-                $("#logout-prompt").show();
-                $("#login-prompt").remove();
-                $("#loadsettings").listen("click", () => {
-                    let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c/latest").file;
-                    req.ready(function () {
-                        let data = JSON.parse(this.responseText)[Cookies.get("u")],
-                            invalid = false;
+    <meta name="keyworks" content="HTML,CSS,JavaScript,InfiniCalc,BigCalc,Big,Infitite,Calculator,Large,Number,Not,Small,Numbers,CalcPlus,Calc,Plus,Big Number Calculator,Big # Calc,GitHub,#,Calculator Plus,Library,JS,Hyper Text Markup Language,Cascading Style Sheet,JS Library">
+    <meta name="author" content="Eric (Virx/VirxEC) Michael Veilleux: virx@virxcase.ga">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="theme-color" content="#0066ff">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="VirxEC Showcase">
+
+    <meta name="twitter:site" content="@virxcase">
+    <meta name="twitter:card" content="summery-large-card">
+    <meta name="twitter:title" content="VirxEC Showcase">
+
+    <meta name="og:image" content="/Assets/icons/512.png">
+    <meta name="og:site_name" content="VirxEC Showcase">
+    <meta name="og:type" content="object">
+    <meta name="og:title" content="VirxEC Showcase">
+    <meta name="og:url" content="https://www.virxcase.ga">
+
+    <link href="/manifest.json" rel="manifest">
+    <link href="/Assets/icons/512.png" rel="icon">
+    <link href="/Assets/icons/128.png" rel="apple-touch-icon">
+
+    <meta name="description" content="Options for VirxEC Showcase">
+    <meta name="twitter:description" content="Options for VirxEC Showcase">
+    <meta name="og:description" content="Options for VirxEC Showcase">
+    <title>Site Options</title>
+    <style>
+        #login-prompt {
+            visibility: hidden;
+        }
+
+        #logout-prompt {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <span id="nav"></span>
+    <p id="sconsole"></p>
+    <h1>Site Options</h1>
+    <p>MD5 algorithm credit: www.myersdaily.org/joseph/</p>
+    <p>Syntax highlighting credit: prismjs.com</p>
+    <p>Discord Widget credit: widgetbot.io</p>
+    <h3 id="login-prompt"><button id="login">Login to save settings</button></h3>
+    <h3 id="logout-prompt"><button id="logout">Logout</button> <button id="loadsettings">Load settings</button> <button id="savesettings">Save settings</button></h3>
+    <h3>Syntax Highlighting<button id="syntax"></button></h3>
+    <h3>Discord Widget <button id="widget"></button></h3>
+    <h3 id="channelWrap">
+        Default Channel
+        <select id="channel">
+            <option value="629774177733181440">CalcPlus</option>
+            <option value="507717342680186891">General</option>
+            <option value="583376212114669578">General 2</option>
+        </select>
+    </h3>
+    <h3>Gamer Mode <button id="gamer"></button></h3>
+    <h3 id="transitionWrap">Transition time <input type="range" min="1" max="5000" id="transition"> <button id="applytrans">Apply <span id="transval"></span>ms</button></h3>
+    <h3>On-Screen Console <button id="console"></button></h3>
+    <h3>Reset all <button id="reset">Reset</button></h3>
+    
+    <link rel="stylesheet" href="/Assets/Css/main.css">
+    <script src="/Assets/Js/CPquery.js"></script>
+    <script src="/Assets/Js/Options.js"></script>
+    <script src="/Assets/Js/cookie.min.js"></script>
+    <script>
+        if (Cookies.get("u") && Cookies.get("p")) {
+            $("#logout-prompt").show();
+            $("#login-prompt").remove();
+            $("#loadsettings").listen("click", () => {
+                let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c/latest").file;
+                req.ready(function () {
+                    let data = JSON.parse(this.responseText)[Cookies.get("u")],
+                        invalid = false;
+                    if (data != null) {
+                        data = data[Cookies.get("p")];
                         if (data != null) {
-                            data = data[Cookies.get("p")];
-                            if (data != null) {
-                                $("@isConsole").i(data.console);
-                                $("@isWidget").i(data.widget);
-                                $("@isGamer").i(data.gamer);
-                                $("@isSyntax").i(data.syntax);
-                                ["629774177733181440", "507717342680186891", "583376212114669578"].includes(data.channel) ? $("@channel").i("629774177733181440") : $("@channel").i(data.channel);
-                                $("@interval").i(data.interval);
-                                location.reload();
-                            } else invalid = true;
+                            $("@isConsole").i(data.console);
+                            $("@isWidget").i(data.widget);
+                            $("@isGamer").i(data.gamer);
+                            $("@isSyntax").i(data.syntax);
+                            ["629774177733181440", "507717342680186891", "583376212114669578"].includes(data.channel) ? $("@channel").i("629774177733181440") : $("@channel").i(data.channel);
+                            $("@interval").i(data.interval);
+                            location.reload();
                         } else invalid = true;
-                        if (invalid) {
-                            Cookies.remove("u");
-                            Cookies.remove("p");
-                            location.replace("/login.html?invalid=true");
-                        }
-                    });
-                    req.open("GET");
-                    req.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
-                    req.send();
+                    } else invalid = true;
+                    if (invalid) {
+                        Cookies.remove("u");
+                        Cookies.remove("p");
+                        location.replace("/login.html?invalid=true");
+                    }
                 });
-                $("#savesettings").listen("click", () => {
-                    let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c/latest").file;
-                    req.ready(function () {
-                        let user = Cookies.get("u"),
-                            pass = Cookies.get("p"),
-                            data = JSON.parse(this.responseText),
-                            invalid = false;
-                        if (data[user]) {
-                            if (data[user][pass]) {
-                                data[user][pass] = {
-                                    console: $("@isConsole").i(),
-                                    widget: $("@isWidget").i(),
-                                    gamer: $("@isGamer").i(),
-                                    syntax: $("@isSyntax").i(),
-                                    channel: $("@channel").i(),
-                                    interval: $("@interval").i()
-                                };
-                                let save = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
-                                save.ready(function () {
-                                    let response = JSON.parse(this.responseText);
-                                    if (response.success) alert("Saved your settings");
-                                });
-                                save.open("PUT");
-                                save.i("setRequestHeader", "Content-type", "application/json");
-                                save.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
-                                save.i("setRequestHeader", "versioning", "false");
-                                save.send(JSON.stringify(data));
-                            } else invalid = true;
+                req.open("GET");
+                req.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
+                req.send();
+            });
+            $("#savesettings").listen("click", () => {
+                let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c/latest").file;
+                req.ready(function () {
+                    let user = Cookies.get("u"),
+                        pass = Cookies.get("p"),
+                        data = JSON.parse(this.responseText),
+                        invalid = false;
+                    if (data[user]) {
+                        if (data[user][pass]) {
+                            data[user][pass] = {
+                                console: $("@isConsole").i(),
+                                widget: $("@isWidget").i(),
+                                gamer: $("@isGamer").i(),
+                                syntax: $("@isSyntax").i(),
+                                channel: $("@channel").i(),
+                                interval: $("@interval").i()
+                            };
+                            let save = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
+                            save.ready(function () {
+                                let response = JSON.parse(this.responseText);
+                                if (response.success) alert("Saved your settings");
+                            });
+                            save.open("PUT");
+                            save.i("setRequestHeader", "Content-type", "application/json");
+                            save.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
+                            save.i("setRequestHeader", "versioning", "false");
+                            save.send(JSON.stringify(data));
                         } else invalid = true;
-                        if (invalid) {
-                            Cookies.remove("u");
-                            Cookies.remove("p");
-                            location.replace("/login.html?invalid=true");
-                        }
-                    });
-                    req.open("GET");
-                    req.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
-                    req.send();
+                    } else invalid = true;
+                    if (invalid) {
+                        Cookies.remove("u");
+                        Cookies.remove("p");
+                        location.replace("/login.html?invalid=true");
+                    }
                 });
-                $("#logout").listen("click", () => {
-                    Cookies.remove("u");
-                    Cookies.remove("p");
-                    location.replace("/login.html");
-                });
-            } else {
-                $("#login-prompt").show();
-                $("#logout-prompt").remove();
-                $("#login").on("click", () => location.replace("/login.html"));
-            }
-            
-            (async() => {
-                let id = [
-                        $("#console"),
-                        $("#widget"),
-                        $("#gamer"),
-                        $("#syntax")
-                    ],
-                    dex = [
-                        $("@isConsole"),
-                        $("@isWidget"),
-                        $("@isGamer"),
-                        $("@isSyntax")
-                    ];
-                $("#channel").val($("@channel").i());
-                $("#transition").val($("@interval").i());
-                $("#transval").txt($("@interval").i());
-                id.forEach((e, i) => {
-                    e.txt(dex[i].i());
-                    e.click(() => {
-                        let value = dex[i].i() == "On" ? "Off" : "On";
-                        dex[i].i(value);
-                        e.txt(value);
-                        location.reload();
-                    });
-                });
-                if ($("@isWidget").i() == "Off") $("#channelWrap").remove();
-                else {
-                    $("#channel").listen("change", () => {
-                        $("@channel").i($("#channel").val());
-                        if ($("@isWidget").i() == "On") discord.options.channel = $("@channel").i();
-                    });
-                }
-                if ($("@isGamer").i() == "Off") $("#transitionWrap").remove();
-                else {
-                    $("#transition").listen("input", () => $("#transval").txt($("#transition").val()));
-                    $("#applytrans").click(() => {
-                        $("@interval").i($("#transition").val());
-                        location.reload();
-                    });
-                }
-                $("#reset").click(() => {
-                    localStorage.clear();
+                req.open("GET");
+                req.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
+                req.send();
+            });
+            $("#logout").listen("click", () => {
+                Cookies.remove("u");
+                Cookies.remove("p");
+                location.replace("/login.html");
+            });
+        } else {
+            $("#login-prompt").show();
+            $("#logout-prompt").remove();
+            $("#login").on("click", () => location.replace("/login.html"));
+        }
+        
+        (async() => {
+            let id = [
+                    $("#console"),
+                    $("#widget"),
+                    $("#gamer"),
+                    $("#syntax")
+                ],
+                dex = [
+                    $("@isConsole"),
+                    $("@isWidget"),
+                    $("@isGamer"),
+                    $("@isSyntax")
+                ];
+            $("#channel").val($("@channel").i());
+            $("#transition").val($("@interval").i());
+            $("#transval").txt($("@interval").i());
+            id.forEach((e, i) => {
+                e.txt(dex[i].i());
+                e.click(() => {
+                    let value = dex[i].i() == "On" ? "Off" : "On";
+                    dex[i].i(value);
+                    e.txt(value);
                     location.reload();
                 });
-            })();
-        </script>
-    </body>
+            });
+            if ($("@isWidget").i() == "Off") $("#channelWrap").remove();
+            else {
+                $("#channel").listen("change", () => {
+                    $("@channel").i($("#channel").val());
+                    if ($("@isWidget").i() == "On") discord.options.channel = $("@channel").i();
+                });
+            }
+            if ($("@isGamer").i() == "Off") $("#transitionWrap").remove();
+            else {
+                $("#transition").listen("input", () => $("#transval").txt($("#transition").val()));
+                $("#applytrans").click(() => {
+                    $("@interval").i($("#transition").val());
+                    location.reload();
+                });
+            }
+            $("#reset").click(() => {
+                localStorage.clear();
+                location.reload();
+            });
+        })();
+    </script>
+</body>
 </html>

@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <link rel="preload" href="/Assets/Css/main.css" as="style">
+    <link rel="preload" href="/Assets/Js/Options.js" as="script">
+    <link rel="preload" href="/Assets/Js/CPquery.js" as="script">
+
+    <meta name="keyworks" content="HTML,CSS,JavaScript,InfiniCalc,BigCalc,Big,Infitite,Calculator,Large,Number,Not,Small,Numbers,CalcPlus,Calc,Plus,Big Number Calculator,Big # Calc,GitHub,#,Calculator Plus,Library,JS,Hyper Text Markup Language,Cascading Style Sheet,JS Library">
+    <meta name="author" content="Eric (Virx/VirxEC) Michael Veilleux: virx@virxcase.ga">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="theme-color" content="#0066ff">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="VirxEC Showcase">
+
+    <meta name="twitter:site" content="@virxcase">
+    <meta name="twitter:card" content="summery-large-card">
+    <meta name="twitter:title" content="VirxEC Showcase">
+
+    <meta name="og:image" content="/Assets/icons/512.png">
+    <meta name="og:site_name" content="VirxEC Showcase">
+    <meta name="og:type" content="object">
+    <meta name="og:title" content="VirxEC Showcase">
+    <meta name="og:url" content="https://www.virxcase.ga">
+
+    <link href="/manifest.json" rel="manifest">
+    <link href="/Assets/icons/512.png" rel="icon">
+    <link href="/Assets/icons/128.png" rel="apple-touch-icon">
+
+    <meta name="description" content="Preview the CalcPlus open-source library">
+    <meta name="twitter:description" content="Preview the CalcPlus open-source library">
+    <meta name="og:description" content="Preview the CalcPlus open-source library">
+
+    <title>Preview the CalcPlus Library</title>
+</head>
+<body>
+    <span id="nav"></span>
+    <div class="ctrls">
+        <p id="sconsole"></p>
+        <li>
+            <input type="radio" id="a" name="math" checked="checked">
+            <label for="a">Addition</label>
+        </li>
+        <li>
+            <input type="radio" id="s" name="math">
+            <label for="s">Subtraction</label>
+        </li>
+        <li>
+            <input type="radio" id="m" name="math">
+            <label for="m">Multiplication</label>
+        </li>
+        <li>
+            <input type="radio" id="e" name="math">
+            <label for="e" title="No decimals after the first number">Exponents</label>
+        </li>
+        <li>
+            <input type="radio" id="d" name="math">
+            <label for="d" title="In development">Division</label>
+        </li>
+        <li>
+            <input type="radio" id="f" name="math">
+            <label for="f" title="No decimals">Factorial</label>
+        </li>
+        <li>
+            <input type="radio" id="l" name="math">
+            <label for="l">Is Less Than</label>
+        </li>
+        <li>
+            <input type="radio" id="g" name="math">
+            <label for="g">Is Greater Than</label>
+        </li>
+        <li>
+            <input type="radio" id="le" name="math">
+            <label for="le">Is Less Than or Equal</label>
+        </li>
+        <li>
+            <input type="radio" id="ge" name="math">
+            <label for="ge">Is Greater Than or Equal</label>
+        </li>
+        <li>
+            <input type="radio" id="r" name="math">
+            <label for="r">Round</label>
+        </li>
+        <li>
+            <input type="radio" id="ru" name="math">
+            <label for="ru">Round Up</label>
+        </li>
+        <li>
+            <input type="radio" id="rd" name="math">
+            <label for="rd">Round down</label>
+        </li>
+        <button id="powermode"><span id="powerstatus">Enable</span> Power mode</button>
+        <button id="anticheck"><span id="checkstatus">Enable</span> Anti-Check</button>
+        <br>
+        <button id="addInput">Add another input field</button>
+        <br>
+        <input type="text" id="input1" placeholder="Number">
+        <br>
+        <input type="text" id="input2" placeholder="Number">
+        <br>
+        <span id="extraInputs"></span>
+        <button id="calc">Calculate...</button>
+        <p id="output">Press "Calculate..."</p>
+
+        <ul id="CPLinks">
+            <li><a href="https://repl.it/github/VirxEC/CalcPlus">Test latest Node.js version on Repl.it</a></li>
+            <li><a href="https://github.com/VirxEC/CalcPlus/packages">CalcPlus Beta Node.js LIbrary</a></li>
+            <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.4.0-beta-js">CalcPlus Stable Beta Library (v0.4.0)</a></li>
+            <li><a href="https://www.virxcase.ga/CalcPlus/Library.js" download="CalcPlus_BETA_Library.js">CalcPlus Alpha Library (Latest)</a></li>
+        </ul>
+    </div>
+
+    <link rel="stylesheet" href="/Assets/Css/main.css">
+    <script src="/Assets/Js/CPquery.js"></script>
+    <script src="/Assets/Js/Options.js"></script>
+    <script src="https://www.virxcase.ga/CalcPlus/Library.js"></script>
+    <script>
+        let inputBoxes=2, divChecked=false, gc=n=>$("#"+n).tag("checked");
+            $("#powermode").listen("click", ()=>{
+                togglePowerMode();
+                if (powermode) $("#powerstatus").txt("Disable");
+                else $("#powerstatus").txt("Enable");
+            });
+            $("#anticheck").listen("click", ()=>{
+                toggleAntiCheck();
+                if (anticheck) $("#checkstatus").txt("Disable");
+                else $("#checkstatus").txt("Enable");
+            });
+        $("#d").listen("change", ()=>{
+            if (gc("d")) $("#extraInputs").htm('<span id="spanDivMax"><input type="text" id="maxDecimal" placeholder="Max decimal place"><br></span>', true);
+            else $("#spanDivMax").tagfunc("remove");
+        });
+        $("#addInput").listen("click", ()=>{
+            inputBoxes++;
+            $("#extraInputs").htm(`<span id="id${inputBoxes}"><input type="text" id="input${inputBoxes}" placeholder="Number"><button class="removeInput" id="${inputBoxes}" onclick="this.parentNode.remove();inputBoxes-=1;">X</button><br></span>`, true);
+        });
+        $("#calc").listen("click", ()=>{
+            let final, inputs=[];
+            for(var i=1;i<=inputBoxes;i++)inputs[i-1]=$("#input"+i).tag("value");
+            final=gc("a")?a(inputs):gc("s")?s(inputs):gc("m")?m(inputs):gc("e")?e(inputs):gc("d")?d(inputs, $("#maxDecimal").tag("value")):gc("f")?f(inputs[0]):gc("l")?l(inputs):gc("g")?g(inputs):gc("le")?le(inputs):gc("ge")?ge(inputs):gc("r")?r(inputs[0]):gc("ru")?ru(inputs[0]):gc("rd")?rd(inputs[0]):console.error("No option was checked");
+            $("#output").txt("Answer: "+final);
+        });
+    </script>
+</body>
+</html>

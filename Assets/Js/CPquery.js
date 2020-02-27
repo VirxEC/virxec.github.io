@@ -7,22 +7,24 @@
 function cpQuery(query, num = false) {
     let element, local = false,
         session = false;
-    if (typeof query == "string") {
-        if (["", "document"].includes(query)) element = document;
-        else if (query == "window") element = window;
-        else if (query == "head") element = document.head;
-        else if (query == "body") element = document.body;
-        else {
-            if (query[0] == "@") query = query.substr(1), local = true;
-            else if (query[0] == "*") query = query.substr(1), session = true;
-            else if (query[0] == '^') query = query.substr(1);
-            else if (num == false) element = document.querySelector(query);
-            else if (num == true) element = document.querySelectorAll(query);
-            else element = element = document.querySelectorAll(query)[num];
-        }
-    } else if (!query) element = document;
-    else element = query;
-    function select(num) {
+    (async ()=>{
+        if (typeof query == "string") {
+            if (["", "document"].includes(query)) element = document;
+            else if (query == "window") element = window;
+            else if (query == "head") element = document.head;
+            else if (query == "body") element = document.body;
+            else {
+                if (query[0] == "@") query = query.substr(1), local = true;
+                else if (query[0] == "*") query = query.substr(1), session = true;
+                else if (query[0] == '^') query = query.substr(1);
+                else if (num == false) element = document.querySelector(query);
+                else if (num == true) element = document.querySelectorAll(query);
+                else element = element = document.querySelectorAll(query)[num];
+            }
+        } else if (!query) element = document;
+        else element = query;
+    })();
+    async function select(num) {
         element = document.querySelectorAll(query)[num];
     }
     function textNode(node) {
@@ -70,25 +72,25 @@ function cpQuery(query, num = false) {
         constructor() {
             this.sheet = document.styleSheets[query];
         }
-        append(item) {
+        async append(item) {
             this.sheet.insertRule(item, this.sheet.cssRules.length);
         }
-        remove(item) {
+        async remove(item) {
             this.sheet.deleteRule(item);
         }
-        removeAll() {
+        async removeAll() {
             for (let i = 0; i < this.sheet.cssRules.length; i++) this.sheet.deleteRule(i);
         }
-        replaceWithAll() {
+        async replaceWithAll() {
             let i = Array.isArray(arguments[0]) ? arguments[0] : arguments;
             this.removeAll();
             for (let g in i) this.append(i[g]);
         }
-        createSheet() {
+        async createSheet() {
             element.appendChild(document.createElement("style"));
         }
     };
-    function listen(name, code, options = false) {
+    async function listen(name, code, options = false) {
         if (typeof code == "object") Object.keys(code).forEach(i => element.addEventListener(i, code[i], options));
         else element.addEventListener(name, code, options);
     }
@@ -126,28 +128,28 @@ function cpQuery(query, num = false) {
         constructor() {
             this.raw = new XMLHttpRequest();
         }
-        load(f) {
+        async load(f) {
             this.raw.onreadystatechange = f;
         }
-        ready(f) {
+        async ready(f) {
             this.raw.onreadystatechange = function () {
                 if (this.readyState == XMLHttpRequest.DONE && this.status == 200) f.call(this);
             };
         }
-        open(type, async = true, user = null, pass = null) {
+        async open(type, async = true, user = null, pass = null) {
             this.raw.open(type, query, async, user, pass);
         }
-        send(item) {
+        async send(item) {
             this.raw.send(item);
         }
-        request(f) {
+        async request(f) {
             this.raw.onreadystatechange = function () {
                 if (this.readyState == XMLHttpRequest.DONE && this.status == 200) f.call(this);
             };
             this.raw.open("GET", query);
             this.raw.send();
         }
-        abort() {
+        async abort() {
             this.raw.abort();
         }
         i(type, item, value) {
