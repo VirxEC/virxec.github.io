@@ -54,11 +54,8 @@
 	<script src="/Assets/Js/Prism.js"></script>
 	<script>
         $("window").onload(()=>{
-            var raw = new $("^/Assets/Js/CPquery.js").file;
-            raw.request(function(){
-                let text = this.responseText;
-                if ($("@isSyntax").i() == "On") text = Prism.highlight(text, Prism.languages.javascript, 'javascript');
-                $("#source").htm(text);
+            $("^/Assets/Js/CPquery.js").file(function() {
+                $("#source").htm($("@isSyntax").i() == "On" ? Prism.highlight(this.responseText, Prism.languages.javascript, 'javascript') : this.responseText);
             });
         });
 	</script>

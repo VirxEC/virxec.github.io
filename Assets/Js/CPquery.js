@@ -24,9 +24,7 @@ function cpQuery(query, num = false) {
         } else if (!query) element = document;
         else element = query;
     })();
-    async function select(num) {
-        element = document.querySelectorAll(query)[num];
-    }
+
     function textNode(node) {
         return element.createTextNode(node);
     }
@@ -39,9 +37,12 @@ function cpQuery(query, num = false) {
         return element[f](...a);
     }
     const create = class {
-        constructor(type, num) {
-            if (num) element = element[num];
+        constructor(type, tags) {
             this.newelem = document.createElement(type);
+            if (tags) {
+                for (let [key, value] of Object.entries(tags)) this.newelem[key] = value;
+                element.appendChild(this.newelem);
+            }
         }
         style(tag, item) {
             this.newelem.style[tag] = item;
@@ -61,10 +62,12 @@ function cpQuery(query, num = false) {
         tag(tag, item) {
             this.newelem[tag] = item;
         }
-        append() {
-            element.appendChild(this.newelem);
+
+        tags(items) {
+            for (let [key, value] of Object.entries(items)) this.newelem[key] = value;
         }
-        async asyncAppend() {
+
+        async append() {
             element.appendChild(this.newelem);
         }
     };
@@ -125,8 +128,29 @@ function cpQuery(query, num = false) {
         else return element.style[tag];
     }
     const file = class {
-        constructor() {
+        constructor(options) {
             this.raw = new XMLHttpRequest();
+            if (typeof options == "object") {
+                if (options.load) this.raw.onreadystatechange = options.load;
+                if (options.ready) {
+                    this.raw.onreadystatechange = function() {
+                        if (this.readyState = XMLHttpRequest.DONE && this.status == 200) options.ready.call(this);
+                    };
+                }
+                if (options.setRequestHeader) this.raw.setRequestHeader(options.setRequestHeader.item, options.setRequestHeader.value);
+                else if (options.requestHeader) this.raw.setRequestHeader(options.reqestHeader.item, options.reqestHeader.value);
+
+                if (typeof options.open == "string") options.open = { type:options.open };
+                if (!options.open.async) options.open.async = true;
+                this.raw.open(options.open.type, options.open.async, options.open.username, options.open.password);
+                this.raw.send(options.send);
+            } else if (typeof options == "function") {
+                this.raw.onreadystatechange = function() {
+                    if (this.readyState == XMLHttpRequest.DONE && this.status == 200) options.call(this);
+                };
+                this.raw.open("GET", query);
+                this.raw.send();
+            }
         }
         async load(f) {
             this.raw.onreadystatechange = f;
@@ -143,7 +167,7 @@ function cpQuery(query, num = false) {
             this.raw.send(item);
         }
         async request(f) {
-            this.raw.onreadystatechange = function () {
+            this.raw.onreadystatechange = function() {
                 if (this.readyState == XMLHttpRequest.DONE && this.status == 200) f.call(this);
             };
             this.raw.open("GET", query);
@@ -177,8 +201,8 @@ function cpQuery(query, num = false) {
         hover: f => listen("hover", f),
         focus: f => listen("focus", f),
         ready: f => listen("load", f),
+        file: o => new file(o),
         val: f => tag("value", f),
-        file: new file(),
         node: textNode,
         css: new css(),
         on: listen,
@@ -186,7 +210,6 @@ function cpQuery(query, num = false) {
         text: txt,
         tagfunc,
         listen,
-        select,
         tagcss,
         func,
         htm,

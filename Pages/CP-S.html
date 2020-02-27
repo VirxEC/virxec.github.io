@@ -58,11 +58,8 @@
 	<link rel="stylesheet" href="/Assets/Css/prism.css">
     <script>
         $("window").onload(()=>{
-            var raw = new $("^https://www.virxcase.ga/CalcPlus/Library.js").file;
-            raw.request(function(){
-                let text = this.responseText;
-                if ($("@isSyntax").i() == "On") text = Prism.highlight(text, Prism.languages.javascript, 'javascript');
-                $("#source").htm(text);
+            $("^https://www.virxcase.ga/CalcPlus/Library.js").file(function(){
+                $("#source").htm($("@isSyntax").i() == "On" ? Prism.highlight(this.responseText, Prism.languages.javascript, 'javascript') : this.responseText);
             });
         });
 	</script>

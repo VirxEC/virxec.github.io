@@ -9,8 +9,7 @@ if (path[path.length-1] == "index.html") {
 delete path;
 if (location.origin == "https://www.virxcase.ga" && location.pathname.split(".")[1] == "html") location.replace(location.pathname.split(".")[0]);
 
-let nav = $("^/Assets/Html/navigation.html").file;
-nav.request(function() {
+$("^/Assets/Html/navigation.html").file(function() {
     $("#nav").htm(this.responseText);
 });
 
@@ -67,16 +66,16 @@ $(window).onload(()=>{
     }
 
     if (widget.i() == "On") {
-        let dscript = $("head").create("script");
-        dscript.tag("src", "https://cdn.jsdelivr.net/npm/@widgetbot/crate@3");
-        dscript.tag("onload", async () => {
-            discord = new Crate({
-                server: '507708985206505482',
-                channel: channel.i(),
-                shard: "https://e.widgetbot.io",
-                defer: true
-            });
+        $("head").create("script", {
+            src: "https://cdn.jsdelivr.net/npm/@widgetbot/crate@3",
+            onload: async ()=>{
+                discord = new Crate({
+                    server: '507708985206505482',
+                    channel: channel.i(),
+                    shard: "https://e.widgetbot.io",
+                    defer: true
+                });
+            }
         });
-        dscript.append();
     }
 });
