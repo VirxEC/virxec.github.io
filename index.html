@@ -33,16 +33,21 @@
     <meta name="og:description" content="VirxEC Showcase. Showcasing: CalcPlus & CPQuery. CalcPlus is a library that lets numbers be calculated way over the normal limit without losing precision. CPQuery is a lightweight version of jQuery that has all the features that are most commonly used.">
     <meta name="twitter:description" content="VirxEC Showcase. Showcasing: CalcPlus & CPQuery. CalcPlus is a library that lets numbers be calculated way over the normal limit without losing precision. CPQuery is a lightweight version of jQuery that has all the features that are most commonly used.">
 
-    <style>#pwamsg {display:none;}</style>
+    <style>
+        #pwamsg {display:none;}
+        .top {margin-bottom:0;}
+        .middle {margin: 0 auto;}
+        .bottom {margin-top: 0;}
+    </style>
 </head>
 <body>
     <span id="nav"></span>
     <div class="center">
         <p id="sconsole"></p>
-        <h1 style="margin-bottom:0;">VirxEC Showcase Website</h1>
+        <h1 class="top">VirxEC Showcase Website</h1>
         <img id="calcplus-icon" src="/Assets/icons/152.png" alt="CalcPlus logo">
-        <p style="margin:0 auto;">Contact me: <a href="mailto:virx@virxcase.ga" target="_blank">virx@virxcase.ga</a></p>
-        <p style="margin-top:0;">GitHub: <a href="https://github.com/VirxEC">VirxEC</a></p>
+        <p class="middle">Contact me: <a href="mailto:virx@virxcase.ga" target="_blank">virx@virxcase.ga</a></p>
+        <p class="bottom">GitHub: <a href="https://github.com/VirxEC">VirxEC</a></p>
     </div>
 
     <table>
@@ -56,33 +61,34 @@
                         <li><a href="https://www.instagram.com/bobcatrobotics/">Instagram</a></li>
                         <li><a href="https://twitter.com/Bobcat_Robotics">Twitter</a></li>
                     </ul>
-                    <div id="pwamsg">
-                        <h3 class="top">Install the VirxEC Showcase <abbr title="Progressive Website Application">PWA</abbr>!</h3>
-                        <p class="middle">Install a shortcut to this website in fullscreen mode!</p>
-                        <a href="https://blog.bitsrc.io/what-is-a-pwa-and-why-should-you-care-388afb6c0bad">What's a "PWA"?</a><br/>
-                        <button class="bottom" id="pwainstall">Install now (No download)</button>
-                    </div>
-                </td>
-                <td class="left">
+                    <h3>CalcPlus Project Links</h3>
                     <ul>
-                        <h3>Download Links</h3>
-                        <li><a href="/LICENSE" download="CalcPlus_License.txt">CalcPlus License</a></li>
-                        <a href="https://repl.it/github/VirxEC/CalcPlus">Test latest Node.js version on Repl.it</a>
-                        <li><a href="https://github.com/VirxEC/CalcPlus/packages">CalcPlus Beta Node.js Library</a></li>
-                        <li><a href="https://github.com/VirxEC/CalcPlus/releases">All Javascript releases</a></li>
-                        <li><a href="https://github.com/VirxEC/CalcPlus/archive/v0.4.1-beta-js.zip" download="CalcPlus_Library_0-4-1.js">CalcPlus Beta Library (v0.4.1)</a></li>
-                        <li><a href="https://www.virxcase.ga/CalcPlus/Library.js" download="CalcPlus_Library_ALPHA.js">CalcPlus Alpha Library (v0.4.1)</a></li>
-                        <li><a href="https://github.com/VirxEC/CPQuery/releases/download/v1.2/CPQuery_1-2-0.min.js" download>CPQuery v1.2.0 Library</a></li>
-                        <li><a href="/Assets/Js/CPquery.js" download="CPQuery.js">CPQuery Beta Library (v1.3.0)</a></li>
-                    </ul>
-                    <ul>
-                        <h3>CalcPlus Project Links</h3>
                         <li><a href="https://github.com/VirxEC/CalcPlus/wiki">Wiki</a></li>
                         <li><a href="https://github.com/VirxEC/CalcPlus/projects/1">To do page</a></li>
                         <li><a href="https://github.com/VirxEC/CalcPlus/issues/new?assignees=VirxEC&labels=bug&template=bug_report.md&title=%5BBUG%5D">Submit a bug report</a></li>
                         <li><a href="https://github.com/VirxEC/CalcPlus/issues/new?assignees=VirxEC&labels=enhancement&template=feature_request.md&title=%5BFEATURE+REQUEST%5D">Suggest a feature</a></li>
                         <li><a href="https://github.com/VirxEC/CalcPlus/compare">Submit a pull request</a></li>
                     </ul>
+                </td>
+                <td class="left">
+                    <h3>Download Links</h3>
+                    <ul>
+                        <li><a href="/LICENSE" download="CalcPlus_License.txt">CalcPlus License</a></li>
+                        <a href="https://repl.it/github/VirxEC/CalcPlus">Test latest Node.js version on Repl.it</a>
+                        <li><a href="https://github.com/VirxEC/CalcPlus/packages">CalcPlus Beta Node.js Library</a></li>
+                        <li><a href="https://github.com/VirxEC/CalcPlus/releases">All Javascript releases</a></li>
+                        <li><a href="https://github.com/VirxEC/CalcPlus/archive/v0.4.1-beta-js.zip" download="CalcPlus_Library_0-4-1.js">CalcPlus Beta Library (v0.4.1)</a></li>
+                        <li><a href="https://www.virxcase.ga/CalcPlus/Library.js" download="CalcPlus_Library_ALPHA.js">CalcPlus Alpha Library (v0.4.1)</a></li>
+                        <li><a href="https://github.com/VirxEC/CPQuery/archive/v1.3.zip" download>CPQuery v1.3.0 Library</a></li>
+                        <li><a href="/Assets/Js/CPquery.js" download="CPQuery.js">CPQuery Beta Library (v1.3.0)</a></li>
+                    </ul>
+                    <div id="pwamsg">
+                        <h3>Install the VirxEC Showcase <a href="https://blog.bitsrc.io/what-is-a-pwa-and-why-should-you-care-388afb6c0bad"><abbr title="Progressive Web App">PWA</abbr></a>!</h3>
+                        <ul>
+                            <p class="top">Install a shortcut to this website in fullscreen mode!</p>
+                            <button class="bottom" id="pwainstall">Install now (No download)</button>
+                        </ul>
+                    </div>
                 </td>
             </tr>
         </tbody>
@@ -97,15 +103,10 @@
         var prompt;
         addEventListener('beforeinstallprompt', e=>{
             prompt = e;
-            document.querySelector("#pwamsg").style.display = "block";
+            console.log(e);
+            $("#pwamsg").tagcss("display", "block");
         });
-        $("#pwainstall").listen('click', e=> {
-            prompt.prompt();
-            deferredPrompt.userChoice.then(c => {
-                if (choiceResult.outcome == 'accepted') document.querySelector("#pwamsg").remove();
-                prompt = null;
-            });
-        });
+        $("#pwainstall").click(e=>prompt.prompt());
         if (/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase() && !(('standalone' in window.navigator) && (window.navigator.standalone))) && !('standalone' in navigator)) this.setState({ showInstallMessage: true });
     </script>
 </body>
