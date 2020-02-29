@@ -209,8 +209,8 @@ td.left {
     text-align: right;
 }
 
-td.right ul {
-    direction: rtl;
+td ul {
+    list-style: none;
 }
 
 .ctrls {
@@ -244,4 +244,16 @@ button {
 
 #CPLinks a {
     color: var(--color-tertiary);
+}
+
+.stable {
+    color: green;
+}
+
+.develop {
+    color: lightgreen;
+}
+
+.fix {
+    color: yellow;
 }

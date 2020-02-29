@@ -40,8 +40,6 @@ let c = "v4",
     "/404",
     "/"
   ];
-self["addEventListener"]("install", e => e["waitUntil"](caches["open"](c)["then"](f => f["addAll"](d))["then"](() => self["skipWaiting"]())));
-self["addEventListener"]("activate", g => g["waitUntil"](caches["keys"]()["then"](c => Promise["all"](c["map"](i => i != c ? caches["delete"](i) : null)))));
-self["addEventListener"]("fetch", j => {
-  j.request.mode != 'navigate' ? 0 : j["respondWith"](fetch(j["request"])["catch"](() => caches["match"](j["request"])));
-});
+self.addEventListener("install", e => e.waitUntil(caches.open(c).then(f => f.addAll(d)).then(() => self.skipWaiting())));
+self.addEventListener("activate", g => g.waitUntil(caches.keys().then(c => Promise.all(c.map(i => i != c ? caches.delete(i) : null)))));
+self.addEventListener("fetch", j => j.request.mode != 'navigate' ? 0 : j.respondWith(fetch(j.request).catch(() => caches.match(j.request))));
