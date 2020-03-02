@@ -100,13 +100,12 @@
     <script>
         if ('serviceWorker' in navigator) navigator.serviceWorker.register("/service-worker.js");
 
-        var prompt;
-        addEventListener('beforeinstallprompt', e=>{
-            prompt = e;
-            console.log(e);
+        var p;
+        addEventListener('beforeinstallp', e=>{
+            p = e;
             $("#pwamsg").tagcss("display", "block");
         });
-        $("#pwainstall").click(e=>prompt.prompt());
+        $("#pwainstall").click(e=>p.prompt());
         if (/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase() && !(('standalone' in window.navigator) && (window.navigator.standalone))) && !('standalone' in navigator)) this.setState({ showInstallMessage: true });
     </script>
 </body>
