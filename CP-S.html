@@ -55,13 +55,11 @@
     <script src="/Assets/Js/CPquery.js"></script>
     <script src="/Assets/Js/Options.js"></script>
 	<script src="/Assets/Js/Prism.js"></script>
-	<link rel="stylesheet" href="/Assets/Css/prism.css">
     <script>
-        $("window").onload(()=>{
-            $("^https://www.virxcase.ga/CalcPlus/Library.js").file(function(){
-                $("#source").htm($("@isSyntax").i() == "On" ? Prism.highlight(this.responseText, Prism.languages.javascript, 'javascript') : this.responseText);
-            });
+        $("^https://www.virxcase.ga/CalcPlus/Library.js").file(async function(){
+            $("#source").htm($("@isSyntax").i() == "On" ? Prism.highlight(this.responseText, Prism.languages.javascript, 'javascript') : this.responseText);
         });
 	</script>
+	<link rel="stylesheet" href="/Assets/Css/prism.css">
   </body>
 </html>

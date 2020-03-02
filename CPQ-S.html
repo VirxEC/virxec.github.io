@@ -50,14 +50,12 @@
     <script src="/Assets/Js/CPquery.js"></script>
     <script src="/Assets/Js/Options.js"></script>
 
-	<link rel="stylesheet" href="/Assets/Css/prism.css">
 	<script src="/Assets/Js/Prism.js"></script>
 	<script>
-        $("window").onload(()=>{
-            $("^/Assets/Js/CPquery.js").file(function() {
-                $("#source").htm($("@isSyntax").i() == "On" ? Prism.highlight(this.responseText, Prism.languages.javascript, 'javascript') : this.responseText);
-            });
+        $("^/Assets/Js/CPquery.js").file(function() {
+            $("#source").htm($("@isSyntax").i() == "On" ? Prism.highlight(this.responseText, Prism.languages.javascript, 'javascript') : this.responseText);
         });
 	</script>
+	<link rel="stylesheet" href="/Assets/Css/prism.css">
   </body>
 </html>
