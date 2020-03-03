@@ -45,7 +45,8 @@ a:visited {
 }
 
 nav {
-    position: relative;
+    position: sticky;
+    top:0;
     width: 100% !important;
     background: var(--bg-secondary);
     text-align: right;
