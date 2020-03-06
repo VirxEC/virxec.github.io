@@ -114,9 +114,8 @@
     <link rel="stylesheet" href="/Assets/Css/main.css">
     <script src="/Assets/Js/CPquery.js"></script>
     <script src="/Assets/Js/Options.js"></script>
-    <script src="https://www.virxcase.ga/CalcPlus/Library.js"></script>
     <script type="module">
-        import { addition as a, subtract as s, multiply as m, exponent as e, divide as d, factorial as f, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, togglePowerMode } from "https://www.virxcase.ga/CalcPlus/bin/calcplus.js";
+        import { add as a, subtract as s, multiply as m, exponent as e, divide as d, factorial as f, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, togglePowerMode } from "https://www.virxcase.ga/CalcPlus/bin/calcplus.js";
         let inputBoxes=2, divChecked=false, gc=n=>$("#"+n).tag("checked");
         $("#powermode").listen("click", ()=>{
             togglePowerMode();
@@ -134,7 +133,7 @@
         $("#calc").listen("click", ()=>{
             let final, inputs=[];
             for(var i=1;i<=inputBoxes;i++)inputs[i-1]=$("#input"+i).tag("value");
-            final=gc("a")?a(inputs):gc("s")?s(inputs):gc("m")?m(inputs):gc("e")?e(inputs):gc("d")?d(inputs, $("#maxDecimal").tag("value")):gc("f")?f(inputs[0]):gc("l")?l(inputs):gc("g")?g(inputs):gc("le")?le(inputs):gc("ge")?ge(inputs):gc("r")?r(inputs[0]):gc("ru")?ru(inputs[0]):gc("rd")?rd(inputs[0]):console.error("No option was checked");
+            final=gc("a")?a(...inputs):gc("s")?s(...inputs):gc("m")?m(...inputs):gc("e")?e(...inputs):gc("d")?d(...inputs):gc("f")?f(inputs[0]):gc("l")?l(inputs[0], inputs[1]):gc("g")?g(inputs[0], inputs[1]):gc("le")?le(inputs[0], inputs[1]):gc("ge")?ge(inputs[0], inputs[1]):gc("r")?r(inputs[0]):gc("ru")?ru(inputs[0]):gc("rd")?rd(inputs[0]):console.error("No option was checked");
             $("#output").txt("Answer: "+final);
         });
     </script>
