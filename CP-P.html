@@ -92,7 +92,6 @@
             <label for="rd">Round down</label>
         </li>
         <button id="powermode"><span id="powerstatus">Enable</span> Power mode</button>
-        <button id="anticheck"><span id="checkstatus">Enable</span> Anti-Check</button>
         <br>
         <button id="addInput">Add another input field</button>
         <br>
@@ -107,8 +106,8 @@
         <ul id="CPLinks">
             <li><a href="https://repl.it/github/VirxEC/CalcPlus">Test latest Node.js version on Repl.it</a></li>
             <li><a href="https://github.com/VirxEC/CalcPlus/packages">CalcPlus Beta Node.js Library</a></li>
-            <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.4.3-beta-js">CalcPlus Stable Beta Library (v0.4.3)</a></li>
-            <li><a href="https://www.virxcase.ga/CalcPlus/Library.js" download="CalcPlus_BETA_Library.js">CalcPlus Alpha Library (Latest)</a></li>
+            <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.4.3-beta-js">CalcPlus Beta Library (v0.4.3)</a></li>
+            <li><a href="https://www.virxcase.ga/CalcPlus/bin/calcplus.js" download="CalcPlus_ALPHA_Library.js">CalcPlus Alpha ModuleJS Library (v0.5.0)</a></li>
         </ul>
     </div>
 
@@ -116,18 +115,14 @@
     <script src="/Assets/Js/CPquery.js"></script>
     <script src="/Assets/Js/Options.js"></script>
     <script src="https://www.virxcase.ga/CalcPlus/Library.js"></script>
-    <script>
+    <script type="module">
+        import { addition as a, subtract as s, multiply as m, exponent as e, divide as d, factorial as f, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, togglePowerMode } from "https://www.virxcase.ga/CalcPlus/bin/calcplus.js";
         let inputBoxes=2, divChecked=false, gc=n=>$("#"+n).tag("checked");
-            $("#powermode").listen("click", ()=>{
-                togglePowerMode();
-                if (powermode) $("#powerstatus").txt("Disable");
-                else $("#powerstatus").txt("Enable");
-            });
-            $("#anticheck").listen("click", ()=>{
-                toggleAntiCheck();
-                if (anticheck) $("#checkstatus").txt("Disable");
-                else $("#checkstatus").txt("Enable");
-            });
+        $("#powermode").listen("click", ()=>{
+            togglePowerMode();
+            if (powermode) $("#powerstatus").txt("Disable");
+            else $("#powerstatus").txt("Enable");
+        });
         $("#d").listen("change", ()=>{
             if (gc("d")) $("#extraInputs").htm('<span id="spanDivMax"><input type="text" id="maxDecimal" placeholder="Max decimal place"><br></span>', true);
             else $("#spanDivMax").tagfunc("remove");

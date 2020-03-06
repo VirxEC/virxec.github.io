@@ -45,8 +45,8 @@
     <ul id="CPLinks">
         <li><a href="https://repl.it/github/VirxEC/CalcPlus">Test latest Node.js version on Repl.it</a></li>
         <li><a href="https://github.com/VirxEC/CalcPlus/packages">CalcPlus Beta Node.js Library</a></li>
-        <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.4.3-beta-js">CalcPlus Stable Beta Library (v0.4.3)</a></li>
-        <li><a href="https://www.virxcase.ga/CalcPlus/Library.js" download="CalcPlus_BETA_Library.js">CalcPlus Alpha Library (Latest)</a></li>
+        <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.4.3-beta-js">CalcPlus Beta Library (v0.4.3)</a></li>
+        <li><a href="https://www.virxcase.ga/CalcPlus/bin/calcplus.js" download="CalcPlus_ALPHA_ModuleJS_Library.js">CalcPlus Alpha ModuleJS Library (v0.5.0)</a></li>
     </ul>
 
     <pre><code id="source">Loading. If this is taking too long, please turn off "Syntax Highlighting" in <a href="./Options.html">Options</a>.</code></pre>
@@ -56,7 +56,7 @@
     <script src="/Assets/Js/Options.js"></script>
 	<script src="/Assets/Js/Prism.js"></script>
     <script>
-        $("^https://www.virxcase.ga/CalcPlus/Library.js").file(async function(){
+        $("^https://www.virxcase.ga/CalcPlus/bin/calcplus.js").file(async function(){
             $("#source").htm($("@isSyntax").i() == "On" ? Prism.highlight(this.responseText, Prism.languages.javascript, 'javascript') : this.responseText);
         });
 	</script>

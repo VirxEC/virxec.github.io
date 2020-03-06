@@ -2,7 +2,7 @@
     --bg-main: #131318;
     --bg-secondary: #0f0f11;
     --color-main: #eee;
-    --color-secondary: #0066ff;
+    --color-secondary: #0095ff;
     --color-tertiary: #00ddff;
 }
 
@@ -45,8 +45,7 @@ a:visited {
 }
 
 nav {
-    position: sticky;
-    top:0;
+    position: relative;
     width: 100% !important;
     background: var(--bg-secondary);
     text-align: right;
