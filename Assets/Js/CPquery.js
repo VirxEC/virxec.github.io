@@ -31,11 +31,6 @@ function cpQuery(query, num = false) {
     function func(f) {
         return element[f];
     }
-    function tagfunc(f) {
-        let a = [...arguments];
-        a.shift();
-        return element[f](...a);
-    }
     const create = class {
         constructor(type, tags) {
             this.newelem = document.createElement(type);
@@ -124,7 +119,7 @@ function cpQuery(query, num = false) {
     }
     function tagcss(tag, extra) {
         if (typeof extra == "string") extra = [extra];
-        if (extra) extra.forEach(item=> element.style[tag] = item);
+        if (extra) extra.forEach(item => element.style[tag] = item);
         else return element.style[tag];
     }
     const file = class {
@@ -195,8 +190,9 @@ function cpQuery(query, num = false) {
         mousedown: f => listen("mousedown", f),
         dblclick: f => listen("dblclick", f),
         mouseup: f => listen("mouseup", f),
+        change: f => listen("change", f),
+        remove: ()=> tag("remove")(),
         onload: f => listen("load", f),
-        remove: () => tagfunc("remove"),
         click: f => listen("click", f),
         hover: f => listen("hover", f),
         focus: f => listen("focus", f),
@@ -208,7 +204,6 @@ function cpQuery(query, num = false) {
         on: listen,
         html: htm,
         text: txt,
-        tagfunc,
         listen,
         tagcss,
         func,

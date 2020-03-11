@@ -37,68 +37,68 @@
 </head>
 <body>
     <span id="nav"></span>
+    <p id="sconsole"></p>
     <div class="ctrls">
-        <p id="sconsole"></p>
-        <li>
-            <input type="radio" id="a" name="math" checked="checked">
-            <label for="a">Addition</label>
-        </li>
-        <li>
-            <input type="radio" id="s" name="math">
-            <label for="s">Subtraction</label>
-        </li>
-        <li>
-            <input type="radio" id="m" name="math">
-            <label for="m">Multiplication</label>
-        </li>
-        <li>
-            <input type="radio" id="e" name="math">
-            <label for="e" title="No decimals after the first number">Exponents</label>
-        </li>
-        <li>
-            <input type="radio" id="d" name="math">
-            <label for="d" title="In development">Division</label>
-        </li>
-        <li>
-            <input type="radio" id="f" name="math">
-            <label for="f" title="No decimals">Factorial</label>
-        </li>
-        <li>
-            <input type="radio" id="l" name="math">
-            <label for="l">Is Less Than</label>
-        </li>
-        <li>
-            <input type="radio" id="g" name="math">
-            <label for="g">Is Greater Than</label>
-        </li>
-        <li>
-            <input type="radio" id="le" name="math">
-            <label for="le">Is Less Than or Equal</label>
-        </li>
-        <li>
-            <input type="radio" id="ge" name="math">
-            <label for="ge">Is Greater Than or Equal</label>
-        </li>
-        <li>
-            <input type="radio" id="r" name="math">
-            <label for="r">Round</label>
-        </li>
-        <li>
-            <input type="radio" id="ru" name="math">
-            <label for="ru">Round Up</label>
-        </li>
-        <li>
-            <input type="radio" id="rd" name="math">
-            <label for="rd">Round down</label>
-        </li>
+        <button id="setMaxInteger">Set max integer to <input type="text" id="maxInteger" size="20" value="18446744073709551615"></button><br>
+        <button id="setMaxDecimal">Set max decimal to <input type="text" id="maxDecimal" size="3" value="10"></button><br>
         <button id="powermode"><span id="powerstatus">Enable</span> Power mode</button>
-        <br>
-        <button id="addInput">Add another input field</button>
-        <br>
-        <input type="text" id="input1" placeholder="Number">
-        <br>
-        <input type="text" id="input2" placeholder="Number">
-        <br>
+        <ul style="padding-left:0;">
+            <li>
+                <input type="radio" id="a" name="math" checked="checked">
+                <label for="a">Addition</label>
+            </li>
+            <li>
+                <input type="radio" id="s" name="math">
+                <label for="s">Subtraction</label>
+            </li>
+            <li>
+                <input type="radio" id="m" name="math">
+                <label for="m">Multiplication</label>
+            </li>
+            <li>
+                <input type="radio" id="e" name="math">
+                <label for="e" title="No decimals after the first number">Exponents</label>
+            </li>
+            <li>
+                <input type="radio" id="d" name="math">
+                <label for="d" title="In development">Division</label>
+            </li>
+            <li>
+                <input type="radio" id="f" name="math">
+                <label for="f" title="No decimals">Factorial</label>
+            </li>
+            <li>
+                <input type="radio" id="l" name="math">
+                <label for="l">Is Less Than</label>
+            </li>
+            <li>
+                <input type="radio" id="g" name="math">
+                <label for="g">Is Greater Than</label>
+            </li>
+            <li>
+                <input type="radio" id="le" name="math">
+                <label for="le">Is Less Than or Equal</label>
+            </li>
+            <li>
+                <input type="radio" id="ge" name="math">
+                <label for="ge">Is Greater Than or Equal</label>
+            </li>
+            <li>
+                <input type="radio" id="r" name="math">
+                <label for="r">Round</label>
+            </li>
+            <li>
+                <input type="radio" id="ru" name="math">
+                <label for="ru">Round Up</label>
+            </li>
+            <li>
+                <input type="radio" id="rd" name="math">
+                <label for="rd">Round down</label>
+            </li>
+        </ul>
+        <button id="addInput">Add another input field</button><br>
+        <input type="text" id="input1" placeholder="Number"><br>
+        <input type="text" id="input2" placeholder="Number"><br>
         <span id="extraInputs"></span>
         <button id="calc">Calculate...</button>
         <p id="output">Press "Calculate..."</p>
@@ -115,22 +115,24 @@
     <script src="/Assets/Js/CPquery.js"></script>
     <script src="/Assets/Js/Options.js"></script>
     <script type="module">
-        import { add as a, subtract as s, multiply as m, exponent as e, divide as d, factorial as f, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, togglePowerMode } from "https://www.virxcase.ga/CalcPlus/bin/calcplus.js";
+        import { add as a, subtract as s, multiply as m, exponent as e, divide as d, factorial as f, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, togglePowerMode, setMaxInteger, setMaxDecimal } from "https://www.virxcase.ga/CalcPlus/bin/calcplus.js";
         let inputBoxes=2, divChecked=false, gc=n=>$("#"+n).tag("checked");
-        $("#powermode").listen("click", ()=>{
+        $("#setMaxInteger").click(()=>setMaxInteger(+$("#maxInteger").val()));
+        $("#setMaxDecimal").click(()=>setMaxDecimal(+$("#maxDecimal").val()));
+        $("#powermode").click(()=>{
             togglePowerMode();
             if (powermode) $("#powerstatus").txt("Disable");
             else $("#powerstatus").txt("Enable");
         });
-        $("#d").listen("change", ()=>{
-            if (gc("d")) $("#extraInputs").htm('<span id="spanDivMax"><input type="text" id="maxDecimal" placeholder="Max decimal place"><br></span>', true);
-            else $("#spanDivMax").tagfunc("remove");
+        $("#options").click(()=>{
+            if (gc("d")) $("#spanDivMax").tagcss("display", "block");
+            else $("#spanDivMax").tagcss("display", "none");
         });
-        $("#addInput").listen("click", ()=>{
+        $("#addInput").click(()=>{
             inputBoxes++;
             $("#extraInputs").htm(`<span id="id${inputBoxes}"><input type="text" id="input${inputBoxes}" placeholder="Number"><button class="removeInput" id="${inputBoxes}" onclick="this.parentNode.remove();inputBoxes-=1;">X</button><br></span>`, true);
         });
-        $("#calc").listen("click", ()=>{
+        $("#calc").click(()=>{
             let final, inputs=[];
             for(var i=1;i<=inputBoxes;i++)inputs[i-1]=$("#input"+i).tag("value");
             final=gc("a")?a(...inputs):gc("s")?s(...inputs):gc("m")?m(...inputs):gc("e")?e(...inputs):gc("d")?d(...inputs):gc("f")?f(inputs[0]):gc("l")?l(inputs[0], inputs[1]):gc("g")?g(inputs[0], inputs[1]):gc("le")?le(inputs[0], inputs[1]):gc("ge")?ge(inputs[0], inputs[1]):gc("r")?r(inputs[0]):gc("ru")?ru(inputs[0]):gc("rd")?rd(inputs[0]):console.error("No option was checked");
