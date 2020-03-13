@@ -38,6 +38,7 @@
 <body>
     <span id="nav"></span>
     <p id="sconsole"></p>
+    <h1 style="color:red">This preview is currently broken.<br>CalcPlus is under heavy development is this might be broken for a bit.</h1>
     <div class="ctrls">
         <button id="setMaxInteger">Set max integer to <input type="text" id="maxInteger" size="20" value="18446744073709551615"></button><br>
         <button id="setMaxDecimal">Set max decimal to <input type="text" id="maxDecimal" size="3" value="10"></button><br>
@@ -115,13 +116,13 @@
     <script src="/Assets/Js/CPquery.js"></script>
     <script src="/Assets/Js/Options.js"></script>
     <script type="module">
-        import { add as a, subtract as s, multiply as m, exponent as e, divide as d, factorial as f, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, togglePowerMode, setMaxInteger, setMaxDecimal } from "https://www.virxcase.ga/CalcPlus/bin/calcplus.js";
+        import { add as a, subtract as s, multiply as m, exponent as e, divide as d, factorial as f, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, togglePowerMode, getPowerMode, setMaxInteger, setMaxDecimalLength } from "https://www.virxcase.ga/CalcPlus/bin/calcplus.js";
         let inputBoxes=2, divChecked=false, gc=n=>$("#"+n).tag("checked");
         $("#setMaxInteger").click(()=>setMaxInteger(+$("#maxInteger").val()));
-        $("#setMaxDecimal").click(()=>setMaxDecimal(+$("#maxDecimal").val()));
+        $("#setMaxDecimal").click(()=>setMaxDecimalLength(+$("#maxDecimal").val()));
         $("#powermode").click(()=>{
             togglePowerMode();
-            if (powermode) $("#powerstatus").txt("Disable");
+            if (getPowerMode()) $("#powerstatus").txt("Disable");
             else $("#powerstatus").txt("Enable");
         });
         $("#options").click(()=>{
