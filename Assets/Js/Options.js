@@ -1,14 +1,6 @@
 var errors = "", errhandler = a => errors += `<div class="error">${a.error}</div>`;
 if (localStorage.getItem("console") == "On") addEventListener("error", errhandler); // whole point of this is so if anything in the Library breaks, this doesn't break.
 
-var path = location.pathname.split("/")
-if (path[path.length-1] == "index.html") {
-    path[path.length-1] = "";
-    location.replace(path.join("/"));
-}
-delete path;
-if (location.origin == "https://www.virxcase.ga" && location.pathname.split(".")[1] == "html") location.replace(location.pathname.split(".")[0]);
-
 $("^/Assets/Html/navigation.html").file(function() {
     $("#nav").htm(this.responseText);
 });

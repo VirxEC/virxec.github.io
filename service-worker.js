@@ -1,6 +1,6 @@
 let c = "v4",
   d = [
-    "https://www.virxcase.ga/CalcPlus/Library.js",
+    "https://www.virxcase.ga/CalcPlus/bin/calcplus.js",
     "/Assets/Html/navigation.html",
     "/Assets/icons/072.png",
     "/Assets/icons/096.png",

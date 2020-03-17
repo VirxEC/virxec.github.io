@@ -4,15 +4,15 @@
 		<priority>1.00</priority>
 	</url>
 	<url>
-		<loc>https://www.virxcase.ga/PreviewLibrary/</loc>
+		<loc>https://www.virxcase.ga/CP-P</loc>
 		<priority>0.80</priority>
 	</url>
 	<url>
-		<loc>https://www.virxcase.ga/LibrarySource/</loc>
+		<loc>https://www.virxcase.ga/CP-S</loc>
 		<priority>0.80</priority>
 	</url>
 	<url>
-		<loc>https://www.virxcase.ga/CPQuerySource/</loc>
+		<loc>https://www.virxcase.ga/CPQ-S</loc>
 		<priority>0.80</priority>
 	</url>
 	<url>
@@ -20,7 +20,11 @@
 		<priority>0.80</priority>
 	</url>
 	<url>
-		<loc>https://www.virxcase.ga/PageOptions/</loc>
+		<loc>https://www.virxcase.ga/Options</loc>
 		<priority>0.80</priority>
+	</url>
+	<url>
+		<loc>https://www.virxcase.ga/login</loc>
+		<priority>0.60</priority>
 	</url>
 </urlset>	
