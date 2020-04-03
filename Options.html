@@ -4,6 +4,7 @@
     <link rel="preload" href="/Assets/Js/cookie.min.js" as="script">
     
     <link rel="preload" href="/Assets/Css/main.css" as="style">
+    <link rel="preload" href="/Assets/Css/Options.css" as="style">
     <link rel="preload" href="/Assets/Js/Options.js" as="script">
     <link rel="preload" href="/Assets/Js/CPquery.js" as="script">
 
@@ -34,26 +35,43 @@
     <meta name="twitter:description" content="Options for VirxEC Showcase">
     <meta name="og:description" content="Options for VirxEC Showcase">
     <title>Site Options</title>
-    <style>
-        #login-prompt {
-            visibility: hidden;
-        }
-
-        #logout-prompt {
-            visibility: hidden;
-        }
-    </style>
 </head>
 <body>
-    <span id="nav"></span>
+    <nav>
+        <div id="mt">
+            <input type="checkbox">
+            <span class="navdecor"></span>
+            <span class="navdecor"></span>
+            <span class="navdecor"></span>
+            <ul>
+                <li id="ic"><a href="#"><img src="/Assets/icons/128.png" alt="CalcPlus Icon"></a></li>
+                <li><a href="/">Home</a></li>
+                <li class="dropdown">
+                    <input type="checkbox" id="calcplus">
+                    <label for="calcplus">CalcPlus</label>
+                    <ul class="dropdown-content">
+                        <li><a href="https://www.virxcase.ga/CalcPlus/">About</a></li>
+                        <li><a href="/CP-P.html">Preview</a></li>
+                        <li><a href="https://github.com/VirxEC/CalcPlus">GitHub</a></li>
+                        <li><a href="/CP-S.html">Source</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <input type="checkbox" id="cpquery">
+                    <label for="cpquery">CPQuery</label>
+                    <ul class="dropdown-content">
+                        <li><a href="/CPQ-S.html">Source</a></li>
+                        <li><a href="https://github.com/VirxEC/CPQuery">GitHub</a></li>
+                    </ul>
+                </li>
+                <li><a href="/Options.html">Options</a></li>
+                <li><a href="https://discord.gg/Fyu8Bdd">Discord</a></li>
+            </ul>
+        </div>
+    </nav>
     <p id="sconsole"></p>
-    <h1>Site Options</h1>
-    <p>MD5 algorithm credit: www.myersdaily.org/joseph/</p>
-    <p>Syntax highlighting credit: prismjs.com</p>
-    <p>Discord Widget credit: widgetbot.io</p>
-    <h3 id="login-prompt"><button id="login">Login to save settings</button></h3>
+    <h3 id="login-prompt"><button id="login">Login/signup to save settings<br><span id="disclaimer">(You can use a fake email if you want)</span></button></h3>
     <h3 id="logout-prompt"><button id="logout">Logout</button> <button id="loadsettings">Load settings</button> <button id="savesettings">Save settings</button></h3>
-    <h3>Syntax Highlighting<button id="syntax"></button></h3>
     <h3>Discord Widget <button id="widget"></button></h3>
     <h3 id="channelWrap">
         Default Channel
@@ -69,6 +87,7 @@
     <h3>Reset all <button id="reset">Reset</button></h3>
     
     <link rel="stylesheet" href="/Assets/Css/main.css">
+    <link rel="stylesheet" href="/Assets/Css/Options.css">
     <script src="/Assets/Js/CPquery.js"></script>
     <script src="/Assets/Js/Options.js"></script>
     <script src="/Assets/Js/cookie.min.js"></script>
@@ -76,71 +95,78 @@
         if (Cookies.get("u") && Cookies.get("p")) {
             $("#logout-prompt").show();
             $("#login-prompt").remove();
-            $("#loadsettings").listen("click", () => {
-                let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c/latest").file;
-                req.ready(function () {
-                    let data = JSON.parse(this.responseText)[Cookies.get("u")],
-                        invalid = false;
-                    if (data != null) {
-                        data = data[Cookies.get("p")];
+            $("#loadsettings").click(() => {
+                $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c/latest").file({
+                    ready: function() {
+                        let data = JSON.parse(this.responseText)[Cookies.get("u")],
+                            invalid = false;
                         if (data != null) {
-                            $("@isConsole").i(data.console);
-                            $("@isWidget").i(data.widget);
-                            $("@isGamer").i(data.gamer);
-                            $("@isSyntax").i(data.syntax);
-                            ["629774177733181440", "507717342680186891", "583376212114669578"].includes(data.channel) ? $("@channel").i("629774177733181440") : $("@channel").i(data.channel);
-                            $("@interval").i(data.interval);
-                            location.reload();
+                            data = data[Cookies.get("p")];
+                            if (data != null) {
+                                $("@isConsole").i(data.console);
+                                $("@isWidget").i(data.widget);
+                                $("@isGamer").i(data.gamer);
+                                $("@channel").i(["629774177733181440", "507717342680186891", "583376212114669578"].includes(data.channel) ? data.channel : "629774177733181440");
+                                $("@interval").i(data.interval);
+                                location.reload();
+                            } else invalid = true;
                         } else invalid = true;
-                    } else invalid = true;
-                    if (invalid) {
-                        Cookies.remove("u");
-                        Cookies.remove("p");
-                        location.replace("/login.html?invalid=true");
+                        if (invalid) {
+                            Cookies.remove("u");
+                            Cookies.remove("p");
+                            location.replace("/login.html?invalid=true");
+                        }
+                    },
+                    open: "GET",
+                    requestHeader: {
+                        "Content-type": "application/json",
+                        "secret-key": "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK"
                     }
                 });
-                req.open("GET");
-                req.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
-                req.send();
             });
-            $("#savesettings").listen("click", () => {
-                let req = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c/latest").file;
-                req.ready(function () {
-                    let user = Cookies.get("u"),
-                        pass = Cookies.get("p"),
-                        data = JSON.parse(this.responseText),
-                        invalid = false;
-                    if (data[user]) {
-                        if (data[user][pass]) {
-                            data[user][pass] = {
-                                console: $("@isConsole").i(),
-                                widget: $("@isWidget").i(),
-                                gamer: $("@isGamer").i(),
-                                syntax: $("@isSyntax").i(),
-                                channel: $("@channel").i(),
-                                interval: $("@interval").i()
-                            };
-                            let save = new $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file;
-                            save.ready(function () {
-                                let response = JSON.parse(this.responseText);
-                                if (response.success) alert("Saved your settings");
-                            });
-                            save.open("PUT");
-                            save.i("setRequestHeader", "Content-type", "application/json");
-                            save.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
-                            save.i("setRequestHeader", "versioning", "false");
-                            save.send(JSON.stringify(data));
+            $("#savesettings").click(() => {
+                $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c/latest").file({
+                    ready: function() {
+                        let user = Cookies.get("u"),
+                            pass = Cookies.get("p"),
+                            data = JSON.parse(this.responseText),
+                            invalid = false;
+                            
+                        if (data[user]) {
+                            if (data[user][pass]) {
+                                data[user][pass] = {
+                                    console: $("@isConsole").i(),
+                                    widget: $("@isWidget").i(),
+                                    gamer: $("@isGamer").i(),
+                                    channel: $("@channel").i(),
+                                    interval: $("@interval").i()
+                                };
+                                $("^https://api.jsonbin.io/b/5e1dbd365df640720835379c").file({
+                                    ready: function() {
+                                        if (JSON.parse(this.responseText).success) alert("Saved your settings");
+                                    },
+                                    open: "PUT",
+                                    requestHeader: {
+                                        "Content-type": "application/json",
+                                        "secret-key": "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK",
+                                        versioning: false
+                                    },
+                                    send: JSON.stringify(data)
+                                });
+                            } else invalid = true;
                         } else invalid = true;
-                    } else invalid = true;
-                    if (invalid) {
-                        Cookies.remove("u");
-                        Cookies.remove("p");
-                        location.replace("/login.html?invalid=true");
+                        if (invalid) {
+                            Cookies.remove("u");
+                            Cookies.remove("p");
+                            // location.replace("/login.html?invalid=true");
+                        }
+                    },
+                    open: "GET",
+                    requestHeader: {
+                        "Content-type": "application/json",
+                        "secret-key": "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK"
                     }
                 });
-                req.open("GET");
-                req.i("setRequestHeader", "secret-key", "$2b$10$oMtRuPvA7L.8VNjBxDVU5.1cW0iAwTYRMEPb1kByjWjgia7yGMxOK");
-                req.send();
             });
             $("#logout").listen("click", () => {
                 Cookies.remove("u");
@@ -157,14 +183,12 @@
             let id = [
                     $("#console"),
                     $("#widget"),
-                    $("#gamer"),
-                    $("#syntax")
+                    $("#gamer")
                 ],
                 dex = [
                     $("@isConsole"),
                     $("@isWidget"),
-                    $("@isGamer"),
-                    $("@isSyntax")
+                    $("@isGamer")
                 ];
             $("#channel").val($("@channel").i());
             $("#transition").val($("@interval").i());

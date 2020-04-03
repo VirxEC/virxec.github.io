@@ -1,79 +1,171 @@
 <!DOCTYPE html>
 <html lang="en-US">
-    <head>
-        <link rel="preload" href="/Assets/Html/navigation.html" as="fetch" crossorigin>
-        <link rel="preload" href="/Assets/Css/main.css" as="stylesheet">
-        <link rel="preload" href="/Assets/Js/CPquery.js" as="script">
-        <link rel="preload" href="/Assets/Js/Options.js" as="script">
-        <meta name="keyworks" content="HTML,CSS,JavaScript,InfiniCalc,BigCalc,Big,Infitite,Calculator,Large,Number,Not,Small,Numbers,CalcPlus,Calc,Plus,Big Number Calculator,Big # Calc,GitHub,#,Calculator Plus,Library,JS,Hyper Text Markup Language,Cascading Style Sheet,JS Library">
-        <meta name="author" content="Eric (Virx/VirxEC) Michael Veilleux: virx@virxcase.ga">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <meta name="theme-color" content="#0066ff">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-title" content="VirxEC Showcase">
-        <meta name="twitter:site" content="@virxcase">
-        <meta name="twitter:card" content="summery-large-card">
-        <meta name="twitter:title" content="VirxEC Showcase">
-        <meta name="og:image" content="/Assets/icons/512.png">
-        <meta name="og:site_name" content="VirxEC Showcase">
-        <meta name="og:type" content="object">
-        <meta name="og:title" content="VirxEC Showcase">
-        <meta name="og:url" content="https://www.virxcase.ga">
-        <link href="/manifest.json" rel="manifest">
-        <link href="/Assets/icons/512.png" rel="icon">
-        <link href="/Assets/icons/128.png" rel="apple-touch-icon">
-        <meta name="description" content="Log into Virxcase">
-        <meta name="twitter:description" content="Log into Virxcase">
-        <meta name="og:description" content="Log into Virxcase">
-        <title>Log into Virxcase</title>
-        <style>
-            #error {
-            visibility: hidden;
-            color: red;
-            }
-        </style>
-    </head>
-    <body>
-        <span id="nav"></span>
-        <p id="sconsole"></p>
-        <h2>You must login before you can do that</h2>
-        <h3 id="error">Invalid username/password</h3>
-        <script>
-            function get(n) {
-            let result, tmp = [];
-            location.search.substr(1).split("&").forEach(i=>{
-            tmp = i.split("=");
-            if (tmp[0] == n) result = decodeURIComponent(tmp[1]);
-            });
-            return result;
-            }
-            (async ()=>{
-            if (get("invalid") == "true") $("#error").show();
-            })();
-        </script>
-        <form id="login" action="/logon.html">
-            <input name="s" type="checkbox">
-            <label for="s">I'm signing up</label><br>
-            <input name="e" type="email" placeholder="Email" autocomplete="email" autofocus required><br>
-            <input name="p" type="password" placeholder="Password" autocomplete="current-password" required><br>
-            <input name="r" type="checkbox">
-            <label for="r">Remember me</label><br>
-            <input type="submit" value="Login/Signup"><br>
+
+<head>
+  <link rel="preload" href="/Assets/Css/main.css" as="style">
+  <link rel="preload" href="/Assets/Css/login.css" as="style">
+  <link rel="preload" href="/Assets/Js/CPquery.js" as="script">
+  <link rel="preload" href="/Assets/Js/Options.js" as="script">
+  <meta name="keyworks"
+    content="HTML,CSS,JavaScript,InfiniCalc,BigCalc,Big,Infitite,Calculator,Large,Number,Not,Small,Numbers,CalcPlus,Calc,Plus,Big Number Calculator,Big # Calc,GitHub,#,Calculator Plus,Library,JS,Hyper Text Markup Language,Cascading Style Sheet,JS Library">
+  <meta name="author" content="Eric (Virx/VirxEC) Michael Veilleux: virx@virxcase.ga">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="theme-color" content="#0066ff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="VirxEC Showcase">
+  <meta name="twitter:site" content="@virxcase">
+  <meta name="twitter:card" content="summery-large-card">
+  <meta name="twitter:title" content="VirxEC Showcase">
+  <meta name="og:image" content="/Assets/icons/512.png">
+  <meta name="og:site_name" content="VirxEC Showcase">
+  <meta name="og:type" content="object">
+  <meta name="og:title" content="VirxEC Showcase">
+  <meta name="og:url" content="https://www.virxcase.ga">
+  <link href="/manifest.json" rel="manifest">
+  <link href="/Assets/icons/512.png" rel="icon">
+  <link href="/Assets/icons/128.png" rel="apple-touch-icon">
+  <meta name="description" content="Log into Virxcase">
+  <meta name="twitter:description" content="Log into Virxcase">
+  <meta name="og:description" content="Log into Virxcase">
+  <title>Log into Virxcase</title>
+  <style>
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div id="mt">
+      <input type="checkbox">
+      <span class="navdecor"></span>
+      <span class="navdecor"></span>
+      <span class="navdecor"></span>
+      <ul>
+        <li id="ic"><a href="#"><img src="/Assets/icons/128.png" alt="CalcPlus Icon"></a></li>
+        <li><a href="/">Home</a></li>
+        <li class="dropdown">
+          <input type="checkbox" id="calcplus">
+          <label for="calcplus">CalcPlus</label>
+          <ul class="dropdown-content">
+            <li><a href="https://www.virxcase.ga/CalcPlus/">About</a></li>
+            <li><a href="/CP-P.html">Preview</a></li>
+            <li><a href="https://github.com/VirxEC/CalcPlus">GitHub</a></li>
+            <li><a href="/CP-S.html">Source</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <input type="checkbox" id="cpquery">
+          <label for="cpquery">CPQuery</label>
+          <ul class="dropdown-content">
+            <li><a href="/CPQ-S.html">Source</a></li>
+            <li><a href="https://github.com/VirxEC/CPQuery">GitHub</a></li>
+          </ul>
+        </li>
+        <li><a href="/Options.html">Options</a></li>
+        <li><a href="https://discord.gg/Fyu8Bdd">Discord</a></li>
+      </ul>
+    </div>
+  </nav>
+  <p id="sconsole"></p>
+
+  <section class="forms-section">
+    <div class="forms">
+      <div class="form-wrapper is-active">
+        <button type="button" class="switcher switcher-login">
+          Login
+          <span class="underline"></span>
+        </button>
+        <form class="form form-login" action="/logon.html">
+          <fieldset>
+            <legend>Please, enter your email and password for login</legend>
+            <h4 id="invalid" class="error">Invalid username/password</h4>
+            <h4 id="user-exists" class="error">User already exists; try logging in</h4>
+            <div class="input-block">
+              <label for="login-email">Email</label>
+              <input id="login-email" type="email" placeholder="example@exmaple.com" name="e" required
+                autocomplete="email" autofocus>
+            </div>
+            <div class="input-block">
+              <label for="login-password">Password</label>
+              <input id="login-password" type="password" name="p" autocomplete="current-password" required>
+            </div>
+          </fieldset>
+          <button type="submit" class="btn-login">Login</button>
         </form>
-        <link rel="stylesheet" href="/Assets/Css/main.css">
-        <script src="/Assets/Js/CPquery.js"></script>
-        <script src="/Assets/Js/Options.js"></script>
-        <script>
-            (async ()=>{
-              let check = false,
-                loginElements = $("#login").tag("elements");
-              $(loginElements["s"]).on("change", ()=>{
-                  check = !check;
-                  if (check) loginElements["p"].autocomplete = "new-password";
-                  else loginElements["p"].autocomplete = "current-password";
-              });
-            })();
-        </script>
-    </body>
+      </div>
+      <div class="form-wrapper">
+        <button type="button" class="switcher switcher-signup">
+          Sign Up
+          <span class="underline"></span>
+        </button>
+        <form class="form form-signup" action="/logon.html">
+          <fieldset>
+            <legend>Please, enter your email, password and password confirmation for sign up</legend>
+            <input type="checkbox" name="s" checked hidden>
+            <div class="input-block">
+              <label for="signup-email">Email</label>
+              <input id="signup-email" type="email" placeholder="example@example.com" name="e" required autofocus
+                autocomplete="email">
+            </div>
+            <div class="input-block">
+              <label for="signup-password">Password</label>
+              <input id="signup-password" type="password" name="p" required autocomplete="new-password">
+            </div>
+            <div class="input-block">
+              <label for="signup-password-confirm">Confirm password</label>
+              <input id="signup-password-confirm" type="password" required autocomplete="new-password">
+            </div>
+          </fieldset>
+          <button type="submit" class="btn-signup">Continue</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <link rel="stylesheet" href="/Assets/Css/main.css">
+  <link rel="stylesheet" href="/Assets/Css/login.css">
+  <script src="/Assets/Js/CPquery.js"></script>
+  <script src="/Assets/Js/Options.js"></script>
+  <script>
+    const password = $("#signup-password"),
+      confirm_password = $("#signup-password-confirm"),
+      switchers = $('.switcher', true);
+
+    function validatePassword() {
+      if (password.val() != confirm_password.val()) {
+        confirm_password.func("setCustomValidity", "Passwords don't match");
+      } else {
+        confirm_password.func("setCustomValidity", "");
+      }
+    }
+
+    password.change(validatePassword);
+    confirm_password.on("keyup", validatePassword);
+
+    switchers.forEachItem(item => {
+      $(item).click(function () {
+        switchers.forEachItem(item => item.parentElement.classList.remove('is-active'));
+        this.parentElement.classList.add('is-active');
+      });
+    });
+
+    (async () => {
+      function get(n) {
+        let result, tmp = [];
+        location.search.substr(1).split("&").forEach(i => {
+          tmp = i.split("=");
+          if (tmp[0] == n) result = decodeURIComponent(tmp[1]);
+        });
+        return result;
+      }
+
+      if (get("invalid") === "true") $("#invalid").show();
+      else $("#invalid").style("display", "none");
+
+      if (get("user-exists") === "true") $("#user-exists").show();
+      else $("#user-exists").style("display", "none");
+    })();
+  </script>
+</body>
+
 </html>

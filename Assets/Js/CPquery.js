@@ -4,34 +4,35 @@
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and limitations under the License
  */
-function cpQuery(query, num = false) {
-    let element, local = false,
-        session = false;
-    (async ()=>{
-        if (typeof query == "string") {
-            if (["", "document"].includes(query)) element = document;
-            else if (query == "window") element = window;
-            else if (query == "head") element = document.head;
-            else if (query == "body") element = document.body;
-            else {
-                if (query[0] == "@") query = query.substr(1), local = true;
-                else if (query[0] == "*") query = query.substr(1), session = true;
-                else if (query[0] == '^') query = query.substr(1);
-                else if (num == false) element = document.querySelector(query);
-                else if (num == true) element = document.querySelectorAll(query);
-                else element = element = document.querySelectorAll(query)[num];
-            }
-        } else if (!query) element = document;
-        else element = query;
-    })();
+function cpQuery(query, num) {
+    let local = false,
+        session = false,
+        element;
+
+    if (typeof query === "string") {
+        if (["", "document"].includes(query)) element = document;
+        else if (query === "window") element = window;
+        else if (query === "head") element = document.head;
+        else if (query === "body") element = document.body;
+        else {
+            if (query[0] == "@") query = query.substr(1), local = true;
+            else if (query[0] === "*") query = query.substr(1), session = true;
+            else if (query[0] === '^') query = query.substr(1);
+            else if (!num) element = document.querySelector(query);
+            else if (num === true) element = document.querySelectorAll(query);
+            else element = document.querySelectorAll(query)[num];
+        }
+    } else if (!query) element = document;
+    else element = query;
+
+    function forEachItem(func) {
+        for (let i = 0; i < element.length; i++) func(element[i], i);
+    }
 
     function textNode(node) {
         return element.createTextNode(node);
     }
-    function func(f) {
-        return element[f];
-    }
-    const create = class {
+    class create {
         constructor(type, tags) {
             this.newelem = document.createElement(type);
             if (tags) {
@@ -66,7 +67,7 @@ function cpQuery(query, num = false) {
             element.appendChild(this.newelem);
         }
     };
-    const css = class {
+    class css {
         constructor() {
             this.sheet = document.styleSheets[query];
         }
@@ -117,28 +118,32 @@ function cpQuery(query, num = false) {
         if (extra) extra.forEach(item=>tag == "#" ? element.id = item : tag == "." ? element.class = item : element[tag] = item);
         else return tag == "#" ? element.id : tag == "." ? element.class : element[tag];
     }
-    function tagcss(tag, extra) {
+    function func(tag, ...args) {
+        return element[tag](...args);
+    }
+    function style(tag, extra) {
         if (typeof extra == "string") extra = [extra];
         if (extra) extra.forEach(item => element.style[tag] = item);
         else return element.style[tag];
     }
-    const file = class {
+    class file {
         constructor(options) {
             this.raw = new XMLHttpRequest();
             if (typeof options == "object") {
                 if (options.load) this.raw.onreadystatechange = options.load;
                 if (options.ready) {
                     this.raw.onreadystatechange = function() {
-                        if (this.readyState = XMLHttpRequest.DONE && this.status == 200) options.ready.call(this);
+                        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) options.ready.call(this);
                     };
                 }
-                if (options.setRequestHeader) this.raw.setRequestHeader(options.setRequestHeader.item, options.setRequestHeader.value);
-                else if (options.requestHeader) this.raw.setRequestHeader(options.reqestHeader.item, options.reqestHeader.value);
 
                 if (typeof options.open == "string") options.open = { type:options.open };
-                if (!options.open.async) options.open.async = true;
-                this.raw.open(options.open.type, options.open.async, options.open.username, options.open.password);
-                this.raw.send(options.send);
+                this.raw.open(options.open.type, query, true, options.open.username, options.open.password);
+
+                if (options.requestHeader) Object.keys(options.requestHeader).forEach(item=>this.raw.setRequestHeader(item, options.requestHeader[item]));
+
+                if(options.send) this.raw.send(options.send);
+                else this.raw.send();
             } else if (typeof options == "function") {
                 this.raw.onreadystatechange = function() {
                     if (this.readyState == XMLHttpRequest.DONE && this.status == 200) options.call(this);
@@ -180,32 +185,40 @@ function cpQuery(query, num = false) {
             name: "CPQuery",
             major: 1,
             minor: 3,
-            bugFix: 0
+            bugFix: 1
         },
-        show: () => tagcss("visibility", "visible"),
-        hide: () => tagcss("visibility", "hidden"),
+
         create: (tag, num) => new create(tag, num),
+        file: o => new file(o),
+        css: new css(),
+
+        show: () => style("visibility", "visible"),
+        hide: () => style("visibility", "hidden"),
+
+        val: f => tag("value", f),
+        
+        remove: () => func("remove"),
+
         mouseenter: f => listen("mouseenter", f),
         mouseleave: f => listen("mouseleave", f),
         mousedown: f => listen("mousedown", f),
         dblclick: f => listen("dblclick", f),
         mouseup: f => listen("mouseup", f),
         change: f => listen("change", f),
-        remove: ()=> tag("remove")(),
         onload: f => listen("load", f),
         click: f => listen("click", f),
         hover: f => listen("hover", f),
         focus: f => listen("focus", f),
         ready: f => listen("load", f),
-        file: o => new file(o),
-        val: f => tag("value", f),
+        
         node: textNode,
-        css: new css(),
         on: listen,
         html: htm,
         text: txt,
+
+        forEachItem,
         listen,
-        tagcss,
+        style,
         func,
         htm,
         tag,
@@ -214,6 +227,6 @@ function cpQuery(query, num = false) {
     };
 }
 
-function $(q) {
-    return cpQuery(q);
+function $(q, n) {
+    return cpQuery(q, n);
 }

@@ -6,7 +6,7 @@
     <link rel="preload" href="/Assets/Js/CPquery.js" as="script">
 
 	<link rel="preload" href="/Assets/Js/Prism.js" as="script">
-	<link rel="preload" href="/Assets/Css/prism.css" as="style">
+	<link rel="preload" href="/Assets/Css/prism.min.css" as="style">
 
     <meta name="keyworks" content="HTML,CSS,JavaScript,InfiniCalc,BigCalc,Big,Infitite,Calculator,Large,Number,Not,Small,Numbers,CalcPlus,Calc,Plus,Big Number Calculator,Big # Calc,GitHub,#,Calculator Plus,Library,JS,Hyper Text Markup Language,Cascading Style Sheet,JS Library">
     <meta name="author" content="Eric (Virx/VirxEC) Michael Veilleux: virx@virxcase.ga">
@@ -41,21 +41,52 @@
 	<title>CPQuery Source Code</title>
 </head>
 <body>
-    <span id="nav"></span>
+    <nav>
+        <div id="mt">
+            <input type="checkbox">
+            <span class="navdecor"></span>
+            <span class="navdecor"></span>
+            <span class="navdecor"></span>
+            <ul>
+                <li id="ic"><a href="#"><img src="/Assets/icons/128.png" alt="CalcPlus Icon"></a></li>
+                <li><a href="/">Home</a></li>
+                <li class="dropdown">
+                    <input type="checkbox" id="calcplus">
+                    <label for="calcplus">CalcPlus</label>
+                    <ul class="dropdown-content">
+                        <li><a href="https://www.virxcase.ga/CalcPlus/">About</a></li>
+                        <li><a href="/CP-P.html">Preview</a></li>
+                        <li><a href="https://github.com/VirxEC/CalcPlus">GitHub</a></li>
+                        <li><a href="/CP-S.html">Source</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <input type="checkbox" id="cpquery">
+                    <label for="cpquery">CPQuery</label>
+                    <ul class="dropdown-content">
+                        <li><a href="/CPQ-S.html">Source</a></li>
+                        <li><a href="https://github.com/VirxEC/CPQuery">GitHub</a></li>
+                    </ul>
+                </li>
+                <li><a href="/Options.html">Options</a></li>
+                <li><a href="https://discord.gg/Fyu8Bdd">Discord</a></li>
+            </ul>
+        </div>
+    </nav>
     <p id="sconsole"></p>
     <h1>CPQuery Source Code</h1>
-    <pre><code id="source"></code></pre>
+    <pre><code id="js"></code></pre>
     
     <link rel="stylesheet" href="/Assets/Css/main.css">
     <script src="/Assets/Js/CPquery.js"></script>
     <script src="/Assets/Js/Options.js"></script>
-
 	<script src="/Assets/Js/Prism.js"></script>
+    <link rel="stylesheet" href="/Assets/Css/prism.min.css">
+    
 	<script>
         $("^/Assets/Js/CPquery.js").file(function() {
-            $("#source").htm($("@isSyntax").i() == "On" ? Prism.highlight(this.responseText, Prism.languages.javascript, 'javascript') : this.responseText);
+            $("#js").htm(Prism.highlight(this.responseText, Prism.languages.javascript, 'javascript'));
         });
 	</script>
-	<link rel="stylesheet" href="/Assets/Css/prism.css">
   </body>
 </html>

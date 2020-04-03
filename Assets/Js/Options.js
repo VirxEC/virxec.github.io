@@ -1,12 +1,7 @@
 var errors = "", errhandler = a => errors += `<div class="error">${a.error}</div>`;
 if (localStorage.getItem("console") == "On") addEventListener("error", errhandler); // whole point of this is so if anything in the Library breaks, this doesn't break.
 
-$("^/Assets/Html/navigation.html").file(function() {
-    $("#nav").htm(this.responseText);
-});
-
 var gamer = $("@isGamer"),
-    syntax = $("@isSyntax"),
     widget = $("@isWidget"),
     channel = $("@channel"),
     interval = $("@interval"),
@@ -14,7 +9,6 @@ var gamer = $("@isGamer"),
 
 (async ()=>{
     if (!widget.i()) widget.i("On");
-    if (!syntax.i()) syntax.i("On");
     if (!channel.i()) channel.i("629774177733181440");
     if (!interval.i()) interval.i("400");
     if (!cconsole.i()) cconsole.i("Off");
@@ -47,15 +41,7 @@ $(window).onload(()=>{
         })();
     }
 
-    if (gamer.i() == "On") {
-        var getRandomColor = () => "#000000".replace(/0/g, () => (~~(Math.random() * 16)).toString(16)),
-            transition = `transition: background-color ${interval.i() / 1000}s ease-in;`;
-        setInterval(async () => {
-            if (discord) discord.options.color = getRandomColor();
-            $(0).css.append(`nav { background-color: ${getRandomColor()}; ${transition} }`);
-            $(0).css.append(`body { background-color: ${getRandomColor()}; ${transition} }`);
-        }, interval.i());
-    }
+    if (gamer.i() == "On") setInterval(async () => discord ? discord.options.color = "#000000".replace(/0/g, () => (~~(Math.random() * 16)).toString(16)) : null, interval.i());
 
     if (widget.i() == "On") {
         $("head").create("script", {

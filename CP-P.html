@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
     <link rel="preload" href="/Assets/Css/main.css" as="style">
+    <link rel="preload" href="/Assets/Css/CP-P.css" as="style">
     <link rel="preload" href="/Assets/Js/Options.js" as="script">
     <link rel="preload" href="/Assets/Js/CPquery.js" as="script">
 
@@ -36,106 +36,160 @@
     <title>Preview the CalcPlus Library</title>
 </head>
 <body>
-    <span id="nav"></span>
+    <nav>
+        <div id="mt">
+            <input type="checkbox">
+            <span class="navdecor"></span>
+            <span class="navdecor"></span>
+            <span class="navdecor"></span>
+            <ul>
+                <li id="ic"><a href="#"><img src="/Assets/icons/128.png" alt="CalcPlus Icon"></a></li>
+                <li><a href="/">Home</a></li>
+                <li class="dropdown">
+                    <input type="checkbox" id="calcplus">
+                    <label for="calcplus">CalcPlus</label>
+                    <ul class="dropdown-content">
+                        <li><a href="https://www.virxcase.ga/CalcPlus/">About</a></li>
+                        <li><a href="/CP-P.html">Preview</a></li>
+                        <li><a href="https://github.com/VirxEC/CalcPlus">GitHub</a></li>
+                        <li><a href="/CP-S.html">Source</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <input type="checkbox" id="cpquery">
+                    <label for="cpquery">CPQuery</label>
+                    <ul class="dropdown-content">
+                        <li><a href="/CPQ-S.html">Source</a></li>
+                        <li><a href="https://github.com/VirxEC/CPQuery">GitHub</a></li>
+                    </ul>
+                </li>
+                <li><a href="/Options.html">Options</a></li>
+                <li><a href="https://discord.gg/Fyu8Bdd">Discord</a></li>
+            </ul>
+        </div>
+    </nav>
     <p id="sconsole"></p>
-    <h1 style="color:red">This preview is currently broken.<br>CalcPlus is under heavy development is this might be broken for a bit.</h1>
-    <div class="ctrls">
-        <button id="setMaxInteger">Set max integer to <input type="text" id="maxInteger" size="20" value="18446744073709551615"></button><br>
-        <button id="setMaxDecimal">Set max decimal to <input type="text" id="maxDecimal" size="3" value="10"></button><br>
-        <button id="powermode"><span id="powerstatus">Enable</span> Power mode</button>
-        <ul style="padding-left:0;">
-            <li>
-                <input type="radio" id="a" name="math" checked="checked">
-                <label for="a">Addition</label>
-            </li>
-            <li>
-                <input type="radio" id="s" name="math">
-                <label for="s">Subtraction</label>
-            </li>
-            <li>
-                <input type="radio" id="m" name="math">
-                <label for="m">Multiplication</label>
-            </li>
-            <li>
-                <input type="radio" id="e" name="math">
-                <label for="e" title="No decimals after the first number">Exponents</label>
-            </li>
-            <li>
-                <input type="radio" id="d" name="math">
-                <label for="d" title="In development">Division</label>
-            </li>
-            <li>
-                <input type="radio" id="f" name="math">
-                <label for="f" title="No decimals">Factorial</label>
-            </li>
-            <li>
-                <input type="radio" id="l" name="math">
-                <label for="l">Is Less Than</label>
-            </li>
-            <li>
-                <input type="radio" id="g" name="math">
-                <label for="g">Is Greater Than</label>
-            </li>
-            <li>
-                <input type="radio" id="le" name="math">
-                <label for="le">Is Less Than or Equal</label>
-            </li>
-            <li>
-                <input type="radio" id="ge" name="math">
-                <label for="ge">Is Greater Than or Equal</label>
-            </li>
-            <li>
-                <input type="radio" id="r" name="math">
-                <label for="r">Round</label>
-            </li>
-            <li>
-                <input type="radio" id="ru" name="math">
-                <label for="ru">Round Up</label>
-            </li>
-            <li>
-                <input type="radio" id="rd" name="math">
-                <label for="rd">Round down</label>
-            </li>
-        </ul>
-        <button id="addInput">Add another input field</button><br>
-        <input type="text" id="input1" placeholder="Number"><br>
-        <input type="text" id="input2" placeholder="Number"><br>
-        <span id="extraInputs"></span>
-        <button id="calc">Calculate...</button>
-        <p id="output">Press "Calculate..."</p>
+    <div id="ctrls">
+        <div>
+            <ul id="CPLinks" class="linklist">
+                <li><a href="https://repl.it/github/VirxEC/CalcPlus">Test latest Node.js version on Repl.it</a></li>
+                <li><a href="https://github.com/VirxEC/CalcPlus/packages">CalcPlus Beta Node.js Library</a></li>
+                <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.4.3-beta-js">CalcPlus Beta Library (v0.4.3)</a></li>
+                <li><a href="https://www.virxcase.ga/CalcPlus/bin/calcplus.js" download="CalcPlus_ALPHA_Library.js">CalcPlus Alpha ModuleJS Library (v0.5.0)</a></li>
+            </ul>
+        </div>
 
-        <ul id="CPLinks">
-            <li><a href="https://repl.it/github/VirxEC/CalcPlus">Test latest Node.js version on Repl.it</a></li>
-            <li><a href="https://github.com/VirxEC/CalcPlus/packages">CalcPlus Beta Node.js Library</a></li>
-            <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.4.3-beta-js">CalcPlus Beta Library (v0.4.3)</a></li>
-            <li><a href="https://www.virxcase.ga/CalcPlus/bin/calcplus.js" download="CalcPlus_ALPHA_Library.js">CalcPlus Alpha ModuleJS Library (v0.5.0)</a></li>
-        </ul>
+        <div id="options">
+            <ul style="padding-left:0;">
+                <li>
+                    <input type="radio" id="a" name="math" checked="checked">
+                    <label for="a">Addition</label>
+                </li>
+                <li>
+                    <input type="radio" id="s" name="math">
+                    <label for="s">Subtraction</label>
+                </li>
+                <li>
+                    <input type="radio" id="m" name="math">
+                    <label for="m">Multiplication</label>
+                </li>
+                <li>
+                    <input type="radio" id="e" name="math">
+                    <label for="e" title="No decimals after the first number">Exponents</label>
+                </li>
+                <li>
+                    <input type="radio" id="d" name="math">
+                    <label for="d" title="In development">Division</label>
+                </li>
+                <li>
+                    <input type="radio" id="f" name="math">
+                    <label for="f" title="No decimals">Factorial</label>
+                </li>
+                <li>
+                    <input type="radio" id="l" name="math">
+                    <label for="l">Is Less Than</label>
+                </li>
+                <li>
+                    <input type="radio" id="g" name="math">
+                    <label for="g">Is Greater Than</label>
+                </li>
+                <li>
+                    <input type="radio" id="le" name="math">
+                    <label for="le">Is Less Than or Equal</label>
+                </li>
+                <li>
+                    <input type="radio" id="ge" name="math">
+                    <label for="ge">Is Greater Than or Equal</label>
+                </li>
+                <li>
+                    <input type="radio" id="r" name="math">
+                    <label for="r">Round</label>
+                </li>
+                <li>
+                    <input type="radio" id="ru" name="math">
+                    <label for="ru">Round Up</label>
+                </li>
+                <li>
+                    <input type="radio" id="rd" name="math">
+                    <label for="rd">Round down</label>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <button id="setMaxInteger">Set max integer length to <input type="text" id="maxInteger" size="3" value="Getting value..."></button><br>
+            <button id="setMaxDecimal">Set max decimal length to <input type="text" id="maxDecimal" size="3" value="Getting value..."></button><br>
+            <button id="powermode"><span id="powerstatus">Getting state...</span> Power mode</button>
+        </div>
+    </div>
+
+    <div class="center">
+        <button id="addInput">Add another input field</button><br>
+        <br>
+        <input type="text" class="inputBoxes" placeholder="Number"><br>
+        <input type="text" class="inputBoxes" placeholder="Number"><br>
+        
+        <span id="extraInputs"></span><br>
+
+        <button id="calc">Calculate...</button>
+
+        <p id="output">Press "Calculate..."</p>
     </div>
 
     <link rel="stylesheet" href="/Assets/Css/main.css">
+    <link rel="stylesheet" href="/Assets/Css/CP-P.css">
     <script src="/Assets/Js/CPquery.js"></script>
     <script src="/Assets/Js/Options.js"></script>
     <script type="module">
-        import { add as a, subtract as s, multiply as m, exponent as e, divide as d, factorial as f, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, togglePowerMode, getPowerMode, setMaxInteger, setMaxDecimalLength } from "https://www.virxcase.ga/CalcPlus/bin/calcplus.js";
-        let inputBoxes=2, divChecked=false, gc=n=>$("#"+n).tag("checked");
-        $("#setMaxInteger").click(()=>setMaxInteger(+$("#maxInteger").val()));
+        import { add as a, subtract as s, multiply as m, exponent as e, divide as d, factorial as f, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, setPowerMode, getPowerMode, getMaxSafeInteger, setMaxSafeInteger, setMaxDecimalLength, getMaxDecimalLength } from "https://www.virxcase.ga/CalcPlus/bin/calcplus.js";
+        
+        let gc=n=>$("#"+n).tag("checked");
+
+        $("#maxInteger").val(''+getMaxSafeInteger());
+        $("#maxDecimal").val(''+getMaxDecimalLength());
+
+        if (getPowerMode()) $("#powerstatus").txt("Disable");
+        else $("#powerstatus").txt("Enable");
+        
+        $("#setMaxInteger").click(()=>setMaxSafeInteger(+$("#maxInteger").val()));
+
         $("#setMaxDecimal").click(()=>setMaxDecimalLength(+$("#maxDecimal").val()));
+
         $("#powermode").click(()=>{
-            togglePowerMode();
+            setPowerMode(!getPowerMode());
             if (getPowerMode()) $("#powerstatus").txt("Disable");
             else $("#powerstatus").txt("Enable");
         });
-        $("#options").click(()=>{
-            if (gc("d")) $("#spanDivMax").tagcss("display", "block");
-            else $("#spanDivMax").tagcss("display", "none");
-        });
+        
         $("#addInput").click(()=>{
-            inputBoxes++;
-            $("#extraInputs").htm(`<span id="id${inputBoxes}"><input type="text" id="input${inputBoxes}" placeholder="Number"><button class="removeInput" id="${inputBoxes}" onclick="this.parentNode.remove();inputBoxes-=1;">X</button><br></span>`, true);
+            $("#extraInputs").htm(`<span><input type="text" class="inputBoxes" placeholder="Number"> <button class="removeInput" onclick="this.parentNode.remove()">X</button><br></span>`, true);
         });
+
         $("#calc").click(()=>{
             let final, inputs=[];
-            for(var i=1;i<=inputBoxes;i++)inputs[i-1]=$("#input"+i).tag("value");
+            
+            $(".inputBoxes", true).forEachItem((item, i)=>inputs[i] = item.value);
+
             final=gc("a")?a(...inputs):gc("s")?s(...inputs):gc("m")?m(...inputs):gc("e")?e(...inputs):gc("d")?d(...inputs):gc("f")?f(inputs[0]):gc("l")?l(inputs[0], inputs[1]):gc("g")?g(inputs[0], inputs[1]):gc("le")?le(inputs[0], inputs[1]):gc("ge")?ge(inputs[0], inputs[1]):gc("r")?r(inputs[0]):gc("ru")?ru(inputs[0]):gc("rd")?rd(inputs[0]):console.error("No option was checked");
             $("#output").txt("Answer: "+final);
         });
