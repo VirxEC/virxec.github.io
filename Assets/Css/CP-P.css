@@ -1,3 +1,19 @@
+.valid {
+  color: green;
+}
+
+.working {
+  color: yellowgreen;
+}
+
+.fixing {
+  color: orange;
+}
+
+.broken {
+  color: red;
+}
+
 #ctrls {
   text-align: center;
   margin: 0 auto;
