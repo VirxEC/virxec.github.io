@@ -7,7 +7,7 @@
     <link rel="preload" href="/Assets/Js/Options.js" as="script">
     <link rel="preload" href="/Assets/Js/CPquery.js" as="script">
 
-    <meta name="keyworks" content="HTML,CSS,JavaScript,InfiniCalc,BigCalc,Big,Infitite,Calculator,Large,Number,Not,Small,Numbers,CalcPlus,Calc,Plus,Big Number Calculator,Big # Calc,GitHub,#,Calculator Plus,Library,JS,Hyper Text Markup Language,Cascading Style Sheet,JS Library">
+    <meta name="keyworks" content="HTML,CSS,JavaScript,InfiniCalc,BigCalc,Big,Infitite,Calculator,Large,Number,Not,Small,Numbers,CalcPlus,Calc,Plus,Big Number Calculator,Big # Calc,GitHub,#,Calculator Plus,Library,JS,Hyper Text Markup Language,Cascading Style Sheet,JS Library,TypeScript,TS,TS Library,TypeScript Library,Node,NPM,ModuleJS,ESNext">
     <meta name="author" content="Eric (Virx/VirxEC) Michael Veilleux: virx@virxcase.ga">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="theme-color" content="#0066ff">
@@ -20,14 +20,14 @@
     <meta name="twitter:card" content="summery-large-card">
     <meta name="twitter:title" content="VirxEC Showcase">
 
-    <meta name="og:image" content="/Assets/icons/512.png">
+    <meta name="og:image" content="/Assets/icons/site_icon.png">
     <meta name="og:site_name" content="VirxEC Showcase">
     <meta name="og:type" content="object">
     <meta name="og:title" content="VirxEC Showcase">
     <meta name="og:url" content="https://www.virxcase.ga">
 
     <link href="/manifest.json" rel="manifest">
-    <link href="/Assets/icons/512.png" rel="icon">
+    <link href="/Assets/icons/192.png" rel="icon">
     <link href="/Assets/icons/128.png" rel="apple-touch-icon">
 
     <meta name="description" content="VirxEC Showcase. Showcasing: CalcPlus & CPQuery. CalcPlus is a library that lets numbers be calculated way over the normal limit without losing precision. CPQuery is a lightweight version of jQuery that has all the features that are most commonly used.">
@@ -42,7 +42,7 @@
             <span class="navdecor"></span>
             <span class="navdecor"></span>
             <ul>
-                <li id="ic"><a href="#"><img src="/Assets/icons/128.png" alt="CalcPlus Icon"></a></li>
+                <li id="ic"><a href="#"><img src="/Assets/icons/096.png" alt="CalcPlus Icon"></a></li>
                 <li><a href="/">Home</a></li>
                 <li class="dropdown">
                     <input type="checkbox" id="calcplus">
@@ -71,8 +71,8 @@
     <div id="main-top-grid" class="center">
         <div id="main-grid">
             <div>
-                <img class="hd-icon" src="/Assets/icons/site_icon.png" alt="CalcPlus logo">
-                <img class="uhd-icon" src="/Assets/icons/site_icon_hd.png" alt="CalcPlus logo">
+                <img class="hd-icon site-icon" data-src="/Assets/icons/site_icon.png" alt="CalcPlus logo">
+                <img class="uhd-icon site-icon" data-src="/Assets/icons/site_icon_hd.png" alt="CalcPlus logo">
             </div>
             <div>
                 <h1 class="top">VirxEC Showcase Website</h1>
@@ -84,8 +84,8 @@
                 </div>
             </div>
             <div class="mobile-spare">
-                <img class="hd-icon" src="/Assets/icons/site_icon.png" alt="CalcPlus logo">
-                <img class="uhd-icon" src="/Assets/icons/site_icon_hd.png" alt="CalcPlus logo">
+                <img class="hd-icon site-icon" data-src="/Assets/icons/site_icon.png" alt="CalcPlus logo">
+                <img class="uhd-icon site-icon" data-src="/Assets/icons/site_icon_hd.png" alt="CalcPlus logo">
             </div>
         </div>
     </div>
@@ -142,6 +142,10 @@
     <script src="/Assets/Js/CPquery.js"></script>
     <script src="/Assets/Js/Options.js"></script>
     <script>
+        $(".site-icon", true).forEachItem(element=>{
+            if (element.style.display !== "none") element.src = element.getAttribute("data-src");
+        });
+
         if ('serviceWorker' in navigator) navigator.serviceWorker.register("/service-worker.js");
         else console.warn("serviceWorker isn't in navigator");
 
