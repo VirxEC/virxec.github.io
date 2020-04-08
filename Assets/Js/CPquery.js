@@ -26,7 +26,7 @@ function cpQuery(query, num) {
     else element = query;
 
     function forEachItem(func) {
-        for (let i = 0; i < element.length; i++) func(element[i], i);
+        for (let i = 0; i < element.length; i++) func($(element[i]), i);
     }
 
     function textNode(node) {
@@ -116,16 +116,19 @@ function cpQuery(query, num) {
     function tag(tag, extra) {
         if (typeof extra == "string") extra = [extra];
         if (extra) extra.forEach(item=>tag == "#" ? element.id = item : tag == "." ? element.class = item : element[tag] = item);
-        else return tag == "#" ? element.id : tag == "." ? element.class : element[tag];
+        else return tag == "#" ? element.id : tag == "." ? element.class : element.getAttribute(tag);
     }
+
     function func(tag, ...args) {
         return element[tag](...args);
     }
+
     function style(tag, extra) {
         if (typeof extra == "string") extra = [extra];
         if (extra) extra.forEach(item => element.style[tag] = item);
-        else return element.style[tag];
+        else return getComputedStyle(element).getPropertyValue(tag);
     }
+
     class file {
         constructor(options) {
             this.raw = new XMLHttpRequest();
@@ -190,7 +193,7 @@ function cpQuery(query, num) {
 
         create: (tag, num) => new create(tag, num),
         file: o => new file(o),
-        css: new css(),
+        css: () => new css(),
 
         show: () => style("visibility", "visible"),
         hide: () => style("visibility", "hidden"),

@@ -142,9 +142,7 @@
     <script src="/Assets/Js/CPquery.js"></script>
     <script src="/Assets/Js/Options.js"></script>
     <script>
-        $(".site-icon", true).forEachItem(element=>{
-            if (element.style.display !== "none") element.src = element.getAttribute("data-src");
-        });
+        $(".site-icon",true).forEachItem(element=>element.style("display")!=="none"?element.tag("src", element.tag("data-src")):null);
 
         if ('serviceWorker' in navigator) navigator.serviceWorker.register("/service-worker.js");
         else console.warn("serviceWorker isn't in navigator");
