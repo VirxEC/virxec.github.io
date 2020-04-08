@@ -83,7 +83,7 @@
         <li><a href="https://github.com/VirxEC/CalcPlus/packages">CalcPlus Beta Node.js Library</a></li>
         <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.4.3-beta-js">CalcPlus Beta Library (v0.4.3)</a>
         </li>
-        <li><a href="https://www.virxcase.ga/CalcPlus/bin/calcplus.js"
+        <li><a href="https://www.virxcase.ga/CalcPlus/calcplus.js"
                 download="CalcPlus_ALPHA_ModuleJS_Library.js">CalcPlus Alpha ModuleJS Library (v0.5.0)</a></li>
     </ul>
 
@@ -113,11 +113,11 @@
 
     <script src="/Assets/Js/Prism.js"></script>
     <script>
-        $("^https://www.virxcase.ga/CalcPlus/calcplus.ts").file(async function () {
+        $("^https://www.virxcase.ga/CalcPlus/src/calcplus.ts").file(async function () {
             $("#ts").htm(Prism.highlight(this.responseText, Prism.languages.ts, "typescript"));
         });
 
-        $("^https://www.virxcase.ga/CalcPlus/bin/calcplus.js").file(async function () {
+        $("^https://www.virxcase.ga/CalcPlus/calcplus.js").file(async function () {
             $("#js").htm(Prism.highlight(this.responseText, Prism.languages.js, "javascript"));
         });
 
