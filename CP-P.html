@@ -75,7 +75,7 @@
                 <li><a href="https://repl.it/github/VirxEC/CalcPlus">Test latest Node.js version on Repl.it</a></li>
                 <li><a href="https://github.com/VirxEC/CalcPlus/packages">CalcPlus Beta Node.js Library</a></li>
                 <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.4.3-beta-js">CalcPlus Beta Library (v0.4.3)</a></li>
-                <li><a href="https://www.virxcase.ga/CalcPlus/calcplus.js" download="CalcPlus_ALPHA_Library.js">CalcPlus Alpha ModuleJS Library (v0.5.2)</a></li>
+                <li><a href="https://www.virxcase.ga/CalcPlus/calcplus.js" download="CalcPlus_ALPHA_Library.js">CalcPlus Alpha ModuleJS Library (v0.5.3)</a></li>
             </ul>
 
             <ul>
@@ -168,23 +168,22 @@
     <script src="/Assets/Js/CPquery.js"></script>
     <script src="/Assets/Js/Options.js"></script>
     <script type="module">
-        import { add as a, subtract as s, multiply as m, exponent as e, divide as d, factorial as f, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, setPowerMode, getPowerMode, getMaxSafeInteger, setMaxSafeInteger, setMaxDecimalLength, getMaxDecimalLength } from "https://www.virxcase.ga/CalcPlus/calcplus.js";
+        import { add as a, subtract as s, multiply as m, exponent as e, divide as d, factorial as f, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, PowerMode, MaxSafeInteger, MaxDecimalLength } from "https://www.virxcase.ga/CalcPlus/calcplus.js";
         
         let gc=n=>$("#"+n).tag("checked");
 
-        $("#maxInteger").val(''+getMaxSafeInteger());
-        $("#maxDecimal").val(''+getMaxDecimalLength());
+        $("#maxInteger").val(''+MaxSafeInteger());
+        $("#maxDecimal").val(''+MaxDecimalLength());
 
-        if (getPowerMode()) $("#powerstatus").txt("Disable");
+        if (PowerMode()) $("#powerstatus").txt("Disable");
         else $("#powerstatus").txt("Enable");
         
-        $("#setMaxInteger").click(()=>setMaxSafeInteger(+$("#maxInteger").val()));
+        $("#setMaxInteger").click(()=>MaxSafeInteger(+$("#maxInteger").val()));
 
-        $("#setMaxDecimal").click(()=>setMaxDecimalLength(+$("#maxDecimal").val()));
+        $("#setMaxDecimal").click(()=>MaxDecimalLength(+$("#maxDecimal").val()));
 
         $("#powermode").click(()=>{
-            setPowerMode(!getPowerMode());
-            if (getPowerMode()) $("#powerstatus").txt("Disable");
+            if (PowerMode(!PowerMode())) $("#powerstatus").txt("Disable");
             else $("#powerstatus").txt("Enable");
         });
         
