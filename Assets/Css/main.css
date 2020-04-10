@@ -1,12 +1,12 @@
 :root {
-    --bg-main: #131318;
-    --bg-main-2: #000022;
+    --bg-main: #112;
+    --bg-main-2: #002;
     --bg-secondary: #0f0f11;
     --bg-tertiary: #0d1e4d;
     --color-main: #eee;
     --color-main-2: #1482ff;
-    --color-secondary: #0095ff;
-    --color-tertiary: #00ddff;
+    --color-secondary: #09f;
+    --color-tertiary: #0df;
 }
 
 body {
