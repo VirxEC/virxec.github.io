@@ -114,9 +114,8 @@ function cpQuery(query, num) {
         return !item ? element.innerHTML : add ? element.innerHTML += item : element.innerHTML = item;
     }
     function tag(tag, extra) {
-        if (typeof extra == "string") extra = [extra];
-        if (extra) extra.forEach(item=>tag == "#" ? element.id = item : tag == "." ? element.class = item : element[tag] = item);
-        else return tag == "#" ? element.id : tag == "." ? element.class : element.getAttribute(tag);
+        if (extra) tag == "#" ? element.id = extra : tag == "." ? element.class = extra : element[tag] = extra;
+        else return tag == "#" ? element.id : tag == "." ? element.class : element.getAttribute(tag) === null ? element[tag] : element.getAttribute(tag);
     }
 
     function func(tag, ...args) {

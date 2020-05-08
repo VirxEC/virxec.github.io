@@ -1,8 +1,8 @@
 let c = "v5",
   d = [
-    "https://www.virxcase.ga/CalcPlus/calcplus.js",
-    "https://www.virxcase.ga/CalcPlus/package.json",
-    "https://www.virxcase.ga/CalcPlus/src/calcplus.ts",
+    "https://calcplus.virxcase.ga/calcplus.js",
+    "https://calcplus.virxcase.ga/package.json",
+    "https://calcplus.virxcase.ga/src/calcplus.ts",
     "/Assets/icons/site_icon_hd.png",
     "/Assets/icons/site_icon.png",
     "/Assets/icons/072.png",

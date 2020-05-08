@@ -49,7 +49,7 @@
                     <input type="checkbox" id="calcplus">
                     <label for="calcplus">CalcPlus</label>
                     <ul class="dropdown-content">
-                        <li><a href="https://www.virxcase.ga/CalcPlus/">About</a></li>
+                        <li><a href="https://calcplus.virxcase.ga/">About</a></li>
                         <li><a href="/CP-P.html">Preview</a></li>
                         <li><a href="https://github.com/VirxEC/CalcPlus">GitHub</a></li>
                         <li><a href="/CP-S.html">Source</a></li>
@@ -75,7 +75,7 @@
                 <li><a href="https://repl.it/github/VirxEC/CalcPlus">Test latest Node.js version on Repl.it</a></li>
                 <li><a href="https://github.com/VirxEC/CalcPlus/packages">CalcPlus Beta Node.js Library</a></li>
                 <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v0.4.3-beta-js">CalcPlus Beta Library (v0.4.3)</a></li>
-                <li><a href="https://www.virxcase.ga/CalcPlus/calcplus.js" download="CalcPlus_ALPHA_Library.js">CalcPlus Alpha ModuleJS Library (v0.5.4)</a></li>
+                <li><a href="https://calcplus.virxcase.ga/calcplus.js" download="CalcPlus_ALPHA_Library.js">CalcPlus Alpha ModuleJS Library (v0.5.4)</a></li>
             </ul>
 
             <ul>
@@ -89,7 +89,7 @@
         <div id="options">
             <ul style="padding-left:0;">
                 <li>
-                    <input type="radio" id="a" name="math" checked="checked">
+                    <input type="radio" id="a" name="math">
                     <label for="a">Addition <span class="valid">(Valid)</span></label>
                 </li>
                 <li>
@@ -98,11 +98,11 @@
                 </li>
                 <li>
                     <input type="radio" id="m" name="math">
-                    <label for="m">Multiplication <span class="fixing">(Fixing)</span></label>
+                    <label for="m">Multiplication <span class="broken">(Broken)</span></label>
                 </li>
                 <li>
                     <input type="radio" id="e" name="math">
-                    <label for="e" title="No decimals after the first number">Exponents <span class="fixing">(Fixing)</span></label>
+                    <label for="e" title="No decimals after the first number">Exponents <span class="broken">(Broken)</span></label>
                 </li>
                 <li>
                     <input type="radio" id="d" name="math">
@@ -110,7 +110,7 @@
                 </li>
                 <li>
                     <input type="radio" id="f" name="math">
-                    <label for="f" title="No decimals">Factorial <span class="fixing">(Fixing)</span></label>
+                    <label for="f" title="No decimals">Factorial <span class="broken">(Broken)</span></label>
                 </li>
                 <li>
                     <input type="radio" id="l" name="math">
@@ -156,7 +156,7 @@
         <input type="text" class="inputBoxes" placeholder="Number"><br>
         <input type="text" class="inputBoxes" placeholder="Number"><br>
         
-        <span id="extraInputs"></span><br>
+        <div id="extraInputs"></div><br>
 
         <button id="calc">Calculate...</button>
 
@@ -167,34 +167,36 @@
     <link rel="stylesheet" href="/Assets/Css/CP-P.css">
     <script src="/Assets/Js/CPquery.js"></script>
     <script src="/Assets/Js/Options.js"></script>
+    <script src="/Assets/Js/handlebars.min.js"></script>
+    <script id="new_input" type="text/x-handlebars-template">
+        <span>
+            <input type="text" class="inputBoxes" placeholder="Number">
+            <button class="removeInput" onclick="this.parentNode.remove()">X</button>
+            <br>
+        </span>
+    </script>
     <script type="module">
-        import { add as a, subtract as s, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, PowerMode, MaxSafeInteger, MaxDecimalLength } from "https://www.virxcase.ga/CalcPlus/calcplus.js";
-        
+        import { add as a, subtract as s, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, PowerMode, MaxIntegerLength, MaxDecimalLength } from "https://calcplus.virxcase.ga/calcplus.js";
+
+        const new_input = Handlebars.compile($("#new_input").htm());
+
         function m(...inputs) {
-            return inputs[0] * inputs[1];
+            let final = 1;
+            inputs.forEach(item=>{
+                final *= item;
+            });
+            return final;
         }
-        
-        function d(...inputs) {
-            return inputs[0] / inputs[1];
-        }
-        
-        function e(...inputs) {
-            return inputs[0] ** inputs[1];
-        }
-        
-        function f(...inputs) {
-            return "000";
-        }
-        
+
         let gc=n=>$("#"+n).tag("checked");
 
-        $("#maxInteger").val(''+MaxSafeInteger());
+        $("#maxInteger").val(''+MaxIntegerLength());
         $("#maxDecimal").val(''+MaxDecimalLength());
 
         if (PowerMode()) $("#powerstatus").txt("Disable");
         else $("#powerstatus").txt("Enable");
-        
-        $("#setMaxInteger").click(()=>MaxSafeInteger(+$("#maxInteger").val()));
+
+        $("#setMaxInteger").click(()=>MaxIntegerLength(+$("#maxInteger").val()));
 
         $("#setMaxDecimal").click(()=>MaxDecimalLength(+$("#maxDecimal").val()));
 
@@ -202,15 +204,15 @@
             if (PowerMode(!PowerMode())) $("#powerstatus").txt("Disable");
             else $("#powerstatus").txt("Enable");
         });
-        
+
         $("#addInput").click(()=>{
-            $("#extraInputs").htm(`<span><input type="text" class="inputBoxes" placeholder="Number"> <button class="removeInput" onclick="this.parentNode.remove()">X</button><br></span>`, true);
+            $("#extraInputs").htm(new_input({}), true);
         });
 
         $("#calc").click(()=>{
             let final, inputs=[];
             
-            $(".inputBoxes", true).forEachItem((item, i)=>inputs[i] = item.value);
+            $(".inputBoxes", true).forEachItem((item, i)=>inputs[i] = item.val());
 
             final=gc("a")?a(...inputs):gc("s")?s(...inputs):gc("m")?m(...inputs):gc("e")?e(...inputs):gc("d")?d(...inputs):gc("f")?f(inputs[0]):gc("l")?l(inputs[0], inputs[1]):gc("g")?g(inputs[0], inputs[1]):gc("le")?le(inputs[0], inputs[1]):gc("ge")?ge(inputs[0], inputs[1]):gc("r")?r(inputs[0]):gc("ru")?ru(inputs[0]):gc("rd")?rd(inputs[0]):console.error("No option was checked");
             $("#output").txt("Answer: "+final);
