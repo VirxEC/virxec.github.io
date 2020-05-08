@@ -168,7 +168,11 @@
     <script src="/Assets/Js/CPquery.js"></script>
     <script src="/Assets/Js/Options.js"></script>
     <script type="module">
-        import { add as a, subtract as s, multiply as m, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, PowerMode, MaxSafeInteger, MaxDecimalLength } from "https://www.virxcase.ga/CalcPlus/calcplus.js";
+        import { add as a, subtract as s, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, PowerMode, MaxSafeInteger, MaxDecimalLength } from "https://www.virxcase.ga/CalcPlus/calcplus.js";
+        
+        function m(...inputs) {
+            return inputs[0] * inputs[1];
+        }
         
         function d(...inputs) {
             return inputs[0] / inputs[1];
