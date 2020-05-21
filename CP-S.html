@@ -64,6 +64,15 @@
                     </ul>
                 </li>
                 <li class="dropdown">
+                    <input type="checkbox" id="virxeb">
+                    <label for="virxeb">VirxEB</label>
+                    <ul class="dropdown-content">
+                        <li><a href="/VEB.html">Source</a></li>
+                        <li><a href="https://virxeb.virxcase.ga/">About</a></li>
+                        <li><a href="https://github.com/VirxEC/VirxEB">GitHub</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
                     <input type="checkbox" id="cpquery">
                     <label for="cpquery">CPQuery</label>
                     <ul class="dropdown-content">
@@ -91,6 +100,9 @@
         <input type="radio" name="tabset" id="tab1" checked>
         <label for="tab1">TypeScript</label>
 
+        <input type="radio" name="tabset" id="tab4">
+        <label for="tab4">Definitions</label>
+
         <input type="radio" name="tabset" id="tab2">
         <label for="tab2">ES6/Node JS</label>
 
@@ -99,6 +111,7 @@
 
         <div class="tab-panels">
             <pre class="tab-panel"><code id="ts">Loading...</code></pre>
+            <pre class="tab-panel"><code id="def">Loading...</code></pre>
             <pre class="tab-panel"><code id="js">Loading...</code></pre>
             <pre class="tab-panel"><code id="json">Loading...</code></pre>
         </div>
@@ -115,6 +128,10 @@
     <script>
         $("^https://calcplus.virxcase.ga/src/calcplus.ts").file(async function () {
             $("#ts").htm(Prism.highlight(this.responseText, Prism.languages.ts, "typescript"));
+        });
+
+        $("^https://calcplus.virxcase.ga/calcplus.d.ts").file(async function () {
+            $("#def").htm(Prism.highlight(this.responseText, Prism.languages.ts, "typescript"));
         });
 
         $("^https://calcplus.virxcase.ga/calcplus.js").file(async function () {

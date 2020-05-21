@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en-US">
+
 <head>
-	<title>Whoops!</title>
-    <link rel="preload" href="/Assets/Html/navigation.html" as="fetch" crossorigin>
-    <link rel="preload" href="/Assets/Css/main.css" as="stylesheet">
+    <link rel="preload" href="/Assets/Css/prism.min.css" as="style">
+    <link rel="preload" href="/Assets/Js/Prism.js" as="script">
+
+    <link rel="preload" href="/Assets/Css/main.css" as="style">
+    <link rel="preload" href="/Assets/Css/CP-S.css" as="style">
     <link rel="preload" href="/Assets/Js/CPquery.js" as="script">
     <link rel="preload" href="/Assets/Js/Options.js" as="script">
 
-    <meta name="keyworks" content="HTML,CSS,JavaScript,InfiniCalc,BigCalc,Big,Infitite,Calculator,Large,Number,Not,Small,Numbers,CalcPlus,Calc,Plus,Big Number Calculator,Big # Calc,GitHub,#,Calculator Plus,Library,JS,Hyper Text Markup Language,Cascading Style Sheet,JS Library,TypeScript,TS,TS Library,TypeScript Library,Node,NPM,ModuleJS,ESNext">
+    <meta name="keyworks"
+        content="HTML,CSS,JavaScript,InfiniCalc,BigCalc,Big,Infitite,Calculator,Large,Number,Not,Small,Numbers,CalcPlus,Calc,Plus,Big Number Calculator,Big # Calc,GitHub,#,Calculator Plus,Library,JS,Hyper Text Markup Language,Cascading Style Sheet,JS Library">
     <meta name="author" content="Eric (Virx/VirxEC) Michael Veilleux: virx@virxcase.ga">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="theme-color" content="#0066ff">
@@ -29,10 +33,16 @@
     <link href="/manifest.json" rel="manifest">
     <link href="/Assets/icons/192.png" rel="icon">
     <link href="/Assets/icons/128.png" rel="apple-touch-icon">
-	<meta name="description" content="Sorry, your page wasn't found">
-    <meta name="twitter:description" content="Sorry, your page wasn't found">
-    <meta name="og:description" content="Sorry, your page wasn't found">
+
+    <meta name="description"
+        content="A library that lets numbers be calculated way over the normal limit without losing precision">
+    <meta name="twitter:description"
+        content="A library that lets numbers be calculated way over the normal limit without losing precision">
+    <meta name="og:description"
+        content="A library that lets numbers be calculated way over the normal limit without losing precision">
+    <title>VirxEB Source Code</title>
 </head>
+
 <body>
     <nav>
         <div id="mt">
@@ -75,13 +85,51 @@
             </ul>
         </div>
     </nav>
-	<p id="sconsole"></p>
-	<h2>Your page wasn't found. To go back, <a onclick="history.back()"><u>click here</u></a></h2>
-	<h3>Or <a href="/">click here</a> to return to the home page<h3>
-    <h4>Do you think that this should be fixed? Contact me: <a href="mailto:virx@virxcase.ga" target="_blank">virx@virxcase.ga</a></p>
-    
+    <p id="sconsole"></p>
+    <h1>VirxEB Source Code - Built on the RLBot Framework</h1>
+    <ul id="CPLinks" class="linklist">
+        <li><a href="https://www.rlbot.org/">RLBot Website</a></li>
+        <li><a herf="https://github.com/RLBot/RLBot">RLBot Github</a></li>
+        <li><a href="https://discord.gg/zygARXx">RLBot Discord</a></li>
+    </ul>
+    <div class="tabset">
+        <input type="radio" name="tabset" id="tab1" checked>
+        <label for="tab1">Strategy</label>
+
+        <input type="radio" name="tabset" id="tab2">
+        <label for="tab2">Routines</label>
+
+        <input type="radio" name="tabset" id="tab3" checked>
+        <label for="tab3">GoslingAgent</label>
+
+        <div class="tab-panels">
+            <pre class="tab-panel"><code id="virxebsrc">Loading...</code></pre>
+            <pre class="tab-panel"><code id="routines">Loading...</code></pre>
+            <pre class="tab-panel"><code id="objects">Loading...</code></pre>
+        </div>
+    </div>
+
     <link rel="stylesheet" href="/Assets/Css/main.css">
+    <link rel="stylesheet" href="/Assets/Css/CP-S.css">
     <script src="/Assets/Js/CPquery.js"></script>
     <script src="/Assets/Js/Options.js"></script>
+
+    <link rel="stylesheet" href="/Assets/Css/prism.min.css">
+
+    <script src="/Assets/Js/Prism.js"></script>
+    <script>
+        $("^https://virxeb.virxcase.ga/src/VirxEB.py").file(function() {
+            $("#virxebsrc").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
+        });
+
+        $("^https://virxeb.virxcase.ga/src/util/routines.py").file(function() {
+            $("#routines").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
+        });
+
+        $("^https://virxeb.virxcase.ga/src/util/objects.py").file(function() {
+            $("#objects").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
+        });
+    </script>
 </body>
+
 </html>
