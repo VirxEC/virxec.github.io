@@ -7,7 +7,7 @@
       "use": "@ardnt/now-python-wsgi",
       "config": { "maxLambdaSize": "90mb" }
     },
-    { "src": "/main/static/*", "use": "@vercel/static" }
+    { "src": "main/static/*", "use": "@vercel/static" }
   ],
   "routes": [{
       "src": "/(.*)",
