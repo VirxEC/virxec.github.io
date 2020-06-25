@@ -1,0 +1,85 @@
+{% load static %}
+{% load pwa %}
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>{{ title }}</title>
+    <link rel="preload" href="{% static 'css/main.css' %}" as="style">
+    <link rel="preload" href="{% static page_css %}" as="style">
+    {% if discord %}<link rel="preload" href="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" as="script">{% endif %}
+
+    {% block head %}{% endblock head %}
+
+    <meta name="keyworks" content="HTML,CSS,JavaScript,InfiniCalc,BigCalc,Big,Infitite,Calculator,Large,Number,Not,Small,Numbers,CalcPlus,Calc,Plus,Big Number Calculator,Big # Calc,GitHub,#,Calculator Plus,Library,JS,Hyper Text Markup Language,Cascading Style Sheet,JS Library,TypeScript,TS,TS Library,TypeScript Library,Node,NPM,ModuleJS,ESNext,VirxEB,Python,RLBot,Rocket League,Bot">
+    <meta name="author" content="Eric (Virx/VirxEC) Michael Veilleux: virx@virxcase.dev">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <meta name="twitter:site" content="@virxcase">
+    <meta name="twitter:card" content="summery-large-card">
+    <meta name="twitter:title" content="{{ title }}">
+
+    <meta name="og:image" content="/static/icons/site_icon.png">
+    <meta name="og:site_name" content="VirxEC Showcase">
+    <meta name="og:type" content="object">
+    <meta name="og:title" content="{{ title }}">
+    <meta name="og:url" content="https://www.virxcase.dev">
+
+    <meta name="description" content="Showcasing CalcPlus and VirxEB">
+    <meta name="og:description" content="Showcasing CalcPlus and VirxEB">
+    <meta name="twitter:description" content="Showcasing CalcPlus and VirxEB">
+
+    {% progressive_web_app_meta %}
+</head>
+<body>
+    <nav>
+        <div id="mt">
+            <input type="checkbox">
+            <span class="navdecor"></span>
+            <span class="navdecor"></span>
+            <span class="navdecor"></span>
+            <ul>
+                <li id="ic"><a href="{% url 'main_home' %}"><img src="{% static 'icons/096.png' %}" alt="CalcPlus Icon"></a></li>
+                <li class="dropdown">
+                    <input type="checkbox" id="calcplus">
+                    <label for="calcplus">CalcPlus</label>
+                    <ul class="dropdown-content">
+                        <li><a href="https://calcplus.virxcase.dev/">About</a></li>
+                        <li><a href="{% url 'calcplus_preview' %}">Preview</a></li>
+                        <li><a href="https://github.com/VirxEC/CalcPlus">GitHub</a></li>
+                        <li><a href="{% url 'calcplus_source' %}">Source</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <input type="checkbox" id="virxeb">
+                    <label for="virxeb">VirxEB</label>
+                    <ul class="dropdown-content">
+                        <li><a href="{% url 'virxeb' %}">Source</a></li>
+                        <li><a href="https://virxeb.virxcase.dev/">About</a></li>
+                        <li><a href="https://github.com/VirxEC/VirxEB">GitHub</a></li>
+                    </ul>
+                </li>
+                <li><a href="{% url 'options' %}">Options</a></li>
+                <li><a href="https://discord.gg/N3ppwGu">Discord</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    {% block body %}{% endblock body %}
+    
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static page_css %}">
+    {% if discord %}
+        <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3"></script>
+        <script>
+            var discord = new Crate({
+                server: '507708985206505482',
+                channel: "{{ channel }}",
+                shard: "https://e.widgetbot.io",
+                defer: true
+            });
+
+            {% if gamer %}setInterval(async () => discord ? discord.options.color = "#000000".replace(/0/g, () => (~~(Math.random() * 16)).toString(16)) : null, {{ interval }});{% endif %}
+        </script>
+    {% endif %}
+</body>

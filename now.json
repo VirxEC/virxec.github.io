@@ -1,0 +1,12 @@
+{
+    "version": 2,
+    "name": "VirxEC Showcase",
+    "builds": [
+      {
+        "src": "./virxcase/wsgi.py",
+        "use": "@now/python@canary",
+        "config": { "maxLambdaSize": "25mb" }
+      }
+    ],
+    "routes": [{"src": "/(.*)", "dest": "/"}]
+  }

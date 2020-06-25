@@ -1,0 +1,93 @@
+{% include 'base.htm' with title="VirxEC Showcase" page_css="css/index.css" %}
+{% load static %}
+
+{% block body %}
+    <div id="main-top-grid" class="center">
+        <div id="main-grid">
+            <div>
+                <img class="hd-icon site-icon" data-src="{% static 'icons/site_icon.png' %}" alt="CalcPlus logo">
+                <img class="uhd-icon site-icon" data-src="{% static 'icons/site_icon_hd.png' %}" alt="CalcPlus logo">
+            </div>
+            <div>
+                <h1 class="top">VirxEC Showcase Website</h1>
+                <p class="middle">
+                    <a href="mailto:virx@virxcase.dev" target="_blank"><img src="{% static 'icons/gmail.png' %}" height="24px" alt="email"></a>
+                    <a href="https://github.com/VirxEC" target="_blank"><img src="{% static 'icons/github.png' %}" height="30px"></a>
+                    <a href="https://stackoverflow.com/users/10930209/virxec" target="_blank"><img src="{% static 'icons/stackoverflow.png' %}" height="30px"></a>
+                    <a href="https://www.youtube.com/channel/UCbXnfz22hD8y26UG454c5PA"><img src="{% static 'icons/youtube.png' %}" height="24px"></a>
+                </p>
+                <div id="pwamsg">
+                    <h3 class="top">Install the VirxEC Showcase <a href="https://blog.bitsrc.io/what-is-a-pwa-and-why-should-you-care-388afb6c0bad"><abbr title="Progressive Web App">PWA</abbr></a>!</h3>
+                    <button class="bottom" id="pwainstall">Install now (No download)</button></li>
+                </div>
+            </div>
+            <div class="mobile-spare">
+                <img class="hd-icon site-icon" data-src="/static/icons/site_icon.png" alt="CalcPlus logo">
+                <img class="uhd-icon site-icon" data-src="/static/icons/site_icon_hd.png" alt="CalcPlus logo">
+            </div>
+        </div>
+    </div>
+
+    <div id="secondary-grid">
+        <div>
+            <h3>CalcPlus Project Links</h3>
+            <ul class="linklist">
+                <li><a href="https://github.com/VirxEC/CalcPlus/wiki">Wiki</a></li>
+                <li><a href="https://github.com/VirxEC/CalcPlus/projects/1">To do page</a></li>
+                <li><a href="https://github.com/VirxEC/CalcPlus/issues/new?assignees=VirxEC&labels=bug&template=bug_report.md&title=%5BBUG%5D">Submit a bug report</a></li>
+                <li><a href="https://github.com/VirxEC/CalcPlus/issues/new?assignees=VirxEC&labels=enhancement&template=feature_request.md&title=%5BFEATURE+REQUEST%5D">Suggest a feature</a></li>
+                <li><a href="https://github.com/VirxEC/CalcPlus/compare">Submit a pull request</a></li>
+            </ul>
+        </div>
+        <div id="aboutcalcplus">
+            <h3>About CalcPlus</h3>
+            <ul class="linklist">
+                <li>Status: <span class="fix">Fixing</span></li>
+                <li><a href="http://www.apache.org/licenses/LICENSE-2.0">CalcPlus License</a></li>
+                <li><a href="https://repl.it/github/VirxEC/CalcPlus">Test latest Node.js version<br>on Repl.it</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3>Download CalcPlus</h3>
+            <ul class="linklist">
+                <li><a href="https://github.com/VirxEC/CalcPlus/releases">All releases</a></li>
+                <li><a href="https://github.com/VirxEC/CalcPlus/packages">CalcPlus Beta NodeJS Library</a></li>
+                <li><a href="https://github.com/VirxEC/CalcPlus/archive/v0.4.3-beta-js.zip" download="CalcPlus_Library_0-4-3.js">CalcPlus Beta JavaScript Library<br>(v{{ calcplus_js }})</a></li>
+                <li><a href="https://calcplus.virxcase.dev/calcplus.js" download="CalcPlus_ALPHA_ModuleJS_Library.js">CalcPlus Alpha Node TS/Module JS Library<br>(v{{ calcplus_ts }})</a></li>
+            </ul>
+        </div>
+        <div id="bobcatrobotics">
+            <h3>Let's go Bobcat Robotics 2020!</h3>
+            <ul class="linklist">
+                <li><a href="https://www.bobcatrobotics.org/">Website</a></li>
+                <li><a href="https://www.instagram.com/bobcatrobotics/">Instagram</a></li>
+                <li><a href="https://twitter.com/Bobcat_Robotics">Twitter</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3>VirxEB Project Links</h3>
+            <ul class="linklist">
+                <li><a href="https://www.rlbot.org/">RLBot Website</a></li>
+                <li><a href="https://github.com/VirxEC/VirxEB">Github</a></li>
+                <li><a href="https://github.com/VirxEC/VirxEB/issues">Issues</a></li>
+                <li><a href="https://github.com/VirxEC/VirxEB/pulls">Pull requests</a></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var icons = document.querySelectorAll(".site-icon")
+        for (let i = 0; i < icons.length; i++) {
+            if (getComputedStyle(icons[i]).getPropertyValue("display") !== "none") icons[i].src = icons[i].getAttribute("data-src")
+        }
+
+        var p;
+        addEventListener('beforeinstallprompt', e=>{
+            p = e;
+            document.querySelector("#pwamsg").style.display = "block";
+        });
+
+        document.querySelector("#pwainstall").addEventListener("click", e=>p.prompt());
+
+        if (/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase() && !(('standalone' in window.navigator) && (window.navigator.standalone))) && !('standalone' in navigator)) this.setState({ showInstallMessage: true });
+    </script>
+{% endblock body %}

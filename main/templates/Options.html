@@ -1,0 +1,34 @@
+{% include 'base.htm' with title='Site Options' page_css='css/Options.css' %}
+{% block body %}
+    <h3>Discord Widget {% if discord %}<a href="{% url 'options' %}?discord=false"><button>On</button></a>{% else %}<a href="{% url 'options' %}?discord=true"><button>Off</button></a>{% endif %}</h3>
+    {% if discord %}
+        <h3>
+            Default Channel
+            <select id="channel">
+                <option value="629774177733181440" {% if channel == "629774177733181440" %}selected{% endif %}>CalcPlus</option>
+                <option value="713127297833500712" {% if channel == "713127297833500712" %}selected{% endif %}>VirxEB</option>
+                <option value="507717342680186891" {% if channel == "507717342680186891" %}selected{% endif %}>General</option>
+                <option value="583376212114669578" {% if channel == "583376212114669578" %}selected{% endif %}>General 2</option>
+            </select>
+        </h3>
+    {% endif %}
+    <h3>Gamer Mode {% if gamer %}<a href="{% url 'options' %}?gamer=false"><button>On</button></a>{% else %}<a href="{% url 'options' %}?gamer=true"><button>Off</button></a>{% endif %}</h3>
+    {% if gamer %}
+        <h3>Transition time <input type="range" min="50" max="5000" id="transition" step="50" value="{{ interval }}"> <a id="interval_link" href=""><button>Apply <span id="interval">{{ interval }}</span>ms</button></a></h3>
+    {% endif %}
+    
+    <h3>Reset all <a href="{% url 'options' %}?reset=yes"><button>Reset</button></a></h3>
+
+    <script>
+        const transition = document.querySelector("#transition");
+        transition.addEventListener("input", () => {
+            document.querySelector("#interval").textContent = transition.value;
+            document.querySelector("#interval_link").href = "{% url 'options' %}?interval=" + transition.value;
+        });
+
+        const channel = document.querySelector("#channel")
+        channel.addEventListener("change", () => {
+            location.replace("{% url 'options' %}?channel=" + channel.value)
+        });
+    </script>
+{% endblock body %}

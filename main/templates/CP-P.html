@@ -1,0 +1,148 @@
+{% include 'base.htm' with title='Preview the CalcPlus Library' page_css='css/CP-P.css' %}
+{% load static %}
+
+{% block head %}
+    <link rel="preload" href="{% static 'js/CPquery.js' %}" as="script">
+    <link rel="preload" href="{% static 'js/handlebars.min.js' %}" as="script">
+{% endblock head %}
+
+{% block body %}
+    <div id="ctrls">
+        <div>
+            <ul id="CPLinks" class="linklist">
+                <li><a href="https://repl.it/github/VirxEC/CalcPlus">Test latest Node.js version on Repl.it</a></li>
+                <li><a href="https://github.com/VirxEC/CalcPlus/packages">CalcPlus Beta Node.js Library</a></li>
+                <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v{{ calcplus_js }}-beta-js">CalcPlus Beta Library (v{{ calcplus_js }})</a></li>
+                <li><a href="https://calcplus.virxcase.dev/calcplus.js" download="CalcPlus_ALPHA_Library.js">CalcPlus Alpha Node TS/Module JS Library (v{{ calcplus_ts }})</a></li>
+            </ul>
+
+            <ul style="padding-inline-start: 0;">
+                <li class="valid">The function has been validated with 40,000 random checks</li>
+                <li class="working">The function appears to be working as intended</li>
+                <li class="fixing">Currently working on fixing the function</li>
+                <li class="broken">The function is currently broken and won't work</li>
+            </ul>
+        </div>
+
+        <div id="options">
+            <ul style="padding-left:0;">
+                <li>
+                    <input type="radio" id="a" name="math">
+                    <label for="a">Addition <span class="valid">(Valid)</span></label>
+                </li>
+                <li>
+                    <input type="radio" id="s" name="math">
+                    <label for="s">Subtraction <span class="valid">(Valid)</span></label>
+                </li>
+                <li>
+                    <input type="radio" id="m" name="math">
+                    <label for="m">Multiplication <span class="fixing">(Fixing)</span></label>
+                </li>
+                <li>
+                    <input type="radio" id="e" name="math">
+                    <label for="e" title="No decimals after the first number">Exponents <span class="broken">(Broken)</span></label>
+                </li>
+                <li>
+                    <input type="radio" id="d" name="math">
+                    <label for="d" title="In development">Division <span class="broken">(Broken)</span></label>
+                </li>
+                <li>
+                    <input type="radio" id="f" name="math">
+                    <label for="f" title="No decimals">Factorial <span class="broken">(Broken)</span></label>
+                </li>
+                <li>
+                    <input type="radio" id="l" name="math">
+                    <label for="l">Is Less Than <span class="valid">(Valid)</span></label>
+                </li>
+                <li>
+                    <input type="radio" id="g" name="math">
+                    <label for="g">Is Greater Than <span class="valid">(Valid)</span></label>
+                </li>
+                <li>
+                    <input type="radio" id="le" name="math">
+                    <label for="le">Is Less Than or Equal <span class="valid">(Valid)</span></label>
+                </li>
+                <li>
+                    <input type="radio" id="ge" name="math">
+                    <label for="ge">Is Greater Than or Equal <span class="valid">(Valid)</span></label>
+                </li>
+                <li>
+                    <input type="radio" id="r" name="math">
+                    <label for="r">Round <span class="valid">(Valid)</span></label>
+                </li>
+                <li>
+                    <input type="radio" id="ru" name="math">
+                    <label for="ru">Round Up <span class="valid">(Valid)</span></label>
+                </li>
+                <li>
+                    <input type="radio" id="rd" name="math">
+                    <label for="rd">Round down <span class="valid">(Valid)</span></label>
+                </li>
+            </ul>
+        </div>
+
+        <div>
+            <button id="setMaxInteger">Set max integer length to <input type="text" id="maxInteger" size="3" value="Getting value..."></button><br>
+            <button id="setMaxDecimal">Set max decimal length to <input type="text" id="maxDecimal" size="3" value="Getting value..."></button><br>
+            <button id="powermode"><span id="powerstatus">Getting state...</span> Power mode</button>
+        </div>
+    </div>
+
+    <div class="center">
+        <button id="addInput">Add another input field</button><br>
+        <br>
+        <input type="text" class="inputBoxes" placeholder="Number"><br>
+        <input type="text" class="inputBoxes" placeholder="Number"><br>
+        
+        <div id="extraInputs"></div><br>
+
+        <button id="calc">Calculate...</button>
+
+        <p id="output">Press "Calculate..."</p>
+    </div>
+    
+    <script src="{% static 'js/CPquery.js' %}"></script>
+    <script src="{% static 'js/handlebars.min.js' %}"></script>
+    <script id="new_input" type="text/x-handlebars-template">
+        <span>
+            <input type="text" class="inputBoxes" placeholder="Number">
+            <button class="removeInput" onclick="this.parentNode.remove()">X</button>
+            <br>
+        </span>
+    </script>
+    <script type="module">
+        import { add as a, subtract as s, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, PowerMode, MaxIntegerLength, MaxDecimalLength } from "https://calcplus.virxcase.dev/calcplus.js";
+
+        const new_input = Handlebars.compile($("#new_input").htm());
+
+        let gc=n=>$("#"+n).tag("checked");
+
+        $("#maxInteger").val(''+MaxIntegerLength());
+        $("#maxDecimal").val(''+MaxDecimalLength());
+
+        if (PowerMode()) $("#powerstatus").txt("Disable");
+        else $("#powerstatus").txt("Enable");
+
+        $("#setMaxInteger").click(()=>MaxIntegerLength(+$("#maxInteger").val()));
+
+        $("#setMaxDecimal").click(()=>MaxDecimalLength(+$("#maxDecimal").val()));
+
+        $("#powermode").click(()=>{
+            if (PowerMode(!PowerMode())) $("#powerstatus").txt("Disable");
+            else $("#powerstatus").txt("Enable");
+        });
+
+        $("#addInput").click(()=>{
+            $("#extraInputs").htm(new_input({}), true);
+        });
+
+        $("#calc").click(()=>{
+            let final, inputs=[];
+            
+            $(".inputBoxes", true).forEachItem((item, i)=>inputs[i] = item.val());
+
+            final=gc("a")?a(...inputs):gc("s")?s(...inputs):gc("m")?m(...inputs):gc("e")?e(...inputs):gc("d")?d(...inputs):gc("f")?f(inputs[0]):gc("l")?l(inputs[0], inputs[1]):gc("g")?g(inputs[0], inputs[1]):gc("le")?le(inputs[0], inputs[1]):gc("ge")?ge(inputs[0], inputs[1]):gc("r")?r(inputs[0]):gc("ru")?ru(inputs[0]):gc("rd")?rd(inputs[0]):"Please select a mode of operation.";
+            $("#output").txt("Answer: "+final);
+        });
+    </script>
+{% endblock body %}

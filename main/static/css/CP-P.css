@@ -1,0 +1,71 @@
+.valid {
+  color: green;
+}
+
+.working {
+  color: yellowgreen;
+}
+
+.fixing {
+  color: orange;
+}
+
+.broken {
+  color: red;
+}
+
+#ctrls {
+  text-align: center;
+  margin: 0 auto;
+  display: grid;
+  width: 100vw;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+#ctrls div ul li {
+  list-style: none;
+}
+
+#ctrls div ul li input {
+  display: none;
+}
+
+#ctrls div ul li input:not(:checked)~label {
+  color: red;
+}
+
+#ctrls div ul li input:checked~label {
+  color: var(--color-tertiary);
+}
+
+#CPLinks {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+#CPLinks a {
+  color: var(--color-tertiary);
+}
+
+@media only screen and (max-width: 500px) {
+  #ctrls {
+    grid-template-columns: auto;
+  }
+}
+
+@media only screen and (max-width: 900px) and (min-width: 500px) {
+  #ctrls {
+    grid-template-columns: auto auto;
+  }
+
+  #options {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  #options {
+    order: 3;
+  }
+}

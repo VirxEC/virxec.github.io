@@ -1,0 +1,60 @@
+{% include 'base.htm' with title="VirxEB Source Code - Built on the RLBot Framework" page_css="css/CP-S.css" %}
+{% load static %}
+
+{% block head %}
+    <link rel="preload" href="{% static 'css/prism.min.css' %}" as="style">
+    <link rel="preload" href="{% static 'js/Prism.js' %}" as="script">
+    <link rel="preload" href="{% static 'js/CPquery.js' %}" as="script">
+{% endblock head %}
+
+{% block body %}
+    <h1>VirxEB Source Code - Built on the RLBot Framework</h1>
+    <ul id="CPLinks" class="linklist">
+        <li><a href="https://www.rlbot.org/">RLBot Website</a></li>
+        <li><a href="https://github.com/RLBot/RLBot">RLBot Github</a></li>
+        <li><a href="https://discord.gg/zygARXx">RLBot Discord</a></li>
+    </ul>
+    <div class="tabset">
+        <input type="radio" name="tabset" id="tab1" checked>
+        <label for="tab1">Strategy</label>
+
+        <input type="radio" name="tabset" id="tab2">
+        <label for="tab2">Routines</label>
+
+        <input type="radio" name="tabset" id="tab3">
+        <label for="tab3">GoslingAgent</label>
+
+        <input type="radio" name="tabset" id="tab4">
+        <label for="tab4">Predictive services</label>
+
+        <div class="tab-panels">
+            <pre class="tab-panel"><code id="virxebsrc">Loading...</code></pre>
+            <pre class="tab-panel"><code id="routines">Loading...</code></pre>
+            <pre class="tab-panel"><code id="objects">Loading...</code></pre>
+            <pre class="tab-panel"><code id="predictions">Loading...</code></pre>
+        </div>
+    </div>
+
+    <script src="{% static 'js/CPquery.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'css/prism.min.css' %}">
+
+    <script src="{% static 'js/Prism.js' %}"></script>
+    <script>
+        $("^https://virxeb.virxcase.dev/VirxEB.py").file(function() {
+            $("#virxebsrc").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
+        });
+
+        $("^https://virxeb.virxcase.dev/util/routines.py").file(function() {
+            $("#routines").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
+        });
+
+        $("^https://virxeb.virxcase.dev/util/objects.py").file(function() {
+            $("#objects").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
+        });
+
+        $("^https://virxeb.virxcase.dev/util/prediction.py").file(function() {
+            $("#predictions").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
+        });
+    </script>
+{% endblock %}
