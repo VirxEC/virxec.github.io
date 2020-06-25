@@ -1,12 +1,13 @@
 {
-    "version": 2,
-    "name": "VirxEC Showcase",
-    "builds": [
-      {
-        "src": "index.py",
-        "use": "@now/python@canary",
-        "config": { "maxLambdaSize": "25mb" }
-      }
-    ],
-    "routes": [{"src": "/(.*)", "dest": "/"}]
-  }
+  "version": 2,
+  "name": "VirxEC Showcase",
+  "builds": [{
+      "src": "virxcase/wsgi.py",
+      "use": "@ardnt/now-python-wsgi",
+      "config": { "maxLambdaSize": "25mb" }
+  }],
+  "routes": [{
+      "src": "/(.*)",
+      "dest": "virxcase/wsgi.py"
+  }]
+}

@@ -13,15 +13,15 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 
-DEBUG = True  # PROD: False
+DEBUG = False  # PROD: False
 
-PWA_APP_DEBUG_MODE = True # PROD: False
+PWA_APP_DEBUG_MODE = False # PROD: False
 
-ALLOWED_HOSTS = ["127.0.0.1"]  # PROD: "www.virxcase.dev"
+ALLOWED_HOSTS = ["www.virxcase.dev"]  # PROD: "www.virxcase.dev"
 
-SESSION_COOKIE_SECURE = False  # PROD: True
+SESSION_COOKIE_SECURE = True  # PROD: True
 
-CSRF_COOKIE_SECURE = False  # PROD: True
+CSRF_COOKIE_SECURE = True  # PROD: True
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
