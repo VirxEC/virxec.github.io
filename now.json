@@ -1,11 +1,14 @@
 {
   "version": 2,
   "name": "VirxEC Showcase",
-  "builds": [{
+  "builds": [
+    {
       "src": "virxcase/wsgi.py",
       "use": "@ardnt/now-python-wsgi",
       "config": { "maxLambdaSize": "90mb" }
-  }],
+    },
+    { "src": "/main/static/*", "use": "@vercel/static" }
+  ],
   "routes": [{
       "src": "/(.*)",
       "dest": "virxcase/wsgi.py"
