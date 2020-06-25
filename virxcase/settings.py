@@ -17,7 +17,7 @@ DEBUG = False  # PROD: False
 
 PWA_APP_DEBUG_MODE = False # PROD: False
 
-ALLOWED_HOSTS = ["www.virxcase.dev"]  # PROD: "www.virxcase.dev"
+ALLOWED_HOSTS = ["www.virxcase.dev", ".now.sh"]  # PROD: "www.virxcase.dev", ".now.sh"
 
 SESSION_COOKIE_SECURE = True  # PROD: True
 
