@@ -4,7 +4,7 @@
   "builds": [{
       "src": "virxcase/wsgi.py",
       "use": "@ardnt/now-python-wsgi",
-      "config": { "maxLambdaSize": "25mb" }
+      "config": { "maxLambdaSize": "65mb" }
   }],
   "routes": [{
       "src": "/(.*)",
