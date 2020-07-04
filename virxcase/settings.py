@@ -12,12 +12,13 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import django_heroku
+import dj_database_url
 
 DEBUG = False  # PROD: False
 
 PWA_APP_DEBUG_MODE = False # PROD: False
 
-ALLOWED_HOSTS = ["www.virxcase.dev",".herokuapp.com"]  # PROD: "www.virxcase.dev", ".herokuapp.com"
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', "www.virxcase.dev","virxcase.herokuapp.com"]  # PROD: "www.virxcase.dev", "virxcase.herokuapp.com"
 
 SESSION_COOKIE_SECURE = True  # PROD: True
 
@@ -88,15 +89,10 @@ WSGI_APPLICATION = 'virxcase.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': os.getenv("DB_ENGINE"),
-        'NAME': os.getenv("DB_NAME"),
-        'USER': os.getenv("DB_USER"),
-        'PASSWORD': os.getenv("DB_PASSWORD"),
-        'HOST': os.getenv("DB_HOST"),
-        'PORT': os.getenv("DB_PORT"),
-    }
+    'default': {}
 }
+
+DATABASES['default'].update(dj_database_url.config(conn_max_age=600))
 
 
 # Password validation
