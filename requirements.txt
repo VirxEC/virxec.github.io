@@ -1,3 +1,5 @@
 psycopg2-binary
-Django
+django
+gunicorn
 django-pwa
+django-heroku

@@ -11,13 +11,13 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
+import django_heroku
 
 DEBUG = False  # PROD: False
 
 PWA_APP_DEBUG_MODE = False # PROD: False
 
-ALLOWED_HOSTS = ["www.virxcase.dev", ".now.sh", ".vercel.app"]  # PROD: "www.virxcase.dev", ".now.sh", ".vercel.app"
+ALLOWED_HOSTS = ["www.virxcase.dev",".herokuapp.com"]  # PROD: "www.virxcase.dev", ".herokuapp.com"
 
 SESSION_COOKIE_SECURE = True  # PROD: True
 
@@ -234,3 +234,5 @@ PWA_APP_ICONS_APPLE = [
 PWA_APP_SPLASH_SCREEN = []
 PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'en-US'
+
+django_heroku.settings(locals())
