@@ -14,11 +14,11 @@ import os
 import django_heroku
 import dj_database_url
 
-DEBUG = False  # PROD: False
+DEBUG = True  # PROD: False
 
 PWA_APP_DEBUG_MODE = False # PROD: False
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', "www.virxcase.dev","virxcase.herokuapp.com"]  # PROD: "www.virxcase.dev", "virxcase.herokuapp.com"
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', "www.virxcase.dev","virxcase.herokuapp.com"]
 
 SESSION_COOKIE_SECURE = True  # PROD: True
 

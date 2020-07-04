@@ -12,9 +12,13 @@
                 <h1 class="top">VirxEC Showcase Website</h1>
                 <p class="middle">
                     <a href="https://discord.gg/N3ppwGu" target="_blank"><img src="{% static 'icons/discord.png' %}" height="24px" at="Discord"></a>
+                    &nbsp;
                     <a href="mailto:virx@virxcase.dev" target="_blank"><img src="{% static 'icons/gmail.png' %}" height="24px" alt="Email"></a>
+                    &nbsp;
                     <a href="https://github.com/VirxEC" target="_blank"><img src="{% static 'icons/github.png' %}" height="30px" alt="GitHub"></a>
+                    &nbsp;
                     <a href="https://stackoverflow.com/users/10930209/virxec" target="_blank"><img src="{% static 'icons/stackoverflow.png' %}" height="30px" alt="Stack Overflow"></a>
+                    &nbsp;
                     <a href="https://www.youtube.com/channel/UCbXnfz22hD8y26UG454c5PA"><img src="{% static 'icons/youtube.png' %}" height="24px" alt="YouTube"></a>
                 </p>
                 <div id="pwamsg">
@@ -76,10 +80,15 @@
         </div>
     </div>
     <script>
-        var icons = document.querySelectorAll(".site-icon")
-        for (let i = 0; i < icons.length; i++) {
-            if (getComputedStyle(icons[i]).getPropertyValue("display") !== "none") icons[i].src = icons[i].getAttribute("data-src")
+        function siteIcons() {
+            var icons = document.querySelectorAll(".site-icon")
+            for (let i = 0; i < icons.length; i++) {
+                if (getComputedStyle(icons[i]).getPropertyValue("display") !== "none") icons[i].src = icons[i].getAttribute("data-src");
+            }
         }
+        
+        siteIcons();
+        addEventListener('resize', siteIcons)
 
         var p;
         addEventListener('beforeinstallprompt', e=>{
