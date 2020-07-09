@@ -1,6 +1,6 @@
-{% include 'base.htm' with title='Site Options' page_css='css/Options.css' %}
+{% extends 'base.htm' %}
 {% block body %}
-    <h3>Discord Widget {% if discord %}<a href="{% url 'options' %}?discord=false"><button>On</button></a>{% else %}<a href="{% url 'options' %}?discord=true"><button>Off</button></a>{% endif %}</h3>
+    <h3>Discord Widget {% if discord %}<a href="{% url 'options' %}?discord=False"><button>On</button></a>{% else %}<a href="{% url 'options' %}?discord=True"><button>Off</button></a>{% endif %}</h3>
     {% if discord %}
         <h3>
             Default Channel
@@ -12,23 +12,30 @@
             </select>
         </h3>
     {% endif %}
-    <h3>Gamer Mode {% if gamer %}<a href="{% url 'options' %}?gamer=false"><button>On</button></a>{% else %}<a href="{% url 'options' %}?gamer=true"><button>Off</button></a>{% endif %}</h3>
+    <h3>Gamer Mode {% if gamer %}<a href="{% url 'options' %}?gamer=False"><button>On</button></a>{% else %}<a href="{% url 'options' %}?gamer=True"><button>Off</button></a>{% endif %}</h3>
     {% if gamer %}
         <h3>Transition time <input type="range" min="50" max="5000" id="transition" step="50" value="{{ interval }}"> <a id="interval_link" href=""><button>Apply <span id="interval">{{ interval }}</span>ms</button></a></h3>
     {% endif %}
     
     <h3>Reset all <a href="{% url 'options' %}?reset=yes"><button>Reset</button></a></h3>
 
-    <script>
-        const transition = document.querySelector("#transition");
-        transition.addEventListener("input", () => {
-            document.querySelector("#interval").textContent = transition.value;
-            document.querySelector("#interval_link").href = "{% url 'options' %}?interval=" + transition.value;
-        });
+    {% if gamer or discord %}
+        <script>
+            {% if gamer %}
+                const transition = document.querySelector("#transition");
+                transition.addEventListener("input", () => {
+                    document.querySelector("#interval").textContent = transition.value;
+                    document.querySelector("#interval_link").href = "{% url 'options' %}?interval=" + transition.value;
+                });
+            {% endif %}
+            
+            {% if discord %}
+                const channel = document.querySelector("#channel")
+                channel.addEventListener("change", () => {
+                    location.replace("{% url 'options' %}?channel=" + channel.value)
+                });
+            {% endif %}
+        </script>
+    {% endif %}
 
-        const channel = document.querySelector("#channel")
-        channel.addEventListener("change", () => {
-            location.replace("{% url 'options' %}?channel=" + channel.value)
-        });
-    </script>
 {% endblock body %}

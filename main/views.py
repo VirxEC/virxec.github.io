@@ -6,7 +6,8 @@ from main.models import Version
 
 def handler404(request, exception):
     return render(request, '404.html', status=404, context={
-        "exception": exception
+        "exception": exception,
+        "title": "Whoops!"
     })
 
 @require_GET
@@ -31,41 +32,43 @@ def handle_session(request):
     if request.session.get('interval') == None:
         request.session['interval'] = "400"
 
-def get_session(request):
+def get_session(request, title, page_css=None, cp_versions=False):
     return {
         "discord": request.session['discord'],
         "channel": request.session['channel'],
         "gamer": request.session['gamer'],
         "interval": request.session['interval'],
-        "calcplus_ts": str(Version.objects.get(name="CalcPlus_TS")),
-        "calcplus_js": str(Version.objects.get(name="CalcPlus_JS"))
+        "calcplus_ts": None if not cp_versions else str(Version.objects.get(name="CalcPlus_TS")),
+        "calcplus_js": None if not cp_versions else str(Version.objects.get(name="CalcPlus_JS")),
+        "title": title,
+        "page_css": page_css
     }
 
 @require_GET
 def home(request):
     handle_session(request)
-    return render(request, "index.html", get_session(request))
+    return render(request, "index.html", get_session(request, "VirxEC Showcase", "css/index.css", True))
 
 @require_GET
 def calcplus_preview(request):
     handle_session(request)
-    return render(request, "CP-P.html", get_session(request))
+    return render(request, "CP-P.html", get_session(request, "Preview the CalcPlus Library", "css/CP-P.css", True))
 
 @require_GET
 def calcplus_source(request):
     handle_session(request)
-    return render(request, "CP-S.html", get_session(request))
+    return render(request, "CP-S.html", get_session(request, "CalcPlus Library Source Code", "css/CP-S.css", True))
 
 @require_GET
 def virxeb(request):
     handle_session(request)
-    return render(request, "VEB.html", get_session(request))
+    return render(request, "VEB.html", get_session(request, "VirxEB Source Code - Built on the RLBot Framework", "css/CP-S.css"))
 
 @require_GET
 def options(request):
     if request.GET.get("discord") != None:
         try:
-            discord = bool(request.GET['discord'])
+            discord = request.GET['discord'] == 'True'
         except Exception:
             return redirect('options')
         
@@ -77,13 +80,13 @@ def options(request):
         except Exception:
             return redirect('options')
         
-        if ["629774177733181440", "507717342680186891", "583376212114669578", "713127297833500712"].count(channel) == 1:
+        if channel in {"629774177733181440", "507717342680186891", "583376212114669578", "713127297833500712"}:
             request.session['channel'] = channel
 
         return redirect('options')
     elif request.GET.get("gamer") != None:
         try:
-            gamer = bool(request.GET['gamer'])
+            gamer = request.GET['gamer'] == 'True'
         except Exception:
             return redirect('options')
         
@@ -106,5 +109,7 @@ def options(request):
             request.session['channel'] = None
             request.session['gamer'] = None
             request.session['interval'] = None
+        return redirect("options")
     
-    return render(request, "Options.html", get_session(request))
+    handle_session(request)
+    return render(request, "Options.html", get_session(request, "Site Options", "css/Options.css"))

@@ -1,4 +1,4 @@
-{% include 'base.htm' with title="VirxEB Source Code - Built on the RLBot Framework" page_css="css/CP-S.css" %}
+{% extends 'base.htm' %}
 {% load static %}
 
 {% block head %}
@@ -25,13 +25,17 @@
         <label for="tab3">GoslingAgent</label>
 
         <input type="radio" name="tabset" id="tab4">
-        <label for="tab4">Predictive services</label>
+        <label for="tab4">Predictive service</label>
+
+        <input type="radio" name="tabset" id="tab5">
+        <label for="tab5">GUI</label>
 
         <div class="tab-panels">
             <pre class="tab-panel"><code id="virxebsrc">Loading...</code></pre>
             <pre class="tab-panel"><code id="routines">Loading...</code></pre>
             <pre class="tab-panel"><code id="objects">Loading...</code></pre>
             <pre class="tab-panel"><code id="predictions">Loading...</code></pre>
+            <pre class="tab-panel"><code id="gui">Loading...</code></pre>
         </div>
     </div>
 
@@ -55,6 +59,10 @@
 
         $("^https://virxeb.virxcase.dev/util/prediction.py").file(function() {
             $("#predictions").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
+        });
+
+        $("^https://virxeb.virxcase.dev/gui.py").file(function() {
+            $("#gui").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
         });
     </script>
 {% endblock %}

@@ -1,4 +1,4 @@
-{% include 'base.htm' with title="CalcPlus Library Source Code" page_css="css/CP-S.css" %}
+{% extends 'base.htm' %}
 {% load static %}
 
 {% block head %}
@@ -12,10 +12,8 @@
     <ul id="CPLinks" class="linklist">
         <li><a href="https://repl.it/github/VirxEC/CalcPlus">Test latest Node.js version on Repl.it</a></li>
         <li><a href="https://github.com/VirxEC/CalcPlus/packages">CalcPlus Beta Node.js Library</a></li>
-        <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v{{ calcplus_js }}-beta-js">CalcPlus Beta Library (v{{ calcplus_js }})</a>
-        </li>
-        <li><a href="https://calcplus.virxcase.dev/calcplus.js"
-                download="CalcPlus_ALPHA_ModuleJS_Library.js">CalcPlus Alpha Node TS/Module JS Library (v{{ calcplus_ts }})</a></li>
+        <li><a href="https://github.com/VirxEC/CalcPlus/releases/tag/v{{ calcplus_js }}-beta-js">CalcPlus Beta Library (v{{ calcplus_js }})</a></li>
+        <li><a href="https://calcplus.virxcase.dev/calcplus.js" download="CalcPlus_ALPHA_ModuleJS_Library.js">CalcPlus Alpha Node TS/Module JS Library (v{{ calcplus_ts }})</a></li>
     </ul>
 
     <div class="tabset">
