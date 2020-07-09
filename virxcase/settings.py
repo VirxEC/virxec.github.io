@@ -20,9 +20,9 @@ PWA_APP_DEBUG_MODE = False # PROD: False
 
 ALLOWED_HOSTS = ['0.0.0.0', "127.0.0.1", "www.virxcase.dev", "virxcase.herokuapp.com"]
 
-SESSION_COOKIE_SECURE = False  # PROD: True
+SESSION_COOKIE_SECURE = True  # PROD: True
 
-CSRF_COOKIE_SECURE = False  # PROD: True
+CSRF_COOKIE_SECURE = True  # PROD: True
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
