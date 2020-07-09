@@ -22,9 +22,7 @@ ALLOWED_HOSTS = ['0.0.0.0', "127.0.0.1", "www.virxcase.dev", "virxcase.herokuapp
 
 SESSION_COOKIE_SECURE = True  # PROD: True
 
-CSRF_COOKIE_SECURE = True  # PROD: True
-
-SECURE_SSL_REDIRECT = True  # PROD: True
+# CSRF_COOKIE_SECURE = True  # PROD: True
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
