@@ -4,3 +4,4 @@ gunicorn
 django-pwa
 django-heroku
 requests
+whitenoise
