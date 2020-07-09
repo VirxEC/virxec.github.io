@@ -9,7 +9,6 @@ const files = [
   "https://virxeb.virxcase.dev/util/objects.py",
   "https://virxeb.virxcase.dev/util/prediction.py",
   "https://virxeb.virxcase.dev/gui.py",
-  "/offline",
   "/CP-P",
   "/CP-S",
   "/VEB",
