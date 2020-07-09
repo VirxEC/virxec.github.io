@@ -5,7 +5,7 @@ from django.views.generic.base import TemplateView
 from . import sitemap as smaps
 from . import views
 
-handler404 = views.handler404
+handler404 = 'main.views.handler404'
 
 sitemaps = {
     'static': smaps.StaticViewSitemap
