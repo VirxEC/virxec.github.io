@@ -53,6 +53,10 @@ nav {
     height: 40px;
 }
 
+#mobile-home {
+    display: none;
+}
+
 nav ul {
     display: block;
     margin: 0;

@@ -14,15 +14,15 @@ import os
 import django_heroku
 import dj_database_url
 
-DEBUG = False  # PROD: False
+DEBUG = True  # PROD: False
 
-PWA_APP_DEBUG_MODE = False # PROD: False
+PWA_APP_DEBUG_MODE = DEBUG
 
 ALLOWED_HOSTS = ['0.0.0.0', "127.0.0.1", "www.virxcase.dev", "virxcase.herokuapp.com"]
 
-SESSION_COOKIE_SECURE = True  # PROD: True
+SESSION_COOKIE_SECURE = not DEBUG
 
-CSRF_COOKIE_SECURE = True  # PROD: True
+CSRF_COOKIE_SECURE = not DEBUG
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -131,7 +131,7 @@ STATICFILES_DIRS = [
 ]
 
 PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'main', 'static', 'js', 'service-worker.js')
-PWA_APP_NAME = 'VirxEC Showcase'
+PWA_APP_NAME = 'VirxEC\'s Showcase Website'
 PWA_APP_THEME_COLOR = '#eee'
 PWA_APP_BACKGROUND_COLOR = '#131318'
 PWA_APP_DISPLAY = 'fullscreen'

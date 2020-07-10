@@ -11,16 +11,17 @@
                 <option value="583376212114669578" {% if channel == "583376212114669578" %}selected{% endif %}>General 2</option>
             </select>
         </h3>
-    {% endif %}
-    <h3>Gamer Mode {% if gamer %}<a href="{% url 'options' %}?gamer=False"><button>On</button></a>{% else %}<a href="{% url 'options' %}?gamer=True"><button>Off</button></a>{% endif %}</h3>
-    {% if gamer %}
-        <h3>Transition time <input type="range" min="50" max="5000" id="transition" step="50" value="{{ interval }}"> <a id="interval_link" href=""><button>Apply <span id="interval">{{ interval }}</span>ms</button></a></h3>
-    {% endif %}
-    
-    <h3>Reset all <a href="{% url 'options' %}?reset=yes"><button>Reset</button></a></h3>
+        <h3>Gamer Mode {% if gamer %}<a href="{% url 'options' %}?gamer=False"><button>On</button></a>{% else %}<a href="{% url 'options' %}?gamer=True"><button>Off</button></a>{% endif %}</h3>
+        {% if gamer %}
+            <h3>Transition time <input type="range" min="50" max="5000" id="transition" step="50" value="{{ interval }}"> <a id="interval_link" href=""><button>Apply <span id="interval">{{ interval }}</span>ms</button></a></h3>
+        {% endif %}
 
-    {% if gamer or discord %}
         <script>
+            const channel = document.querySelector("#channel")
+            channel.addEventListener("change", () => {
+                location.replace("{% url 'options' %}?channel=" + channel.value)
+            });
+
             {% if gamer %}
                 const transition = document.querySelector("#transition");
                 transition.addEventListener("input", () => {
@@ -28,14 +29,9 @@
                     document.querySelector("#interval_link").href = "{% url 'options' %}?interval=" + transition.value;
                 });
             {% endif %}
-            
-            {% if discord %}
-                const channel = document.querySelector("#channel")
-                channel.addEventListener("change", () => {
-                    location.replace("{% url 'options' %}?channel=" + channel.value)
-                });
-            {% endif %}
         </script>
     {% endif %}
+        
+    <h3>Reset all <a href="{% url 'options' %}?reset=yes"><button>Reset</button></a></h3>
 
 {% endblock body %}

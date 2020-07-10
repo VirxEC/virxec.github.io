@@ -1,4 +1,4 @@
-#pwamsg {
+.pwamsg {
   display: none;
 }
 
@@ -52,15 +52,15 @@ div.right ul {
   padding-right: 40px;
 }
 
-.stable {
+.Stable {
   color: green;
 }
 
-.develop {
+.Developing {
   color: lightgreen;
 }
 
-.fix {
+.Fixing {
   color: yellow;
 }
 
@@ -111,6 +111,6 @@ ul {
 
   .uhd-icon {
     display: inline;
-    width: 400px;
+    height: 315px;
   }
 }

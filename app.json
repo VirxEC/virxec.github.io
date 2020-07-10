@@ -1,5 +1,5 @@
 {
-  "name": "VirxEC Showcase",
+  "name": "VirxEC's Showcase Website",
   "description": "Showcase website for VirxEC",
   "image": "heroku/python",
   "repository": "https://git.heroku.com/virxcase.git",
@@ -8,7 +8,7 @@
   "environments": {
     "test": {
       "scripts": {
-        "test-setup": "python manage.py collectstatic --noinput",
+        "test-setup": "python manage.py collectstatic --noinput --clear",
         "test": "python manage.py test"
       }
     }

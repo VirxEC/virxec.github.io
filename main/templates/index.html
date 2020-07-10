@@ -6,10 +6,10 @@
         <div id="main-grid">
             <div>
                 <img class="hd-icon site-icon" data-src="{% static 'icons/site_icon.png' %}" alt="CalcPlus logo">
-                <img class="uhd-icon site-icon" data-src="{% static 'icons/site_icon_hd.png' %}" alt="CalcPlus logo">
+                <img class="uhd-icon site-icon" data-src="{% static 'icons/512.png' %}" alt="CalcPlus logo">
             </div>
             <div>
-                <h1 class="top">VirxEC Showcase Website</h1>
+                <h1 class="top">VirxEC's Showcase Website</h1>
                 <p class="middle">
                     <a href="https://discord.gg/N3ppwGu" target="_blank"><img src="{% static 'icons/discord.png' %}" height="24px" at="Discord"></a>
                     &nbsp;
@@ -21,14 +21,18 @@
                     &nbsp;
                     <a href="https://www.youtube.com/channel/UCbXnfz22hD8y26UG454c5PA"><img src="{% static 'icons/youtube.png' %}" height="24px" alt="YouTube"></a>
                 </p>
-                <div id="pwamsg">
-                    <h3 class="top">Install the VirxEC Showcase <a href="https://blog.bitsrc.io/what-is-a-pwa-and-why-should-you-care-388afb6c0bad"><abbr title="Progressive Web App">PWA</abbr></a>!</h3>
-                    <button class="bottom" id="pwainstall">Install now (No download)</button></li>
+                <div id="pwamsg" class="pwamsg">
+                    <h3 class="top">Get VirxEC's Showcase Website's <a href="https://blog.bitsrc.io/what-is-a-pwa-and-why-should-you-care-388afb6c0bad"><abbr title="Progressive Web App">PWA</abbr></a>!</h3>
+                    <button class="bottom" id="pwainstall">Add shortcut</button></li>
+                </div>
+                <div id="pwamsg-mobile" class="pwamsg">
+                    <h3 class="top">Get Virxcase's <a href="https://blog.bitsrc.io/what-is-a-pwa-and-why-should-you-care-388afb6c0bad"><abbr title="Progressive Web App">PWA</abbr></a>!</h3>
+                    <button class="bottom" id="pwainstall">Add shortcut to home</button></li>
                 </div>
             </div>
             <div class="mobile-spare">
-                <img class="hd-icon site-icon" data-src="/static/icons/site_icon.png" alt="CalcPlus logo">
-                <img class="uhd-icon site-icon" data-src="/static/icons/site_icon_hd.png" alt="CalcPlus logo">
+                <img class="hd-icon site-icon" data-src="{% static 'icons/site_icon.png' %}" alt="CalcPlus logo">
+                <img class="uhd-icon site-icon" data-src="{% static 'icons/site_icon_hd.png' %}" alt="CalcPlus logo">
             </div>
         </div>
     </div>
@@ -47,7 +51,7 @@
         <div id="aboutcalcplus">
             <h3>About CalcPlus</h3>
             <ul class="linklist">
-                <li>Status: <span class="fix">Fixing</span></li>
+                <li>Status: <span class="{{ status }}">{{ status }}</span></li>
                 <li><a href="http://www.apache.org/licenses/LICENSE-2.0">CalcPlus License</a></li>
                 <li><a href="https://repl.it/github/VirxEC/CalcPlus">Test latest Node.js version<br>on Repl.it</a></li>
             </ul>
@@ -61,23 +65,33 @@
                 <li><a href="https://calcplus.virxcase.dev/calcplus.js" download>CalcPlus Alpha Node TS/Module JS Library<br>(v{{ calcplus_ts }})</a></li>
             </ul>
         </div>
-        <div id="bobcatrobotics">
-            <h3>Let's go Bobcat Robotics 2020!</h3>
-            <ul class="linklist">
-                <li><a href="https://www.bobcatrobotics.org/">Website</a></li>
-                <li><a href="https://www.instagram.com/bobcatrobotics/">Instagram</a></li>
-                <li><a href="https://twitter.com/Bobcat_Robotics">Twitter</a></li>
-            </ul>
-        </div>
         <div>
             <h3>VirxEB Project Links</h3>
             <ul class="linklist">
+                <li><a href="https://virxeb.virxcase.dev/LICENSE">VirxEB's License</a></li>
                 <li><a href="https://www.rlbot.org/">RLBot Website</a></li>
                 <li><a href="https://github.com/VirxEC/VirxEB">Github</a></li>
                 <li><a href="https://github.com/VirxEC/VirxEB/issues">Issues</a></li>
                 <li><a href="https://github.com/VirxEC/VirxEB/pulls">Pull requests</a></li>
             </ul>
         </div>
+        <div>
+            <h3>VirxEC's Showcase Website Project Links</h3>
+            <ul class="linklist">
+                <li><a href="http://www.apache.org/licenses/LICENSE-2.0">Website License</a></li>
+                <li><a href="https://github.com/VirxEC/virxec.github.io/tree/django">GitHub</a></li>
+                <li><a href="https://github.com/VirxEC/virxec.github.io/issues">Issues</a></li>
+                <li><a href="https://github.com/VirxEC/virxec.github.io/pulls">Pull requests</a></li>
+            </ul>
+        </div>
+        <!-- <div id="bobcatrobotics">
+            <h3>Let's go Bobcat Robotics 2020!</h3>
+            <ul class="linklist">
+                <li><a href="https://www.bobcatrobotics.org/">Website</a></li>
+                <li><a href="https://www.instagram.com/bobcatrobotics/">Instagram</a></li>
+                <li><a href="https://twitter.com/Bobcat_Robotics">Twitter</a></li>
+            </ul>
+        </div> -->
     </div>
     <script>
         function siteIcons() {
@@ -93,7 +107,15 @@
         var p;
         addEventListener('beforeinstallprompt', e=>{
             p = e;
-            document.querySelector("#pwamsg").style.display = "block";
+            function pwamsg_mobile() {
+                document.querySelector("#pwamsg").style.display = "none";
+                document.querySelector("#pwamsg-mobile").style.display = "none";
+                if (screen.width > 700) document.querySelector("#pwamsg").style.display = "block";
+                else document.querySelector("#pwamsg-mobile").style.display = "block";
+            }
+            
+            pwamsg_mobile()
+            addEventListener('resize', pwamsg_mobile)
         });
 
         document.querySelector("#pwainstall").addEventListener("click", e=>p.prompt());
