@@ -1,11 +1,10 @@
-# virxec.github.io
+# VirxEC's Showcase Website
 
-Testing/showcase website for all things VirxEC (virx@virxcase.ga)
+This website is now powered by Django, and has been moved to https://www.virxcase.dev/
+
+Testing/showcase website for all things VirxEC (virx@virxcase.dev)
 
 Currently showcasing:
 
  - [CalcPlus](https://github.com/virxec/calcplus)
- - [CPQuery](https://github.com/virxec/cpquery)
  - [VirxEB](https://github.com/virxec/virxeb)
-
-[![Build Status](https://travis-ci.com/VirxEC/virxec.github.io.svg?branch=master)](https://travis-ci.com/VirxEC/virxec.github.io)
