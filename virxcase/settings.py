@@ -14,7 +14,7 @@ import os
 import django_heroku
 import dj_database_url
 
-DEBUG = True  # PROD: False
+DEBUG = False  # PROD: False
 
 PWA_APP_DEBUG_MODE = DEBUG
 
@@ -169,6 +169,12 @@ PWA_APP_ICONS = [
         "src": "/static/icons/192.png",
         "sizes": "192x192",
         "type": "image/png"
+    },
+    {
+        "src": "/static/icons/196_mask.png",
+        "sizes": "196x196",
+        "type": "image/png",
+        "purpose": "any maskable"
     },
     {
         "src": "/static/icons/384.png",

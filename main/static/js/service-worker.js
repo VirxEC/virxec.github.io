@@ -1,23 +1,10 @@
-const cname = "v3";
+const cname = "v4";
 const files = [
-  "https://calcplus.virxcase.dev/calcplus.js",
-  "https://calcplus.virxcase.dev/package.json",
-  "https://calcplus.virxcase.dev/src/calcplus.ts",
-  "https://calcplus.virxcase.dev/calcplus.d.ts",
-  "https://virxeb.virxcase.dev/VirxEB.py",
-  "https://virxeb.virxcase.dev/util/routines.py",
-  "https://virxeb.virxcase.dev/util/objects.py",
-  "https://virxeb.virxcase.dev/util/prediction.py",
-  "https://virxeb.virxcase.dev/gui.py",
-  "/CP-P",
-  "/CP-S",
-  "/VEB",
-  "/Options",
   "/manifest.json",
   "/"
 ];
 // Cache on install
-self.addEventListener("install", e => {
+self.addEventListener("install", function(e) {
   this.skipWaiting();
   e.waitUntil(
     caches.open(cname).then(cache => {
@@ -37,11 +24,16 @@ self.addEventListener('activate', e => {
   );
 });
 
-// Serve from Cache
-self.addEventListener("fetch", e => {
-  e.respondWith(
-    caches.match(e.request).then(r => {
-      return r || fetch(e.request);
+// Serve from cache, cache if not already
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.open(cname).then(function(cache) {
+      return cache.match(event.request).then(function (response) {
+        return response || fetch(event.request).then(function(response) {
+          cache.put(event.request, response.clone());
+          return response;
+        });
+      });
     })
-  )
+  );
 });
