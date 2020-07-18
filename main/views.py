@@ -4,20 +4,24 @@ from django.views.decorators.http import require_GET
 
 from main.models import Version, Cache
 
+
 def handler404(request, exception):
     return render(request, '404.html', status=404, context={
         "exception": exception,
         "title": "Whoops!"
     })
 
+
 @require_GET
 def robots_txt(request):
     lines = [
         "User-Agent: *",
         "Allow: /",
-        "Sitemap: /sitemap.xml"
+        "Disallow: /Options",
+        "Sitemap: https://www.virxcase.dev/sitemap.xml"
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")
+
 
 def handle_session(request):
     if request.session.get('discord') == None:
@@ -25,12 +29,13 @@ def handle_session(request):
 
     if request.session.get('channel') == None:
         request.session['channel'] = "629774177733181440"
-    
+
     if request.session.get('gamer') == None:
         request.session['gamer'] = False
 
     if request.session.get('interval') == None:
         request.session['interval'] = "400"
+
 
 def get_session(request, title, page_css=None, cp_versions=False):
     return {
@@ -45,20 +50,24 @@ def get_session(request, title, page_css=None, cp_versions=False):
         "page_css": page_css
     }
 
+
 @require_GET
 def home(request):
     handle_session(request)
     return render(request, "index.html", get_session(request, "VirxEC's Showcase Website", "css/index.css", True))
+
 
 @require_GET
 def calcplus_preview(request):
     handle_session(request)
     return render(request, "CP-P.html", get_session(request, "Preview the CalcPlus Library", "css/CP-P.css", True))
 
+
 @require_GET
 def calcplus_source(request):
     handle_session(request)
     return render(request, "CP-S.html", get_session(request, "CalcPlus Library Source Code", "css/CP-S.css", True))
+
 
 @require_GET
 def virxeb(request):
@@ -66,14 +75,17 @@ def virxeb(request):
     virxeb_version = repr(Cache.objects.get(name="VirxEB_COMM"))
     return render(request, "VEB.html", get_session(request, f"VirxEB (COMM-{virxeb_version}) Source Code - Built on the RLBot Framework", "css/CP-S.css"))
 
+
 @require_GET
 def options(request):
+    handle_session(request)
+
     if request.GET.get("discord") != None:
         try:
             discord = request.GET['discord'] == 'True'
         except Exception:
             return redirect('options')
-        
+
         request.session['discord'] = discord
         return redirect("options")
     elif request.GET.get("channel") != None:
@@ -81,7 +93,7 @@ def options(request):
             channel = str(request.GET['channel'])
         except Exception:
             return redirect('options')
-        
+
         if channel in {"629774177733181440", "507717342680186891", "583376212114669578", "713127297833500712"}:
             request.session['channel'] = channel
 
@@ -91,7 +103,7 @@ def options(request):
             gamer = request.GET['gamer'] == 'True'
         except Exception:
             return redirect('options')
-        
+
         request.session['gamer'] = gamer
         return redirect("options")
     elif request.GET.get('interval') != None:
@@ -99,7 +111,7 @@ def options(request):
             interval = int(request.GET['interval'])
         except Exception:
             return redirect("options")
-        
+
         if interval % 50 != 0:
             return redirect("options")
 
@@ -112,6 +124,11 @@ def options(request):
             request.session['gamer'] = None
             request.session['interval'] = None
         return redirect("options")
-    
-    handle_session(request)
+
     return render(request, "Options.html", get_session(request, "Site Options", "css/Options.css"))
+
+
+@require_GET
+def minecraft_curseforge(request):
+    handle_session(request)
+    return render(request, "curseforge.html", get_session(request, "Minecraft CurseForge Projects", "css/MC-CF.css"))

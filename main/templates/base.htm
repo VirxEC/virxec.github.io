@@ -39,7 +39,7 @@
             <span class="navdecor"></span>
             <span class="navdecor"></span>
             <ul>
-                <li id="ic"><a href="{% url 'main_home' %}"><img src="{% static 'icons/096.png' %}" alt="CalcPlus Icon"></a></li>
+                <li id="ic"><a href="{% url 'main_home' %}"><img src="{% static 'icons/096.png' %}" alt="Site logo"></a></li>
                 <li id="mobile-home"><a href="{% url 'main_home' %}">Home</a></li>
                 <li class="dropdown">
                     <input type="checkbox" id="calcplus">
@@ -47,7 +47,7 @@
                     <ul class="dropdown-content">
                         <li><a href="https://calcplus.virxcase.dev/">About</a></li>
                         <li><a href="{% url 'calcplus_preview' %}">Preview</a></li>
-                        <li><a href="https://github.com/VirxEC/CalcPlus">GitHub</a></li>
+                        <li><a href="https://github.com/VirxEC/CalcPlus" target="_blank">GitHub</a></li>
                         <li><a href="{% url 'calcplus_source' %}">Source</a></li>
                     </ul>
                 </li>
@@ -57,7 +57,16 @@
                     <ul class="dropdown-content">
                         <li><a href="{% url 'virxeb' %}">Source</a></li>
                         <li><a href="https://virxeb.virxcase.dev/">About</a></li>
-                        <li><a href="https://github.com/VirxEC/VirxEB">GitHub</a></li>
+                        <li><a href="https://github.com/VirxEC/VirxEB" target="_blank">GitHub</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <input type="checkbox" id="curseforge">
+                    <label for="curseforge">CurseForge</label>
+                    <ul class="dropdown-content">
+                        <li><a href="{% url 'minecraft_curseforge' %}">About</a></li>
+                        <li><a href="https://www.curseforge.com/minecraft/worlds/vanilla-skyblock" target="_blank">Vanilla Skyblock</a></li>
+                        <li><a href="https://www.curseforge.com/minecraft/texture-packs/transparent-gui-ultimate" target="_blank">Transparent GUI</a></li>
                     </ul>
                 </li>
                 <li><a href="{% url 'options' %}">Options</a></li>

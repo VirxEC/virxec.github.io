@@ -68,4 +68,9 @@
   #options {
     order: 3;
   }
+
+  input.inputBoxes {
+    height: 30px;
+    padding-bottom: 18px;
+  }
 }
