@@ -24,16 +24,16 @@ def robots_txt(request):
 
 
 def handle_session(request):
-    if request.session.get('discord') == None:
+    if request.session.get('discord') is None:
         request.session['discord'] = True
 
-    if request.session.get('channel') == None:
+    if request.session.get('channel') is None:
         request.session['channel'] = "629774177733181440"
 
-    if request.session.get('gamer') == None:
+    if request.session.get('gamer') is None:
         request.session['gamer'] = False
 
-    if request.session.get('interval') == None:
+    if request.session.get('interval') is None:
         request.session['interval'] = "400"
 
 
@@ -78,8 +78,6 @@ def virxeb(request):
 
 @require_GET
 def options(request):
-    handle_session(request)
-
     if request.GET.get("discord") != None:
         try:
             discord = request.GET['discord'] == 'True'
@@ -125,6 +123,7 @@ def options(request):
             request.session['interval'] = None
         return redirect("options")
 
+    handle_session(request)
     return render(request, "Options.html", get_session(request, "Site Options", "css/Options.css"))
 
 
