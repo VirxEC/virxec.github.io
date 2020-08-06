@@ -1,3 +1,11 @@
+#discord, #email, #youtube, #curseforge {
+  height: 24px;
+}
+
+#github, #stack-overflow {
+  height: 30px;
+}
+
 .pwamsg {
   display: none;
 }
@@ -98,15 +106,29 @@ ul {
   }
 }
 
-@media only screen and (max-width: 900px) and (min-width: 700px) {
+@media only screen and (max-width: 1000px) {
+  .desktop-grid-format {
+    order: 200;
+  }
+}
+
+@media only screen and (max-width: 1000px) and (min-width: 700px) {
   #secondary-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media only screen and (min-width: 2500px) {
+@media only screen and (min-width: 2560px) {
   .hd-icon {
     display: none;
+  }
+
+  #discord, #email, #youtube, #curseforge {
+    height: 36px;
+  }
+  
+  #github, #stack-overflow {
+    height: 45px;
   }
 
   .uhd-icon {

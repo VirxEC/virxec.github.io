@@ -22,7 +22,7 @@
         <label for="tab2">Routines</label>
 
         <input type="radio" name="tabset" id="tab3">
-        <label for="tab3">GoslingAgent</label>
+        <label for="tab3">Agent</label>
 
         <input type="radio" name="tabset" id="tab4">
         <label for="tab4">Predictive service</label>
@@ -53,11 +53,11 @@
             $("#routines").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
         });
 
-        $("^https://virxeb.virxcase.dev/util/objects.py").file(function() {
+        $("^https://virxeb.virxcase.dev/util/agent.py").file(function() {
             $("#objects").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
         });
 
-        $("^https://virxeb.virxcase.dev/util/prediction.py").file(function() {
+        $("^https://virxeb.virxcase.dev/prediction.py").file(function() {
             $("#predictions").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
         });
 
