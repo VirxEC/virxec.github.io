@@ -19,5 +19,6 @@ urlpatterns = [
     path("MC-CF", views.minecraft_curseforge, name='minecraft_curseforge'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
     path("robots.txt", views.robots_txt),
+    path("ads.txt", views.ads_txt),
     path('', include('pwa.urls'))
 ]

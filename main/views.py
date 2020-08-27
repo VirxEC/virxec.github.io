@@ -23,6 +23,12 @@ def robots_txt(request):
     return HttpResponse("\n".join(lines), content_type="text/plain")
 
 
+@require_GET
+def ads_txt(request):
+    content = "google.com, pub-9063288785609075, DIRECT, f08c47fec0942fa0"
+    return HttpResponse(content, content_type="text/plain")
+
+
 def handle_session(request):
     if request.session.get('discord') is None:
         request.session['discord'] = True
@@ -78,7 +84,7 @@ def virxeb(request):
 
 @require_GET
 def options(request):
-    if request.GET.get("discord") != None:
+    if request.GET.get("discord") is not None:
         try:
             discord = request.GET['discord'] == 'True'
         except Exception:
@@ -86,7 +92,7 @@ def options(request):
 
         request.session['discord'] = discord
         return redirect("options")
-    elif request.GET.get("channel") != None:
+    elif request.GET.get("channel") is not None:
         try:
             channel = str(request.GET['channel'])
         except Exception:
@@ -96,7 +102,7 @@ def options(request):
             request.session['channel'] = channel
 
         return redirect('options')
-    elif request.GET.get("gamer") != None:
+    elif request.GET.get("gamer") is not None:
         try:
             gamer = request.GET['gamer'] == 'True'
         except Exception:
@@ -104,7 +110,7 @@ def options(request):
 
         request.session['gamer'] = gamer
         return redirect("options")
-    elif request.GET.get('interval') != None:
+    elif request.GET.get('interval') is not None:
         try:
             interval = int(request.GET['interval'])
         except Exception:
@@ -115,7 +121,7 @@ def options(request):
 
         request.session['interval'] = interval
         return redirect("options")
-    elif request.GET.get("reset") != None:
+    elif request.GET.get("reset") is not None:
         if request.GET['reset'] == "yes":
             request.session['discord'] = None
             request.session['channel'] = None
