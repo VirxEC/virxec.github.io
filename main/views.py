@@ -61,7 +61,7 @@ def get_session(request, title, page_css=None, cp_versions=False):
 def home(request):
     handle_session(request)
     return render(request, "index.html", get_session(request, "VirxEC's Showcase Website", "css/index.css", True))
-
+    
 
 @require_GET
 def calcplus_preview(request):

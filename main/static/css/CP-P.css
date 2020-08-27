@@ -14,7 +14,7 @@
   color: red;
 }
 
-#ctrls {
+#ctrls, #input {
   text-align: center;
   margin: 0 auto;
   display: grid;
@@ -48,25 +48,14 @@
 }
 
 @media only screen and (max-width: 500px) {
-  #ctrls {
+  #input {
     grid-template-columns: auto;
   }
 }
 
-@media only screen and (max-width: 900px) and (min-width: 500px) {
-  #ctrls {
-    grid-template-columns: auto auto;
-  }
-
-  #options {
-    grid-column-start: 1;
-    grid-column-end: 3;
-  }
-}
-
 @media only screen and (max-width: 900px) {
-  #options {
-    order: 3;
+  #ctrls {
+    grid-template-columns: auto;
   }
 
   input.inputBoxes {
