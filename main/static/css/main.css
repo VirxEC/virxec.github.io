@@ -1,6 +1,6 @@
 :root {
     --bg-main: #112;
-    --bg-main-2: #002;
+    --bg-main-2: #000022;
     --bg-secondary: #0f0f11;
     --bg-tertiary: #0d1e4d;
     --color-main: #eee;
@@ -53,6 +53,30 @@ nav {
     height: 40px;
 }
 
+#search {
+    height: 25px;
+    width: 25px;
+}
+
+#search-overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100vw; /* Full width (cover the whole page) */
+    height: 100vh; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #0f0f1177; /* --bg-secondary with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+}
+
+#other-overlay {
+    width: 100vw;
+    height: 100%;
+}
+
 #mobile-home {
     display: none;
 }
@@ -70,13 +94,20 @@ nav ul li {
     box-sizing: border-box;
 }
 
+nav ul li a svg {
+    fill: var(--color-secondary);
+}
+
+nav ul li a:hover svg {
+    fill: var(--color-tertiary);
+}
+
 nav ul li a, nav ul li label {
     display: block;
     color: var(--color-secondary);
     margin-right: 5px;
     font-weight: 600;
     font-size: 14px;
-    text-transform: uppercase;
     padding: 25px 15px;
 }
 

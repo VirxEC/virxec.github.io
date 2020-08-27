@@ -136,4 +136,4 @@ def options(request):
 @require_GET
 def minecraft_curseforge(request):
     handle_session(request)
-    return render(request, "curseforge.html", get_session(request, "Minecraft CurseForge Projects", "css/MC-CF.css"))
+    return render(request, "curseforge.html", get_session(request, "Minecraft CurseForge Projects Vanilla SkyBlock and Transparent GUI", "css/MC-CF.css"))
