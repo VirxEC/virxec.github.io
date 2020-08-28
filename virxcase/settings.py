@@ -14,7 +14,7 @@ import os
 import django_heroku
 import dj_database_url
 
-DEBUG = True  # PROD: False
+DEBUG = False  # PROD: False
 
 PWA_APP_DEBUG_MODE = DEBUG
 
