@@ -34,22 +34,22 @@
     {% progressive_web_app_meta %}
 </head>
 <body>
-    <script>
-        function searchOverlay(show) {
-            document.querySelector('#search-overlay').style.display = show ? 'block' : 'none';
-        }
-
-        function bindSearchX() {
-            document.querySelector("#gs_cb50").addEventListener("click", ()=>searchOverlay(false));
-        }
-
-        window.onload = bindSearchX;
-    </script>
-
-    <div id='search-overlay'>
+    <section id='search-overlay' aria-hidden="true">
         <div class="gcse-search"></div>
         <div id="other-overlay" onclick='searchOverlay(false)'></div>
-    </div>
+    </section>
+
+    <script>
+        const overlay = document.querySelector('#search-overlay');
+
+        function searchOverlay(show) {
+            overlay.setAttribute('aria-hidden', !show);
+            document.body.classList.toggle('noscroll', show);
+            overlay.scrollTop = 0;
+        }
+
+        addEventListener('load', ()=>document.querySelector("#gs_cb50").addEventListener("click", ()=>searchOverlay(false)))
+    </script>
 
     <nav>
         <div id="mt">
@@ -107,6 +107,7 @@
     
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     {% if page_css %}<link rel="stylesheet" href="{% static page_css %}">{% endif %}
+    {% block post_styles %}{% endblock post_styles %}
     {% if discord %}
         <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3"></script>
         <script>

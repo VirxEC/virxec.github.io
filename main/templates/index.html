@@ -134,18 +134,16 @@
         </div> -->
     </div>
     <script>
+        const icons = document.querySelectorAll(".site-icon");
         function siteIcons() {
-            var icons = document.querySelectorAll(".site-icon")
-            for (let i = 0; i < icons.length; i++) {
-                if (getComputedStyle(icons[i]).getPropertyValue("display") !== "none") icons[i].src = icons[i].getAttribute("data-src");
-            }
+            for (let i = 0; i < icons.length; i++)
+                if (getComputedStyle(icons[i]).getPropertyValue("display") === "inline" && icons[i].getAttribute("src") == null) icons[i].src = icons[i].getAttribute("data-src");
         }
-        
-        siteIcons();
-        addEventListener('resize', siteIcons)
 
-        var p;
-        addEventListener('beforeinstallprompt', e=>{
+        addEventListener('resize', siteIcons);
+
+        let p;
+        addEventListener('beforeinstallprompt', e => {
             p = e;
             function pwamsg_mobile() {
                 document.querySelector("#pwamsg").style.display = "none";
@@ -154,12 +152,18 @@
                 else document.querySelector("#pwamsg-mobile").style.display = "block";
             }
             
-            pwamsg_mobile()
-            addEventListener('resize', pwamsg_mobile)
-        });
+            pwamsg_mobile();
+            addEventListener('resize', pwamsg_mobile);
+        }); 
 
-        document.querySelector("#pwainstall").addEventListener("click", e=>p.prompt());
+        document.querySelector("#pwainstall").addEventListener("click", () => p.prompt());
 
         if (/iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase() && !(('standalone' in window.navigator) && (window.navigator.standalone))) && !('standalone' in navigator)) this.setState({ showInstallMessage: true });
     </script>
 {% endblock body %}
+
+{% block post_styles %}
+    <script>
+        siteIcons();
+    </script>
+{% endblock %}

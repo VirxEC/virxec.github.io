@@ -10,7 +10,7 @@
   display: none;
 }
 
-.uhd-icon {
+.uhd-icon, .hd-icon {
   display: none;
 }
 
@@ -118,21 +118,23 @@ ul {
   }
 }
 
+@media only screen and (max-width: 2560px) {
+  .hd-icon {
+    display: inline;
+  }
+
+  .uhd-icon {
+    display: none;
+  }
+}
+
 @media only screen and (min-width: 2560px) {
   .hd-icon {
     display: none;
   }
 
-  #discord, #email, #youtube, #curseforge {
-    height: 36px;
-  }
-  
-  #github, #stack-overflow {
-    height: 45px;
-  }
-
   .uhd-icon {
-    display: inline;
     height: 315px;
+    display: inline;
   }
 }

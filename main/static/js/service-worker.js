@@ -1,4 +1,4 @@
-const cname = "v4";
+const cname = "v5";
 const files = [
   "/manifest.json",
   "/"
@@ -26,14 +26,24 @@ self.addEventListener('activate', e => {
 
 // Serve from cache, cache if not already
 self.addEventListener('fetch', function(event) {
+  let update = true
+
   event.respondWith(
     caches.open(cname).then(function(cache) {
       return cache.match(event.request).then(function (response) {
-        return response || fetch(event.request).then(function(response) {
-          cache.put(event.request, response.clone());
-          return response;
+        if (response)
+          return response
+        
+        update = false
+        return fetch(event.request).then(function(response2) {
+          if (!event.request.url.includes("google"))
+            cache.put(event.request, response2.clone());
+          return response2;
         });
       });
     })
   );
+  
+  if (update && !event.request.url.includes("google"))
+    event.waitUntil(caches.open(cname).then(cache => fetch(event.request).then(response => cache.put(event.request, response.clone()).then(response))));
 });

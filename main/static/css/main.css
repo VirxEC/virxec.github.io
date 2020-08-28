@@ -17,10 +17,15 @@ body {
     color: var(--color-main);
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
-a, a:link, a:visited, a:hover, a:active, a:visited {
+a,
+a:link,
+a:visited,
+a:hover,
+a:active,
+a:visited {
     text-decoration: none !important;
     color: var(--color-secondary);
 }
@@ -38,7 +43,7 @@ nav {
     width: 100%;
     background: var(--bg-secondary);
     text-align: right;
-    border-bottom: 1px solid rgba(0, 0, 0, .5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 #ic {
@@ -60,7 +65,7 @@ nav {
 
 #search-overlay {
     position: fixed; /* Sit on top of the page content */
-    display: none; /* Hidden by default */
+    overflow-y: scroll;
     width: 100vw; /* Full width (cover the whole page) */
     height: 100vh; /* Full height (cover the whole page) */
     top: 0;
@@ -72,9 +77,20 @@ nav {
     cursor: pointer; /* Add a pointer on hover */
 }
 
+.noscroll {
+    overflow: hidden;
+}
+
+[aria-hidden="true"] {
+    display: none;
+}
+[aria-hidden="false"] {
+    display: block;
+}
+
 #other-overlay {
     width: 100vw;
-    height: 100%;
+    height: 95vh;
 }
 
 #mobile-home {
@@ -102,7 +118,8 @@ nav ul li a:hover svg {
     fill: var(--color-tertiary);
 }
 
-nav ul li a, nav ul li label {
+nav ul li a,
+nav ul li label {
     display: block;
     color: var(--color-secondary);
     margin-right: 5px;
@@ -111,7 +128,8 @@ nav ul li a, nav ul li label {
     padding: 25px 15px;
 }
 
-nav ul li a:hover, nav ul li label:hover {
+nav ul li a:hover,
+nav ul li label:hover {
     color: var(--color-tertiary);
 }
 
@@ -200,10 +218,10 @@ button {
     .dropdown-content {
         position: static;
     }
-    .dropdown input:not(:checked)~.dropdown-content {
+    .dropdown input:not(:checked) ~ .dropdown-content {
         display: none;
     }
-    .dropdown input:checked~.dropdown-content {
+    .dropdown input:checked ~ .dropdown-content {
         display: block;
     }
     .dropdown ul li {
@@ -221,7 +239,8 @@ button {
     nav ul img {
         display: none;
     }
-    nav ul li a, nav ul li label {
+    nav ul li a,
+    nav ul li label {
         padding: 15px 25px;
         font-size: 1.5em;
     }
@@ -252,11 +271,12 @@ button {
         height: 4px;
         margin-bottom: 5px;
         position: relative;
-        background: #0090FF;
+        background: #0090ff;
         border-radius: 3px;
         z-index: 1;
         transform-origin: 4px 0px;
-        transition: transform 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.55s ease;
+        transition: transform 0.3s cubic-bezier(0.77, 0.2, 0.05, 1), background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+            opacity 0.55s ease;
     }
     #mt span:first-child {
         transform-origin: 0% 0%;
@@ -264,25 +284,25 @@ button {
     #mt span:nth-last-child(2) {
         transform-origin: 0% 100%;
     }
-    #mt input:checked~span {
+    #mt input:checked ~ span {
         opacity: 1;
         transform: rotate(45deg) translate(-2px, -1px);
     }
-    #mt input:checked~span:nth-last-child(3) {
+    #mt input:checked ~ span:nth-last-child(3) {
         opacity: 0;
         transform: rotate(0deg) scale(0.2, 0.2);
     }
-    #mt input:checked~span:nth-last-child(2) {
+    #mt input:checked ~ span:nth-last-child(2) {
         transform: rotate(-45deg) translate(0, -1px);
     }
-    #mt input:checked~ul {
+    #mt input:checked ~ ul {
         height: 95vh;
     }
-    #mt input:checked~ul li {
+    #mt input:checked ~ ul li {
         display: block;
-        animation: .5s ease-out 0s 1 slideInFromTop;
+        animation: 0.5s ease-out 0s 1 slideInFromTop;
     }
-    #mt input:checked~nav ul {
+    #mt input:checked ~ nav ul {
         margin: 0;
         padding: 0 5vw;
     }
