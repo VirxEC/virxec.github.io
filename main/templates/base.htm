@@ -61,16 +61,6 @@
                 <li id="ic"><a href="{% url 'main_home' %}"><img src="{% static 'icons/096.png' %}" alt="Site logo"></a></li>
                 <li id="mobile-home"><a href="{% url 'main_home' %}">Home</a></li>
                 <li class="dropdown">
-                    <input type="checkbox" id="calcplus">
-                    <label for="calcplus">CalcPlus</label>
-                    <ul class="dropdown-content">
-                        <li><a href="https://calcplus.virxcase.dev/">About</a></li>
-                        <li><a href="{% url 'calcplus_preview' %}">Preview</a></li>
-                        <li><a href="https://github.com/VirxEC/CalcPlus" target="_blank">GitHub</a></li>
-                        <li><a href="{% url 'calcplus_source' %}">Source</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
                     <input type="checkbox" id="virxeb">
                     <label for="virxeb">VirxEB</label>
                     <ul class="dropdown-content">
@@ -83,9 +73,21 @@
                     <input type="checkbox" id="virxerlu">
                     <label for="virxerlu">VirxERLU</label>
                     <ul class="dropdown-content">
+                        <li><a href="{% url 'virxerlu' %}">Source</a></li>
                         <li><a href="https://virxerlu.virxcase.dev/">About</a></li>
-                        <li><a href="https://www.youtube.com/watch?v=UpwiAgcAKgs">Tutorial</a></li>
+                        <li><a href="https://github.com/VirxEC/VirxERLU/wiki">Wiki</a></li>
                         <li><a href="https://github.com/VirxEC/VirxERLU" target="_blank">GitHub</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=UpwiAgcAKgs">Tutorial</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <input type="checkbox" id="calcplus">
+                    <label for="calcplus">CalcPlus</label>
+                    <ul class="dropdown-content">
+                        <li><a href="{% url 'calcplus_preview' %}">Preview</a></li>
+                        <li><a href="{% url 'calcplus_source' %}">Source</a></li>
+                        <li><a href="https://calcplus.virxcase.dev/">About</a></li>
+                        <li><a href="https://github.com/VirxEC/CalcPlus" target="_blank">GitHub</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

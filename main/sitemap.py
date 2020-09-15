@@ -9,7 +9,8 @@ class StaticViewSitemap(Sitemap):
             'calcplus_preview',
             'calcplus_source',
             'virxeb',
-            'minecraft_curseforge'
+            'minecraft_curseforge',
+            'virxerlu'
         ]
 
     def location(self, item):

@@ -38,17 +38,17 @@
         <label for="tab3">Agent</label>
 
         <input type="radio" name="tabset" id="tab4">
-        <label for="tab4">Predictive service</label>
+        <label for="tab4">Utils</label>
 
         <input type="radio" name="tabset" id="tab5">
-        <label for="tab5">GUI</label>
+        <label for="tab5">Tools</label>
 
         <div class="tab-panels">
             <pre class="tab-panel"><code id="virxebsrc">Loading...</code></pre>
-            <pre class="tab-panel">Do you want to use these utils for yourself? Check out <a href="https://virxerlu.virxcase.dev/">VirxERLU</a>!<br><br><code id="routines">Loading...</code></pre>
-            <pre class="tab-panel">Do you want to use these utils for yourself? Check out <a href="https://virxerlu.virxcase.dev/">VirxERLU</a>!<br><br><code id="objects">Loading...</code></pre>
-            <pre class="tab-panel"><code id="predictions">Loading...</code></pre>
-            <pre class="tab-panel"><code id="gui">Loading...</code></pre>
+            <pre class="tab-panel"><code id="routines">Loading...</code></pre>
+            <pre class="tab-panel"><code id="objects">Loading...</code></pre>
+            <pre class="tab-panel"><code id="tools">Loading...</code></pre>
+            <pre class="tab-panel"><code id="utils">Loading...</code></pre>
         </div>
     </div>
 
@@ -70,24 +70,24 @@
 
     <script src="{% static 'js/Prism.js' %}"></script>
     <script>
-        $("^https://virxeb.virxcase.dev/VirxEB.py").file(function() {
+        $("^https://virxerlu.virxcase.dev/main.py").file(function() {
             $("#virxebsrc").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
         });
 
-        $("^https://virxeb.virxcase.dev/util/routines.py").file(function() {
+        $("^https://virxerlu.virxcase.dev/util/routines.py").file(function() {
             $("#routines").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
         });
 
-        $("^https://virxeb.virxcase.dev/util/agent.py").file(function() {
+        $("^https://virxerlu.virxcase.dev/util/agent.py").file(function() {
             $("#objects").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
         });
 
-        $("^https://virxeb.virxcase.dev/prediction.py").file(function() {
-            $("#predictions").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
+        $("^https://virxeb.virxcase.dev/util/tools.py").file(function() {
+            $("#tools").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
         });
 
-        $("^https://virxeb.virxcase.dev/gui.py").file(function() {
-            $("#gui").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
+        $("^https://virxeb.virxcase.dev/util/utils.py").file(function() {
+            $("#utils").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
         });
     </script>
 {% endblock %}
