@@ -170,7 +170,8 @@
             $(".inputBoxes", true).forEachItem((item, i)=>inputs[i] = item.val());
 
             final=gc("a")?a(...inputs):gc("s")?s(...inputs):gc("m")?m(...inputs):gc("e")?e(...inputs):gc("d")?d(...inputs):gc("f")?f(inputs[0]):gc("l")?l(inputs[0], inputs[1]):gc("g")?g(inputs[0], inputs[1]):gc("le")?le(inputs[0], inputs[1]):gc("ge")?ge(inputs[0], inputs[1]):gc("r")?r(inputs[0]):gc("ru")?ru(inputs[0]):gc("rd")?rd(inputs[0]):"Please select a mode of operation.";
-            $("#output").txt("Answer: "+final);
+            final = "Answer:<br>"+final
+            $("#output").html(final.match(/.{1,48}/g).join("<br>"));
         });
     </script>
 {% endblock body %}
