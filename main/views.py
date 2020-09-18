@@ -85,7 +85,7 @@ def virxeb(request):
 @require_GET
 def virxerlu(request):
     handle_session(request)
-    return render(request, "ERLU.html", get_session(request, "VirxERLU Source Code - Build on the RLBot Framework", "css/CP-S.css"))
+    return render(request, "ERLU.html", get_session(request, "VirxERLU Source Code - Built on the RLBot Framework", "css/CP-S.css"))
 
 
 @require_GET
