@@ -17,7 +17,7 @@
             </ul>
 
             <ul style="padding-inline-start: 0;">
-                <li class="valid">The function has been validated with 40,000 random checks</li>
+                <li class="valid">The function has been validated with 100,000 random checks</li>
                 <li class="working">The function appears to be working as intended</li>
                 <li class="fixing">Currently working on fixing the function</li>
                 <li class="broken">The function is currently broken and won't work</li>
@@ -36,15 +36,15 @@
                 </li>
                 <li>
                     <input type="radio" id="m" name="math">
-                    <label for="m">Multiplication <span class="fixing">(Fixing)</span></label>
-                </li>
-                <li>
-                    <input type="radio" id="e" name="math">
-                    <label for="e" title="No decimals after the first number">Exponents <span class="broken">(Broken)</span></label>
+                    <label for="m">Multiplication <span class="valid">(Valid)</span></label>
                 </li>
                 <li>
                     <input type="radio" id="d" name="math">
                     <label for="d" title="In development">Division <span class="broken">(Broken)</span></label>
+                </li>
+                <li>
+                    <input type="radio" id="e" name="math">
+                    <label for="e" title="No decimals after the first number">Exponents <span class="broken">(Broken)</span></label>
                 </li>
                 <li>
                     <input type="radio" id="f" name="math">
@@ -139,7 +139,7 @@
         </span>
     </script>
     <script type="module">
-        import { add as a, subtract as s, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, PowerMode, MaxIntegerLength, MaxDecimalLength } from "https://calcplus.virxcase.dev/calcplus.js";
+        import { add as a, subtract as s, multiply as m, isLessThan as l, isGreaterThan as g, isLessThanEqual as le, isGreaterThanEqual as ge, round as r, roundUp as ru, roundDown as rd, PowerMode, MaxIntegerLength, MaxDecimalLength } from "https://calcplus.virxcase.dev/calcplus.js";
 
         const new_input = Handlebars.compile($("#new_input").htm());
 
