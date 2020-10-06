@@ -81,10 +81,6 @@ ul {
     grid-template-columns: auto;
   }
 
-  #aboutcalcplus {
-    order: -1;
-  }
-
   #bobcatrobotics {
     order: 5;
   }
