@@ -17,7 +17,6 @@ def robots_txt(request):
     lines = [
         "User-Agent: *",
         "Allow: /",
-        "Disallow: /Options",
         "Sitemap: https://www.virxcase.dev/sitemap.xml"
     ]
     return HttpResponse("\n".join(lines), content_type="text/plain")

@@ -1,4 +1,9 @@
 {% extends 'base.htm' %}
+
+{% block head %}
+<meta name="robots" content="noindex">
+{% endblock head %}
+
 {% block body %}
     <h3>Discord Widget {% if discord %}<a href="{% url 'options' %}?discord=False"><button>On</button></a>{% else %}<a href="{% url 'options' %}?discord=True"><button>Off</button></a>{% endif %}</h3>
     {% if discord %}
