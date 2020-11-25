@@ -38,7 +38,7 @@
         <label for="tab3">Agent</label>
 
         <input type="radio" name="tabset" id="tab4">
-        <label for="tab4">Predictive service</label>
+        <label for="tab4">Utilities</label>
 
         <input type="radio" name="tabset" id="tab5">
         <label for="tab5">GUI</label>
@@ -47,7 +47,7 @@
             <pre class="tab-panel"><code id="virxebsrc">Loading...</code></pre>
             <pre class="tab-panel">Do you want to use these utils for yourself? Check out <a href="https://virxerlu.virxcase.dev/">VirxERLU</a>!<br><br><code id="routines">Loading...</code></pre>
             <pre class="tab-panel">Do you want to use these utils for yourself? Check out <a href="https://virxerlu.virxcase.dev/">VirxERLU</a>!<br><br><code id="objects">Loading...</code></pre>
-            <pre class="tab-panel"><code id="predictions">Loading...</code></pre>
+            <pre class="tab-panel">Do you want to use these utils for yourself? Check out <a href="https://virxerlu.virxcase.dev/">VirxERLU</a>!<br><br><code id="utils">Loading...</code></pre>
             <pre class="tab-panel"><code id="gui">Loading...</code></pre>
         </div>
     </div>
@@ -82,8 +82,8 @@
             $("#objects").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
         });
 
-        $("^https://virxeb.virxcase.dev/prediction.py").file(function() {
-            $("#predictions").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
+        $("^https://virxeb.virxcase.dev/util/utils.py").file(function() {
+            $("#utils").htm(Prism.highlight(this.responseText, Prism.languages.py, "python"));
         });
 
         $("^https://virxeb.virxcase.dev/gui.py").file(function() {
