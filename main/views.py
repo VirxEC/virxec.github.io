@@ -42,7 +42,7 @@ def handle_session(request):
         request.session['interval'] = "400"
 
 
-def get_session(request, title, page_css=None, cp_versions=False):
+def get_session(request, title, page_css=None, cp_versions=False, curseforge_downloads=False):
     return {
         "discord": request.session['discord'],
         "channel": request.session['channel'],
@@ -52,7 +52,9 @@ def get_session(request, title, page_css=None, cp_versions=False):
         "calcplus_js": None if not cp_versions else repr(Version.objects.get(name="CalcPlus_JS")),
         "status": None if not cp_versions else repr(Cache.objects.get(name="CP_Status")),
         "title": title,
-        "page_css": page_css
+        "page_css": page_css,
+        "tgui_downloads": None if not curseforge_downloads else repr(Cache.objects.get(name="TransparentGUI_downloads")),
+        "vs_downloads": None if not curseforge_downloads else repr(Cache.objects.get(name="VanillaSkyBlock_downloads"))
     }
 
 
@@ -141,4 +143,4 @@ def options(request):
 @require_GET
 def minecraft_curseforge(request):
     handle_session(request)
-    return render(request, "curseforge.html", get_session(request, "Minecraft CurseForge Projects Vanilla SkyBlock and Transparent GUI", "css/MC-CF.css"))
+    return render(request, "curseforge.html", get_session(request, "Minecraft CurseForge Projects Vanilla SkyBlock and Transparent GUI", "css/MC-CF.css", curseforge_downloads=True))
