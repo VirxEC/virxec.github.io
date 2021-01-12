@@ -4,7 +4,8 @@
 }
 
 .tabset .tab-panel {
-  white-space: pre-wrap;
+  white-space: normal;
+  word-break: break-all;
   display: none;
 }
 
