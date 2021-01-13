@@ -4,7 +4,7 @@
 }
 
 .tabset .tab-panel {
-  overflow-wrap: anywhere;
+  word-break: break-all;
   display: none;
 }
 
