@@ -1,4 +1,4 @@
-const cname = "v6";
+const cname = "v7";
 const files = [
   "/manifest.json",
   "/"
@@ -44,6 +44,6 @@ self.addEventListener('fetch', function(event) {
     })
   );
   
-  if (update && !event.request.url.includes("google") && [".js", ".css", ".png", ".svg"].indexOf(event.request.url) >= 0)
+  if (update && !event.request.url.includes("google") && [".js", ".css", ".png", ".svg"].some(ss => event.request.url.includes(ss)) >= 0)
     event.waitUntil(caches.open(cname).then(cache => fetch(event.request).then(response => cache.put(event.request, response.clone()).then(response))));
 });

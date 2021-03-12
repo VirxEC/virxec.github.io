@@ -143,53 +143,116 @@ PWA_APP_ICONS = [
     {
         "src": "/static/icons/048.png",
         "sizes": "48x48",
-        "type": "image/png"
+        "type": "image/png",
+        "purpose": "maskable"
+    },
+    {
+        "src": "/static/icons/048_circle.png",
+        "sizes": "48x48",
+        "type": "image/png",
+        "purpose": "any"
     },
     {
         "src": "/static/icons/072.png",
         "sizes": "72x72",
-        "type": "image/png"
+        "type": "image/png",
+        "purpose": "maskable"
+    },
+    {
+        "src": "/static/icons/072_circle.png",
+        "sizes": "72x72",
+        "type": "image/png",
+        "purpose": "any"
     },
     {
         "src": "/static/icons/096.png",
         "sizes": "96x96",
-        "type": "image/png"
+        "type": "image/png",
+        "purpose": "maskable"
+    },
+    {
+        "src": "/static/icons/096_circle.png",
+        "sizes": "96x96",
+        "type": "image/png",
+        "purpose": "any"
     },
     {
         "src": "/static/icons/128.png",
         "sizes": "128x128",
-        "type": "image/png"
+        "type": "image/png",
+        "purpose": "maskable"
+    },
+    {
+        "src": "/static/icons/128_circle.png",
+        "sizes": "128x128",
+        "type": "image/png",
+        "purpose": "any"
     },
     {
         "src": "/static/icons/144.png",
         "sizes": "144x144",
-        "type": "image/png"
+        "type": "image/png",
+        "purpose": "maskable"
+    },
+    {
+        "src": "/static/icons/144_circle.png",
+        "sizes": "144x144",
+        "type": "image/png",
+        "purpose": "any"
     },
     {
         "src": "/static/icons/152.png",
         "sizes": "152x152",
-        "type": "image/png"
+        "type": "image/png",
+        "purpose": "maskable"
+    },
+    {
+        "src": "/static/icons/152_circle.png",
+        "sizes": "152x152",
+        "type": "image/png",
+        "purpose": "any"
     },
     {
         "src": "/static/icons/192.png",
         "sizes": "192x192",
-        "type": "image/png"
+        "type": "image/png",
+        "purpose": "maskable"
+    },
+    {
+        "src": "/static/icons/192_circle.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
     },
     {
         "src": "/static/icons/196_mask.png",
         "sizes": "196x196",
         "type": "image/png",
-        "purpose": "any maskable"
+        "purpose": "maskable"
     },
     {
         "src": "/static/icons/384.png",
         "sizes": "384x384",
-        "type": "image/png"
+        "type": "image/png",
+        "purpose": "maskable"
+    },
+    {
+        "src": "/static/icons/384_circle.png",
+        "sizes": "384x384",
+        "type": "image/png",
+        "purpose": "any"
     },
     {
         "src": "/static/icons/512.png",
         "sizes": "512x512",
-        "type": "image/png"
+        "type": "image/png",
+        "purpose": "maskable"
+    },
+    {
+        "src": "/static/icons/512_circle.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any"
     }
 ]
 
