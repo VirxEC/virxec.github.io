@@ -1,16 +1,7 @@
-const cname = "v7";
-const files = [
-  "/manifest.json",
-  "/"
-];
+const cname = "v8";
 // Cache on install
 self.addEventListener("install", function(e) {
   this.skipWaiting();
-  e.waitUntil(
-    caches.open(cname).then(cache => {
-      return cache.addAll(files);
-    })
-  )
 });
 
 // Clear cache on activate
@@ -36,7 +27,7 @@ self.addEventListener('fetch', function(event) {
         
         update = false
         return fetch(event.request).then(function(response2) {
-          if (!event.request.url.includes("google") && [".js", ".css", ".png", ".svg"].indexOf(event.request.url) >= 0)
+          if (!event.request.url.includes("google") && [".js", ".css", ".png", ".svg"].some(ss => event.request.url.includes(ss)))
             cache.put(event.request, response2.clone());
           return response2;
         });
@@ -44,6 +35,6 @@ self.addEventListener('fetch', function(event) {
     })
   );
   
-  if (update && !event.request.url.includes("google") && [".js", ".css", ".png", ".svg"].some(ss => event.request.url.includes(ss)) >= 0)
+  if (update && !event.request.url.includes("google") && [".js", ".css", ".png", ".svg"].some(ss => event.request.url.includes(ss)))
     event.waitUntil(caches.open(cname).then(cache => fetch(event.request).then(response => cache.put(event.request, response.clone()).then(response))));
 });
