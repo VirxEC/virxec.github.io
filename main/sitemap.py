@@ -6,8 +6,6 @@ class StaticViewSitemap(Sitemap):
     def items(self):
         return [
             'main_home',
-            'calcplus_preview',
-            'calcplus_source',
             'virxeb',
             'minecraft_curseforge',
             'virxerlu'

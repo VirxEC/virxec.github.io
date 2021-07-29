@@ -20,13 +20,13 @@ class SimpleTest(TestCase):
         response = views.home(get_request("main_home"))
         self.assertEqual(response.status_code, 200)
 
-        response = views.calcplus_preview(get_request("calcplus_preview"))
-        self.assertEqual(response.status_code, 200)
-
-        response = views.calcplus_source(get_request("calcplus_source"))
-        self.assertEqual(response.status_code, 200)
-
         response = views.virxeb(get_request("virxeb"))
+        self.assertEqual(response.status_code, 200)
+
+        response = views.virxeb(get_request("virxerlu"))
+        self.assertEqual(response.status_code, 200)
+
+        response = views.options(get_request("minecraft_curseforge"))
         self.assertEqual(response.status_code, 200)
 
         response = views.options(get_request("options"))

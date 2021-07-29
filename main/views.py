@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_GET
 
-from main.models import Version, Cache
+from main.models import Cache
 
 
 def handler404(request, exception):
@@ -42,15 +42,12 @@ def handle_session(request):
         request.session['interval'] = "400"
 
 
-def get_session(request, title, page_css=None, cp_versions=False, curseforge_downloads=False):
+def get_session(request, title, page_css=None, curseforge_downloads=False):
     return {
         "discord": request.session['discord'],
         "channel": request.session['channel'],
         "gamer": request.session['gamer'],
         "interval": request.session['interval'],
-        "calcplus_ts": None if not cp_versions else repr(Version.objects.get(name="CalcPlus_TS")),
-        "calcplus_js": None if not cp_versions else repr(Version.objects.get(name="CalcPlus_JS")),
-        "status": None if not cp_versions else repr(Cache.objects.get(name="CP_Status")),
         "title": title,
         "page_css": page_css,
         "tgui_downloads": None if not curseforge_downloads else repr(Cache.objects.get(name="TransparentGUI_downloads")),
@@ -62,18 +59,6 @@ def get_session(request, title, page_css=None, cp_versions=False, curseforge_dow
 def home(request):
     handle_session(request)
     return render(request, "index.html", get_session(request, "VirxEC's Showcase Website", "css/index.css", True))
-    
-
-@require_GET
-def calcplus_preview(request):
-    handle_session(request)
-    return render(request, "CP-P.html", get_session(request, "Preview the CalcPlus Library", "css/CP-P.css", True))
-
-
-@require_GET
-def calcplus_source(request):
-    handle_session(request)
-    return render(request, "CP-S.html", get_session(request, "CalcPlus Library Source Code", "css/CP-S.css", True))
 
 
 @require_GET

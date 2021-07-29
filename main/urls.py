@@ -12,8 +12,6 @@ sitemaps = {
 
 urlpatterns = [
     path("", views.home, name="main_home"),
-    path("CP-P", views.calcplus_preview, name="calcplus_preview"),
-    path("CP-S", views.calcplus_source, name="calcplus_source"),
     path("Options", views.options, name="options"),
     path("VEB", views.virxeb, name="virxeb"),
     path("ERLU", views.virxerlu, name="virxerlu"),
