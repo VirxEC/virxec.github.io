@@ -16,6 +16,7 @@ urlpatterns = [
     path("VEB", views.virxeb, name="virxeb"),
     path("ERLU", views.virxerlu, name="virxerlu"),
     path("MC-CF", views.minecraft_curseforge, name='minecraft_curseforge'),
+    path("rlballsym", views.rlballsym, name="rl_ball_sym"),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
     path("robots.txt", views.robots_txt),
     path("ads.txt", views.ads_txt),

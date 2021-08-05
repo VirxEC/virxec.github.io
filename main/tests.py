@@ -29,5 +29,8 @@ class SimpleTest(TestCase):
         response = views.options(get_request("minecraft_curseforge"))
         self.assertEqual(response.status_code, 200)
 
+        response = views.virxeb(get_request("rl_ball_sym"))
+        self.assertEqual(response.status_code, 200)
+
         response = views.options(get_request("options"))
         self.assertEqual(response.status_code, 200)

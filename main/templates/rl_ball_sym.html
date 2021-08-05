@@ -1,0 +1,93 @@
+{% extends 'base.htm' %}
+{% load static %}
+
+{% block head %}
+    <link rel="preload" href="{% static 'css/prism.min.css' %}" as="style">
+    <link rel="preload" href="{% static 'js/Prism.js' %}" as="script">
+    <link rel="preload" href="{% static 'js/CPquery.js' %}" as="script">
+{% endblock head %}
+
+{% block body %}
+    <h1>{{ title }}</h1>
+    <ul id="CPLinks" class="linklist">
+        <li><a href="https://www.rlbot.org/">RLBot Website</a></li>
+        <li><a href="https://github.com/RLBot/RLBot">RLBot Github</a></li>
+        <li><a href="https://discord.gg/zygARXx">RLBot Discord</a></li>
+    </ul>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- Generic ads -->
+    <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-9063288785609075"
+        data-ad-slot="7974382344"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    
+    <div class="tabset">
+        <input type="radio" name="tabset" id="tab1" checked>
+        <label for="tab1">Main</label>
+
+        <input type="radio" name="tabset" id="tab2" checked>
+        <label for="tab2">Ball</label>
+
+        <input type="radio" name="tabset" id="tab3" checked>
+        <label for="tab3">BvH</label>
+
+        <input type="radio" name="tabset" id="tab4" checked>
+        <label for="tab4">Geometry</label>
+
+        <input type="radio" name="tabset" id="tab5" checked>
+        <label for="tab5">Morton</label>
+
+        <div class="tab-panels">
+            <pre class="tab-panel"><code id="lib">Loading...</code></pre>
+            <pre class="tab-panel"><code id="ball">Loading...</code></pre>
+            <pre class="tab-panel"><code id="bvh">Loading...</code></pre>
+            <pre class="tab-panel"><code id="geometry">Loading...</code></pre>
+            <pre class="tab-panel"><code id="morton">Loading...</code></pre>
+        </div>
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- Generic ads -->
+    <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-9063288785609075"
+        data-ad-slot="7974382344"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+    <script src="{% static 'js/CPquery.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'css/prism.min.css' %}">
+
+    <script src="{% static 'js/Prism.js' %}"></script>
+    <script>
+        $("^https://rlballsym.virxcase.dev/src/lib.rs").file(function() {
+            $("#lib").htm(Prism.highlight(this.responseText, Prism.languages.rust, "rust"));
+        });
+
+        $("^https://rlballsym.virxcase.dev/src/simulation/ball.rs").file(function() {
+            $("#ball").htm(Prism.highlight(this.responseText, Prism.languages.rust, "rust"));
+        });
+
+        $("^https://rlballsym.virxcase.dev/src/simulation/bvh.rs").file(function() {
+            $("#bvh").htm(Prism.highlight(this.responseText, Prism.languages.rust, "rust"));
+        });
+
+        $("^https://rlballsym.virxcase.dev/src/simulation/geometry.rs").file(function() {
+            $("#geometry").htm(Prism.highlight(this.responseText, Prism.languages.rust, "rust"));
+        });
+
+        $("^https://rlballsym.virxcase.dev/src/simulation/morton.rs").file(function() {
+            $("#morton").htm(Prism.highlight(this.responseText, Prism.languages.rust, "rust"));
+        });
+    </script>
+{% endblock %}

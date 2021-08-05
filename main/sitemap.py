@@ -8,7 +8,8 @@ class StaticViewSitemap(Sitemap):
             'main_home',
             'virxeb',
             'minecraft_curseforge',
-            'virxerlu'
+            'virxerlu',
+            'rl_ball_sym'
         ]
 
     def location(self, item):

@@ -1,5 +1,7 @@
+from time import time
+
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.views.decorators.http import require_GET
 
 from main.models import Cache
@@ -41,11 +43,28 @@ def handle_session(request):
     if request.session.get('interval') is None:
         request.session['interval'] = "400"
 
+    if request.session.get('last_notify') is None:
+        request.session['last_notify'] = None
+
 
 def get_session(request, title, page_css=None, curseforge_downloads=False):
+    notify_chat = False
+    current_time = int(time())
+
+    if request.session['last_notify'] is None:
+        notify_chat = True
+    else:
+        time_diff = current_time - request.session['last_notify']
+        notify_chat = time_diff < 15 or time_diff > 1800
+
+    if notify_chat:
+        request.session['last_notify'] = current_time
+
     return {
         "discord": request.session['discord'],
         "channel": request.session['channel'],
+        "notify_chat": notify_chat,
+        "discord_notification": "Come chat with myself and others on Discord!\\nNo account is required.",
         "gamer": request.session['gamer'],
         "interval": request.session['interval'],
         "title": title,
@@ -65,13 +84,18 @@ def home(request):
 def virxeb(request):
     handle_session(request)
     virxeb_version = repr(Cache.objects.get(name="VirxEB_COMM"))
-    return render(request, "VEB.html", get_session(request, f"VirxEB (COMM-{virxeb_version}) Source Code - Built on the RLBot Framework", "css/CP-S.css"))
+    return render(request, "VEB.html", get_session(request, f"VirxEB (COMM-{virxeb_version}) Source Code - Built on the RLBot Framework", "css/project_source.css"))
 
 
 @require_GET
 def virxerlu(request):
     handle_session(request)
-    return render(request, "ERLU.html", get_session(request, "VirxERLU Source Code - Built on the RLBot Framework", "css/CP-S.css"))
+    return render(request, "ERLU.html", get_session(request, "VirxERLU Source Code - Built on the RLBot Framework", "css/project_source.css"))
+
+@require_GET
+def rlballsym(request):
+    handle_session(request)
+    return render(request, "rl_ball_sym.html", get_session(request, "Rocket League Ball Simulator (rl_ball_sym) - Built in Rust, Inspired by RLUtilities", "css/project_source.css"))
 
 
 @require_GET
