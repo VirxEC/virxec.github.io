@@ -18,7 +18,7 @@ DEBUG = False  # PROD: False
 
 PWA_APP_DEBUG_MODE = DEBUG
 
-ALLOWED_HOSTS = ['0.0.0.0', "127.0.0.1", "www.virxcase.dev", "virxcase.herokuapp.com"]
+ALLOWED_HOSTS = ["www.virxcase.dev"]
 
 SESSION_COOKIE_SECURE = not DEBUG
 
@@ -90,6 +90,9 @@ DATABASES = {
 }
 
 DATABASES['default'].update(dj_database_url.config(conn_max_age=600))
+
+SERVER_EMAIL = "root@virxcase.dev"
+ADMINS = [('Virx', 'virx@virxcase.dev')]
 
 
 # Password validation

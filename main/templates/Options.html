@@ -7,7 +7,7 @@
 {% block body %}
     <h3>Discord Widget {% if discord %}<a href="{% url 'options' %}?discord=False"><button>On</button></a>{% else %}<a href="{% url 'options' %}?discord=True"><button>Off</button></a>{% endif %}</h3>
     {% if discord %}
-        <h3>
+        <!-- <h3>
             Default Channel
             <select id="channel">
                 <option value="713127297833500712" {% if channel == "713127297833500712" %}selected{% endif %}>RLBot</option>
@@ -17,7 +17,7 @@
                 <option value="507717342680186891" {% if channel == "507717342680186891" %}selected{% endif %}>General</option>
                 <option value="583376212114669578" {% if channel == "583376212114669578" %}selected{% endif %}>General 2</option>
             </select>
-        </h3>
+        </h3> -->
         <h3>RGB Discord {% if gamer %}<a href="{% url 'options' %}?gamer=False"><button>On</button></a>{% else %}<a href="{% url 'options' %}?gamer=True"><button>Off</button></a>{% endif %}</h3>
         {% if gamer %}
             <h3>Transition time <input type="range" min="50" max="5000" id="transition" step="50" value="{{ interval }}"> <a id="interval_link" href=""><button>Apply <span id="interval">{{ interval }}</span>ms</button></a></h3>

@@ -34,8 +34,8 @@ def handle_session(request):
     if request.session.get('discord') is None:
         request.session['discord'] = True
 
-    if request.session.get('channel') is None:
-        request.session['channel'] = "713127297833500712"
+    # if request.session.get('channel') is None:
+    #     request.session['channel'] = "713127297833500712"
 
     if request.session.get('gamer') is None:
         request.session['gamer'] = False
@@ -47,7 +47,7 @@ def handle_session(request):
         request.session['last_notify'] = None
 
 
-def get_session(request, title, page_css=None, curseforge_downloads=False):
+def get_session(request, title, page_css=None, channel="733705579171676280", curseforge_downloads=False):
     notify_chat = False
     current_time = int(time())
 
@@ -62,7 +62,7 @@ def get_session(request, title, page_css=None, curseforge_downloads=False):
 
     return {
         "discord": request.session['discord'],
-        "channel": request.session['channel'],
+        "channel": channel,  # request.session['channel']
         "notify_chat": notify_chat,
         "discord_notification": "Come chat with myself and others on Discord!\\nNo account is required.",
         "gamer": request.session['gamer'],
@@ -77,7 +77,7 @@ def get_session(request, title, page_css=None, curseforge_downloads=False):
 @require_GET
 def home(request):
     handle_session(request)
-    return render(request, "index.html", get_session(request, "VirxEC's Showcase Website", "css/index.css", True))
+    return render(request, "index.html", get_session(request, "VirxEC's Showcase Website", "css/index.css", "507717342680186891"))
 
 
 @require_GET
@@ -90,12 +90,12 @@ def virxeb(request):
 @require_GET
 def virxerlu(request):
     handle_session(request)
-    return render(request, "ERLU.html", get_session(request, "VirxERLU Source Code - Built on the RLBot Framework", "css/project_source.css"))
+    return render(request, "ERLU.html", get_session(request, "VirxERLU Source Code - Built on the RLBot Framework", "css/project_source.css", "713127297833500712"))
 
 @require_GET
 def rlballsym(request):
     handle_session(request)
-    return render(request, "rl_ball_sym.html", get_session(request, "Rocket League Ball Simulator (rl_ball_sym) - Built in Rust, Inspired by RLUtilities", "css/project_source.css"))
+    return render(request, "rl_ball_sym.html", get_session(request, "Rocket League Ball Simulator (rl_ball_sym) - Built in Rust, Inspired by RLUtilities", "css/project_source.css", "713127297833500712"))
 
 
 @require_GET
@@ -108,16 +108,16 @@ def options(request):
 
         request.session['discord'] = discord
         return redirect("options")
-    elif request.GET.get("channel") is not None:
-        try:
-            channel = str(request.GET['channel'])
-        except Exception:
-            return redirect('options')
+    # elif request.GET.get("channel") is not None:
+    #     try:
+    #         channel = str(request.GET['channel'])
+    #     except Exception:
+    #         return redirect('options')
 
-        if channel in {"629774177733181440", "507717342680186891", "583376212114669578", "713127297833500712", "733705579171676280", "606543169680703497", "606543227654373380"}:
-            request.session['channel'] = channel
+    #     if channel in {"629774177733181440", "507717342680186891", "583376212114669578", "713127297833500712", "733705579171676280", "606543169680703497", "606543227654373380"}:
+    #         request.session['channel'] = channel
 
-        return redirect('options')
+    #     return redirect('options')
     elif request.GET.get("gamer") is not None:
         try:
             gamer = request.GET['gamer'] == 'True'
@@ -152,4 +152,4 @@ def options(request):
 @require_GET
 def minecraft_curseforge(request):
     handle_session(request)
-    return render(request, "curseforge.html", get_session(request, "Minecraft CurseForge Projects Vanilla SkyBlock and Transparent GUI", "css/MC-CF.css", curseforge_downloads=True))
+    return render(request, "curseforge.html", get_session(request, "Minecraft CurseForge Projects Vanilla SkyBlock and Transparent GUI", "css/MC-CF.css", "606543169680703497", True))
