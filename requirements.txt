@@ -1,7 +1,7 @@
 dj_database_url
 django
 gunicorn
-django-pwa
+git+https://github.com/silviolleite/django-paw
 django-heroku
 requests
 whitenoise
