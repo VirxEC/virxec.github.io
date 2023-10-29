@@ -1,4 +1,4 @@
-const cname = "v8";
+const cname = "v9";
 // Cache on install
 self.addEventListener("install", function(e) {
   this.skipWaiting();
